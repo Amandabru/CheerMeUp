@@ -1,6 +1,8 @@
+import {config} from "dotenv";
 import express, {Request, Response} from "express";
 import mongoose from "mongoose";
 import Deck from "./models/deck";
+config();
 
 const PORT = 5000;
 
@@ -15,9 +17,7 @@ app.post('/decks', async (req:Request, res:Response) => {
     res.json(cretedDeck);
 });
 
-mongoose.connect(
-    'mongodb+srv://CheerMeUp:ncl00uYyCsNhWGPC@cçluster0.bb6igcp.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
-    ).then(()=> {
+mongoose.connect(process.env.MONGO_URL!).then(()=> {
         console.log("listening on port " + PORT);
         app.listen(PORT);
     });
