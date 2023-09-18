@@ -1,6 +1,7 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -25,8 +26,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -43,10 +42,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #fff;
+  color: black;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
@@ -66,4 +67,15 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.container {
+  width: 800px;
+  margin: 0 auto;
 }
