@@ -2,7 +2,6 @@ import { config } from 'dotenv';
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import fetch from 'node-fetch';
 import Deck from './models/Deck';
 import { getDecksController } from './controllers/getDecksController';
 import { createDeckController } from './controllers/createDeckController';
