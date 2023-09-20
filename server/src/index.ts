@@ -9,6 +9,7 @@ import { deleteDeckController } from './controllers/deleteDeckController';
 import { getDeckController } from './controllers/getDeckController';
 import { createCardForDeckController } from './controllers/createCardForDeckController';
 import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
+import fetch from 'node-fetch';
 
 config();
 
