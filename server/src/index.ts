@@ -10,6 +10,7 @@ import { getDeckController } from './controllers/getDeckController';
 import { createCardForDeckController } from './controllers/createCardForDeckController';
 import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
 import { getHappyNewsController } from './controllers/getHappyNewsController';
+import { getMemesController } from './controllers/getMemesController';
 
 config();
 
@@ -27,7 +28,7 @@ app.use(express.json());
 
 //CheerMeUp
 app.get('/news', getHappyNewsController);
-
+app.get('/memes', getMemesController);
 
 // Deck examples
 app.get('/decks', getDecksController);
@@ -36,7 +37,6 @@ app.delete('/decks/:deckId', deleteDeckController);
 app.get('/decks/:deckId', getDeckController);
 app.post('/decks/:deckId/cards', createCardForDeckController);
 app.delete('/decks/:deckId/cards/:index', deleteCardOnDeckController);
-
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
