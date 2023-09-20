@@ -32,7 +32,7 @@ app.post('/decks/:deckId/cards', createCardForDeckController);
 app.delete('/decks/:deckId/cards/:index', deleteCardOnDeckController);
 
 async function fetching() {
-  const response = await fetch('https://api.github.com/users/github');
+  const response = await fetch('https://meme-api.com/gimme/2');
   const data = await response.json();
   console.log(data);
 }
