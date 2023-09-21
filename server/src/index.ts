@@ -2,7 +2,6 @@ import { config } from 'dotenv';
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import fetch from 'node-fetch';
 import Deck from './models/Deck';
 import { getDecksController } from './controllers/getDecksController';
 import { createDeckController } from './controllers/createDeckController';
@@ -10,6 +9,8 @@ import { deleteDeckController } from './controllers/deleteDeckController';
 import { getDeckController } from './controllers/getDeckController';
 import { createCardForDeckController } from './controllers/createCardForDeckController';
 import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
+import { getHappyNewsController } from './controllers/getHappyNewsController';
+import { getMemesController } from './controllers/getMemesController';
 
 config();
 
@@ -24,6 +25,12 @@ app.use(
 );
 
 app.use(express.json());
+
+//CheerMeUp
+app.get('/news', getHappyNewsController);
+app.get('/memes', getMemesController);
+
+// Deck examples
 app.get('/decks', getDecksController);
 app.post('/decks', createDeckController);
 app.delete('/decks/:deckId', deleteDeckController);
