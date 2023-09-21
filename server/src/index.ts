@@ -30,7 +30,7 @@ app.use(express.json());
 //CheerMeUp
 app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
-app.get('/jokes', getJokeController);
+app.get('/jokes/:categories', getJokeController);
 
 // Deck examples
 app.get('/decks', getDecksController);
