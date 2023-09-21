@@ -10,9 +10,9 @@ import SuggestionPresenter from "./pages/suggestions/SuggestionPresenter";
 import { getMemes } from "./api/getMemes";
 
 function App() {
+  /*
   const [decks, setDecks] = useState<TDeck[]>([]);
   const [title, setTitle] = useState("");
-  const [suggestion, setSuggestion] = useState("");
 
   async function handleCreateDeck(e: React.FormEvent) {
     e.preventDefault();
@@ -25,25 +25,41 @@ function App() {
     await deleteDeck(deckId);
     setDecks(decks.filter((deck) => deck._id !== deckId));
   }
-
-  async function getRandomSuggestion() {
-    const suggestionProm = await getMemes();
-    const suggestion: string = suggestionProm.memes[0].title;
-    setSuggestion(suggestion);
-  }
-
   useEffect(() => {
     async function fetchDecks() {
       const newDecks = await getDecks();
       setDecks(newDecks);
     }
     fetchDecks();
-  }, []);
+  }, []);*/
+
+  /* async function getRandomSuggestion() {
+    const suggestionProm = await getMemes();
+    const suggestion: string = suggestionProm.memes[0].title;
+    setSuggestion(suggestion);
+  }*/
+
+  /*const [suggestion, setSuggestion] = useState<string>("");
+
+  useEffect(() => {
+    async function getRandomSuggestion() {
+      const suggestionProm = await getMemes();
+      // randomNumber = Math.floor(Math.random() * max);
+      const suggestion: string = suggestionProm.memes[0].title;
+      setSuggestion(suggestion);
+    }
+    getRandomSuggestion();
+  }, []);*/
 
   return (
+    /*<SuggestionPresenter
+        sugg={suggestion}
+        setSuggestion={(s: React.SetStateAction<string>) => setSuggestion(s)}
+      /> */
     <div>
-      <SuggestionPresenter sugg={"hej"} />
+      <SuggestionPresenter />
     </div>
+
     /*
     <div className='container'>
       <div className='App'>

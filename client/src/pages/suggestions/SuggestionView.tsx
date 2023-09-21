@@ -1,9 +1,9 @@
 function SuggestionView({
   randomizedSuggestion,
-  setCurrentSuggestion,
+  onNewSuggestion,
 }: {
   randomizedSuggestion: string;
-  setCurrentSuggestion: any;
+  onNewSuggestion: Function; // dubbelkoll
 }) {
   return (
     <body className="bg-violet-300 text-black">
@@ -32,9 +32,11 @@ function SuggestionView({
       </div>
       <button
         className="btn absolute top-1/2 left-1/2 m-auto"
-        onClick={setCurrentSuggestion}
+        onClick={() => {
+          onNewSuggestion();
+        }}
       >
-        Button
+        Get new suggestion
       </button>
     </body>
   );
