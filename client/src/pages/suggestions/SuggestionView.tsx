@@ -11,16 +11,17 @@ function SuggestionView({
         <div className="form-control w-fit">
           <label className="label cursor-pointer">
             <span>Alone</span>
-            <input type="checkbox" className="toggle" checked />
+            <input type="checkbox" className="toggle" />
             <span>With Friends</span>
           </label>
         </div>
 
         <div>
-          <select className="select select-bordered select-sm w-full max-w-xs bg-violet-200">
-            <option disabled selected>
-              Type of Activity
-            </option>
+          <select
+            className="select select-bordered select-sm w-full max-w-xs bg-violet-200"
+            defaultValue={"Type of Activity"}
+          >
+            <option disabled={true}>Type of Activity</option>
             <option>Fetcha</option>
             <option>Fetcha</option>
           </select>
