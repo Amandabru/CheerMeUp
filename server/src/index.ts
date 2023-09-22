@@ -11,6 +11,7 @@ import { createCardForDeckController } from './controllers/createCardForDeckCont
 import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
 import { getHappyNewsController } from './controllers/getHappyNewsController';
 import { getMemesController } from './controllers/getMemesController';
+import { getJokeController } from './controllers/getJokeController';
 
 config();
 
@@ -29,6 +30,7 @@ app.use(express.json());
 //CheerMeUp
 app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
+app.get('/jokes/:categories', getJokeController);
 
 // Deck examples
 app.get('/decks', getDecksController);
