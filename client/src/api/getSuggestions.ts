@@ -1,15 +1,20 @@
-import { API_URL } from './config';
+import { API_URL } from "./config";
 
 type SuggestionType = {
-    activity: string,
-	accessibility: number,
-	type: string,
-	participants: number,
-	price: number,
-}
+  activity: string;
+  accessibility: number;
+  type: string;
+  participants: number;
+  price: number;
+};
 
-export async function getHappyNews(): Promise<SuggestionType> {
-    const response = await fetch(`${API_URL}/news`);
-    return response.json();
-  }
-  
+export async function getSuggestions(
+  type: string,
+  multipleParticipants: boolean
+): Promise<SuggestionType> {
+  const response = await fetch(
+    `${API_URL}/suggestions/${type}/:${multipleParticipants}`
+  );
+  console.log(response);
+  return response.json();
+}
