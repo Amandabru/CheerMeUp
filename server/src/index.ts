@@ -62,7 +62,6 @@ app.get('/decks/:deckId', getDeckController);
 app.post('/decks/:deckId/cards', createCardForDeckController);
 app.delete('/decks/:deckId/cards/:index', deleteCardOnDeckController);
 
-//kanske inte behöver utropstecken?
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);
