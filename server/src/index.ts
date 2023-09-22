@@ -14,7 +14,7 @@ import { getJokeController } from './controllers/getJokeController';
 import * as UserController from './controllers/userController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
-import { requiresAuth } from './middleware/auth';
+import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
 
 config();
 
