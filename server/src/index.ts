@@ -14,6 +14,7 @@ import { getJokeController } from './controllers/getJokeController';
 import * as UserController from './controllers/userController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import { requiresAuth } from './middleware/auth';
 
 config();
 
