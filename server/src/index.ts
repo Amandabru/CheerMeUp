@@ -12,6 +12,7 @@ import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckContro
 import { getHappyNewsController } from './controllers/getHappyNewsController';
 import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
+import { getSuggestionsController } from './controllers/getSuggestionsController';
 
 config();
 
@@ -31,6 +32,7 @@ app.use(express.json());
 app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
+app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 
 // Deck examples
 app.get('/decks', getDecksController);
