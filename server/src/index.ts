@@ -9,7 +9,9 @@ import { deleteDeckController } from './controllers/deleteDeckController';
 import { getDeckController } from './controllers/getDeckController';
 import { createCardForDeckController } from './controllers/createCardForDeckController';
 import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
-import fetch from 'node-fetch';
+import { getHappyNewsController } from './controllers/getHappyNewsController';
+import { getMemesController } from './controllers/getMemesController';
+import { getJokeController } from './controllers/getJokeController';
 
 config();
 
@@ -24,6 +26,13 @@ app.use(
 );
 
 app.use(express.json());
+
+//CheerMeUp
+app.get('/news', getHappyNewsController);
+app.get('/memes', getMemesController);
+app.get('/jokes/:categories', getJokeController);
+
+// Deck examples
 app.get('/decks', getDecksController);
 app.post('/decks', createDeckController);
 app.delete('/decks/:deckId', deleteDeckController);
