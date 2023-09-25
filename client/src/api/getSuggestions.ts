@@ -15,6 +15,5 @@ export async function getSuggestions(
   const response = await fetch(
     `${API_URL}/suggestions/${type}/:${multipleParticipants}`
   );
-  console.log(response);
   return response.json();
 }

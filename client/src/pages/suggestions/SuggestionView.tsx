@@ -1,10 +1,27 @@
 function SuggestionView({
   randomizedSuggestion,
-  onNewSuggestion,
+  activityType,
+  onActivityTypeChange,
 }: {
   randomizedSuggestion: string;
-  onNewSuggestion: Function; // dubbelkoll
+  activityType: string;
+  onActivityTypeChange: Function;
 }) {
+  const options: {
+    value: string;
+    label: string;
+  }[] = [
+    { value: "education", label: "education" },
+    { value: "recreational", label: "recreational" },
+    { value: "social", label: "social" },
+    { value: "diy", label: "diy" },
+    { value: "charity", label: "charity" },
+    { value: "cooking", label: "cooking" },
+    { value: "relaxation", label: "relaxation" },
+    { value: "charity", label: "charity" },
+    { value: "busywork", label: "busywork" },
+  ];
+
   return (
     <body className="bg-violet-300 text-black">
       <div className="absolute top-[20%] left-1/4 w-1/2">
@@ -19,11 +36,20 @@ function SuggestionView({
         <div>
           <select
             className="select select-bordered select-sm w-full max-w-xs bg-violet-200"
-            defaultValue={"Type of Activity"}
+            value={activityType}
+            onChange={(e) => {
+              const newActivityType = e.target.value;
+              onActivityTypeChange(newActivityType);
+            }}
           >
-            <option disabled={true}>Type of Activity</option>
-            <option>Fetcha</option>
-            <option>Fetcha</option>
+            <option value="" disabled>
+              Type of Activity
+            </option>
+            {options.map(({ value, label }, index) => (
+              <option value={value} key={index}>
+                {label}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -34,7 +60,8 @@ function SuggestionView({
       <button
         className="btn absolute top-1/2 left-1/2 m-auto"
         onClick={() => {
-          onNewSuggestion();
+          console.log(activityType);
+          onActivityTypeChange(activityType);
         }}
       >
         Get new suggestion
