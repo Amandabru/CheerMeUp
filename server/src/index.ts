@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { getDecksController } from './controllers/getDecksController';
@@ -15,6 +15,7 @@ import { getSuggestionsController } from './controllers/getSuggestionsController
 import * as UserController from './controllers/userController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
 
 config();
@@ -46,7 +47,7 @@ app.use(
   })
 );
 
-//CheerMeUp
+//CheerMeUp end-points
 app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
@@ -63,6 +64,23 @@ app.delete('/decks/:deckId', deleteDeckController);
 app.get('/decks/:deckId', getDeckController);
 app.post('/decks/:deckId/cards', createCardForDeckController);
 app.delete('/decks/:deckId/cards/:index', deleteCardOnDeckController);
+
+// Unexisting endpoint
+app.use((_req, _res, next) => {
+  next(createHttpError(404, 'Endpoint not found'));
+});
+
+// Unknown error
+app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  console.error(error);
+  let errorMessage = 'An unknown error occurred';
+  let statusCode = 500;
+  if (isHttpError(error)) {
+    statusCode = error.status;
+    errorMessage = error.message;
+  }
+  res.status(statusCode).json({ error: errorMessage });
+});
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening on port ${PORT}`);
