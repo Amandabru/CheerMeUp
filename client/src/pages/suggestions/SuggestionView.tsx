@@ -2,10 +2,14 @@ function SuggestionView({
   randomizedSuggestion,
   activityType,
   onActivityTypeChange,
+  isToggled,
+  onToggle,
 }: {
   randomizedSuggestion: string;
   activityType: string;
   onActivityTypeChange: Function;
+  isToggled: boolean;
+  onToggle: Function;
 }) {
   const options: {
     value: string;
@@ -28,7 +32,15 @@ function SuggestionView({
         <div className="form-control w-fit">
           <label className="label cursor-pointer">
             <span>Alone</span>
-            <input type="checkbox" className="toggle" />
+            <input
+              type="checkbox"
+              className="toggle"
+              defaultChecked={false}
+              onClick={() => {
+                isToggled = !isToggled;
+                onToggle(activityType, isToggled);
+              }}
+            />
             <span>With Friends</span>
           </label>
         </div>
@@ -39,7 +51,7 @@ function SuggestionView({
             value={activityType}
             onChange={(e) => {
               const newActivityType = e.target.value;
-              onActivityTypeChange(newActivityType);
+              onActivityTypeChange(newActivityType, isToggled);
             }}
           >
             <option value="" disabled>
@@ -61,7 +73,7 @@ function SuggestionView({
         className="btn absolute top-1/2 left-1/2 m-auto"
         onClick={() => {
           console.log(activityType);
-          onActivityTypeChange(activityType);
+          onActivityTypeChange(activityType, isToggled);
         }}
       >
         Get new suggestion
