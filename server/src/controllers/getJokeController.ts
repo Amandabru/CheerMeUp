@@ -8,5 +8,11 @@ export async function getJokeController(req: Request, res: Response) {
   )}?safe-mode&type=single`;
   const response = await fetch(api_url);
   const data = await response.json();
-  res.json(data);
+
+  const selectedData = {
+    joke: data.joke,
+    apiId: data.id,
+  };
+  
+  res.json(selectedData);
 }
