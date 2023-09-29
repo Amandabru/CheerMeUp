@@ -1,19 +1,15 @@
 function SuggestionView({
   randomizedSuggestion,
-  activityType,
-  onActivityTypeChange,
   isToggled,
   onToggle,
-  activityID,
-  onNewActivity,
+  typeID,
+  onNewType,
 }: {
   randomizedSuggestion: string;
-  activityType: string;
-  onActivityTypeChange: Function;
   isToggled: boolean;
   onToggle: Function;
-  activityID: string;
-  onNewActivity: Function;
+  typeID: string;
+  onNewType: Function;
 }) {
   const options: {
     value: string;
@@ -42,7 +38,7 @@ function SuggestionView({
               defaultChecked={false}
               onClick={() => {
                 isToggled = !isToggled;
-                onToggle(activityType, isToggled);
+                onToggle(isToggled);
               }}
             />
             <span>With Friends</span>
@@ -52,12 +48,11 @@ function SuggestionView({
         <div>
           <select
             className="select select-bordered select-sm w-full max-w-xs bg-violet-200"
-            value={activityType}
+            value={typeID}
             onChange={(e) => {
               const newActivityType = e.target.value;
-              onActivityTypeChange(newActivityType, isToggled);
-              onNewActivity(newActivityType);
-              console.log(activityID);
+              onNewType(newActivityType);
+              console.log("onchange " + newActivityType + " " + isToggled);
             }}
           >
             <option value="" disabled>
@@ -78,7 +73,8 @@ function SuggestionView({
       <button
         className="btn absolute top-1/2 left-1/2 m-auto"
         onClick={() => {
-          onActivityTypeChange(activityType, isToggled);
+          onNewType(typeID);
+          console.log("onclick " + typeID + " " + isToggled);
         }}
       >
         Get new suggestion
