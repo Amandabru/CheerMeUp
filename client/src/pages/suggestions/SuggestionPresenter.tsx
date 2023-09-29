@@ -4,20 +4,20 @@ import { CheerModel } from "../../models/model";
 import useModelProp from "../../hooks/useModelProp";
 
 function SuggestionPresenter({ model }: { model: CheerModel }) {
-  const modelSuggestion = useModelProp(model, "currentSuggestion");
-  const modelType = useModelProp(model, "typeID");
+  const suggestion = useModelProp(model, "currentSuggestion");
+  const type = useModelProp(model, "type");
 
-  const [suggestion, setSuggestion] = useState<string>("");
-  const [activityType, setActivityType] = useState<string>("");
+  const [s, setSuggestion] = useState<string>("");
+  const [a, setActivityType] = useState<string>("");
   const [company, setCompany] = useState<boolean>(false);
 
   return (
     <SuggestionView
-      randomizedSuggestion={modelSuggestion.activity}
+      randomizedSuggestion={suggestion.activity}
       isToggled={company}
       onToggle={(c: boolean) => setCompany(c)}
-      typeID={modelType}
-      onNewType={(newType: string) => model.setTypeID(newType, company)}
+      activityType={type}
+      onNewType={(newType: string) => model.setType(newType, company)}
     />
   );
 }
