@@ -3,7 +3,7 @@ import SuggestionView from "./SuggestionView";
 import { CheerModel } from "../../model/model";
 import useModelProp from "../../hooks/useModelProp";
 
-import { getSuggestions, apiCall } from "../../api/getSuggestions";
+import { getSuggestions } from "../../api/getSuggestions";
 
 function SuggestionPresenter({ model }: { model: CheerModel }) {
   const modelActivity = useModelProp(model, "activityID");
@@ -12,7 +12,10 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
   const [activityType, setActivityType] = useState<string>("");
   const [company, setCompany] = useState<boolean>(true);
 
-  const apiCall = async (newActivityType: string, company: boolean) => {
+  const getRandomSuggestion = async (
+    newActivityType: string,
+    company: boolean
+  ) => {
     // !! model grejs etc + redux
     setActivityType(newActivityType);
     setCompany(company);
@@ -25,9 +28,9 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
     <SuggestionView
       randomizedSuggestion={suggestion}
       activityType={activityType}
-      onActivityTypeChange={apiCall}
+      onActivityTypeChange={getRandomSuggestion}
       isToggled={company}
-      onToggle={apiCall}
+      onToggle={getRandomSuggestion}
       activityID={modelActivity}
       onNewActivity={(newId: string) => model.setActivityID(newId)}
     />
