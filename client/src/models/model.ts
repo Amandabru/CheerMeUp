@@ -2,30 +2,31 @@ import { apiCall, getSuggestions } from "../api/getSuggestions";
 
 export class CheerModel {
   private observers: (() => void)[];
-  private activityID: string;
+  private typeID: string;
   public currentSuggestion: string;
 
-  constructor(observers = [], activityID = "", currentSuggestion = "") {
+  constructor(observers = [], typeID = "", currentSuggestion = "") {
     this.observers = observers;
-    this.activityID = activityID;
+    this.typeID = typeID;
     this.currentSuggestion = currentSuggestion;
   }
 
-  setActivityID(id: string) {
-    if (id == this.activityID) return;
-    else this.activityID = id;
+  setTypeID(id: string) {
+    if (id == this.typeID) return;
+    else this.typeID = id;
 
     this.notifyObservers();
-    if (this.activityID) {
-      apiCall(this.activityID, true)
+    if (this.typeID) {
+      apiCall(this.typeID, true)
         .then((data) => {
-          if (id === this.activityID) {
+          if (id === this.typeID) {
             this.currentSuggestion = data;
+            console.log(data);
             this.notifyObservers();
           }
         })
         .catch((error) => {
-          if (id === this.activityID) {
+          if (id === this.typeID) {
             this.currentSuggestion = error;
             this.notifyObservers();
           }

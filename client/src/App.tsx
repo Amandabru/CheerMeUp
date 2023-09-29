@@ -1,7 +1,7 @@
 import "./App.css";
 
 import SuggestionPresenter from "./pages/suggestions/SuggestionPresenter";
-import { CheerModel } from "./model/model";
+import { CheerModel } from "./models/model";
 
 function App() {
   const model = new CheerModel();
