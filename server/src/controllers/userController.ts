@@ -2,6 +2,7 @@ import { RequestHandler } from 'express';
 import UserModel from '../models/User';
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
+import * as EmailValidator from 'email-validator';
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
   const authenticatedUserId = req.session.userId;
@@ -45,6 +46,13 @@ export const signUp: RequestHandler<
       throw createHttpError(
         409,
         'Username already taken. Please choose a different one.'
+      );
+    }
+    const validatedEmail = EmailValidator.validate(email);
+    if(!validatedEmail){
+      throw createHttpError(
+        400,
+        'Invalid e-mail'
       );
     }
     const existingEmail = await UserModel.findOne({ email: email }).exec();
