@@ -11,13 +11,13 @@ export class CheerModel {
     this.currentSuggestion = currentSuggestion;
   }
 
-  setTypeID(id: string) {
+  setTypeID(id: string, multipleParticipants: boolean) {
     if (id == this.typeID) return;
     else this.typeID = id;
 
     this.notifyObservers();
     if (this.typeID) {
-      apiCall(this.typeID, true)
+      apiCall(this.typeID, multipleParticipants)
         .then((data) => {
           if (id === this.typeID) {
             this.currentSuggestion = data;
