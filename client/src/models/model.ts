@@ -1,32 +1,32 @@
-import { apiCall, getSuggestions } from "../api/getSuggestions";
+import { getSuggestions } from "../api/getSuggestions";
 
 export class CheerModel {
   private observers: (() => void)[];
-  private typeID: string;
+  private type: string;
   public currentSuggestion: string;
 
-  constructor(observers = [], typeID = "", currentSuggestion = "") {
+  constructor(observers = [], type = "", currentSuggestion = "") {
     this.observers = observers;
-    this.typeID = typeID;
+    this.type = type;
     this.currentSuggestion = currentSuggestion;
   }
 
-  setTypeID(id: string, multipleParticipants: boolean) {
-    if (id == this.typeID) return;
-    else this.typeID = id;
+  setType(id: string, multipleParticipants: boolean) {
+    //if (id == this.type) return;
+    this.type = id;
 
     this.notifyObservers();
-    if (this.typeID) {
-      apiCall(this.typeID, multipleParticipants)
+    if (this.type) {
+      getSuggestions(this.type, multipleParticipants)
         .then((data) => {
-          if (id === this.typeID) {
+          if (id === this.type) {
             this.currentSuggestion = data;
             console.log(data);
             this.notifyObservers();
           }
         })
         .catch((error) => {
-          if (id === this.typeID) {
+          if (id === this.type) {
             this.currentSuggestion = error;
             this.notifyObservers();
           }
