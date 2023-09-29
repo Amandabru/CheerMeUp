@@ -11,6 +11,7 @@ export class CheerModel {
     this.currentSuggestion = currentSuggestion;
   }
 
+  // TODO: uppdatera till setSuggestion istället antagligen
   setType(id: string, multipleParticipants: boolean) {
     //if (id == this.type) return;
     this.type = id;
@@ -27,7 +28,7 @@ export class CheerModel {
         })
         .catch((error) => {
           if (id === this.type) {
-            this.currentSuggestion = error;
+            this.currentSuggestion = error; // error handling ska tilläggas mm
             this.notifyObservers();
           }
         });
