@@ -21,7 +21,7 @@ export async function getHappyNewsController(req: Request, res: Response) {
 
   function selectFewerProps(news:NewsType){
     const {id, title, text, url, image, author} = news;
-    return {id, title, text, url, image, author};
+    return {type: "news", id, title, text, url, image, author};
   }
 
   const selectedData = data.news.map(selectFewerProps);

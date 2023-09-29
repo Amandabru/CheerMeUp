@@ -21,7 +21,7 @@ export async function getMemesController(req: Request, res: Response) {
 
   function selectFewerProps(meme:MemeType){
     const {title, url, preview} = meme;
-    return {title, url, preview} ;
+    return {type: "meme", title, url, preview} ;
   }
 
   data.memes = data.memes.map(selectFewerProps);

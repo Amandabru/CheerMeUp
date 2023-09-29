@@ -1,6 +1,7 @@
 import { API_URL } from './config';
 
 type SuggestionType = {
+    type: string,
     activity: string,
 }
 

@@ -10,6 +10,7 @@ export async function getJokeController(req: Request, res: Response) {
   const data = await response.json();
 
   const selectedData = {
+    type: "joke",
     joke: data.joke,
     apiId: data.id,
   };
