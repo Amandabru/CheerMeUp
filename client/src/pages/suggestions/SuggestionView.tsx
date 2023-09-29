@@ -4,12 +4,16 @@ function SuggestionView({
   onActivityTypeChange,
   isToggled,
   onToggle,
+  activityID,
+  onNewActivity,
 }: {
   randomizedSuggestion: string;
   activityType: string;
   onActivityTypeChange: Function;
   isToggled: boolean;
   onToggle: Function;
+  activityID: string;
+  onNewActivity: Function;
 }) {
   const options: {
     value: string;
@@ -28,6 +32,15 @@ function SuggestionView({
 
   return (
     <body className="bg-violet-300 text-black">
+      <button
+        onClick={(e) => {
+          const click = e.target as HTMLButtonElement;
+          onNewActivity(click.value);
+        }}
+      >
+        Testar model prop
+      </button>
+
       <div className="absolute top-[20%] left-1/4 w-1/2">
         <div className="form-control w-fit">
           <label className="label cursor-pointer">

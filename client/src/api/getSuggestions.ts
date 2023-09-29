@@ -17,3 +17,18 @@ export async function getSuggestions(
   );
   return response.json();
 }
+
+export function apiCall(type: string, multipleParticipants: boolean) {
+  return (
+    fetch(`${API_URL}/suggestions/${type}/:${multipleParticipants}`)
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          throw new Error(response.statusText);
+        }
+      })
+      // from HTTP response headers to HTTP response data
+      .then((response) => response.json())
+  );
+}
