@@ -32,15 +32,6 @@ function SuggestionView({
 
   return (
     <body className="bg-violet-300 text-black">
-      <button
-        onClick={(e) => {
-          const click = e.target as HTMLButtonElement;
-          onNewActivity(click.value);
-        }}
-      >
-        Testar model prop
-      </button>
-
       <div className="absolute top-[20%] left-1/4 w-1/2">
         <div className="form-control w-fit">
           <label className="label cursor-pointer">
@@ -65,6 +56,8 @@ function SuggestionView({
             onChange={(e) => {
               const newActivityType = e.target.value;
               onActivityTypeChange(newActivityType, isToggled);
+              onNewActivity(newActivityType);
+              console.log(activityID);
             }}
           >
             <option value="" disabled>
@@ -85,7 +78,6 @@ function SuggestionView({
       <button
         className="btn absolute top-1/2 left-1/2 m-auto"
         onClick={() => {
-          console.log(activityType);
           onActivityTypeChange(activityType, isToggled);
         }}
       >
