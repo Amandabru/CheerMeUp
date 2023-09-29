@@ -8,6 +8,7 @@ type SuggestionType = {
   price: number;
 };
 
+/*
 export async function getSuggestions(
   type: string,
   multipleParticipants: boolean
@@ -16,9 +17,9 @@ export async function getSuggestions(
     `${API_URL}/suggestions/${type}/:${multipleParticipants}`
   );
   return response.json();
-}
+}*/
 
-export function apiCall(type: string, multipleParticipants: boolean) {
+export function getSuggestions(type: string, multipleParticipants: boolean) {
   return (
     fetch(`${API_URL}/suggestions/${type}/:${multipleParticipants}`)
       .then((response) => {
