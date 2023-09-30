@@ -3,15 +3,16 @@ import { getSuggestions } from "../api/getSuggestions";
 export class CheerModel {
   private observers: (() => void)[];
   private type: string;
-  public currentSuggestion: string;
+  public currentSuggestionData: string | Error;
+  public currentSuggestionError: string | Error;
 
-  constructor(observers = [], type = "", currentSuggestion = "") {
+  constructor(observers = [], type = "") {
     this.observers = observers;
     this.type = type;
-    this.currentSuggestion = currentSuggestion;
+    this.currentSuggestionData = "";
+    this.currentSuggestionError = "";
   }
 
-  // TODO: uppdatera till setSuggestion istället antagligen
   setType(id: string, multipleParticipants: boolean) {
     //if (id == this.type) return;
     this.type = id;
@@ -21,14 +22,14 @@ export class CheerModel {
       getSuggestions(this.type, multipleParticipants)
         .then((data) => {
           if (id === this.type) {
-            this.currentSuggestion = data;
+            this.currentSuggestionData = data;
             console.log(data);
             this.notifyObservers();
           }
         })
         .catch((error) => {
           if (id === this.type) {
-            this.currentSuggestion = error; // error handling ska tilläggas mm
+            this.currentSuggestionError = error; // error handling ska tilläggas mm
             this.notifyObservers();
           }
         });

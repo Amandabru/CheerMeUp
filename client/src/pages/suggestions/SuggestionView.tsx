@@ -3,13 +3,13 @@ function SuggestionView({
   isToggled,
   onToggle,
   activityType,
-  onNewType,
+  onNewSuggestion,
 }: {
   randomizedSuggestion: string;
   isToggled: boolean;
   onToggle: Function;
   activityType: string;
-  onNewType: Function;
+  onNewSuggestion: Function;
 }) {
   const options: {
     value: string;
@@ -51,7 +51,7 @@ function SuggestionView({
             value={activityType}
             onChange={(e) => {
               const newActivityType = e.target.value;
-              onNewType(newActivityType);
+              onNewSuggestion(newActivityType);
               console.log("onchange " + newActivityType + " " + isToggled);
             }}
           >
@@ -73,7 +73,7 @@ function SuggestionView({
       <button
         className="btn absolute top-1/2 left-1/2 m-auto"
         onClick={() => {
-          onNewType(activityType);
+          onNewSuggestion(activityType);
           console.log("onclick " + activityType + " " + isToggled);
         }}
       >

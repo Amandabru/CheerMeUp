@@ -4,7 +4,7 @@ import { CheerModel } from "../../models/model";
 import useModelProp from "../../hooks/useModelProp";
 
 function SuggestionPresenter({ model }: { model: CheerModel }) {
-  const suggestion = useModelProp(model, "currentSuggestion");
+  const suggestion = useModelProp(model, "currentSuggestionData");
   const type = useModelProp(model, "type");
 
   const [s, setSuggestion] = useState<string>("");
@@ -17,7 +17,9 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
       isToggled={company}
       onToggle={(c: boolean) => setCompany(c)}
       activityType={type}
-      onNewType={(newType: string) => model.setType(newType, company)}
+      onNewSuggestion={(newType: string) => {
+        model.setType(newType, company);
+      }}
     />
   );
 }
