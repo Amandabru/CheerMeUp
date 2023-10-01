@@ -6,11 +6,10 @@ import TextInputField from './TextInputField';
 import { SignUpCredentials } from '../api/user';
 
 interface SignUpModalProps {
-  onDismiss: () => void;
   onSignUpSuccessful: (user: User) => void;
 }
 
-const SignUpModal = ({ onDismiss, onSignUpSuccessful }: SignUpModalProps) => {
+const SignUpModal = ({ onSignUpSuccessful }: SignUpModalProps) => {
   const {
     register,
     handleSubmit,
@@ -30,7 +29,12 @@ const SignUpModal = ({ onDismiss, onSignUpSuccessful }: SignUpModalProps) => {
   return (
     <dialog id='signup_modal' className='modal'>
       <div className='modal-box'>
-        <div>SIGNUP</div>
+        <form method='dialog'>
+          <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
+            ✕
+          </button>
+        </form>
+        <h3 className='font-bold text-lg'>Sign Up</h3>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <TextInputField
             name='username'
@@ -59,10 +63,13 @@ const SignUpModal = ({ onDismiss, onSignUpSuccessful }: SignUpModalProps) => {
             registerOptions={{ required: 'Required' }}
             error={errors.password}
           />
-          <button type='submit' disabled={isSubmitting}>
-            SIGN UP
+          <button
+            className='btn btn-primary'
+            type='submit'
+            disabled={isSubmitting}
+          >
+            Sign Up
           </button>
-          <button onClick={onDismiss}>Close</button>
         </Form>
       </div>
     </dialog>

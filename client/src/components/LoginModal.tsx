@@ -6,11 +6,10 @@ import { Form } from 'react-bootstrap';
 import TextInputField from './TextInputField';
 
 interface LoginModalProps {
-  onDismiss: () => void;
   onLoginSuccessful: (user: User) => void;
 }
 
-const LoginModal = ({ onDismiss, onLoginSuccessful }: LoginModalProps) => {
+const LoginModal = ({ onLoginSuccessful }: LoginModalProps) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +27,12 @@ const LoginModal = ({ onDismiss, onLoginSuccessful }: LoginModalProps) => {
   return (
     <dialog id='login_modal' className='modal'>
       <div className='modal-box'>
-        <div>LOGIN</div>
+        <form method='dialog'>
+          <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>
+            ✕
+          </button>
+        </form>
+        <h3 className='font-bold text-lg'>Log In</h3>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <TextInputField
             name='username'
@@ -48,10 +52,13 @@ const LoginModal = ({ onDismiss, onLoginSuccessful }: LoginModalProps) => {
             registerOptions={{ required: 'Required' }}
             errors={errors.password}
           ></TextInputField>
-          <button type='submit' disabled={isSubmitting}>
+          <button
+            className='btn btn-primary'
+            type='submit'
+            disabled={isSubmitting}
+          >
             Log In
           </button>
-          <button onClick={onDismiss}>Close</button>
         </Form>
       </div>
     </dialog>

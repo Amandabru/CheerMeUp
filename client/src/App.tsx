@@ -57,14 +57,12 @@ function App() {
         </Routes>
       </div>
       <SignUpModal
-        onDismiss={() => closeModal('signup_modal')}
         onSignUpSuccessful={(user) => {
           setLoggedInUser(user);
           closeModal('signup_modal');
         }}
       />
       <LoginModal
-        onDismiss={() => closeModal('login_modal')}
         onLoginSuccessful={(user) => {
           setLoggedInUser(user);
           closeModal('login_modal');
