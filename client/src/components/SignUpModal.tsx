@@ -1,7 +1,7 @@
 import { User } from '../userModel';
 import { useForm } from 'react-hook-form';
 import * as userApi from '../api/user';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import TextInputField from './TextInputField';
 import { SignUpCredentials } from '../api/user';
 
@@ -28,11 +28,9 @@ const SignUpModal = ({ onDismiss, onSignUpSuccessful }: SignUpModalProps) => {
   }
 
   return (
-    <Modal show onHide={onDismiss}>
-      <Modal.Header closeButton>
-        <Modal.Title>Sign Up</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <dialog id='signup_modal' className='modal'>
+      <div className='modal-box'>
+        <div>SIGNUP</div>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <TextInputField
             name='username'
@@ -61,12 +59,13 @@ const SignUpModal = ({ onDismiss, onSignUpSuccessful }: SignUpModalProps) => {
             registerOptions={{ required: 'Required' }}
             error={errors.password}
           />
-          <Button type='submit' disabled={isSubmitting}>
-            Signup
-          </Button>
+          <button type='submit' disabled={isSubmitting}>
+            SIGN UP
+          </button>
+          <button onClick={onDismiss}>Close</button>
         </Form>
-      </Modal.Body>
-    </Modal>
+      </div>
+    </dialog>
   );
 };
 

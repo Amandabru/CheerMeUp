@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { User } from '../userModel';
 import { LoginCredentials } from '../api/user';
 import * as userApi from '../api/user';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import TextInputField from './TextInputField';
 
 interface LoginModalProps {
@@ -26,11 +26,9 @@ const LoginModal = ({ onDismiss, onLoginSuccessful }: LoginModalProps) => {
     }
   }
   return (
-    <Modal show onHide={onDismiss}>
-      <Modal.Header closeButton>
-        <Modal.Title>Login</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <dialog id='login_modal' className='modal'>
+      <div className='modal-box'>
+        <div>LOGIN</div>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <TextInputField
             name='username'
@@ -50,12 +48,13 @@ const LoginModal = ({ onDismiss, onLoginSuccessful }: LoginModalProps) => {
             registerOptions={{ required: 'Required' }}
             errors={errors.password}
           ></TextInputField>
-          <Button type='submit' disabled={isSubmitting}>
+          <button type='submit' disabled={isSubmitting}>
             Log In
-          </Button>
+          </button>
+          <button onClick={onDismiss}>Close</button>
         </Form>
-      </Modal.Body>
-    </Modal>
+      </div>
+    </dialog>
   );
 };
 

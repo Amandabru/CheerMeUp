@@ -14,8 +14,19 @@ import LoginModal from './components/LoginModal';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  function closeModal(modalId: string) {
+    if (document) {
+      (document.getElementById(modalId) as HTMLFormElement).close();
+    }
+  }
+
+  function showModal(modalId: string) {
+    if (document) {
+      (document.getElementById(modalId) as HTMLFormElement).showModal();
+    }
+  }
+
   useEffect(() => {
     async function fetchLoggedInUser() {
       try {
@@ -32,8 +43,8 @@ function App() {
     <>
       <NavigationBar
         loggedInUser={loggedInUser}
-        onLoginClicked={() => setShowLoginModal(true)}
-        onSignUpClicked={() => setShowSignUpModal(true)}
+        onLoginClicked={() => showModal('login_modal')}
+        onSignUpClicked={() => showModal('signup_modal')}
         onLogoutSuccessful={() => setLoggedInUser(null)}
       />
       <div>
@@ -45,24 +56,20 @@ function App() {
           <Route path='/*' element={<NotFoundView />} />
         </Routes>
       </div>
-      {showSignUpModal && (
-        <SignUpModal
-          onDismiss={() => setShowSignUpModal(false)}
-          onSignUpSuccessful={(user) => {
-            setLoggedInUser(user);
-            setShowSignUpModal(false);
-          }}
-        />
-      )}
-      {showLoginModal && (
-        <LoginModal
-          onDismiss={() => setShowLoginModal(false)}
-          onLoginSuccessful={(user) => {
-            setLoggedInUser(user);
-            setShowLoginModal(false);
-          }}
-        />
-      )}
+      <SignUpModal
+        onDismiss={() => closeModal('signup_modal')}
+        onSignUpSuccessful={(user) => {
+          setLoggedInUser(user);
+          closeModal('signup_modal');
+        }}
+      />
+      <LoginModal
+        onDismiss={() => closeModal('login_modal')}
+        onLoginSuccessful={(user) => {
+          setLoggedInUser(user);
+          closeModal('login_modal');
+        }}
+      />
     </>
   );
 }
