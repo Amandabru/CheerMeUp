@@ -4,17 +4,17 @@ type SuggestionType = {
     activity: string;
 };
 
-/*
 export async function getSuggestions(
-  type: string,
-  multipleParticipants: boolean
+    type: string,
+    multipleParticipants: boolean
 ): Promise<SuggestionType> {
-  const response = await fetch(
-    `${API_URL}/suggestions/${type}/:${multipleParticipants}`
-  );
-  return response.json();
-}*/
+    const response = await fetch(
+        `${API_URL}/suggestions/${type}/:${multipleParticipants}`
+    );
+    return response.json();
+}
 
+/*
 export function getSuggestions(type: string, multipleParticipants: boolean) {
     return (
         fetch(`${API_URL}/suggestions/${type}/:${multipleParticipants}`)
@@ -28,4 +28,4 @@ export function getSuggestions(type: string, multipleParticipants: boolean) {
             // from HTTP response headers to HTTP response data
             .then((response) => response.json())
     );
-}
+}*/
