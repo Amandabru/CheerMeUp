@@ -3,7 +3,8 @@ import JoyModel from '../models/Joys';
 import UserModel from '../models/User';
 import createHttpError from 'http-errors';
 
-export async function getLikeController(req: Request, res: Response, next: NextFunction) {
+// Change to two endpoints?
+export async function postLikeController(req: Request, res: Response, next: NextFunction) {
     const likedJoy = req.body;
     const type = likedJoy.type;
 
