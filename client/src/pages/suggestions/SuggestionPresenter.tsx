@@ -15,11 +15,27 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
   // const [s, setSuggestion] = useState<string>("");
   // const [a, setActivityType] = useState<string>("");
 
+  const options: {
+    value: string;
+    label: string;
+  }[] = [
+    { value: "education", label: "education" },
+    { value: "recreational", label: "recreational" },
+    { value: "social", label: "social" },
+    { value: "diy", label: "diy" },
+    { value: "charity", label: "charity" },
+    { value: "cooking", label: "cooking" },
+    { value: "relaxation", label: "relaxation" },
+    { value: "charity", label: "charity" },
+    { value: "busywork", label: "busywork" },
+  ];
+
   return (
     <SuggestionView
       randomizedSuggestion={data.activity}
       isToggled={company}
       onToggle={(c: boolean) => setCompany(c)}
+      options={options}
       activityType={type}
       onNewSuggestion={(newType: string) => {
         model.setType(newType, company);
