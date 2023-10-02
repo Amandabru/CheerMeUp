@@ -1,12 +1,12 @@
 function SuggestionView({
-    randomizedSuggestion,
+    randomSuggestion,
     isToggled,
     onToggle,
     options,
     activityType,
     onNewSuggestion
 }: {
-    randomizedSuggestion: string;
+    randomSuggestion: string;
     isToggled: boolean;
     onToggle: Function;
     options: {
@@ -60,7 +60,7 @@ function SuggestionView({
             </div>
 
             <div className="absolute top-1/3 left-1/4 w-1/2 m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100">
-                {randomizedSuggestion}
+                {randomSuggestion}
             </div>
             <button
                 className="btn absolute top-1/2 left-1/2 m-auto"

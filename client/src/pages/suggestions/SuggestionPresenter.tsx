@@ -30,11 +30,12 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
         { value: 'busywork', label: 'busywork' }
     ];
 
-    const loadNoData = promiseNoData(type, data, error, 'Choose an Activity');
-
     return (
         <SuggestionView
-            randomizedSuggestion={loadNoData ? loadNoData : data.activity}
+            randomSuggestion={
+                promiseNoData(type, data, error, 'Choose an Activity') ||
+                data.activity
+            }
             isToggled={company}
             onToggle={(c: boolean) => setCompany(c)}
             options={options}
