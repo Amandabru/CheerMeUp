@@ -1,7 +1,8 @@
 import { API_URL } from './config';
 
 type JokeType = {
-  joke: string;
+  type: string,
+  text: string;
   apiId: number;
 };
 
