@@ -18,7 +18,7 @@ export async function getJokeController(
 
         /* External Jokes API response errors are stored in boolean error parameter*/
         if (data.error) {
-            throw createHttpError(data.code, data.message);
+            throw createHttpError(500, data.message);
         }
         const selectedData = {
             type: 'joke',
