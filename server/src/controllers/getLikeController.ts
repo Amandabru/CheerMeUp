@@ -39,7 +39,7 @@ export async function getLikeController(req: Request, res: Response, next: NextF
                           { _id: req.session.userId },
                           { $push: {[`likedPosts.${type}`]: existingJoy._id } }
                         ).exec();
-                        res.status(201).json(existingJoy);
+                        res.status(201).end();
                     } 
                     catch (error) {
                         next(error)
@@ -62,7 +62,7 @@ export async function getLikeController(req: Request, res: Response, next: NextF
                           { _id: req.session.userId },
                           { $pull: {[`likedPosts.${type}`]: existingJoy._id } }
                         ).exec();
-                        res.status(201).json(existingJoy);
+                        res.status(201).end();
                     } 
                     catch (error) {
                         next(error)
@@ -97,7 +97,7 @@ export async function getLikeController(req: Request, res: Response, next: NextF
                     { _id: req.session.userId },
                     { $push: {[`likedPosts.${type}`]: createdJoy._id } }
                   ).exec();
-                res.status(201).json(createdJoy);
+                res.status(201).end();
               } 
               catch (error) {
                 next(error);

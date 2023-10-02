@@ -1,9 +1,5 @@
 import { API_URL } from './config';
-
-type SuggestionType = {
-    type: string;
-    text: string;
-};
+import { SuggestionType } from '../Types';
 
 export async function getSuggestions(
     type: string,
