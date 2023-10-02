@@ -28,7 +28,10 @@ function NavBarView({
             <a className="btn btn-ghost normal-case text-xl">
                 <Link to="/jokes">Jokes</Link>
             </a>
-            <a className="btn btn-ghost normal-case text-xl">Suggestions</a>
+            <a className="btn btn-ghost normal-case text-xl">
+                {' '}
+                <Link to="/suggestions">Suggestions</Link>
+            </a>
             {loggedInUser ? (
                 <>
                     <p>Signed in as: {loggedInUser.username}</p>
