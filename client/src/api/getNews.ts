@@ -1,6 +1,7 @@
 import { API_URL } from './config';
 
 type NewsType = {
+    type: string,
     apiId: number,
     title: string,
     text: string,

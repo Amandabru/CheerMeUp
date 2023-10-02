@@ -6,6 +6,7 @@ type MemesCollectionType = {
 };
 
 type MemeType = {
+  type: string,
   title: string;
   url: string;
   preview: string[];
