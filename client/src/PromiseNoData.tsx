@@ -1,16 +1,13 @@
 function promiseNoData(
   promise: Promise<string | null>,
   data: string | object | Error,
-  error: Error | null
+  error: Error | null,
+  noDataMessage: string
 ) {
   if (!promise) {
-    return <span> no data </span>;
+    return <span> {noDataMessage} </span>;
   } else if (!data && !error) {
-    return (
-      <div className="image">
-        <img src="http://www.csc.kth.se/~cristi/loading.gif" height="170"></img>
-      </div>
-    );
+    return <img src="http://www.csc.kth.se/~cristi/loading.gif"></img>;
   } else if (!data && error) {
     return <span> {error.message} </span>;
   }
