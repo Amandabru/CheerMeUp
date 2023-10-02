@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import JoyModel from '../models/Joys';
 import UserModel from '../models/User';
 import createHttpError from 'http-errors';
 
-export async function getLikeController(req: Request, res: Response) {
+export async function getLikeController(req: Request, res: Response, next: NextFunction) {
     const likedJoy = req.body;
     const type = likedJoy.type;
 
@@ -26,28 +26,56 @@ export async function getLikeController(req: Request, res: Response) {
       }).exec();
 
     if(existingJoy){
-        JoyModel.updateOne({ _id: existingJoy._id}, {$inc: {likes: 1}, $set: {lastLiked: Date.now()}}).exec()
-        .then(async (result:any) => {
-            // Is only false if both updates don't work
-            if (result.acknowledged) {
-                try {
-                    await UserModel.updateOne(
-                      { _id: req.params.session },
-                      { [`likedPosts.${searchParam}`]: existingJoy._id }
-                    );
-                    res.status(201).json(existingJoy);
+
+        const alreadyLiked = await UserModel.findOne( { _id: req.session.userId, [`likedPosts.${type}`]: existingJoy._id });
+
+        if(!alreadyLiked){
+            JoyModel.updateOne({ _id: existingJoy._id}, {$inc: {likes: 1}, $set: {lastLiked: Date.now()}}).exec()
+            .then(async (result:any) => {
+                // Is only false if both updates don't work
+                if (result.acknowledged) {
+                    try {
+                        await UserModel.updateOne(
+                          { _id: req.session.userId },
+                          { $push: {[`likedPosts.${type}`]: existingJoy._id } }
+                        ).exec();
+                        res.status(201).json(existingJoy);
+                    } 
+                    catch (error) {
+                        next(error)
+                    }
                 } 
-                catch (error) {
-                    throw createHttpError(500, 'Failed to update the user like');
+                else {
+                    throw createHttpError(304, 'No documents were modified');
                 }
-            } 
-            else {
-                throw createHttpError(304, 'No documents were modified');
-            }
-        })
-        .catch(() => {
-            throw createHttpError(500, 'Internal Server Error');
-        });;
+            })
+            .catch((error) => {
+                next(error)
+            });
+        }
+        else{
+            JoyModel.updateOne({ _id: existingJoy._id}, {$inc: {likes: -1}}).exec()
+            .then(async (result:any) => {
+                if (result.acknowledged) {
+                    try {
+                        await UserModel.updateOne(
+                          { _id: req.session.userId },
+                          { $pull: {[`likedPosts.${type}`]: existingJoy._id } }
+                        ).exec();
+                        res.status(201).json(existingJoy);
+                    } 
+                    catch (error) {
+                        next(error)
+                    }
+                } 
+                else {
+                    throw createHttpError(304, 'No documents were modified');
+                }
+            })
+            .catch((error) => {
+                next(error)
+            });
+        }
     }
     else{
         await JoyModel.create({
@@ -64,14 +92,15 @@ export async function getLikeController(req: Request, res: Response) {
         .then(async (createdJoy) => {
             if (createdJoy) {
               try {
+                console.log(createdJoy._id)
                 await UserModel.updateOne(
-                  { _id: req.params.session },
-                  { [`likedPosts.${searchParam}`]: createdJoy._id }
-                );
+                    { _id: req.session.userId },
+                    { $push: {[`likedPosts.${type}`]: createdJoy._id } }
+                  ).exec();
                 res.status(201).json(createdJoy);
               } 
               catch (error) {
-                throw createHttpError(500, 'Failed to update the user like');
+                next(error);
               }
             } 
             else {
@@ -79,7 +108,7 @@ export async function getLikeController(req: Request, res: Response) {
             }
         })
         .catch((error) => {
-            throw createHttpError(500, 'Internal Server Error');
+            next(error)
         });
     }
   }
