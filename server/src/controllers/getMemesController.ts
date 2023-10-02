@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 
 export async function getMemesController(req: Request, res: Response) {
     //get ten random memes. To be specified furhter, depending on the request
+    //still needs error handling
     const api_url = 'https://meme-api.com/gimme/10';
     const response = await fetch(api_url);
     const data = await response.json();
@@ -25,6 +26,5 @@ export async function getMemesController(req: Request, res: Response) {
     }
 
     data.memes = data.memes.map(selectFewerProps);
-
     res.json(data);
 }
