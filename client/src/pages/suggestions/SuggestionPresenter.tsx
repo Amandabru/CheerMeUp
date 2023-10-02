@@ -34,7 +34,7 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
         <SuggestionView
             randomSuggestion={
                 promiseNoData(type, data, error, 'Choose an Activity') ||
-                data.activity
+                data.text
             }
             isToggled={company}
             onToggle={(c: boolean) => setCompany(c)}
