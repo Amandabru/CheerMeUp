@@ -5,18 +5,17 @@ export async function getSuggestionsController(req: Request, res: Response) {
     const type = req.params.type;
     const multipleParticipants = req.params.multipleParticipants;
 
-    let participantsQuery: string = "";
-    if (multipleParticipants === "false")
-        participantsQuery = "participants=1";
+    let participantsQuery: string = '';
+    if (multipleParticipants == 'false') participantsQuery = 'participants=1';
 
-    const api_url = `http://www.boredapi.com/api/activity?${participantsQuery}&type=${type}`
+    const api_url = `http://www.boredapi.com/api/activity?${participantsQuery}&type=${type}`;
     const response = await fetch(api_url);
     const data = await response.json();
 
     const selectedData = {
-        type: "suggestion",
-        text: data.activity,
+        type: 'suggestion',
+        text: data.activity
     };
-    
+
     res.json(selectedData);
 }
