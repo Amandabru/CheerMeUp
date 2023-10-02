@@ -3,12 +3,16 @@ import { useForm } from 'react-hook-form';
 import * as userApi from '../../api/user';
 import { SignUpCredentials } from '../../api/user';
 import SignUpView from './SignUpView';
+import { useState } from 'react';
+import { ConflictError } from '../../errors/httpErrors';
 
 interface SignUpPresenterProps {
     onSignUpSuccessful: (user: User) => void;
 }
 
 const SignUpPresenter = ({ onSignUpSuccessful }: SignUpPresenterProps) => {
+    const [errorText, setErrorText] = useState<string | null>(null);
+
     const {
         register,
         handleSubmit,
@@ -20,7 +24,11 @@ const SignUpPresenter = ({ onSignUpSuccessful }: SignUpPresenterProps) => {
             const newUser = await userApi.signUp(credentials);
             onSignUpSuccessful(newUser);
         } catch (error) {
-            alert(error);
+            if (error instanceof ConflictError) {
+                setErrorText(error.message);
+            } else {
+                alert(error);
+            }
             console.error(error);
         }
     }
@@ -29,8 +37,9 @@ const SignUpPresenter = ({ onSignUpSuccessful }: SignUpPresenterProps) => {
         <SignUpView
             register={register}
             handleSubmit={handleSubmit(onSubmit)}
-            isSubmitting={isSubmitting}
             errors={errors}
+            errorText={errorText}
+            isSubmitting={isSubmitting}
         ></SignUpView>
     );
 };

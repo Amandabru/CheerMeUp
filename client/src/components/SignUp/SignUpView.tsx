@@ -6,14 +6,16 @@ import * as userApi from '../../api/user';
 interface SignUpViewProps {
     register: UseFormRegister<userApi.SignUpCredentials>;
     handleSubmit: () => void;
-    isSubmitting: boolean;
     errors: FieldErrors<userApi.SignUpCredentials>;
+    errorText: string | null;
+    isSubmitting: boolean;
 }
 
 const SignUpView = ({
     register,
     handleSubmit,
     errors,
+    errorText,
     isSubmitting
 }: SignUpViewProps) => {
     return (
@@ -25,6 +27,7 @@ const SignUpView = ({
                     </button>
                 </form>
                 <h3 className="font-bold text-lg">Sign Up</h3>
+                <p>{errorText}</p>
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
                         name="username"

@@ -7,6 +7,7 @@ interface LoginViewProps {
     register: UseFormRegister<LoginCredentials>;
     handleSubmit: () => void;
     errors: FieldErrors<LoginCredentials>;
+    errorText: string | null;
     isSubmitting: boolean;
 }
 
@@ -14,6 +15,7 @@ const LoginView = ({
     register,
     handleSubmit,
     errors,
+    errorText,
     isSubmitting
 }: LoginViewProps) => {
     return (
@@ -25,6 +27,7 @@ const LoginView = ({
                     </button>
                 </form>
                 <h3 className="font-bold text-lg">Log In</h3>
+                {errorText && <div>{errorText}</div>}
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
                         name="username"

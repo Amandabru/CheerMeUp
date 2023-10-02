@@ -3,12 +3,15 @@ import { User } from '../../userModel';
 import { LoginCredentials } from '../../api/user';
 import * as userApi from '../../api/user';
 import LoginView from './LoginView';
+import { useState } from 'react';
+import { UnathorizedError } from '../../errors/httpErrors';
 
 interface LoginPresenterProps {
     onLoginSuccessful: (user: User) => void;
 }
 
 const LoginPresenter = ({ onLoginSuccessful }: LoginPresenterProps) => {
+    const [errorText, setErrorText] = useState<string | null>(null);
     const {
         register,
         handleSubmit,
@@ -20,7 +23,11 @@ const LoginPresenter = ({ onLoginSuccessful }: LoginPresenterProps) => {
             const user = await userApi.login(credentials);
             onLoginSuccessful(user);
         } catch (error) {
-            alert(error);
+            if (error instanceof UnathorizedError) {
+                setErrorText(error.message);
+            } else {
+                alert(error);
+            }
             console.error(error);
         }
     }
@@ -30,6 +37,7 @@ const LoginPresenter = ({ onLoginSuccessful }: LoginPresenterProps) => {
             register={register}
             handleSubmit={handleSubmit(onSubmit)}
             errors={errors}
+            errorText={errorText}
             isSubmitting={isSubmitting}
         ></LoginView>
     );
