@@ -11,9 +11,12 @@ import { User } from './userModel';
 import * as userApi from './api/user';
 import LoginPresenter from './components/Login/LoginPresenter';
 import SignUpPresenter from './components/SignUp/SignUpPresenter';
+import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
+import { CheerModel } from './models/model';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+    const model = new CheerModel();
 
     function closeModal(modalId: string) {
         if (document) {
@@ -53,6 +56,11 @@ function App() {
                     <Route path="/jokes" element={<JokeView />} />
                     <Route path="/memes" element={<MemeView />} />
                     <Route path="/news" element={<NewsView />} />
+                    <Route
+                        path="/suggestions"
+                        element={<SuggestionPresenter model={model} />}
+                    />
+
                     <Route path="/*" element={<NotFoundView />} />
                 </Routes>
             </div>
@@ -71,5 +79,4 @@ function App() {
         </>
     );
 }
-
 export default App;
