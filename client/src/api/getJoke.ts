@@ -1,23 +1,9 @@
 import { API_URL } from './config';
 
 type JokeType = {
-  error: boolean;
-  category: string;
-  type: string;
-  joke: string;
-  flags: FlagType;
-  id: number;
-  safe: boolean;
-  lang: string;
-};
-
-type FlagType = {
-  nsfw: boolean;
-  religious: boolean;
-  political: boolean;
-  racist: boolean;
-  sexist: boolean;
-  explicit: boolean;
+  type: string,
+  text: string;
+  apiId: number;
 };
 
 export async function getJoke(categories: string[]): Promise<JokeType> {
