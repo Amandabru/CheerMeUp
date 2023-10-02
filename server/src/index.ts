@@ -6,7 +6,7 @@ import { getHappyNewsController } from './controllers/getHappyNewsController';
 import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
-import { getLikesController } from './controllers/getLikesController';
+import { getLikeController } from './controllers/getLikeController';
 import * as UserController from './controllers/userController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
@@ -47,11 +47,11 @@ app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
-app.post('/likes', getLikesController, requiresAuth);
+app.post('/like', requiresAuth, getLikeController);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
 app.get('/users', UserController.getAuthenticatedUser);
-app.post('/users/logout', UserController.logout, requiresAuth);
+app.post('/users/logout', requiresAuth, UserController.logout);
 
 // Unexisting endpoint
 app.use((_req, _res, next) => {

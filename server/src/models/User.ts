@@ -6,9 +6,9 @@ const userSchema = new Schema({
   password: { type: String, required: true, select: false },
   profilePicture: { type: String, required: false },
   likedPosts: {
-    jokes: [String],
-    suggestions: [String],
-    memes: [String],
+    joke: [String],
+    suggestion: [String],
+    meme: [String],
     news: [String],
   }
 });
