@@ -1,11 +1,7 @@
-import { API_URL } from "./config";
+import { API_URL } from './config';
 
 type SuggestionType = {
-  activity: string;
-  accessibility: number;
-  type: string;
-  participants: number;
-  price: number;
+    activity: string;
 };
 
 /*
@@ -20,16 +16,16 @@ export async function getSuggestions(
 }*/
 
 export function getSuggestions(type: string, multipleParticipants: boolean) {
-  return (
-    fetch(`${API_URL}/suggestions/${type}/:${multipleParticipants}`)
-      .then((response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          throw new Error(response.statusText);
-        }
-      })
-      // from HTTP response headers to HTTP response data
-      .then((response) => response.json())
-  );
+    return (
+        fetch(`${API_URL}/suggestions/${type}/:${multipleParticipants}`)
+            .then((response) => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    throw new Error(response.statusText);
+                }
+            })
+            // from HTTP response headers to HTTP response data
+            .then((response) => response.json())
+    );
 }
