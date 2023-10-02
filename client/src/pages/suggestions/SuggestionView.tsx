@@ -63,7 +63,7 @@ function SuggestionView({
                 {randomSuggestion}
             </div>
             <button
-                className="btn absolute top-1/2 left-1/2 m-auto"
+                className="btn absolute top-1/2 left-1/2 transform -translate-x-1/2 min-w-fit"
                 onClick={() => {
                     onNewSuggestion(activityType);
                     console.log('onclick ' + activityType + ' ' + isToggled);
