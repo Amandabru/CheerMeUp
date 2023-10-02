@@ -1,14 +1,19 @@
 import { getSuggestions } from '../api/getSuggestions';
+import { getJoke } from '../api/getJoke';
 
 export class CheerModel {
     private observers: (() => void)[];
     private type: string | null;
     public currentSuggestionData: object | Error;
     public currentSuggestionError: object | Error;
+    private jokeType: string[];
+    public currentJokeData: object | Error;
+    public currentJokeError: object | Error;
 
-    constructor(observers = [], type = '') {
+    constructor(observers = [], type = '', jokeType = ['']) {
         this.observers = observers;
         this.type = type;
+        this.jokeType = jokeType;
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
@@ -28,6 +33,29 @@ export class CheerModel {
                 .catch((error: object | Error) => {
                     if (id === this.type) {
                         this.currentSuggestionError = error;
+                        this.notifyObservers();
+                    }
+                });
+        }
+    }
+
+    setJoke(id: string[]) {
+        if (id == this.jokeType) return;
+        else this.jokeType = id;
+
+        this.notifyObservers();
+        if (this.jokeType) {
+            getJoke(this.jokeType)
+                .then((data: object | Error) => {
+                    if (id === this.jokeType) {
+                        this.currentJokeData = data;
+                        console.log(data);
+                        this.notifyObservers();
+                    }
+                })
+                .catch((error: object | Error) => {
+                    if (id === this.jokeType) {
+                        this.currentJokeError = error;
                         this.notifyObservers();
                     }
                 });
