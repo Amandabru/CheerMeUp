@@ -17,7 +17,7 @@ function SuggestionView({
     onNewSuggestion: Function;
 }) {
     return (
-        <body className="bg-violet-300 text-black">
+        <div className="bg-violet-300 text-black h-full w-full fixed">
             <div className="absolute top-[20%] left-1/4 w-1/2">
                 <div className="form-control w-fit">
                     <label className="label cursor-pointer">
@@ -71,7 +71,7 @@ function SuggestionView({
             >
                 Get new suggestion
             </button>
-        </body>
+        </div>
     );
 }
 
