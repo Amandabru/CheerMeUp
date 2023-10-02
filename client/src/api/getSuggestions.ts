@@ -2,7 +2,7 @@ import { API_URL } from './config';
 
 type SuggestionType = {
     type: string,
-    activity: string,
+    text: string,
 }
 
 export async function getHappyNews(): Promise<SuggestionType> {

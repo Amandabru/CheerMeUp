@@ -15,7 +15,7 @@ export async function getSuggestionsController(req: Request, res: Response) {
 
     const selectedData = {
         type: "suggestion",
-        activity: data.activity,
+        text: data.activity,
     };
     
     res.json(selectedData);
