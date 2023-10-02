@@ -1,25 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SuggestionView from "./SuggestionView";
 import { CheerModel } from "../../models/model";
 import useModelProp from "../../hooks/useModelProp";
+import promiseNoData from "../../PromiseNoData";
 
 function SuggestionPresenter({ model }: { model: CheerModel }) {
-  const suggestion = useModelProp(model, "currentSuggestionData");
+  const data = useModelProp(model, "currentSuggestionData");
   const type = useModelProp(model, "type");
+  const error = useModelProp(model, "currentSuggestionError");
 
-  const [s, setSuggestion] = useState<string>("");
-  const [a, setActivityType] = useState<string>("");
+  // Alone activity
   const [company, setCompany] = useState<boolean>(false);
+
+  // const [s, setSuggestion] = useState<string>("");
+  // const [a, setActivityType] = useState<string>("");
 
   return (
     <SuggestionView
-      randomizedSuggestion={suggestion.activity}
+      randomizedSuggestion={data.activity}
       isToggled={company}
       onToggle={(c: boolean) => setCompany(c)}
       activityType={type}
       onNewSuggestion={(newType: string) => {
         model.setType(newType, company);
       }}
+      promiseNoData={promiseNoData(type, data, error, "Pick an Activity Type")}
     />
   );
 }
