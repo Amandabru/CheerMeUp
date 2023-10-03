@@ -3,6 +3,7 @@ import JoyModel from '../models/Joys';
 import UserModel from '../models/User';
 import createHttpError from 'http-errors';
 
+// CHECK: possible bug when you try to like when you just have recently signed up as user - might get error unautharized
 // Change to two endpoints?
 export async function postLikeController(req: Request, res: Response, next: NextFunction) {
     const likedJoy = req.body;
@@ -93,7 +94,6 @@ export async function postLikeController(req: Request, res: Response, next: Next
         .then(async (createdJoy) => {
             if (createdJoy) {
               try {
-                console.log(createdJoy._id)
                 await UserModel.updateOne(
                     { _id: req.session.userId },
                     { $push: {[`likedPosts.${type}`]: createdJoy._id } }

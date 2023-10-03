@@ -8,10 +8,12 @@ import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
 import { postLikeController } from './controllers/postLikeController';
 import * as UserController from './controllers/userController';
+import { getMostLikedController } from './controllers/getMostLikedController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
+
 
 config();
 
@@ -48,6 +50,7 @@ app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 app.post('/like', requiresAuth, postLikeController);
+app.post('/mostLiked/:number', getMostLikedController);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
 app.get('/users', UserController.getAuthenticatedUser);
