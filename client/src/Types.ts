@@ -13,16 +13,11 @@ export type NewsType = {
     author: string,
 };
 
-export type MemesCollectionType = {
-    count: number;
-    memes: MemeType[];
-};
 
 export type MemeType = {
     type: string,
     title: string;
     url: string;
-    preview: string[];
 };
 
 export type JokeType = {
