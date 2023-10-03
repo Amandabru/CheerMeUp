@@ -32,13 +32,19 @@ export async function getMemesController(
         if (data.error) {
             throw createHttpError(500, 'Failed to fetch memes');
         }
-        // only keep memes that contains an imagee
+        //only keep memes that contains an imagee
         const dataArray: RedditPost[] = data.data;
         const filteredArray = dataArray.filter(
             (item) => item.post_hint === 'image'
         );
-        console.log(filteredArray);
-        res.status(200).json(filteredArray);
+        const filteredArrayWithSelectedProperties = filteredArray.map(
+            (item) => ({
+                type: 'meme',
+                title: item.title,
+                url: item.url
+            })
+        );
+        res.status(200).json(filteredArrayWithSelectedProperties);
     } catch (error) {
         next(error);
     }
