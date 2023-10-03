@@ -1,11 +1,7 @@
 import { API_URL } from './config';
+import { MemeType } from '../Types';
 
-type MemeType = {
-    title: string;
-    url: string;
-};
-
-export async function getMemes(): Promise<[MemeType]> {
+export async function getMemes(): Promise<MemeType[]> {
     const response = await fetch(`${API_URL}/memes`);
     return response.json();
 }
