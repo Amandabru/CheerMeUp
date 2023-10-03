@@ -8,7 +8,7 @@ export async function getJokeController(
     next: NextFunction
 ) {
     const categories = req.params.categories;
-    const api_url = `https://v2.jokeapi.dev/joke/${categories}?safe-mode&type=single`;
+    const api_url = `https://v2.jokeapi.dev/joke/${categories}?blacklistFlags=nsfw,religious,political,racist,sexist,explicit`;
     try {
         const response = await fetch(api_url);
         if (!response.ok) throw createHttpError(500, 'Failed to fetch joke');
@@ -20,7 +20,10 @@ export async function getJokeController(
         }
         const selectedData = {
             type: 'joke',
-            text: data.joke,
+            text:
+                data.type === 'single'
+                    ? data.joke
+                    : data.setup + '\n' + data.delivery,
             apiId: data.id
         };
         res.status(200).json(selectedData);

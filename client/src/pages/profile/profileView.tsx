@@ -9,7 +9,6 @@ function ProfileView({ loggedInUser }: ProfileViweProps) {
     return (
         <div>
             <h1>Hi {user?.username}</h1>
-            <p>Your liked posts</p>
         </div>
     );
 }
