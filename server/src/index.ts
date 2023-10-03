@@ -7,7 +7,6 @@ import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
 import { postLikeController } from './controllers/postLikeController';
-import { getLikedJoys } from './controllers/getLikedJoys';
 import * as UserController from './controllers/userController';
 import { getPopularController } from './controllers/getPopularController';
 import session from 'express-session';
@@ -56,7 +55,7 @@ app.get('/users', requiresAuth, UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
 app.post('/users/logout', requiresAuth, UserController.logout);
-app.get('/users/likedJoys', requiresAuth, getLikedJoys);
+app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint
 app.use((_req, _res, next) => {
