@@ -6,12 +6,14 @@ import { getHappyNewsController } from './controllers/getHappyNewsController';
 import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
-import { getLikeController } from './controllers/getLikeController';
+import { postLikeController } from './controllers/postLikeController';
 import * as UserController from './controllers/userController';
+import { getPopularController } from './controllers/getPopularController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
+
 
 config();
 
@@ -47,7 +49,8 @@ app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
-app.post('/like', requiresAuth, getLikeController);
+app.post('/like', requiresAuth, postLikeController);
+app.post('/popular/:sortBy/:number', getPopularController);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
 app.get('/users', UserController.getAuthenticatedUser);
@@ -58,7 +61,7 @@ app.use((_req, _res, next) => {
     next(createHttpError(404, 'Endpoint not found'));
 });
 
-// Unknown error
+// Any error
 app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
     console.error(error);
     let errorMessage = 'An unknown error occurred';

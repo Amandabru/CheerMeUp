@@ -3,7 +3,9 @@ import JoyModel from '../models/Joys';
 import UserModel from '../models/User';
 import createHttpError from 'http-errors';
 
-export async function getLikeController(req: Request, res: Response, next: NextFunction) {
+// CHECK: possible bug when you try to like when you just have recently signed up as user - might get error unautharized
+// Change to two endpoints?
+export async function postLikeController(req: Request, res: Response, next: NextFunction) {
     const likedJoy = req.body;
     const type = likedJoy.type;
 
@@ -39,7 +41,7 @@ export async function getLikeController(req: Request, res: Response, next: NextF
                           { _id: req.session.userId },
                           { $push: {[`likedPosts.${type}`]: existingJoy._id } }
                         ).exec();
-                        res.status(201).json(existingJoy);
+                        res.status(201).end();
                     } 
                     catch (error) {
                         next(error)
@@ -62,7 +64,7 @@ export async function getLikeController(req: Request, res: Response, next: NextF
                           { _id: req.session.userId },
                           { $pull: {[`likedPosts.${type}`]: existingJoy._id } }
                         ).exec();
-                        res.status(201).json(existingJoy);
+                        res.status(201).end();
                     } 
                     catch (error) {
                         next(error)
@@ -92,12 +94,11 @@ export async function getLikeController(req: Request, res: Response, next: NextF
         .then(async (createdJoy) => {
             if (createdJoy) {
               try {
-                console.log(createdJoy._id)
                 await UserModel.updateOne(
                     { _id: req.session.userId },
                     { $push: {[`likedPosts.${type}`]: createdJoy._id } }
                   ).exec();
-                res.status(201).json(createdJoy);
+                res.status(201).end();
               } 
               catch (error) {
                 next(error);
