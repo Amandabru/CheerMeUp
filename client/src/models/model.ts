@@ -6,11 +6,11 @@ export class CheerModel {
     private type: string | null;
     public currentSuggestionData: object | Error;
     public currentSuggestionError: object | Error;
-    private jokeType: string[];
+    private jokeType: string[] | null;
     public currentJokeData: object | Error;
     public currentJokeError: object | Error;
 
-    constructor(observers = [], type = '', jokeType = ['']) {
+    constructor(observers = [], type = '', jokeType = null) {
         this.observers = observers;
         this.type = type;
         this.jokeType = jokeType;
