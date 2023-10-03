@@ -1,11 +1,17 @@
+import HeartIcon from '../../components/UI/HeartIcon';
+
 function JokeView({
     randomJoke,
     jokeType,
-    onNewJoke
+    onNewJoke,
+    liked,
+    isLiked
 }: {
     randomJoke: string;
     jokeType: string[];
     onNewJoke: Function;
+    liked: boolean;
+    isLiked: Function;
 }) {
     return (
         <div className="bg-lime-200	text-black h-full w-full fixed">
@@ -46,8 +52,25 @@ function JokeView({
                         value={['programming', 'misc', 'pun']}
                     />
                 </div>
-                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-lime-100 h-40 w-full overflow-x-auto flex items-center justify-center">
-                    {randomJoke}
+                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-lime-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
+                    <span
+                        onClick={() => {
+                            liked = !liked;
+                            isLiked(liked);
+                        }}
+                    >
+                        <HeartIcon
+                            isSolid={liked} // likedList.find((likedObject => likedObject.id === liked.id))
+                            style={{
+                                position: 'absolute',
+                                top: '15px',
+                                right: '15px',
+                                cursor: 'pointer',
+                                transform: 'scale(1.5)'
+                            }}
+                        />
+                    </span>
+                    <span>{randomJoke}</span>
                 </div>
                 <button
                     className="btn mt-5 transition-transform min-w-fit"

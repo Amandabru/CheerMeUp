@@ -2,12 +2,12 @@ import React from 'react';
 import { TiHeartOutline, TiHeartFullOutline } from 'react-icons/Ti';
 
 interface HeartIconProps {
-    isLiked: boolean;
+    isSolid: boolean;
     style?: React.CSSProperties;
 }
 
 function HeartIcon(props: HeartIconProps) {
-    if (props.isLiked) {
+    if (props.isSolid) {
         return <TiHeartFullOutline style={props.style} />;
     }
     return <TiHeartOutline style={props.style} />;

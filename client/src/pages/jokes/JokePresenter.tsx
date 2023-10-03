@@ -2,11 +2,16 @@ import { CheerModel } from '../../models/model';
 import useModelProp from '../../hooks/useModelProp';
 import promiseNoData from '../../PromiseNoData';
 import JokeView from './JokeView';
+import { useState } from 'react';
 
 function JokePresenter({ model }: { model: CheerModel }) {
     const type = useModelProp(model, 'jokeType');
     const data = useModelProp(model, 'currentJokeData');
     const error = useModelProp(model, 'currentJokeError');
+
+    // TODO: Implement with model
+
+    const [liked, isLiked] = useState<boolean>(false);
 
     return (
         <JokeView
@@ -17,6 +22,8 @@ function JokePresenter({ model }: { model: CheerModel }) {
             onNewJoke={(newType: string[]) => {
                 model.setJoke(newType);
             }}
+            liked={liked}
+            isLiked={(l: boolean) => isLiked(l)}
         />
     );
 }
