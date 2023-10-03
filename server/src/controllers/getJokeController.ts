@@ -7,10 +7,8 @@ export async function getJokeController(
     res: Response,
     next: NextFunction
 ) {
-    const categories = req.params.categories.split(',');
-    const api_url = `https://v2.jokeapi.dev/joke/${categories.join(
-        ','
-    )}?safe-mode&type=single`;
+    const categories = req.params.categories;
+    const api_url = `https://v2.jokeapi.dev/joke/${categories}?safe-mode&type=single`;
     try {
         const response = await fetch(api_url);
         if (!response.ok) throw createHttpError(500, 'Failed to fetch joke');
