@@ -13,6 +13,7 @@ import LoginPresenter from './components/Login/LoginPresenter';
 import SignUpPresenter from './components/SignUp/SignUpPresenter';
 import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
+import ProfileView from './pages/profile/profileView';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -60,7 +61,10 @@ function App() {
                         path="/suggestions"
                         element={<SuggestionPresenter model={model} />}
                     />
-
+                    <Route
+                        path="/profile"
+                        element={<ProfileView loggedInUser={loggedInUser} />}
+                    />
                     <Route path="/*" element={<NotFoundView />} />
                 </Routes>
             </div>

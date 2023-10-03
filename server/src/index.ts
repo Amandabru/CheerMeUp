@@ -7,13 +7,13 @@ import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
 import { postLikeController } from './controllers/postLikeController';
+import { getLikedJoys } from './controllers/getLikedJoys';
 import * as UserController from './controllers/userController';
 import { getPopularController } from './controllers/getPopularController';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
-
 
 config();
 
@@ -50,11 +50,13 @@ app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 app.post('/like', requiresAuth, postLikeController);
+//ska väl vara get på den nedan?
 app.post('/popular/:sortBy/:number', getPopularController);
+app.get('/users', requiresAuth, UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
-app.get('/users', UserController.getAuthenticatedUser);
 app.post('/users/logout', requiresAuth, UserController.logout);
+app.get('/users/likedJoys', requiresAuth, getLikedJoys);
 
 // Unexisting endpoint
 app.use((_req, _res, next) => {
