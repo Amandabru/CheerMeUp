@@ -8,16 +8,14 @@ function JokePresenter({ model }: { model: CheerModel }) {
     const data = useModelProp(model, 'currentJokeData');
     const error = useModelProp(model, 'currentJokeError');
 
-    let categories: string[] = ['programming'];
-
     return (
         <JokeView
             randomJoke={
                 promiseNoData(type, data, error, 'Choose a Type') || data.text
             }
-            jokeType={categories}
+            jokeType={type}
             onNewJoke={(newType: string[]) => {
-                model.setJoke(categories);
+                model.setJoke(newType);
             }}
         />
     );
