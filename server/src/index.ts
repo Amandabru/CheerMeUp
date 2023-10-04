@@ -48,9 +48,10 @@ app.get('/news', getHappyNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
+
 app.post('/like', requiresAuth, postLikeController);
-//ska väl vara get på den nedan?
-app.post('/popular/:sortBy/:number', getPopularController);
+app.get('/popular/:sortBy/:number', getPopularController);
+
 app.get('/users', requiresAuth, UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
