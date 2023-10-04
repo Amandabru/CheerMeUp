@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Card({ image }: { image: string }) {
+function Card({ image, title }: { image: string; title?: string }) {
     const [isHovered, setIsHovered] = useState(false);
     const handleHover = () => {
         setIsHovered(!isHovered);
@@ -8,6 +8,7 @@ function Card({ image }: { image: string }) {
 
     return (
         <div className="bg-white w-128 h-80 rounded-3xl overflow-hidden shadow-lg">
+            <h1 className="ml-10">Title: {title}</h1>
             <img
                 className="object-contain w-128 h-5/6"
                 src={image}

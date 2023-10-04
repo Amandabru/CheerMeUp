@@ -1,25 +1,22 @@
 import Card from '../../components/Card';
+import testMemes from './TestMemes';
 
 function RandomMemeView() {
+    let data = testMemes();
     return (
-        <body className="bg-blue-300 text-black h-full w-full fixed">
+        <div className="bg-blue-300 text-black">
             <div>
                 <section className="m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {/* First Card*/}
-                    <Card image="/src/images/shoe.jpeg" />
-                    {/* Second Card*/}
-                    <Card image="/src/images/cute.avif" />
-                    {/* Third Card*/}
-                    <Card image="/src/images/shoe.jpeg" />
-                    {/* First Card*/}
-                    <Card image="/src/images/shoe.jpeg" />
-                    {/* Second Card*/}
-                    <Card image="/src/images/cute.avif" />
-                    {/* Third Card*/}
-                    <Card image="/src/images/shoe.jpeg" />
+                    {data.map((item, index) => (
+                        <Card
+                            key={index}
+                            image={item.url}
+                            title={item.title}
+                        ></Card>
+                    ))}
                 </section>
             </div>
-        </body>
+        </div>
     );
 }
 

@@ -14,6 +14,7 @@ import SignUpPresenter from './components/SignUp/SignUpPresenter';
 import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
+import MemePresenter from './pages/memes/MemePresenter';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -58,7 +59,7 @@ function App() {
                         path="/jokes"
                         element={<JokePresenter model={model} />}
                     />
-                    <Route path="/memes" element={<MemeView />} />
+                    <Route path="/memes" element={<MemePresenter />} />
                     <Route path="/news" element={<NewsView />} />
                     <Route
                         path="/suggestions"

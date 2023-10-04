@@ -15,28 +15,28 @@ function MemeView() {
     };
 
     return (
-        <div className="bg-blue-300 text-black h-full w-full fixed">
-            <div>
-                <div className="flex justify-center items-center">
-                    <button
-                        className={`btn btn-accent mr-5 mt-10 ${
-                            selectedView === 'random' ? 'btn-active' : ''
-                        }`}
-                        onClick={() => setSelectedView('random')}
-                    >
-                        Random
-                    </button>
-                    <button
-                        className={`btn btn-accent mr-5 mt-10 ${
-                            selectedView === 'best' ? 'btn-active' : ''
-                        }`}
-                        onClick={() => setSelectedView('best')}
-                    >
-                        Best
-                    </button>
-                </div>
+        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
+            <div className="flex justify-center items-center">
+                <button
+                    className={`btn btn-accent mr-5 mt-10 ${
+                        selectedView === 'random' ? 'btn-active' : ''
+                    }`}
+                    onClick={() => setSelectedView('random')}
+                >
+                    Random
+                </button>
+                <button
+                    className={`btn btn-accent mr-5 mt-10 ${
+                        selectedView === 'best' ? 'btn-active' : ''
+                    }`}
+                    onClick={() => setSelectedView('best')}
+                >
+                    Best
+                </button>
             </div>
+
             {renderSelectedView()}
+            <div className="h-15"></div>
         </div>
     );
 }
