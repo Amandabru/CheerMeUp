@@ -1,5 +1,6 @@
 import { User } from '../../userModel';
 import { Link } from 'react-router-dom';
+import logoImage from '../../assets/images/LogoTest.png';
 
 interface NavBarViewProps {
     loggedInUser: User | null;
@@ -16,6 +17,11 @@ function NavBarView({
 }: NavBarViewProps) {
     return (
         <div className="navbar bg-base-100">
+            <img
+                className="btn btn-ghost normal-case text-xl"
+                src={logoImage}
+                alt={'Logo'}
+            ></img>
             <Link to="/">
                 <a className="btn btn-ghost normal-case text-xl">CheerMeUp</a>
             </Link>
