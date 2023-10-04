@@ -1,11 +1,17 @@
-import Card from '../../components/Card';
+import RandomMemeView from './RandomMemeView';
+import BestMemeView from './BestMemeView';
 
 function MemeView() {
     return (
-        <div>
-            <h1>meme page in progess</h1>
-            <Card image="/src/images/shoe.jpeg"></Card>
-        </div>
+        <body className="bg-blue-300 text-black h-full w-full fixed">
+            <div>
+                <h1>Meme page in progress</h1>
+                <div className="flex align-middle">
+                    <button className="btn btn-accent">Random</button>
+                    <button className="btn btn-accent">Best</button>
+                </div>
+            </div>
+        </body>
     );
 }
 
