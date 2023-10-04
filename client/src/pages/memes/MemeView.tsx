@@ -19,13 +19,17 @@ function MemeView() {
             <div>
                 <div className="flex justify-center items-center">
                     <button
-                        className="btn btn-accent mr-5 mt-10"
+                        className={`btn btn-accent mr-5 mt-10 ${
+                            selectedView === 'random' ? 'btn-active' : ''
+                        }`}
                         onClick={() => setSelectedView('random')}
                     >
                         Random
                     </button>
                     <button
-                        className="btn btn-accent ml-5 mt-10"
+                        className={`btn btn-accent mr-5 mt-10 ${
+                            selectedView === 'best' ? 'btn-active' : ''
+                        }`}
                         onClick={() => setSelectedView('best')}
                     >
                         Best
