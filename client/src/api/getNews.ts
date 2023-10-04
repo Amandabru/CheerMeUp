@@ -1,13 +1,5 @@
 import { API_URL } from './config';
-
-type NewsType = {
-    apiId: number,
-    title: string,
-    text: string,
-    url: string,
-    image: string,
-    author: string,
-};
+import { NewsType } from '../Types';
 
 export async function getHappyNews(): Promise<NewsType[]> {
   const response = await fetch(`${API_URL}/news`);
