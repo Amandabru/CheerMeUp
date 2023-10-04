@@ -13,7 +13,7 @@ import LoginPresenter from './components/Login/LoginPresenter';
 import SignUpPresenter from './components/SignUp/SignUpPresenter';
 import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
-import ProfileView from './pages/profile/profileView';
+import JokePresenter from './pages/jokes/JokePresenter';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -54,18 +54,16 @@ function App() {
             <div>
                 <Routes>
                     <Route path="/" element={<HomeView />} />
-                    <Route path="/jokes" element={<JokeView />} />
+                    <Route
+                        path="/jokes"
+                        element={<JokePresenter model={model} />}
+                    />
                     <Route path="/memes" element={<MemeView />} />
                     <Route path="/news" element={<NewsView />} />
                     <Route
                         path="/suggestions"
                         element={<SuggestionPresenter model={model} />}
                     />
-                    <Route
-                        path="/profile"
-                        element={<ProfileView loggedInUser={loggedInUser} />}
-                    />
-                    <Route path="/*" element={<NotFoundView />} />
                 </Routes>
             </div>
             <SignUpPresenter

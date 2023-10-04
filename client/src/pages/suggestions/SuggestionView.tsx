@@ -59,18 +59,22 @@ function SuggestionView({
                 </div>
             </div>
 
-            <div className="absolute top-1/3 left-1/4 w-1/2 m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100">
+            <div className="absolute top-1/3 left-1/4 w-1/2 min-w-fit m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100">
                 {randomSuggestion}
             </div>
-            <button
-                className="btn absolute top-1/2 left-1/2 m-auto"
-                onClick={() => {
-                    onNewSuggestion(activityType);
-                    console.log('onclick ' + activityType + ' ' + isToggled);
-                }}
-            >
-                Get new suggestion
-            </button>
+            <div className="absolute top-[50%] left-1/4 w-1/2 text-center">
+                <button
+                    className="btn transition-transform min-w-fit"
+                    onClick={() => {
+                        onNewSuggestion(activityType);
+                        console.log(
+                            'onclick ' + activityType + ' ' + isToggled
+                        );
+                    }}
+                >
+                    Get new suggestion
+                </button>
+            </div>
         </div>
     );
 }
