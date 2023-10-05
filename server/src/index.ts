@@ -55,7 +55,7 @@ app.get('/popular/:sortBy/:number', getPopularController);
 app.get('/users', requiresAuth, UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
-app.post('/users/logout', requiresAuth, UserController.logout);
+app.post('/users/logout', UserController.logout);
 app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint
