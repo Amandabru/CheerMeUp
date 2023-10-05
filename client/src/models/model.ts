@@ -10,9 +10,9 @@ export class CheerModel {
     public currentJokeData: object | Error;
     public currentJokeError: object | Error;
 
-    constructor(observers = [], type = '', jokeType = null) {
+    constructor(observers = [], activityType = '', jokeType = null) {
         this.observers = observers;
-        this.type = type;
+        this.activityType = activityType;
         this.jokeType = jokeType;
     }
 
