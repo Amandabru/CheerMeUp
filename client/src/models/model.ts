@@ -14,6 +14,11 @@ export class CheerModel {
         this.observers = observers;
         this.activityType = activityType;
         this.jokeType = jokeType;
+
+        this.currentSuggestionData = {}
+        this.currentSuggestionError = {}
+        this.currentJokeData = {}
+        this.currentJokeError = {}
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
