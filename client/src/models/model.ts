@@ -3,7 +3,7 @@ import { getJoke } from '../api/getJoke';
 
 export class CheerModel {
     private observers: (() => void)[];
-    private type: string | null;
+    private activityType: string | null;
     public currentSuggestionData: object | Error;
     public currentSuggestionError: object | Error;
     private jokeType: string[] | null;
@@ -18,20 +18,20 @@ export class CheerModel {
 
     setType(id: string | null, multipleParticipants: boolean) {
         //if (id == this.type) return;
-        this.type = id;
+        this.activityType = id;
 
         this.notifyObservers();
-        if (this.type) {
-            getSuggestions(this.type, multipleParticipants)
+        if (this.activityType) {
+            getSuggestions(this.activityType, multipleParticipants)
                 .then((data: object | Error) => {
-                    if (id === this.type) {
+                    if (id === this.activityType) {
                         this.currentSuggestionData = data;
                         console.log(data);
                         this.notifyObservers();
                     }
                 })
                 .catch((error: object | Error) => {
-                    if (id === this.type) {
+                    if (id === this.activityType) {
                         this.currentSuggestionError = error;
                         this.notifyObservers();
                     }
