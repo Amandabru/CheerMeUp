@@ -39,6 +39,19 @@ function JokeView({
                             value={category}
                         />
                     ))}
+                    <input
+                        type="radio"
+                        name="options"
+                        data-title={'all'}
+                        className="btn"
+                        value={[
+                            'programming',
+                            'misc',
+                            'pun',
+                            'spooky',
+                            'christmas'
+                        ]}
+                    />
                 </div>
                 <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-lime-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
                     <span

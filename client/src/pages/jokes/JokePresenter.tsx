@@ -15,7 +15,6 @@ function JokePresenter({ model }: { model: CheerModel }) {
 
     const categories: string[] = [
         'programming',
-        'misc',
         'pun',
         'dark',
         'spooky',
