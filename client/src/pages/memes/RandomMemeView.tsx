@@ -6,7 +6,7 @@ function RandomMemeView() {
     return (
         <div className="bg-blue-300 text-black">
             <div>
-                <section className="m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
                     {data.map((item, index) => (
                         <Card
                             key={index}

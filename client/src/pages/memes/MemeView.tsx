@@ -16,7 +16,7 @@ function MemeView() {
 
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center !scroll-smooth">
                 <button
                     className={`btn btn-accent mr-5 mt-10 ${
                         selectedView === 'random' ? 'btn-active' : ''
