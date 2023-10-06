@@ -18,24 +18,26 @@ function NavBarView({
     return (
         <div className="navbar bg-base-100">
             <img
-                className="btn btn-ghost normal-case text-xl animate-wiggle"
+                className="h-10 normal-case animate-wiggle mr-5"
                 src={logoImage}
                 alt={'Logo'}
             ></img>
+
             <Link to="/">
-                <a className="btn btn-ghost normal-case text-xl">CheerMeUp</a>
+                <a className="normal-case text-2xl mr-10">CheerMeUp</a>
             </Link>
             <Link to="/news">
-                <a className="btn btn-ghost normal-case text-xl">News</a>
+                <a className="normal-case text-lg mr-10">News</a>
             </Link>
             <Link to="/memes">
-                <a className="btn btn-ghost normal-case text-xl">Memes</a>
+                <a className="normal-case text-lg mr-10">Memes</a>
             </Link>
+
             <Link to="/jokes">
-                <a className="btn btn-ghost normal-case text-xl">Jokes</a>
+                <a className="normal-case text-lg mr-10">Jokes</a>
             </Link>
             <Link to="/suggestions">
-                <a className="btn btn-ghost normal-case text-xl">Suggestions</a>
+                <a className="normal-case text-lg mr-10">Suggestions</a>
             </Link>
             {loggedInUser ? (
                 <>
@@ -44,14 +46,16 @@ function NavBarView({
                 </>
             ) : (
                 <>
+                    <div className="divider divider-horizontal" />
+
                     <button
-                        className="btn btn-ghost normal-case text-xl"
+                        className="btn btn-ghost normal-case text-lg"
                         onClick={onSignUpClicked}
                     >
                         Sign Up
                     </button>
                     <button
-                        className="btn btn-ghost normal-case text-xl"
+                        className="btn btn-ghost normal-case text-lg"
                         onClick={onLoginClicked}
                     >
                         Log In
