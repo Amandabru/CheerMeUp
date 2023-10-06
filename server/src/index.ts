@@ -22,7 +22,9 @@ const app = express();
 
 app.use(
     cors({
-        origin: '*'
+        origin: true,
+        credentials: true,
+        optionsSuccessStatus: 200
     })
 );
 
@@ -52,7 +54,7 @@ app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 app.post('/like', requiresAuth, postLikeController);
 app.get('/popular/:sortBy/:number', getPopularController);
 
-app.get('/users', requiresAuth, UserController.getAuthenticatedUser);
+app.get('/users', UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
 app.post('/users/logout', requiresAuth, UserController.logout);

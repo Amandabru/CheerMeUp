@@ -3,35 +3,50 @@ import { getJoke } from '../api/getJoke';
 
 export class CheerModel {
     private observers: (() => void)[];
-    private type: string | null;
-    public currentSuggestionData: object | Error;
-    public currentSuggestionError: object | Error;
+    private activityType: string | null;
+    public currentSuggestionData: object | Error | null;
+    public currentSuggestionError: object | Error | null;
     private jokeType: string[] | null;
-    public currentJokeData: object | Error;
-    public currentJokeError: object | Error;
+    public currentJokeData: object | Error | null;
+    public currentJokeError: object | Error | null;
 
-    constructor(observers = [], type = '', jokeType = null) {
+    constructor(
+        observers = [],
+        activityType = '',
+        jokeType = null,
+        currentSuggestionData = null,
+        currentSuggestionError = null,
+        currentJokeData = null,
+        currentJokeError = null
+    ) {
         this.observers = observers;
-        this.type = type;
+        this.activityType = activityType;
         this.jokeType = jokeType;
+        this.currentSuggestionData = currentSuggestionData;
+        this.currentSuggestionError = currentSuggestionError;
+        this.currentJokeData = currentJokeData;
+        this.currentJokeError = currentJokeError;
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
         //if (id == this.type) return;
-        this.type = id;
+        this.activityType = id;
+
+        this.currentSuggestionData = null;
+        this.currentSuggestionError = null;
 
         this.notifyObservers();
-        if (this.type) {
-            getSuggestions(this.type, multipleParticipants)
+        if (this.activityType) {
+            getSuggestions(this.activityType, multipleParticipants)
                 .then((data: object | Error) => {
-                    if (id === this.type) {
+                    if (id === this.activityType) {
                         this.currentSuggestionData = data;
                         console.log(data);
                         this.notifyObservers();
                     }
                 })
                 .catch((error: object | Error) => {
-                    if (id === this.type) {
+                    if (id === this.activityType) {
                         this.currentSuggestionError = error;
                         this.notifyObservers();
                     }
@@ -42,6 +57,9 @@ export class CheerModel {
     setJoke(id: string[]) {
         if (id == this.jokeType) return;
         else this.jokeType = id;
+
+        this.currentJokeData = null;
+        this.currentJokeError = null;
 
         this.notifyObservers();
         if (this.jokeType) {

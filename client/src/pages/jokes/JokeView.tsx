@@ -6,13 +6,15 @@ function JokeView({
     jokeType,
     onNewJoke,
     liked,
-    isLiked
+    isLiked,
+    categories
 }: {
     randomJoke: string;
     jokeType: string[];
     onNewJoke: Function;
     liked: boolean;
     isLiked: Function;
+    categories: string[];
 }) {
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
@@ -28,33 +30,28 @@ function JokeView({
                         jokeType = [target.value];
                     }}
                 >
+                    {categories.map((category) => (
+                        <input
+                            type="radio"
+                            name="options"
+                            data-title={category}
+                            className="btn"
+                            value={category}
+                            key ={category}
+                        />
+                    ))}
                     <input
                         type="radio"
                         name="options"
-                        data-title="Programming"
+                        data-title={'all'}
                         className="btn"
-                        value={['programming']}
-                    />
-                    <input
-                        type="radio"
-                        name="options"
-                        data-title="Misc"
-                        className="btn"
-                        value={['misc']}
-                    />
-                    <input
-                        type="radio"
-                        name="options"
-                        data-title="Pun"
-                        className="btn"
-                        value={['pun']}
-                    />
-                    <input
-                        type="radio"
-                        name="options"
-                        data-title="All"
-                        className="btn"
-                        value={['programming', 'misc', 'pun']}
+                        value={[
+                            'programming',
+                            'misc',
+                            'pun',
+                            'spooky',
+                            'christmas'
+                        ]}
                     />
                 </div>
                 <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-lime-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
