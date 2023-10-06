@@ -1,6 +1,7 @@
 export type SuggestionType = {
     type: string,
     text: string,
+    liked: boolean,
 };
 
 export type NewsType = {
