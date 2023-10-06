@@ -14,6 +14,7 @@ import SignUpPresenter from './components/SignUp/SignUpPresenter';
 import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
+import ProfileView from './pages/profile/profileView';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -63,6 +64,10 @@ function App() {
                     <Route
                         path="/suggestions"
                         element={<SuggestionPresenter model={model} />}
+                    />
+                    <Route
+                        path="/personal-profile" // TODO
+                        element={<ProfileView loggedInUser={loggedInUser} />}
                     />
                 </Routes>
             </div>

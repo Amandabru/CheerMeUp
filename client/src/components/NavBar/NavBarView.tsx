@@ -1,6 +1,7 @@
 import { User } from '../../userModel';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/images/LogoTest.png';
+import UserIcon from '../UI/ProfileIcon';
 
 interface NavBarViewProps {
     loggedInUser: User | null;
@@ -37,6 +38,7 @@ function NavBarView({
             <Link to="/suggestions">
                 <a className="btn btn-ghost normal-case text-xl">Suggestions</a>
             </Link>
+
             {loggedInUser ? (
                 <>
                     <p>Signed in as: {loggedInUser.username}</p>
@@ -58,6 +60,11 @@ function NavBarView({
                     </button>
                 </>
             )}
+            <Link to="/personal-profile">
+                <a className="btn btn-ghost normal-case text-xl">
+                    <UserIcon />
+                </a>
+            </Link>
         </div>
     );
 }
