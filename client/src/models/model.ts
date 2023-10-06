@@ -4,16 +4,24 @@ import { getJoke } from '../api/getJoke';
 export class CheerModel {
     private observers: (() => void)[];
     private type: string | null;
-    public currentSuggestionData: object | Error;
-    public currentSuggestionError: object | Error;
+    public currentSuggestionData: object | Error | null;
+    public currentSuggestionError: object | Error | null;
     private jokeType: string[] | null;
-    public currentJokeData: object | Error;
-    public currentJokeError: object | Error;
+    public currentJokeData: object | Error | null;
+    public currentJokeError: object | Error | null;
 
-    constructor(observers = [], type = '', jokeType = null) {
+    constructor(
+        observers = [],
+        type = '',
+        jokeType = null,
+        currentJokeData = null,
+        currentJokeError = null
+    ) {
         this.observers = observers;
         this.type = type;
         this.jokeType = jokeType;
+        this.currentJokeData = currentJokeData;
+        this.currentJokeError = currentJokeError;
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
@@ -42,6 +50,9 @@ export class CheerModel {
     setJoke(id: string[]) {
         if (id == this.jokeType) return;
         else this.jokeType = id;
+
+        this.currentJokeData = null;
+        this.currentJokeError = null;
 
         this.notifyObservers();
         if (this.jokeType) {
