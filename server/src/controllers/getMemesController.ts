@@ -10,13 +10,6 @@ interface RedditPost {
     url: string,
 }
 
-interface UpdatedRedditPost {
-    type: string,
-    title: string,
-    url: string,
-    liked: boolean,
-}
-
 export async function getMemesController(
     req: Request,
     res: Response,
@@ -59,14 +52,13 @@ export async function getMemesController(
             return;
         }
 
-        filteredArrayWithSelectedProperties.map(async (meme: UpdatedRedditPost) => {
+        for (const meme of filteredArrayWithSelectedProperties) {
             const likedByUser = await UserModel.findOne(
-                { _id: req.session.userId },
-                { 'likedPosts.meme.key': meme.url }
-              ).exec();
-
+              { _id: req.session.userId, 'likedPosts.meme.key': meme.url }
+            ).exec();
+          
             meme.liked = likedByUser ? true : false;
-        })
+        }
 
         res.status(200).json(filteredArrayWithSelectedProperties);
     } catch (error) {

@@ -54,15 +54,14 @@ export async function getHappyNewsController(
             res.status(200).json(selectedData);
             return;
         }
-        
-        selectedData.map(async (news: UpdatedNewsType) => {
-            const likedByUser = await UserModel.findOne(
-                { _id: req.session.userId },
-                { 'likedPosts.news.key': news.apiId }
-              ).exec();
 
+        for (const news of selectedData) {
+            const likedByUser = await UserModel.findOne(
+              { _id: req.session.userId, 'likedPosts.news.key': news.apiId }
+            ).exec();
+          
             news.liked = likedByUser ? true : false;
-        })
+        }
 
         res.status(200).json(selectedData);
     
