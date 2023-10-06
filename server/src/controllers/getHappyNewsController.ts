@@ -57,7 +57,7 @@ export async function getHappyNewsController(
         selectedData.map(async (news: UpdatedNewsType) => {
             const likedByUser = await UserModel.findOne(
                 { _id: req.session.userId },
-                { $push: {'likedPosts.news': selectedData.id } }
+                { 'likedPosts.news': selectedData.id }
               ).exec();
 
             news.liked = likedByUser ? true : false;
