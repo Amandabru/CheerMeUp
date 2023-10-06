@@ -19,6 +19,7 @@ export type MemeType = {
     type: string,
     title: string,
     url: string,
+    liked?: boolean
 };
 
 export type JokeType = {

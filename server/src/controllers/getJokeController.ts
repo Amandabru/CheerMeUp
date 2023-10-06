@@ -36,7 +36,7 @@ export async function getJokeController(
 
         const likedByUser = await UserModel.findOne(
             { _id: req.session.userId },
-            { 'likedPosts.joke': selectedData.apiId }
+            { 'likedPosts.joke.key': selectedData.apiId }
             ).exec();
 
         selectedData.liked = likedByUser ? true : false;

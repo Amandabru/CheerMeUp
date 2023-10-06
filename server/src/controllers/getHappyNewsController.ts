@@ -18,7 +18,7 @@ type NewsType = {
 
 type UpdatedNewsType = {
     type: string,
-    id: number,
+    apiId: number,
     title: string,
     text: string,
     url: string,
@@ -30,7 +30,8 @@ type UpdatedNewsType = {
 
 function selectFewerProps(news: NewsType): UpdatedNewsType {
     const { id, title, text, url, image, author } = news;
-    return { type: 'news', id, title, text, url, image, author, liked: false };
+    const apiId = id;
+    return { type: 'news', apiId, title, text, url, image, author, liked: false };
 }
 
 export async function getHappyNewsController(
@@ -57,7 +58,7 @@ export async function getHappyNewsController(
         selectedData.map(async (news: UpdatedNewsType) => {
             const likedByUser = await UserModel.findOne(
                 { _id: req.session.userId },
-                { 'likedPosts.news': selectedData.id }
+                { 'likedPosts.news.key': news.apiId }
               ).exec();
 
             news.liked = likedByUser ? true : false;
