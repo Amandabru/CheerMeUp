@@ -11,6 +11,7 @@ export type NewsType = {
     url: string,
     image: string,
     author: string,
+    liked?: boolean,
 };
 
 

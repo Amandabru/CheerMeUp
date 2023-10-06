@@ -29,7 +29,7 @@ export async function postLikeController(req: Request, res: Response, next: Next
 
     if(existingJoy){
 
-        const alreadyLiked = await UserModel.findOne( { _id: req.session.userId, [`likedPosts.${type}`]: existingJoy._id });
+        const alreadyLiked = await UserModel.findOne( { _id: req.session.userId, [`likedPosts.${type}.id`]: existingJoy._id });
 
         if(!alreadyLiked){
             JoyModel.updateOne({ _id: existingJoy._id}, {$inc: {likes: 1}, $set: {lastLiked: Date.now()}}).exec()
@@ -39,7 +39,7 @@ export async function postLikeController(req: Request, res: Response, next: Next
                     try {
                         await UserModel.updateOne(
                           { _id: req.session.userId },
-                          { $push: {[`likedPosts.${type}`]: existingJoy._id } }
+                          { $push: {[`likedPosts.${type}`]: {id: existingJoy._id, key: searchParamValue}} }
                         ).exec();
                         res.status(201).end();
                     } 
@@ -62,7 +62,7 @@ export async function postLikeController(req: Request, res: Response, next: Next
                     try {
                         await UserModel.updateOne(
                           { _id: req.session.userId },
-                          { $pull: {[`likedPosts.${type}`]: existingJoy._id } }
+                          { $pull: {[`likedPosts.${type}`]: { id: existingJoy._id }} }
                         ).exec();
                         res.status(201).end();
                     } 
@@ -96,7 +96,7 @@ export async function postLikeController(req: Request, res: Response, next: Next
               try {
                 await UserModel.updateOne(
                     { _id: req.session.userId },
-                    { $push: {[`likedPosts.${type}`]: createdJoy._id } }
+                    { $push: {[`likedPosts.${type}`]: {id: createdJoy._id, key: searchParamValue }} }
                   ).exec();
                 res.status(201).end();
               } 
