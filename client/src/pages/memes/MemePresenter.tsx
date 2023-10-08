@@ -1,13 +1,21 @@
 import { CheerModel } from '../../models/model';
 import useModelProp from '../../hooks/useModelProp';
 import promiseNoData from '../../PromiseNoData';
-import RandomMemeView from './RandomMemeView';
 import MemeView from './MemeView';
+import { useState, useEffect } from 'react';
 
-import { useState } from 'react';
+function MemePresenter({ model }: { model: CheerModel }) {
+    const data = useModelProp(model, 'currentMemeData');
 
-function MemePresenter() {
-    return <MemeView />;
+    useEffect(() => {
+        if (data === undefined) {
+            model.setMeme();
+        }
+    }, [data, model]);
+
+    return (
+        <MemeView randomMeme={data?.url} onNewMeme={() => model.setMeme()} />
+    );
 }
 
 export default MemePresenter;

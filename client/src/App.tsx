@@ -59,7 +59,10 @@ function App() {
                         path="/jokes"
                         element={<JokePresenter model={model} />}
                     />
-                    <Route path="/memes" element={<MemePresenter />} />
+                    <Route
+                        path="/memes"
+                        element={<MemePresenter model={model} />}
+                    />
                     <Route path="/news" element={<NewsView />} />
                     <Route
                         path="/suggestions"
