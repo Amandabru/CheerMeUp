@@ -60,7 +60,7 @@ function NavBarView({
                     </button>
                 </>
             )}
-            <Link to="/personal-profile">
+            <Link to="/profile">
                 <a className="btn btn-ghost normal-case text-xl">
                     <UserIcon />
                 </a>
