@@ -13,6 +13,14 @@ function JokePresenter({ model }: { model: CheerModel }) {
 
     const [liked, isLiked] = useState<boolean>(false);
 
+    const categories: string[] = [
+        'programming',
+        'pun',
+        'dark',
+        'spooky',
+        'christmas'
+    ];
+
     return (
         <JokeView
             randomJoke={
@@ -24,6 +32,7 @@ function JokePresenter({ model }: { model: CheerModel }) {
             }}
             liked={liked}
             isLiked={(l: boolean) => isLiked(l)}
+            categories={categories}
         />
     );
 }
