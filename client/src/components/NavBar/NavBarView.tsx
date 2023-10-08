@@ -60,11 +60,13 @@ function NavBarView({
                     </button>
                 </>
             )}
-            <Link to="/profile">
-                <a className="btn btn-ghost normal-case text-xl">
-                    <UserIcon />
-                </a>
-            </Link>
+            {loggedInUser ? (
+                <Link to="/profile">
+                    <a className="btn btn-ghost normal-case text-xl">
+                        <UserIcon />
+                    </a>
+                </Link>
+            ) : null}
         </div>
     );
 }

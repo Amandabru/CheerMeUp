@@ -65,10 +65,15 @@ function App() {
                         path="/suggestions"
                         element={<SuggestionPresenter model={model} />}
                     />
-                    <Route
-                        path="/profile"
-                        element={<ProfileView loggedInUser={loggedInUser} />}
-                    />
+                    {loggedInUser ? (
+                        <Route
+                            path="/profile"
+                            element={
+                                <ProfileView loggedInUser={loggedInUser} />
+                            }
+                        />
+                    ) : null}
+                    <Route path="/*" element={<NotFoundView />} />
                 </Routes>
             </div>
             <SignUpPresenter
