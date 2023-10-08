@@ -66,8 +66,8 @@ function App() {
                         element={<SuggestionPresenter model={model} />}
                     />
                     <Route
-                        path="/personal-profile" // TODO
-                        element={<ProfileView loggedInUser={loggedInUser} />}
+                        path="/profile"
+                        element={<SuggestionPresenter model={model} />}
                     />
                 </Routes>
             </div>
