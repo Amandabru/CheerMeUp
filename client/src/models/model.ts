@@ -1,7 +1,13 @@
 import { getSuggestions } from '../api/getSuggestions';
 import { getJoke } from '../api/getJoke';
 import { getLikedJoys } from '../api/user';
-import { DataStructure, MemeType, JokeType, NewsType } from '../Types';
+import {
+    DataStructure,
+    MemeType,
+    JokeType,
+    NewsType,
+    SuggestionType
+} from '../Types';
 
 export class CheerModel {
     private observers: (() => void)[];
@@ -24,8 +30,9 @@ export class CheerModel {
         currentJokeError = null,
 
         likedJoys: DataStructure = {
-            memes: [],
             jokes: [],
+            suggestions: [],
+            memes: [],
             news: []
         }
     ) {
@@ -45,7 +52,9 @@ export class CheerModel {
         this.notifyObservers();
     }
 
-    addToLikedJoys(likedObject: MemeType | JokeType | NewsType) {
+    addToLikedJoys(
+        likedObject: MemeType | JokeType | NewsType | SuggestionType
+    ) {
         if (likedObject.type == 'meme') {
             // add object to meme array
             this.likedJoys.memes.push(likedObject as MemeType);
@@ -64,7 +73,7 @@ export class CheerModel {
             // remove object from meme array
             const memetoRemove = likedObject as MemeType;
             this.likedJoys.memes.filter(
-                (meme) => meme.title !== memetoRemove.title
+                (meme) => meme.url !== memetoRemove.url
             );
         } else if (likedObject.type == 'joke') {
             // remove object from joke array

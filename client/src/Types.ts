@@ -47,8 +47,9 @@ export type DataBaseType = {
 };
 
 export type DataStructure = {
-    memes: Array<MemeType>;
     jokes: Array<JokeType>;
+    suggestions: Array<SuggestionType>;
+    memes: Array<MemeType>;
     news: Array<NewsType>;
 };
 export type JoyToUpdateType = {
