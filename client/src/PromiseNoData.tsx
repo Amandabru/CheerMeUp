@@ -1,6 +1,8 @@
+import { MemeType } from './Types';
+
 function promiseNoData(
-    promise: Promise<string | null>,
-    data: string | object | Error,
+    promise: Promise<string | MemeType[] | null>,
+    data: string | object | MemeType[] | Error,
     error: Error | null,
     noDataMessage: string
 ) {

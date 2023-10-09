@@ -11,7 +11,7 @@ export class CheerModel {
     private jokeType: string[] | null;
     public currentJokeData: object | Error | null;
     public currentJokeError: object | Error | null;
-    public currentMemeData: MemeType[] | Error | undefined;
+    public currentMemeData: MemeType[] | Error | null;
     public currentMemeError: object | Error | null;
 
     constructor(

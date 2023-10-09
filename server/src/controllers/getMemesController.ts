@@ -4,10 +4,10 @@ import createHttpError from 'http-errors';
 import UserModel from '../models/User';
 
 interface RedditPost {
-    author: string,
-    title: string,
-    post_hint?: string,
-    url: string,
+    author: string;
+    title: string;
+    post_hint?: string;
+    url: string;
 }
 
 export async function getMemesController(
@@ -28,7 +28,11 @@ export async function getMemesController(
 
     try {
         const response = await fetch(url, options);
-        if (!response.ok) throw createHttpError(500, 'Failed to fetch memes');
+        if (!response.ok) {
+            console.log('feel');
+            throw createHttpError(500, 'Failed to fetch memes');
+        }
+
         const data = await response.json();
         if (data.error) {
             throw createHttpError(500, 'Failed to fetch memes');
@@ -43,20 +47,21 @@ export async function getMemesController(
                 type: 'meme',
                 title: item.title,
                 url: item.url,
-                liked: false,
+                liked: false
             })
         );
 
-        if(!req.session.userId){
+        if (!req.session.userId) {
             res.status(200).json(filteredArrayWithSelectedProperties);
             return;
         }
 
         for (const meme of filteredArrayWithSelectedProperties) {
-            const likedByUser = await UserModel.findOne(
-              { _id: req.session.userId, 'likedPosts.meme.key': meme.url }
-            ).exec();
-          
+            const likedByUser = await UserModel.findOne({
+                _id: req.session.userId,
+                'likedPosts.meme.key': meme.url
+            }).exec();
+
             meme.liked = likedByUser ? true : false;
         }
 

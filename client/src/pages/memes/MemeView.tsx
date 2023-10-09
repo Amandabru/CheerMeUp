@@ -26,10 +26,10 @@ function MemeView({
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
-                {randomMeme !== undefined ? (
-                    randomMeme.map((meme, index) => (
-                        <Card key={index} image={meme.url}></Card>
-                    ))
+                {randomMeme ? (
+                    randomMeme.map((memeObject, index) => {
+                        return <Card key={index} image={memeObject.url}></Card>;
+                    })
                 ) : (
                     <div>No meme data available</div>
                 )}
@@ -89,3 +89,5 @@ function MemeView({
 }
 
 export default MemeView;
+
+/* */
