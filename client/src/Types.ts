@@ -1,49 +1,53 @@
 export type SuggestionType = {
-    type: string,
-    text: string,
-    liked: boolean,
+    type: string;
+    text: string;
+    liked: boolean;
 };
 
 export type NewsType = {
-    type: string,
-    apiId: number,
-    title: string,
-    text: string,
-    url: string,
-    image: string,
-    author: string,
-    liked?: boolean,
+    type: string;
+    apiId: number;
+    title: string;
+    text: string;
+    url: string;
+    image: string;
+    author: string;
+    liked?: boolean;
 };
 
-
 export type MemeType = {
-    type: string,
-    title: string,
-    url: string,
-    liked?: boolean
+    type: string;
+    title: string;
+    url: string;
+    liked?: boolean;
 };
 
 export type JokeType = {
-    type: string,
-    text: string,
-    apiId: number,
-    liked?: boolean
+    type: string;
+    text: string;
+    apiId: number;
+    liked?: boolean;
 };
 
 export type ContentType = {
-    id: string,
-    title: string, 
-    text: string,
-    apiId: number,
-    url: string,
-    image: string,
-}
+    id: string;
+    title: string;
+    text: string;
+    apiId: number;
+    url: string;
+    image: string;
+};
 
 export type DataBaseType = {
-    id: string,
-    type: string,
-    likes: number,
-    content: ContentType,
-    lastliked: Date,
-}
+    id: string;
+    type: string;
+    likes: number;
+    content: ContentType;
+    lastliked: Date;
+};
 
+export type DataStructure = {
+    memes: Array<MemeType>;
+    jokes: Array<JokeType>;
+    news: Array<NewsType>;
+};

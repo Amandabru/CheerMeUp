@@ -1,5 +1,7 @@
 import { getSuggestions } from '../api/getSuggestions';
 import { getJoke } from '../api/getJoke';
+import { getLikedJoys } from '../api/user';
+import { DataStructure, MemeType, JokeType, NewsType } from '../Types';
 
 export class CheerModel {
     private observers: (() => void)[];
@@ -10,6 +12,8 @@ export class CheerModel {
     public currentJokeData: object | Error | null;
     public currentJokeError: object | Error | null;
 
+    public likedJoys: DataStructure;
+
     constructor(
         observers = [],
         activityType = '',
@@ -17,7 +21,13 @@ export class CheerModel {
         currentSuggestionData = null,
         currentSuggestionError = null,
         currentJokeData = null,
-        currentJokeError = null
+        currentJokeError = null,
+
+        likedJoys: DataStructure = {
+            memes: [],
+            jokes: [],
+            news: []
+        }
     ) {
         this.observers = observers;
         this.activityType = activityType;
@@ -26,6 +36,43 @@ export class CheerModel {
         this.currentSuggestionError = currentSuggestionError;
         this.currentJokeData = currentJokeData;
         this.currentJokeError = currentJokeError;
+
+        this.likedJoys = likedJoys;
+    }
+
+    addToLikedJoys(likedObject: MemeType | JokeType | NewsType) {
+        if (likedObject.type == 'meme') {
+            // add object to meme array
+            this.likedJoys.memes.push(likedObject as MemeType);
+        } else if (likedObject.type == 'joke') {
+            // add object to joke array
+            this.likedJoys.jokes.push(likedObject as JokeType);
+        } else if (likedObject.type == 'news') {
+            // add object to news array
+            this.likedJoys.news.push(likedObject as NewsType);
+        }
+    }
+
+    removeFromLikedJoys(likedObject: MemeType | JokeType | NewsType) {
+        if (likedObject.type == 'meme') {
+            // remove object to meme array
+            const memetoRemove = likedObject as MemeType;
+            this.likedJoys.memes.filter(
+                (meme) => meme.title !== memetoRemove.title
+            );
+        } else if (likedObject.type == 'joke') {
+            // remove object to joke array
+            const jokeToRemove = likedObject as JokeType;
+            this.likedJoys.jokes.filter(
+                (joke) => joke.apiId !== jokeToRemove.apiId
+            );
+        } else if (likedObject.type == 'news') {
+            // remove object to news array
+            const newsToRemove = likedObject as NewsType;
+            this.likedJoys.news.filter(
+                (news) => news.apiId !== newsToRemove.apiId
+            );
+        }
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
