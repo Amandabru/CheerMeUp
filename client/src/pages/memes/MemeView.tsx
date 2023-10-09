@@ -12,6 +12,7 @@ function MemeView({
     randomMeme: MemeType[];
     onNewMeme: Function;
 }) {
+    console.log(randomMeme);
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
@@ -34,7 +35,9 @@ function MemeView({
                 )}
             </section>
             <div className="flex justify-center items-center !scroll-smooth">
-                <button className="btn btn-accent mt-10">More memes</button>
+                <button className="btn btn-accent mt-10 hidden">
+                    More memes
+                </button>
             </div>
             <div className="h-15"></div>
         </div>

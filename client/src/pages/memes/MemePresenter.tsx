@@ -6,12 +6,7 @@ import { useState, useEffect } from 'react';
 
 function MemePresenter({ model }: { model: CheerModel }) {
     const data = useModelProp(model, 'currentMemeData');
-
-    useEffect(() => {
-        if (data === undefined) {
-            model.setMeme();
-        }
-    }, [data, model]);
+    console.log(data);
 
     return (
         <MemeView randomMeme={data?.url} onNewMeme={() => model.setMeme()} />

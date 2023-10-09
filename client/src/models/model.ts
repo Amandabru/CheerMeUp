@@ -6,11 +6,13 @@ import { MemeType } from '../Types';
 export class CheerModel {
     private observers: (() => void)[];
     private activityType: string | null;
-    public currentSuggestionData: object | Error | null | null;
-    public currentSuggestionError: object | Error | null | null;
+    public currentSuggestionData: object | Error | null;
+    public currentSuggestionError: object | Error | null;
     private jokeType: string[] | null;
     public currentJokeData: object | Error | null;
     public currentJokeError: object | Error | null;
+    public currentMemeData: MemeType[] | Error | undefined;
+    public currentMemeError: object | Error | null;
 
     constructor(
         observers = [],
@@ -19,18 +21,6 @@ export class CheerModel {
         currentSuggestionData = null,
         currentSuggestionError = null,
         currentJokeData = null,
-        currentJokeError = null
-    ) {
-    public currentJokeData: object | Error | null;
-    public currentJokeError: object | Error | null;
-    public currentMemeData: MemeType[] | Error | undefined;
-    public currentMemeError: object | Error | null;
-
-    constructor(
-        observers = [],
-        type = '',
-        jokeType = null,
-        currentJokeData = null,
         currentJokeError = null,
         currentMemeData = undefined,
         currentMemeError = null
@@ -38,14 +28,12 @@ export class CheerModel {
         this.observers = observers;
         this.activityType = activityType;
         this.jokeType = jokeType;
-        this.currentJokeData = currentJokeData;
-        this.currentJokeError = currentJokeError;
-        this.currentMemeData = currentMemeData;
-        this.currentMemeError = currentMemeError;
         this.currentSuggestionData = currentSuggestionData;
         this.currentSuggestionError = currentSuggestionError;
         this.currentJokeData = currentJokeData;
         this.currentJokeError = currentJokeError;
+        this.currentMemeData = currentMemeData;
+        this.currentMemeError = currentMemeError;
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
