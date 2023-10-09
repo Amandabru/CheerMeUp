@@ -2,11 +2,14 @@ import { useState } from 'react';
 import SuggestionView from './SuggestionView';
 import promiseNoData from '../../PromiseNoData';
 import { getSuggestions } from '../../api/getSuggestions';
+import usePromise from '../../hooks/usePromise';
+import { SuggestionType } from '../../Types';
 
 function SuggestionPresenter() {
-    // Set amount of people
-    const [company, setCompany] = useState<boolean>(false);
+    const [promise, setPromise] = useState<any>();
+    const [data, error] = usePromise(promise);
 
+    const [company, setCompany] = useState<boolean>(false);
     const [suggestion, setSuggestion] = useState<string>('');
     const [activityType, setActivityType] = useState<string>('');
 
@@ -29,18 +32,24 @@ function SuggestionPresenter() {
         newActivityType: string,
         company: boolean
     ) => {
-        setActivityType(newActivityType);
-        setCompany(company);
+        // setPromise(getSuggestions(newActivityType, company));
+        // console.log(promise);
+
         const suggestionProm = await getSuggestions(newActivityType, company);
         const newSuggestion = suggestionProm.text;
+        setActivityType(newActivityType);
+        setCompany(company);
         setSuggestion(newSuggestion);
     };
 
-    // promiseNoData promiseNoData(type, data, error, 'Choose an Activity') ||
+    // promiseNoData promiseNoData(promise, data, error, 'Choose an Activity') ||
 
     return (
         <SuggestionView
-            randomSuggestion={suggestion}
+            randomSuggestion={
+                //promiseNoData(promise, data, error, 'Choose an Activity') ||
+                suggestion
+            }
             isToggled={company}
             onToggle={(c: boolean) => setCompany(c)}
             options={options}
