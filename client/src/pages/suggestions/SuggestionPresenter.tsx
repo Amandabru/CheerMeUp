@@ -34,11 +34,9 @@ function SuggestionPresenter() {
         company: boolean
     ) => {
         setActivityType(newActivityType);
-        setCompany(company); // Reset company state when getting a new suggestion
+        setCompany(company);
         setPromise(getSuggestions(newActivityType, company));
     };
-
-    // promiseNoData promiseNoData(promise, data, error, 'Choose an Activity') ||
 
     return (
         <SuggestionView
