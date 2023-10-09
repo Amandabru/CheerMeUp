@@ -9,7 +9,7 @@ import { API_URL } from './config';
 
 // returns an object with the attribute exists that is either true or false. If the attribute is true, it also returns the id of the
 // object that should be sent to the patchLike endpoint.
-export async function getJoy(searchParam: string, searchParamValue: string, type: string): Promise<Response> {
+export async function getJoy(searchParam: string, searchParamValue: string | number, type: string): Promise<Response> {
     const response = await fetch(`${API_URL}/joyExists/${type}/${searchParam}/${searchParamValue}`);
     return response.json();
 }

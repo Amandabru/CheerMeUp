@@ -50,6 +50,6 @@ export type DataBaseType = {
 export type JoyToUpdateType = {
     id: string,
     type: string,
-    searchParamValue: string,
+    searchParamValue: string | number,
 }
 
