@@ -62,7 +62,7 @@ function App() {
                     <Route path="/news" element={<NewsView />} />
                     <Route
                         path="/suggestions"
-                        element={<SuggestionPresenter model={model} />}
+                        element={<SuggestionPresenter />}
                     />
                 </Routes>
             </div>
