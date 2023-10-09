@@ -18,7 +18,7 @@ function NavBarView({
     return (
         <div className="navbar bg-base-100">
             <img
-                className="btn btn-ghost normal-case text-xl animate-wiggle"
+                className="btn btn-ghost normal-case text-xl"
                 src={logoImage}
                 alt={'Logo'}
             ></img>

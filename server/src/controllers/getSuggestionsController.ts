@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import fetch from 'node-fetch';
-import UserModel from '../models/User';
 
 export async function getSuggestionsController(
     req: Request,
@@ -28,22 +27,8 @@ export async function getSuggestionsController(
         }
         const selectedData = {
             type: 'suggestion',
-            text: data.activity,
-            liked: false,
+            text: data.activity
         };
-
-        if(!req.session.userId){
-            res.status(200).json(selectedData);
-            return;
-        }
-
-        const likedByUser = await UserModel.findOne(
-            { _id: req.session.userId,
-            'likedPosts.suggestion.key': selectedData.text }
-            ).exec();
-
-        selectedData.liked = likedByUser ? true : false;
-
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);

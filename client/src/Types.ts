@@ -1,7 +1,6 @@
 export type SuggestionType = {
-    type: string,
-    text: string,
-    liked: boolean,
+    type: string;
+    text: string;
 };
 
 export type NewsType = {
@@ -12,22 +11,19 @@ export type NewsType = {
     url: string,
     image: string,
     author: string,
-    liked?: boolean,
 };
 
 
 export type MemeType = {
     type: string,
-    title: string,
-    url: string,
-    liked?: boolean
+    title: string;
+    url: string;
 };
 
 export type JokeType = {
     type: string,
-    text: string,
-    apiId: number,
-    liked?: boolean
+    text: string;
+    apiId: number;
 };
 
 export type ContentType = {

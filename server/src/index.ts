@@ -22,9 +22,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: true,
-        credentials: true,
-        optionsSuccessStatus: 200
+        origin: '*'
     })
 );
 
@@ -54,10 +52,10 @@ app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 app.post('/like', requiresAuth, postLikeController);
 app.get('/popular/:sortBy/:number', getPopularController);
 
-app.get('/users', UserController.getAuthenticatedUser);
+app.get('/users', requiresAuth, UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
-app.post('/users/logout', requiresAuth, UserController.logout);
+app.post('/users/logout', UserController.logout);
 app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint

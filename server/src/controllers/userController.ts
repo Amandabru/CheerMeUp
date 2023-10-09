@@ -125,7 +125,9 @@ export const getLikedJoys: RequestHandler = async (req, res, next) => {
         }).exec();
         const likedMemes = await Promise.all(
             (user?.likedPosts?.meme || []).map(async (joyId) => {
+                console.log('here2');
                 const meme = await JoyModel.findOne({ _id: joyId }).exec();
+                console.log(meme);
                 return meme ? meme.content : null;
             })
         );

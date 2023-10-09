@@ -1,13 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import fetch from 'node-fetch';
 import createHttpError from 'http-errors';
-import UserModel from '../models/User';
 
 interface RedditPost {
-    author: string,
-    title: string,
-    post_hint?: string,
-    url: string,
+    author: string;
+    title: string;
+    post_hint?: string;
+    url: string;
 }
 
 export async function getMemesController(
@@ -42,24 +41,9 @@ export async function getMemesController(
             (item) => ({
                 type: 'meme',
                 title: item.title,
-                url: item.url,
-                liked: false,
+                url: item.url
             })
         );
-
-        if(!req.session.userId){
-            res.status(200).json(filteredArrayWithSelectedProperties);
-            return;
-        }
-
-        for (const meme of filteredArrayWithSelectedProperties) {
-            const likedByUser = await UserModel.findOne(
-              { _id: req.session.userId, 'likedPosts.meme.key': meme.url }
-            ).exec();
-          
-            meme.liked = likedByUser ? true : false;
-        }
-
         res.status(200).json(filteredArrayWithSelectedProperties);
     } catch (error) {
         next(error);

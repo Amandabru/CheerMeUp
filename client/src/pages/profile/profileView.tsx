@@ -1,5 +1,4 @@
 import { User } from '../../userModel';
-import { getLikedJoys } from '../../api/user';
 
 interface ProfileViweProps {
     loggedInUser: User | null;

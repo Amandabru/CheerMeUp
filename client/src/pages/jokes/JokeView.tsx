@@ -37,7 +37,6 @@ function JokeView({
                             data-title={category}
                             className="btn"
                             value={category}
-                            key ={category}
                         />
                     ))}
                     <input

@@ -5,7 +5,7 @@ import useModelProp from '../../hooks/useModelProp';
 import promiseNoData from '../../PromiseNoData';
 
 function SuggestionPresenter({ model }: { model: CheerModel }) {
-    const type = useModelProp(model, 'activityType');
+    const type = useModelProp(model, 'type');
     const data = useModelProp(model, 'currentSuggestionData');
     const error = useModelProp(model, 'currentSuggestionError');
 

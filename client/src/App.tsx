@@ -68,10 +68,6 @@ function App() {
                         path="/suggestions"
                         element={<SuggestionPresenter model={model} />}
                     />
-                    <Route
-                        path="/profile"
-                        element={<SuggestionPresenter model={model} />}
-                    />
                 </Routes>
             </div>
             <SignUpPresenter
