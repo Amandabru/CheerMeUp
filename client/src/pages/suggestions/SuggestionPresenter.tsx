@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import SuggestionView from './SuggestionView';
-import { CheerModel } from '../../models/model';
-import useModelProp from '../../hooks/useModelProp';
 import promiseNoData from '../../PromiseNoData';
+import { getSuggestions } from '../../api/getSuggestions';
 
-function SuggestionPresenter({ model }: { model: CheerModel }) {
-    const type = useModelProp(model, 'activityType');
-    const data = useModelProp(model, 'currentSuggestionData');
-    const error = useModelProp(model, 'currentSuggestionError');
-
+function SuggestionPresenter() {
     // Set amount of people
     const [company, setCompany] = useState<boolean>(false);
 
-    // const [s, setSuggestion] = useState<string>("");
-    // const [a, setActivityType] = useState<string>("");
+    const [suggestion, setSuggestion] = useState<string>('');
+    const [activityType, setActivityType] = useState<string>('');
 
     const options: {
         value: string;
@@ -30,18 +25,28 @@ function SuggestionPresenter({ model }: { model: CheerModel }) {
         { value: 'busywork', label: 'busywork' }
     ];
 
+    const getRandomSuggestion = async (
+        newActivityType: string,
+        company: boolean
+    ) => {
+        setActivityType(newActivityType);
+        setCompany(company);
+        const suggestionProm = await getSuggestions(newActivityType, company);
+        const newSuggestion = suggestionProm.text;
+        setSuggestion(newSuggestion);
+    };
+
+    // promiseNoData promiseNoData(type, data, error, 'Choose an Activity') ||
+
     return (
         <SuggestionView
-            randomSuggestion={
-                promiseNoData(type, data, error, 'Choose an Activity') ||
-                data.text
-            }
+            randomSuggestion={suggestion}
             isToggled={company}
             onToggle={(c: boolean) => setCompany(c)}
             options={options}
-            activityType={type}
+            activityType={activityType}
             onNewSuggestion={(newType: string) => {
-                model.setType(newType, company);
+                getRandomSuggestion(newType, company);
             }}
         />
     );
