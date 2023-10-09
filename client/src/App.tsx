@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import HomeView from './pages/home/HomeView';
-import JokeView from './pages/jokes/JokeView';
 import MemeView from './pages/memes/MemeView';
 import NewsView from './pages/news/NewsView';
 import NotFoundView from './pages/NotFoundView';
@@ -14,7 +13,7 @@ import SignUpPresenter from './components/SignUp/SignUpPresenter';
 import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
-import ProfileView from './pages/profile/profileView';
+import ProfilePresenter from './pages/profile/ProfilePresenter';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -69,7 +68,7 @@ function App() {
                         <Route
                             path="/profile"
                             element={
-                                <ProfileView loggedInUser={loggedInUser} />
+                                <ProfilePresenter loggedInUser={loggedInUser} />
                             }
                         />
                     ) : null}
