@@ -1,15 +1,14 @@
-import { CheerModel } from '../../models/model';
-import useModelProp from '../../hooks/useModelProp';
 import promiseNoData from '../../PromiseNoData';
 import JokeView from './JokeView';
 import { useState } from 'react';
+import usePromise from '../../hooks/usePromise';
+import { getJoke } from '../../api/getJoke';
+import { JokeType } from '../../Types';
 
-function JokePresenter({ model }: { model: CheerModel }) {
-    const type = useModelProp(model, 'jokeType');
-    const data = useModelProp(model, 'currentJokeData');
-    const error = useModelProp(model, 'currentJokeError');
-
-    // TODO: Implement with model
+function JokePresenter() {
+    const [promise, setPromise] = useState<Promise<JokeType> | null>(null);
+    const [data, error] = usePromise(promise);
+    const [jokeType, setJokeType] = useState<string[]>([]);
 
     const [liked, isLiked] = useState<boolean>(false);
     let santaLaugh = new Audio('../../assets/audio/santa.mp3');
@@ -31,14 +30,20 @@ function JokePresenter({ model }: { model: CheerModel }) {
         spookyLaugh.play();
     };
 
+    const getRandomJoke = async (newJokeType: string[]) => {
+        setJokeType(newJokeType);
+        setPromise(getJoke(newJokeType));
+    };
+
     return (
         <JokeView
             randomJoke={
-                promiseNoData(type, data, error, 'Choose a Type') || data.text
+                promiseNoData(promise, data, error, 'Choose a Type') ||
+                data.text
             }
-            jokeType={type}
+            jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
-                model.setJoke(newType);
+                getRandomJoke(newType);
             }}
             liked={liked}
             isLiked={(l: boolean) => isLiked(l)}
