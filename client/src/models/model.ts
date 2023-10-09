@@ -5,10 +5,22 @@ import { MemeType } from '../Types';
 
 export class CheerModel {
     private observers: (() => void)[];
-    private type: string | null;
-    public currentSuggestionData: object | Error | null;
-    public currentSuggestionError: object | Error | null;
+    private activityType: string | null;
+    public currentSuggestionData: object | Error | null | null;
+    public currentSuggestionError: object | Error | null | null;
     private jokeType: string[] | null;
+    public currentJokeData: object | Error | null;
+    public currentJokeError: object | Error | null;
+
+    constructor(
+        observers = [],
+        activityType = '',
+        jokeType = null,
+        currentSuggestionData = null,
+        currentSuggestionError = null,
+        currentJokeData = null,
+        currentJokeError = null
+    ) {
     public currentJokeData: object | Error | null;
     public currentJokeError: object | Error | null;
     public currentMemeData: MemeType[] | Error | undefined;
@@ -24,30 +36,37 @@ export class CheerModel {
         currentMemeError = null
     ) {
         this.observers = observers;
-        this.type = type;
+        this.activityType = activityType;
         this.jokeType = jokeType;
         this.currentJokeData = currentJokeData;
         this.currentJokeError = currentJokeError;
         this.currentMemeData = currentMemeData;
         this.currentMemeError = currentMemeError;
+        this.currentSuggestionData = currentSuggestionData;
+        this.currentSuggestionError = currentSuggestionError;
+        this.currentJokeData = currentJokeData;
+        this.currentJokeError = currentJokeError;
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
         //if (id == this.type) return;
-        this.type = id;
+        this.activityType = id;
+
+        this.currentSuggestionData = null;
+        this.currentSuggestionError = null;
 
         this.notifyObservers();
-        if (this.type) {
-            getSuggestions(this.type, multipleParticipants)
+        if (this.activityType) {
+            getSuggestions(this.activityType, multipleParticipants)
                 .then((data: object | Error) => {
-                    if (id === this.type) {
+                    if (id === this.activityType) {
                         this.currentSuggestionData = data;
                         console.log(data);
                         this.notifyObservers();
                     }
                 })
                 .catch((error: object | Error) => {
-                    if (id === this.type) {
+                    if (id === this.activityType) {
                         this.currentSuggestionError = error;
                         this.notifyObservers();
                     }
