@@ -15,6 +15,7 @@ import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
 import { getJoyController } from './controllers/getJoyController';
 import { patchLikeController } from './controllers/patchLikeController';
+import path from 'path';
 
 config();
 
@@ -63,6 +64,17 @@ app.post('/users/signup', UserController.signUp);
 app.post('/users/login', UserController.login);
 app.post('/users/logout', requiresAuth, UserController.logout);
 app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
+
+// Deployment
+__dirname = path.resolve();
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, 'client/build'))); // frontend build
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    })
+}
+
+
 
 // Unexisting endpoint
 app.use((_req, _res, next) => {

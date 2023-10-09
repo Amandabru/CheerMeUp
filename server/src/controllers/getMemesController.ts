@@ -29,7 +29,7 @@ export async function getMemesController(
     try {
         const response = await fetch(url, options);
         if (!response.ok) throw createHttpError(500, 'Failed to fetch memes');
-        const data = await response.json();
+            const data = await response.json();
         if (data.error) {
             throw createHttpError(500, 'Failed to fetch memes');
         }
