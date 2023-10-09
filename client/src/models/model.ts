@@ -40,6 +40,11 @@ export class CheerModel {
         this.likedJoys = likedJoys;
     }
 
+    setLikedJoys(likedJoys: DataStructure) {
+        this.likedJoys = { ...likedJoys };
+        this.notifyObservers();
+    }
+
     addToLikedJoys(likedObject: MemeType | JokeType | NewsType) {
         if (likedObject.type == 'meme') {
             // add object to meme array
@@ -51,28 +56,30 @@ export class CheerModel {
             // add object to news array
             this.likedJoys.news.push(likedObject as NewsType);
         }
+        this.notifyObservers();
     }
 
     removeFromLikedJoys(likedObject: MemeType | JokeType | NewsType) {
         if (likedObject.type == 'meme') {
-            // remove object to meme array
+            // remove object from meme array
             const memetoRemove = likedObject as MemeType;
             this.likedJoys.memes.filter(
                 (meme) => meme.title !== memetoRemove.title
             );
         } else if (likedObject.type == 'joke') {
-            // remove object to joke array
+            // remove object from joke array
             const jokeToRemove = likedObject as JokeType;
             this.likedJoys.jokes.filter(
                 (joke) => joke.apiId !== jokeToRemove.apiId
             );
         } else if (likedObject.type == 'news') {
-            // remove object to news array
+            // remove object from news array
             const newsToRemove = likedObject as NewsType;
             this.likedJoys.news.filter(
                 (news) => news.apiId !== newsToRemove.apiId
             );
         }
+        this.notifyObservers();
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
