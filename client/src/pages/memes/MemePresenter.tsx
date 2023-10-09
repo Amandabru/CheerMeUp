@@ -8,6 +8,12 @@ function MemePresenter({ model }: { model: CheerModel }) {
     const data = useModelProp(model, 'currentMemeData');
     console.log(data);
 
+    useEffect(() => {
+        if (data === undefined) {
+            model.setMeme();
+        }
+    }, [data, model]);
+
     return (
         <MemeView randomMeme={data?.url} onNewMeme={() => model.setMeme()} />
     );
