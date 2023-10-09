@@ -6,11 +6,12 @@ import usePromise from '../../hooks/usePromise';
 import { SuggestionType } from '../../Types';
 
 function SuggestionPresenter() {
-    const [promise, setPromise] = useState<any>();
+    const [promise, setPromise] = useState<Promise<SuggestionType> | null>(
+        null
+    );
     const [data, error] = usePromise(promise);
-
     const [company, setCompany] = useState<boolean>(false);
-    const [suggestion, setSuggestion] = useState<string>('');
+    // const [suggestion, setSuggestion] = useState<string>('');
     const [activityType, setActivityType] = useState<string>('');
 
     const options: {
@@ -32,14 +33,9 @@ function SuggestionPresenter() {
         newActivityType: string,
         company: boolean
     ) => {
-        // setPromise(getSuggestions(newActivityType, company));
-        // console.log(promise);
-
-        const suggestionProm = await getSuggestions(newActivityType, company);
-        const newSuggestion = suggestionProm.text;
         setActivityType(newActivityType);
-        setCompany(company);
-        setSuggestion(newSuggestion);
+        setCompany(company); // Reset company state when getting a new suggestion
+        setPromise(getSuggestions(newActivityType, company));
     };
 
     // promiseNoData promiseNoData(promise, data, error, 'Choose an Activity') ||
@@ -47,8 +43,8 @@ function SuggestionPresenter() {
     return (
         <SuggestionView
             randomSuggestion={
-                //promiseNoData(promise, data, error, 'Choose an Activity') ||
-                suggestion
+                promiseNoData(promise, data, error, 'Choose an Activity') ||
+                data.text
             }
             isToggled={company}
             onToggle={(c: boolean) => setCompany(c)}
