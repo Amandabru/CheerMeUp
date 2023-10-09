@@ -1,6 +1,8 @@
+import { SuggestionType } from './Types';
+
 function promiseNoData(
-    promise: Promise<string | null>,
-    data: string | object | Error,
+    promise: Promise<string | null | SuggestionType> | null,
+    data: string | object | Error | null,
     error: Error | null,
     noDataMessage: string
 ) {
