@@ -51,3 +51,8 @@ export type DataStructure = {
     jokes: Array<JokeType>;
     news: Array<NewsType>;
 };
+export type JoyToUpdateType = {
+    id: string;
+    type: string;
+    searchParamValue: string | number;
+};
