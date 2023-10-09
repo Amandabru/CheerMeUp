@@ -47,3 +47,9 @@ export type DataBaseType = {
     lastliked: Date,
 }
 
+export type JoyToUpdateType = {
+    id: string,
+    type: string,
+    searchParamValue: string,
+}
+
