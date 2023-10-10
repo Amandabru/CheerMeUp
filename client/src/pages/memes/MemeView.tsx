@@ -7,10 +7,10 @@ import { MemeType } from '../../Types';
 
 function MemeView({
     randomMeme,
-    onNewMeme
+    arrow
 }: {
     randomMeme: MemeType[];
-    onNewMeme: Function;
+    arrow?: string;
 }) {
     console.log(randomMeme);
     return (
@@ -19,10 +19,18 @@ function MemeView({
                 <button
                     className="btn btn-accent mt-10"
                     onClick={() => {
-                        onNewMeme;
+                        arrow = 'a';
                     }}
                 >
-                    More memes
+                    left
+                </button>
+                <button
+                    className="btn btn-accent mt-10"
+                    onClick={() => {
+                        arrow = 'b';
+                    }}
+                >
+                    right
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">

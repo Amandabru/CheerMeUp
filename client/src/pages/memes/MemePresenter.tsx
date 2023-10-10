@@ -4,24 +4,26 @@ import useModelProp from '../../hooks/useModelProp';
 import MemeView from './MemeView';
 import { useState, useEffect } from 'react';
 import { MemeType } from '../../Types';
+import { getMemes } from '../../api/getMemes';
 
 function MemePresenter({ model }: { model: CheerModel }) {
-    const data: MemeType[] = useModelProp(model, 'currentMemeData');
+    const [memeData, setMemeData] = useState<MemeType[]>([]);
 
+    //fetch data when page is loaded
     useEffect(() => {
-        // Call the setMeme method when the component mounts
-        model.setMeme();
-    }, []); // The empty dependency array ensures this effect runs only once on mount
+        getMemes()
+            .then((res) => setMemeData(res))
+            .catch((err) => console.log(err));
+    }, []); // Empty dependency array means this effect runs only once on component mount
 
-    return (
-        (data && (
-            <MemeView randomMeme={data} onNewMeme={() => model.setMeme()} />
-        )) || (
-            <MemeView
-                randomMeme={undefined}
-                onNewMeme={() => model.setMeme()}
-            />
-        )
+    return memeData.length > 0 ? (
+        <MemeView
+            randomMeme={memeData.slice(memeData.length / 2, memeData.length)}
+        />
+    ) : (
+        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
+            No data
+        </div>
     );
 }
 

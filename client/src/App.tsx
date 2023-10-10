@@ -62,7 +62,7 @@ function App() {
                     />
                     <Route
                         path="/memes"
-                        element={<TestPresenter model={model} />}
+                        element={<MemePresenter model={model} />}
                     />
                     <Route path="/news" element={<NewsView />} />
                     <Route
