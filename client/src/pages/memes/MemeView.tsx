@@ -7,30 +7,34 @@ import { MemeType } from '../../Types';
 
 function MemeView({
     randomMeme,
-    arrow
+    onIncrement,
+    onDecrement
 }: {
     randomMeme: MemeType[];
-    arrow?: string;
+    onIncrement: () => void;
+    onDecrement: () => void;
 }) {
     console.log(randomMeme);
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
                 <button
-                    className="btn btn-accent mt-10"
+                    className="btn btn-accent mt-10 mr-10"
                     onClick={() => {
-                        arrow = 'a';
+                        onDecrement();
+                        console.log('- pressed');
                     }}
                 >
-                    left
+                    -
                 </button>
                 <button
                     className="btn btn-accent mt-10"
                     onClick={() => {
-                        arrow = 'b';
+                        onIncrement();
+                        console.log('+ pressed');
                     }}
                 >
-                    right
+                    +
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
