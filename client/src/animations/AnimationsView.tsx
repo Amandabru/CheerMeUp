@@ -1,17 +1,6 @@
-import './animation.css';
-import { useState, useEffect } from 'react';
+import './animations.css';
 
-const Animation = () => {
-    const [smileyState, setSmileyState] = useState('normal');
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setSmileyState('happy');
-        }, 2000);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, []);
-
+export const AnimationsView = ({ smileyState }: { smileyState: string }) => {
     return (
         <>
             <div className="smileyContainer">
@@ -26,5 +15,3 @@ const Animation = () => {
         </>
     );
 };
-
-export default Animation;

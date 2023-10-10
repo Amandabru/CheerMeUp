@@ -14,6 +14,7 @@ import SignUpPresenter from './components/SignUp/SignUpPresenter';
 import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
+import AnimationPresenter from './animations/AnimationsPresenter';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -51,6 +52,7 @@ function App() {
                 onSignUpClicked={() => showModal('signup_modal')}
                 onLogoutSuccessful={() => setLoggedInUser(null)}
             />
+            <AnimationPresenter />
             <div>
                 <Routes>
                     <Route path="/" element={<HomeView />} />
