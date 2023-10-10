@@ -13,6 +13,8 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
+import { getJoyController } from './controllers/getJoyController';
+import { patchLikeController } from './controllers/patchLikeController';
 
 config();
 
@@ -51,6 +53,8 @@ app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 
+app.get('/joyExists/:type/:searchParam/:searchParamValue', requiresAuth, getJoyController);
+app.patch('/like', requiresAuth, patchLikeController);
 app.post('/like', requiresAuth, postLikeController);
 app.get('/popular/:sortBy/:number', getPopularController);
 

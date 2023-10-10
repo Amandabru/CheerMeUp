@@ -16,6 +16,7 @@ import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
+import AnimationPresenter from './animations/AnimationsPresenter';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -53,6 +54,7 @@ function App() {
                 onSignUpClicked={() => showModal('signup_modal')}
                 onLogoutSuccessful={() => setLoggedInUser(null)}
             />
+            <AnimationPresenter />
             <div>
                 <Routes>
                     <Route path="/" element={<HomeView />} />
