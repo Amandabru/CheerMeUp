@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Card({ image }: { image: string }) {
+function Card({ image }: { image?: string }) {
     const [isHovered, setIsHovered] = useState(false);
     const handleHover = () => {
         setIsHovered(!isHovered);
@@ -8,11 +8,7 @@ function Card({ image }: { image: string }) {
 
     return (
         <div className="bg-white w-128 h-80 rounded-3xl overflow-hidden shadow-lg">
-            <img
-                className="object-contain w-128 h-5/6"
-                src={image}
-                alt="Shoes"
-            />
+            <img className="object-contain w-128 h-5/6" src={image} />
             <button
                 className="m-2 focus:outline-none flex items-center"
                 onMouseEnter={handleHover}

@@ -15,6 +15,7 @@ import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
+import HomePresenter from './pages/home/HomePresenter';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -55,7 +56,7 @@ function App() {
             <AnimationPresenter />
             <div>
                 <Routes>
-                    <Route path="/" element={<HomeView />} />
+                    <Route path="/" element={<HomePresenter model={model} />} />
                     <Route
                         path="/jokes"
                         element={<JokePresenter model={model} />}
