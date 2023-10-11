@@ -9,7 +9,7 @@ function JokeView({
     isLiked,
     categories
 }: {
-    randomJoke: string;
+    randomJoke: string | React.ReactElement | undefined;
     jokeType: string[];
     onNewJoke: Function;
     liked: boolean;
@@ -37,7 +37,7 @@ function JokeView({
                             data-title={category}
                             className="btn"
                             value={category}
-                            key ={category}
+                            key={category}
                         />
                     ))}
                     <input
