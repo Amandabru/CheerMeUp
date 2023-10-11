@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { AnimationsView } from './AnimationsView';
+import { User } from '../userModel';
 
-const AnimationPresenter = () => {
+const AnimationPresenter = ({ user }: { user: User | null }) => {
     const [smileyState, setSmileyState] = useState('normal');
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -12,7 +13,7 @@ const AnimationPresenter = () => {
         };
     }, []);
 
-    return <AnimationsView smileyState={smileyState} />;
+    return <AnimationsView smileyState={smileyState} user={user} />;
 };
 
 export default AnimationPresenter;
