@@ -1,5 +1,7 @@
 import { getSuggestions } from '../api/getSuggestions';
 import { getJoke } from '../api/getJoke';
+import { getMemes } from '../api/getMemes';
+import { MemeType } from '../Types';
 
 export class CheerModel {
     private observers: (() => void)[];
@@ -9,6 +11,8 @@ export class CheerModel {
     private jokeType: string[] | null;
     public currentJokeData: object | Error | null;
     public currentJokeError: object | Error | null;
+    public currentMemeData: MemeType[] | Error | null;
+    public currentMemeError: object | Error | null;
 
     constructor(
         observers = [],
@@ -17,7 +21,9 @@ export class CheerModel {
         currentSuggestionData = null,
         currentSuggestionError = null,
         currentJokeData = null,
-        currentJokeError = null
+        currentJokeError = null,
+        currentMemeData = undefined,
+        currentMemeError = null
     ) {
         this.observers = observers;
         this.activityType = activityType;
@@ -26,6 +32,8 @@ export class CheerModel {
         this.currentSuggestionError = currentSuggestionError;
         this.currentJokeData = currentJokeData;
         this.currentJokeError = currentJokeError;
+        this.currentMemeData = currentMemeData;
+        this.currentMemeError = currentMemeError;
     }
 
     setType(id: string | null, multipleParticipants: boolean) {
@@ -78,6 +86,19 @@ export class CheerModel {
                     }
                 });
         }
+    }
+
+    setMeme() {
+        getMemes()
+            .then((data: MemeType[] | Error) => {
+                this.currentMemeData = data;
+                console.log(data);
+                this.notifyObservers();
+            })
+            .catch((error: object | Error) => {
+                this.currentMemeError = error;
+                this.notifyObservers();
+            });
     }
 
     addObserver(callback: () => void) {

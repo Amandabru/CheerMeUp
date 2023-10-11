@@ -36,7 +36,13 @@ function NewsView({
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
                 {randomNews ? (
                     randomNews.map((newsObject, index) => {
-                        return <Card key={index} image={newsObject.url}></Card>;
+                        return (
+                            <Card
+                                key={index}
+                                image={newsObject.image}
+                                title={newsObject.title}
+                            ></Card>
+                        );
                     })
                 ) : (
                     <div>No news data available</div>
