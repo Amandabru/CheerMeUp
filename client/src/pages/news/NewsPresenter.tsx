@@ -3,10 +3,12 @@ import NewsView from './NewsView';
 import { useState, useEffect } from 'react';
 import { NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
+import promiseNoData from '../../PromiseNoData';
 
 function NewsPresenter({ model }: { model: CheerModel }) {
     const [newsData, setNewsData] = useState<NewsType[]>([]);
     const [count, setCount] = useState<number>(0);
+    const [error, setError] = useState<Error | null>(null);
 
     // Function to increment the count
     const increment = () => {
@@ -25,10 +27,10 @@ function NewsPresenter({ model }: { model: CheerModel }) {
     useEffect(() => {
         getHappyNews()
             .then((res) => setNewsData(res))
-            .catch((err) => console.log(err));
+            .catch((err) => setError(err));
     }, []); // Empty dependency array means this effect runs only once on component mount
 
-    function memeDataSlice(data: NewsType[], count: number): NewsType[] {
+    function newsDataSlice(data: NewsType[], count: number): NewsType[] {
         if (count === 0) {
             return data.slice(0, data.length / 3);
         }
@@ -41,16 +43,14 @@ function NewsPresenter({ model }: { model: CheerModel }) {
         return [];
     }
 
-    return newsData.length > 0 ? (
-        <NewsView
-            randomNews={memeDataSlice(newsData, count)}
-            onIncrement={increment}
-            onDecrement={decrement}
-        />
-    ) : (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
-            No data
-        </div>
+    return (
+        promiseNoData(getHappyNews(), newsData, error, 'No data') || (
+            <NewsView
+                newsData={newsDataSlice(newsData, count)}
+                onIncrement={increment}
+                onDecrement={decrement}
+            />
+        )
     );
 }
 

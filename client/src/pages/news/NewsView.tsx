@@ -2,15 +2,15 @@ import { NewsType } from '../../Types';
 import Card from '../../components/Card';
 
 function NewsView({
-    randomNews,
+    newsData,
     onIncrement,
     onDecrement
 }: {
-    randomNews: NewsType[];
+    newsData: NewsType[];
     onIncrement: () => void;
     onDecrement: () => void;
 }) {
-    console.log(randomNews);
+    console.log(newsData);
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
@@ -34,8 +34,8 @@ function NewsView({
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
-                {randomNews ? (
-                    randomNews.map((newsObject, index) => {
+                {newsData ? (
+                    newsData.map((newsObject, index) => {
                         return (
                             <Card
                                 key={index}
