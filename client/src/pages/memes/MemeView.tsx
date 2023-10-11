@@ -6,15 +6,15 @@ import testMemes from './TestMemes';
 import { MemeType } from '../../Types';
 
 function MemeView({
-    randomMeme,
+    memeData,
     onIncrement,
     onDecrement
 }: {
-    randomMeme: MemeType[];
+    memeData: MemeType[];
     onIncrement: () => void;
     onDecrement: () => void;
 }) {
-    console.log(randomMeme);
+    console.log(memeData);
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
@@ -38,8 +38,8 @@ function MemeView({
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
-                {randomMeme ? (
-                    randomMeme.map((memeObject, index) => {
+                {memeData ? (
+                    memeData.map((memeObject, index) => {
                         return <Card key={index} image={memeObject.url}></Card>;
                     })
                 ) : (

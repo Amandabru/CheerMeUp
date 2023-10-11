@@ -1,14 +1,15 @@
 import { CheerModel } from '../../models/model';
 import useModelProp from '../../hooks/useModelProp';
-//import promiseNoData from '../../PromiseNoData';
 import MemeView from './MemeView';
 import { useState, useEffect } from 'react';
 import { MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
+import promiseNoData from '../../PromiseNoData';
 
 function MemePresenter({ model }: { model: CheerModel }) {
     const [memeData, setMemeData] = useState<MemeType[]>([]);
     const [count, setCount] = useState<number>(0);
+    const [error, setError] = useState<Error | null>(null);
 
     // Function to increment the count
     const increment = () => {
@@ -27,7 +28,7 @@ function MemePresenter({ model }: { model: CheerModel }) {
     useEffect(() => {
         getMemes()
             .then((res) => setMemeData(res))
-            .catch((err) => console.log(err));
+            .catch((err) => setError(err));
     }, []); // Empty dependency array means this effect runs only once on component mount
 
     function memeDataSlice(data: MemeType[], count: number): MemeType[] {
@@ -43,16 +44,14 @@ function MemePresenter({ model }: { model: CheerModel }) {
         return [];
     }
 
-    return memeData.length > 0 ? (
-        <MemeView
-            randomMeme={memeDataSlice(memeData, count)}
-            onIncrement={increment}
-            onDecrement={decrement}
-        />
-    ) : (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
-            No data
-        </div>
+    return (
+        promiseNoData(getMemes(), memeData, error, 'No data') || (
+            <MemeView
+                memeData={memeDataSlice(memeData, count)}
+                onIncrement={increment}
+                onDecrement={decrement}
+            />
+        )
     );
 }
 
