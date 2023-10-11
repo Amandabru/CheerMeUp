@@ -39,7 +39,7 @@ function NewsView({
                         return (
                             <Card
                                 key={index}
-                                image={newsObject.image}
+                                image={newsObject.urlToImage}
                                 title={newsObject.title}
                             ></Card>
                         );

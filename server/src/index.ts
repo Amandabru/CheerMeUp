@@ -2,7 +2,6 @@ import { config } from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { getHappyNewsController } from './controllers/getHappyNewsController';
 import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
@@ -15,6 +14,7 @@ import createHttpError, { isHttpError } from 'http-errors';
 import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
 import { getJoyController } from './controllers/getJoyController';
 import { patchLikeController } from './controllers/patchLikeController';
+import { getNewsController } from './controllers/getNewsController';
 
 config();
 
@@ -48,12 +48,16 @@ app.use(
 );
 
 //CheerMeUp end-points
-app.get('/news', getHappyNewsController);
+app.get('/news', getNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 
-app.get('/joyExists/:type/:searchParam/:searchParamValue', requiresAuth, getJoyController);
+app.get(
+    '/joyExists/:type/:searchParam/:searchParamValue',
+    requiresAuth,
+    getJoyController
+);
 app.patch('/like', requiresAuth, patchLikeController);
 app.post('/like', requiresAuth, postLikeController);
 app.get('/popular/:sortBy/:number', getPopularController);
