@@ -54,7 +54,7 @@ function App() {
                 onSignUpClicked={() => showModal('signup_modal')}
                 onLogoutSuccessful={() => setLoggedInUser(null)}
             />
-            <AnimationPresenter />
+            {loggedInUser && <AnimationPresenter user={loggedInUser} />}
             <div>
                 <Routes>
                     <Route path="/" element={<HomeView />} />
