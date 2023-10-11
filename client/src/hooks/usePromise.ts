@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 // TODO: any
 
-function usePromise(promise: any) {
+function usePromise<T>(promise: Promise<T> | null) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     useEffect(

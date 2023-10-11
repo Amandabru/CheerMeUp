@@ -39,7 +39,7 @@ function JokePresenter() {
         <JokeView
             randomJoke={
                 promiseNoData(promise, data, error, 'Choose a Type') ||
-                data.text
+                data?.text
             }
             jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
