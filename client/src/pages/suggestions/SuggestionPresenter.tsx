@@ -39,19 +39,21 @@ function SuggestionPresenter() {
     };
 
     return (
-        <SuggestionView
-            randomSuggestion={
-                promiseNoData(promise, data, error, 'Choose an Activity') ||
-                data.text
-            }
-            isToggled={company}
-            onToggle={(c: boolean) => setCompany(c)}
-            options={options}
-            activityType={activityType}
-            onNewSuggestion={(newType: string) => {
-                getRandomSuggestion(newType, company);
-            }}
-        />
+        <>
+            <SuggestionView
+                randomSuggestion={
+                    promiseNoData(promise, data, error, 'Choose an Activity') ||
+                    data['text']
+                }
+                isToggled={company}
+                onToggle={(c: boolean) => setCompany(c)}
+                options={options}
+                activityType={activityType}
+                onNewSuggestion={(newType: string) => {
+                    newType && getRandomSuggestion(newType, company);
+                }}
+            />
+        </>
     );
 }
 

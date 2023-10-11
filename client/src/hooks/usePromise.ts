@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { SuggestionType } from '../Types';
 
 // TODO: any
 
-function usePromise<T>(promise: Promise<T> | null) {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+function usePromise<T>(promise: Promise<T> | null): any {
+    const [data, setData] = useState<SuggestionType | null>(null);
+    const [error, setError] = useState<Error | null>(null);
     useEffect(
         function () {
             setData(null);
