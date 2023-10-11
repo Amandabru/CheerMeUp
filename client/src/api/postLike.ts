@@ -10,5 +10,5 @@ export async function postLike(likedJoy: SuggestionType | MemeType | NewsType | 
         body: JSON.stringify({likedJoy: likedJoy}),
       });
     return response.json();
-  }
+}
   

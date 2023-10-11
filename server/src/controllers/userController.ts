@@ -5,6 +5,11 @@ import createHttpError from 'http-errors';
 import * as EmailValidator from 'email-validator';
 import { assertIsDefined } from '../utils/assertIsDefined';
 import JoyModel from '../models/Joys';
+import validate from 'deep-email-validator';
+
+async function isEmailValid(email: string) {
+    return validate(email)
+}
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
     try {
@@ -46,9 +51,9 @@ export const signUp: RequestHandler<
                 'Username already taken. Please choose a different one.'
             );
         }
-        const validatedEmail = EmailValidator.validate(email);
-        if (!validatedEmail) {
-            throw createHttpError(400, 'Invalid e-mail');
+        const {valid, reason} = await isEmailValid(email);
+        if (!valid) {
+             throw createHttpError(400, `Invalid email. Reason: ${reason}`);
         }
         const existingEmail = await UserModel.findOne({ email: email }).exec();
         if (existingEmail) {
@@ -125,9 +130,7 @@ export const getLikedJoys: RequestHandler = async (req, res, next) => {
         }).exec();
         const likedMemes = await Promise.all(
             (user?.likedPosts?.meme || []).map(async (joyId) => {
-                console.log('here2');
                 const meme = await JoyModel.findOne({ _id: joyId }).exec();
-                console.log(meme);
                 return meme ? meme.content : null;
             })
         );

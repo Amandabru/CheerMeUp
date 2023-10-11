@@ -1,0 +1,166 @@
+.smileyContainer {
+    animation: slideIn 2s ease forwards;
+    margin: 0 auto;
+    margin-top: 50vh;
+    position: fixed;
+    z-index: 4;
+    animation-name: slideIn, slideOut;
+    animation-duration: 2s, 2s;
+    animation-delay: 0s, 4s;
+}
+
+.smiley {
+    background: rgb(66, 66, 211);
+    border-radius: 100%;
+    padding: 25px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(calc(-50% - 121px));
+    box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.speechBubble {
+    position: absolute;
+    top: -40%;
+    left: 80%;
+    width: 200px;
+    opacity: 0;
+    animation: fadeInOut 2s;
+    animation-delay: 2s;
+}
+
+.mouth {
+    width: 30%;
+    height: 15%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 30%;
+    left: 64%;
+    margin-left: -30%;
+    background: rgb(0, 0, 0);
+    transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.eyes {
+    width: 100%;
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.eyes .eye {
+    width: 15px;
+    height: 15px;
+    background: black;
+    border-radius: 100%;
+}
+
+.leftEye {
+    justify-self: left;
+}
+
+.rightEye {
+    justify-self: right;
+    animation: wink;
+    animation-duration: 2s;
+    animation-delay: 3s;
+}
+
+.smiley.normal .mouth {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    height: 8%;
+    width: 30%;
+    bottom: 18%;
+    left: 64%;
+}
+
+.smiley.normal .eyes {
+    margin-top: 20%;
+}
+
+@keyframes slideIn {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        margin-left: 0%;
+        width: 100%;
+    }
+
+    to {
+        margin-left: -100%;
+        width: 100%;
+    }
+}
+
+@keyframes fadeInOut {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    20% {
+        display: block;
+        opacity: 1;
+    }
+
+    85% {
+        display: block;
+        opacity: 1;
+    }
+
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+@keyframes wink {
+    0% {
+        height: 15px;
+        margin-top: 0;
+    }
+
+    3.9% {
+        height: 3px;
+        margin-top: 8px;
+    }
+
+    9.1% {
+        height: 3px;
+        margin-top: 8px;
+    }
+
+    13% {
+        height: 15px;
+        margin-top: 0;
+    }
+
+    100% {
+        height: 15px;
+        margin-top: 0;
+    }
+}
