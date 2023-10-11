@@ -1,11 +1,17 @@
 import { MemeType, NewsType } from './Types';
 
+// need to rewrite because data sends an object with an error
+
 function promiseNoData(
     promise: Promise<string | MemeType[] | NewsType[] | null>,
     data: string | object | MemeType[] | NewsType[] | Error,
     error: Error | null,
     noDataMessage: string
 ) {
+    console.log(promise);
+    console.log(data);
+    console.log('error' + error);
+    console.log('noDataMessage' + noDataMessage);
     if (!promise) {
         return <span> {noDataMessage} </span>;
     } else if (

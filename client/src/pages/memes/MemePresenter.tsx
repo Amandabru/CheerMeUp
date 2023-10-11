@@ -45,7 +45,7 @@ function MemePresenter({ model }: { model: CheerModel }) {
     }
 
     return (
-        promiseNoData(getMemes(), memeData, error, 'No data') || (
+        promiseNoData(getMemes(), memeData, error, 'Could not fetch memes') || (
             <MemeView
                 memeData={memeDataSlice(memeData, count)}
                 onIncrement={increment}
