@@ -1,12 +1,17 @@
 import { MemeType, NewsType, JokeType, SuggestionType } from './Types';
 
-// need to rewrite because data sends an object with an error
-
 function promiseNoData(
     promise: Promise<
-        string | MemeType[] | NewsType[] | SuggestionType | JokeType | null
+        string | MemeType[] | NewsType[] | JokeType | SuggestionType | null
     > | null,
-    data: string | object | MemeType[] | NewsType[] | Error | null,
+    data:
+        | string
+        | object
+        | MemeType[]
+        | NewsType[]
+        | JokeType
+        | SuggestionType
+        | null,
     error: Error | null,
     noDataMessage: string
 ) {

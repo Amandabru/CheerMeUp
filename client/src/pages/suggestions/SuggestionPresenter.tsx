@@ -43,7 +43,7 @@ function SuggestionPresenter() {
             <SuggestionView
                 randomSuggestion={
                     promiseNoData(promise, data, error, 'Choose an Activity') ||
-                    data['text']
+                    data?.text
                 }
                 isToggled={company}
                 onToggle={(c: boolean) => setCompany(c)}

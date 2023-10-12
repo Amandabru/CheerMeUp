@@ -11,7 +11,7 @@ function JokeView({
     isLiked,
     categories
 }: {
-    randomJoke: string;
+    randomJoke: string | React.ReactElement | undefined;
     onChristmasClick: Function;
     onSpookyClick: Function;
     jokeType: string[];
