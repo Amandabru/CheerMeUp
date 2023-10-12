@@ -7,13 +7,13 @@ import promiseNoData from '../../PromiseNoData';
 
 function MemePresenter({ model }: { model: CheerModel }) {
     const [memeData, setMemeData] = useState<MemeType[]>([]);
-    const storedCount = localStorage.getItem('count');
+    const storedCount = localStorage.getItem('memeCount');
     const initialCount = storedCount ? parseInt(storedCount) : 0;
     const [count, setCount] = useState<number>(initialCount);
 
     const [error, setError] = useState<Error | null>(null);
 
-    const lastFetchDate = localStorage.getItem('lastFetchDate');
+    const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
 
     const shouldFetchData = () => {
         if (!lastFetchDate) return true;
@@ -28,7 +28,10 @@ function MemePresenter({ model }: { model: CheerModel }) {
             .then((res) => {
                 setMemeData(res);
                 localStorage.setItem('memeData', JSON.stringify(res));
-                localStorage.setItem('lastFetchDate', new Date().toISOString());
+                localStorage.setItem(
+                    'lastFetchDateMemes',
+                    new Date().toISOString()
+                );
             })
             .catch((err) => setError(err));
     };
@@ -57,7 +60,7 @@ function MemePresenter({ model }: { model: CheerModel }) {
     }, []); // Empty dependency array means this effect runs only once on component mount
 
     useEffect(() => {
-        localStorage.setItem('count', count.toString());
+        localStorage.setItem('memeCount', count.toString());
     }, [count]);
 
     function memeDataSlice(data: MemeType[], count: number): MemeType[] {
