@@ -1,16 +1,24 @@
 import { NewsType } from '../../Types';
 import Card from '../../components/Card';
+import { User } from '../../userModel';
 
 function NewsView({
     newsData,
     onIncrement,
-    onDecrement
+    onDecrement,
+    likedNews,
+    likePost,
+    user,
+    showUserMustLogin
 }: {
     newsData: NewsType[];
     onIncrement: () => void;
     onDecrement: () => void;
+    likedNews: NewsType[];
+    likePost: Function;
+    user: User | null;
+    showUserMustLogin: Function;
 }) {
-    console.log(newsData);
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
@@ -47,6 +55,18 @@ function NewsView({
                                 published={newsObject.publishedAt}
                                 source={newsObject.source.name}
                                 url={newsObject.url}
+                                isLiked={
+                                    likedNews.find(
+                                        (news) => news.url === newsObject.url
+                                    )
+                                        ? true
+                                        : false
+                                }
+                                handleLike={() => {
+                                    user
+                                        ? likePost(newsObject)
+                                        : showUserMustLogin();
+                                }}
                             ></Card>
                         );
                     })

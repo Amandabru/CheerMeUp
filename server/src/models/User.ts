@@ -27,7 +27,7 @@ const userSchema = new Schema({
         news: [
             {
                 id: Schema.Types.ObjectId,
-                key: Number
+                key: String
             }
         ]
     }

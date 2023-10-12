@@ -46,7 +46,6 @@ function JokePresenter({
         setJokeType(newJokeType);
         setPromise(getJoke(newJokeType));
     };
-    console.log(likedJoys.jokes);
 
     return (
         <JokeView

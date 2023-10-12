@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 function Card({
     type,
     image,
@@ -8,7 +6,9 @@ function Card({
     author,
     published,
     source,
-    url
+    url,
+    handleLike,
+    isLiked
 }: {
     type: 'joke' | 'meme' | 'news';
     image?: string;
@@ -18,18 +18,9 @@ function Card({
     published?: string;
     source?: string;
     url?: string;
+    handleLike: Function;
+    isLiked: boolean;
 }) {
-    const [isHovered, setIsHovered] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
-
-    const handleHover = () => {
-        setIsHovered(!isHovered);
-    };
-
-    const handleLike = () => {
-        setIsLiked(!isLiked);
-    };
-
     const cardSizeClasses = {
         joke: 'w-48 h-64',
         meme: 'w-128 h-128',
@@ -41,11 +32,6 @@ function Card({
         meme: 'object-contain w-128 h-5/6 mx-auto ',
         news: 'object-contain w-96 h-2/6 mx-auto my-5'
     };
-
-    // Reset isLiked when image changes
-    useEffect(() => {
-        setIsLiked(false);
-    }, [image]);
 
     let heart = (
         <svg
@@ -96,12 +82,11 @@ function Card({
                 {/* This creates space to push the button to the bottom */}
                 <button
                     className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onMouseEnter={handleHover}
-                    onMouseLeave={handleHover}
-                    onClick={handleLike}
+                    onClick={() => {
+                        handleLike();
+                    }}
                 >
-                    {isLiked || isHovered ? heart : filledHeart}
-                    Nr of likes
+                    {isLiked ? heart : filledHeart}
                 </button>
             </div>
         </div>

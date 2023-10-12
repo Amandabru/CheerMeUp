@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import JoyModel from '../models/Joys';
-import createHttpError from 'http-errors';
 
 export async function getJoyController(
     req: Request,
@@ -8,9 +7,12 @@ export async function getJoyController(
     next: NextFunction
 ) {
     const searchParam = req.params.searchParam;
-    const searchParamValue = req.params.searchParamValue;
+    let searchParamValue = req.params.searchParamValue;
     const type = req.params.type;
 
+    if (searchParam === 'url') {
+        searchParamValue = decodeURIComponent(searchParamValue);
+    }
     const existingJoy = await JoyModel.findOne({
         [`content.${searchParam}`]: searchParamValue,
         type: type

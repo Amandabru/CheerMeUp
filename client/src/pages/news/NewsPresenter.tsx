@@ -4,13 +4,24 @@ import { useState, useEffect } from 'react';
 import { NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
 import promiseNoData from '../../PromiseNoData';
+import useModelProp from '../../hooks/useModelProp';
+import { User } from '../../userModel';
 
-function NewsPresenter({ model }: { model: CheerModel }) {
+function NewsPresenter({
+    model,
+    user,
+    directToLogin
+}: {
+    model: CheerModel;
+    user: User | null;
+    directToLogin: Function;
+}) {
     const [newsData, setNewsData] = useState<NewsType[]>([]);
     const storedCount = localStorage.getItem('newsCount');
     const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
     const [count, setCount] = useState<number>(initialCount);
     const [error, setError] = useState<Error | null>(null);
+    const likedJoys = useModelProp(model, 'likedJoys');
 
     const lastFetchDate = localStorage.getItem('lastFetchDateNews');
 
@@ -74,7 +85,6 @@ function NewsPresenter({ model }: { model: CheerModel }) {
         }
         return [];
     }
-
     return (
         promiseNoData(
             getHappyNews(),
@@ -86,6 +96,10 @@ function NewsPresenter({ model }: { model: CheerModel }) {
                 newsData={newsDataSlice(newsData, count)}
                 onIncrement={increment}
                 onDecrement={decrement}
+                likedNews={likedJoys.news}
+                likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
+                user={user}
+                showUserMustLogin={() => directToLogin()}
             />
         )
     );

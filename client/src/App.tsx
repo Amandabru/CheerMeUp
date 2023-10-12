@@ -13,7 +13,6 @@ import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
-import useModelProp from './hooks/useModelProp';
 
 function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -49,7 +48,6 @@ function App({ model }: { model: CheerModel }) {
             try {
                 if (loggedInUser) {
                     const likedJoys = await userApi.getLikedJoys();
-                    console.log('liked app', likedJoys);
                     model.setLikedJoys(likedJoys);
                 }
             } catch (error) {
@@ -58,6 +56,13 @@ function App({ model }: { model: CheerModel }) {
         }
         if (loggedInUser) {
             fetchLikedJokes();
+        } else {
+            model.setLikedJoys({
+                jokes: [],
+                suggestions: [],
+                memes: [],
+                news: []
+            });
         }
     }, [loggedInUser]);
 
@@ -89,7 +94,13 @@ function App({ model }: { model: CheerModel }) {
                     />
                     <Route
                         path="/news"
-                        element={<NewsPresenter model={model} />}
+                        element={
+                            <NewsPresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
                     />
                     <Route
                         path="/suggestions"
