@@ -1,29 +1,36 @@
+import { DataStructure, JokeType } from '../../Types';
 import HeartIcon from '../../components/UI/HeartIcon';
 import { useState } from 'react';
+import { User } from '../../userModel';
 
 function JokeView({
-    randomJoke,
+    randomJokeText,
+    randomJokeData,
     onChristmasClick,
     onSpookyClick,
     jokeType,
     onNewJoke,
-    liked,
+    likedJokes,
     isLiked,
-    categories
+    categories,
+    user,
+    showUserMustLogin
 }: {
-    randomJoke: string | React.ReactElement | undefined;
+    randomJokeText: string;
+    randomJokeData: JokeType;
     onChristmasClick: Function;
     onSpookyClick: Function;
     jokeType: string[];
     onNewJoke: Function;
-    liked: boolean;
+    likedJokes: JokeType[];
     isLiked: Function;
     categories: string[];
+    user: User | null;
+    showUserMustLogin: Function;
 }) {
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
-
     return (
         <div className="bg-lime-200	text-black h-full w-full fixed">
             <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 text-center">
@@ -69,13 +76,21 @@ function JokeView({
                     <span
                         // TODO: Implement with model
                         onClick={() => {
-                            liked = !liked;
-                            isLiked(liked);
+                            user
+                                ? isLiked(randomJokeData)
+                                : showUserMustLogin();
                         }}
                         style={{ visibility: hidden }}
                     >
                         <HeartIcon
-                            isSolid={liked} // likedList.find((likedObject => likedObject.id === liked.id))
+                            isSolid={
+                                likedJokes.find(
+                                    (joke) =>
+                                        joke.apiId === randomJokeData?.apiId
+                                )
+                                    ? true
+                                    : false
+                            }
                             style={{
                                 position: 'absolute',
                                 top: '15px',
@@ -85,7 +100,7 @@ function JokeView({
                             }}
                         />
                     </span>
-                    <span>{randomJoke}</span>
+                    <span>{randomJokeText}</span>
                 </div>
                 <button
                     className="btn mt-5 transition-transform min-w-fit"

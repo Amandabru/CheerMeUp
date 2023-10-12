@@ -1,9 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import HomeView from './pages/home/HomeView';
-import MemeView from './pages/memes/MemeView';
-import NewsView from './pages/news/NewsView';
-import NotFoundView from './pages/NotFoundView';
 import NavBarPresenter from './components/NavBar/NavBarPresenter';
 import { useState, useEffect } from 'react';
 import { User } from './userModel';
@@ -16,10 +13,10 @@ import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
+import useModelProp from './hooks/useModelProp';
 
-function App() {
+function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
-    const model = new CheerModel();
 
     function closeModal(modalId: string) {
         if (document) {
@@ -42,8 +39,27 @@ function App() {
                 console.log(error);
             }
         }
-        fetchLoggedInUser();
+        if (loggedInUser) {
+            fetchLoggedInUser();
+        }
     }, []);
+
+    useEffect(() => {
+        async function fetchLikedJokes() {
+            try {
+                if (loggedInUser) {
+                    const likedJoys = await userApi.getLikedJoys();
+                    console.log('liked app', likedJoys);
+                    model.setLikedJoys(likedJoys);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (loggedInUser) {
+            fetchLikedJokes();
+        }
+    }, [loggedInUser]);
 
     return (
         <>
@@ -57,7 +73,16 @@ function App() {
             <div>
                 <Routes>
                     <Route path="/" element={<HomeView />} />
-                    <Route path="/jokes" element={<JokePresenter />} />
+                    <Route
+                        path="/jokes"
+                        element={
+                            <JokePresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
+                    />
                     <Route
                         path="/memes"
                         element={<MemePresenter model={model} />}

@@ -3,6 +3,7 @@ import NewsView from './NewsView';
 import { useState, useEffect } from 'react';
 import { NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
+import promiseNoData from '../../PromiseNoData';
 
 function NewsPresenter({ model }: { model: CheerModel }) {
     const [newsData, setNewsData] = useState<NewsType[]>([]);
@@ -41,7 +42,7 @@ function NewsPresenter({ model }: { model: CheerModel }) {
         }
         return [];
     }
-
+    /*
     return newsData.length > 0 ? (
         <NewsView
             newsData={newsDataSlice(newsData, count)}
@@ -52,9 +53,8 @@ function NewsPresenter({ model }: { model: CheerModel }) {
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             No Data
         </div>
-    );
+    );*/
 
-    /*
     return (
         promiseNoData(
             getHappyNews(),
@@ -68,7 +68,7 @@ function NewsPresenter({ model }: { model: CheerModel }) {
                 onDecrement={decrement}
             />
         )
-    );*/
+    );
 }
 
 export default NewsPresenter;

@@ -3,10 +3,8 @@ import { JokeType, SuggestionType } from '../Types';
 
 // TODO: any
 
-function usePromise(
-    promise: Promise<SuggestionType | JokeType> | null
-): [SuggestionType | JokeType | null, Error | null] {
-    const [data, setData] = useState<JokeType | SuggestionType | null>(null);
+function usePromise<T>(promise: Promise<T> | null): any {
+    const [data, setData] = useState<SuggestionType | null>(null);
     const [error, setError] = useState<Error | null>(null);
     useEffect(
         function () {
@@ -15,10 +13,10 @@ function usePromise(
             let cancelled = false;
             if (promise)
                 promise
-                    .then((dt: SuggestionType | JokeType) => {
+                    .then((dt: any) => {
                         if (!cancelled) setData(dt);
                     })
-                    .catch((er: Error) => {
+                    .catch((er: any) => {
                         if (!cancelled) setError(er);
                     });
             return function () {
