@@ -1,104 +1,118 @@
-import { getSuggestions } from '../api/getSuggestions';
-import { getJoke } from '../api/getJoke';
-import { getMemes } from '../api/getMemes';
-import { MemeType } from '../Types';
+import { patchLike } from '../api/patchLike';
+import { getJoy } from '../api/getJoy';
+import { postLike } from '../api/postLike';
+import { JoyToUpdateType } from '../Types';
+import { DataStructure, MemeType, JokeType, NewsType } from '../Types';
 
 export class CheerModel {
     private observers: (() => void)[];
-    private activityType: string | null;
-    public currentSuggestionData: object | Error | null;
-    public currentSuggestionError: object | Error | null;
-    private jokeType: string[] | null;
-    public currentJokeData: object | Error | null;
-    public currentJokeError: object | Error | null;
-    public currentMemeData: MemeType[] | Error | null;
-    public currentMemeError: object | Error | null;
+    public likedJoys: DataStructure;
 
     constructor(
         observers = [],
-        activityType = '',
-        jokeType = null,
-        currentSuggestionData = null,
-        currentSuggestionError = null,
-        currentJokeData = null,
-        currentJokeError = null,
-        currentMemeData = undefined,
-        currentMemeError = null
+        likedJoys: DataStructure = {
+            jokes: [],
+            suggestions: [],
+            memes: [],
+            news: []
+        }
     ) {
         this.observers = observers;
-        this.activityType = activityType;
-        this.jokeType = jokeType;
-        this.currentSuggestionData = currentSuggestionData;
-        this.currentSuggestionError = currentSuggestionError;
-        this.currentJokeData = currentJokeData;
-        this.currentJokeError = currentJokeError;
-        this.currentMemeData = currentMemeData;
-        this.currentMemeError = currentMemeError;
+        this.likedJoys = likedJoys;
     }
 
-    setType(id: string | null, multipleParticipants: boolean) {
-        //if (id == this.type) return;
-        this.activityType = id;
+    getLikedJoys(): DataStructure {
+        return { ...this.likedJoys };
+    }
 
-        this.currentSuggestionData = null;
-        this.currentSuggestionError = null;
-
-        this.notifyObservers();
-        if (this.activityType) {
-            getSuggestions(this.activityType, multipleParticipants)
-                .then((data: object | Error) => {
-                    if (id === this.activityType) {
-                        this.currentSuggestionData = data;
-                        console.log(data);
-                        this.notifyObservers();
-                    }
-                })
-                .catch((error: object | Error) => {
-                    if (id === this.activityType) {
-                        this.currentSuggestionError = error;
-                        this.notifyObservers();
-                    }
-                });
+    setLikedJoys(likedJoys: DataStructure | undefined) {
+        if (likedJoys) {
+            this.likedJoys = { ...likedJoys };
         }
-    }
-
-    setJoke(id: string[]) {
-        if (id == this.jokeType) return;
-        else this.jokeType = id;
-
-        this.currentJokeData = null;
-        this.currentJokeError = null;
-
         this.notifyObservers();
-        if (this.jokeType) {
-            getJoke(this.jokeType)
-                .then((data: object | Error) => {
-                    if (id === this.jokeType) {
-                        this.currentJokeData = data;
-                        console.log(data);
-                        this.notifyObservers();
-                    }
-                })
-                .catch((error: object | Error) => {
-                    if (id === this.jokeType) {
-                        this.currentJokeError = error;
-                        this.notifyObservers();
-                    }
-                });
-        }
     }
 
-    setMeme() {
-        getMemes()
-            .then((data: MemeType[] | Error) => {
-                this.currentMemeData = data;
-                console.log(data);
-                this.notifyObservers();
-            })
-            .catch((error: object | Error) => {
-                this.currentMemeError = error;
-                this.notifyObservers();
-            });
+    async likeOrUnlikeMeme(likedMeme: MemeType) {
+        const meme = await getJoy('url', likedMeme.url, 'meme');
+        if (meme.exists) {
+            const memeToUpdate: JoyToUpdateType = {
+                id: meme.id,
+                type: 'meme',
+                searchParamValue: likedMeme.url
+            };
+            patchLike(memeToUpdate);
+            const index = this.likedJoys.memes.findIndex(
+                (meme) => meme.url === likedMeme.url
+            );
+
+            if (index !== -1) {
+                this.likedJoys.memes.splice(index, 1);
+            } else {
+                this.likedJoys.memes.push(likedMeme);
+            }
+        } else {
+            postLike(likedMeme);
+            this.likedJoys.memes.push(likedMeme);
+        }
+        this.notifyObservers();
+    }
+
+    async likeOrUnlikeJoke(likedJoke: JokeType) {
+        const likedJoysCopy = { ...this.likedJoys }; // Make a shallow copy
+
+        const joke = await getJoy('apiId', likedJoke.apiId, 'joke');
+        if (joke.exists) {
+            const jokeToUpdate: JoyToUpdateType = {
+                id: joke.id,
+                type: 'joke',
+                searchParamValue: likedJoke.apiId
+            };
+            patchLike(jokeToUpdate);
+            const index = likedJoysCopy.jokes.findIndex(
+                (j) => j.apiId === likedJoke.apiId
+            );
+
+            if (index !== -1) {
+                console.log('Removing from liked Joys');
+                likedJoysCopy.jokes.splice(index, 1);
+            } else {
+                console.log('Adding existing joy to liked Joys');
+                likedJoysCopy.jokes.push(likedJoke);
+            }
+        } else {
+            console.log('Adding to liked Joys');
+            postLike(likedJoke);
+            likedJoysCopy.jokes.push(likedJoke);
+        }
+
+        // Set the state with the modified copy
+        this.setLikedJoys(likedJoysCopy);
+        this.notifyObservers();
+    }
+
+    async likeOrUnlikeNews(likedNews: NewsType) {
+        const news = await getJoy('url', likedNews.url, 'news');
+        if (news.exists) {
+            const newsToUpdate: JoyToUpdateType = {
+                id: news.id,
+                type: 'news',
+                searchParamValue: likedNews.url
+            };
+            patchLike(newsToUpdate);
+            const index = this.likedJoys.news.findIndex(
+                (news) => news.url === likedNews.url
+            );
+
+            if (index !== -1) {
+                this.likedJoys.news.splice(index, 1);
+            } else {
+                this.likedJoys.news.push(likedNews);
+            }
+        } else {
+            postLike(likedNews);
+            this.likedJoys.news.push(likedNews);
+        }
+        this.notifyObservers();
     }
 
     addObserver(callback: () => void) {

@@ -6,12 +6,14 @@ export type SuggestionType = {
 
 export type NewsType = {
     type: string;
-    apiId: number;
-    title: string;
-    text: string;
-    url: string;
-    image: string;
+    source: { id: string; name: string };
     author: string;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string;
+    publishedAt: string;
+    content: string;
     liked?: boolean;
 };
 
@@ -47,7 +49,19 @@ export type DataBaseType = {
 };
 
 export type JoyToUpdateType = {
-    id: string;
+    id?: string;
     type: string;
     searchParamValue: string | number;
+};
+
+export type DataStructure = {
+    jokes: Array<JokeType>;
+    suggestions: Array<SuggestionType>;
+    memes: Array<MemeType>;
+    news: Array<NewsType>;
+};
+
+export type ExistingJoy = {
+    exists: boolean;
+    id?: string;
 };

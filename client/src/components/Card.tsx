@@ -1,6 +1,24 @@
 import { useState, useEffect } from 'react';
 
-function Card({ image, title }: { image: string; title?: string }) {
+function Card({
+    type,
+    image,
+    title,
+    description,
+    author,
+    published,
+    source,
+    url
+}: {
+    type: 'joke' | 'meme' | 'news';
+    image?: string;
+    title?: string;
+    description?: string;
+    author?: string;
+    published?: string;
+    source?: string;
+    url?: string;
+}) {
     const [isHovered, setIsHovered] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
 
@@ -10,6 +28,18 @@ function Card({ image, title }: { image: string; title?: string }) {
 
     const handleLike = () => {
         setIsLiked(!isLiked);
+    };
+
+    const cardSizeClasses = {
+        joke: 'w-48 h-64',
+        meme: 'w-128 h-128',
+        news: 'w-144 h-128'
+    };
+
+    const imageClasses = {
+        joke: '',
+        meme: 'object-contain w-128 h-5/6 mx-auto ',
+        news: 'object-contain w-96 h-2/6 mx-auto my-5'
     };
 
     // Reset isLiked when image changes
@@ -43,21 +73,37 @@ function Card({ image, title }: { image: string; title?: string }) {
     );
 
     return (
-        <div className="bg-white w-144 h-96 rounded-3xl overflow-hidden shadow-lg">
-            <h1>{title}</h1>
-            <img
-                className="object-contain w-128 h-5/6 mx-auto mt-5"
-                src={image}
-            />
-            <button
-                className="m-2 focus:outline-none flex items-center"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleHover}
-                onClick={handleLike}
-            >
-                {isLiked || isHovered ? heart : filledHeart}
-                Nr of likes
-            </button>
+        <div
+            className={`bg-white rounded-3xl overflow-hidden shadow-lg ${cardSizeClasses[type]}`}
+        >
+            <div className="flex flex-col h-full">
+                <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
+                <img className={`${imageClasses[type]}`} src={image} />
+                <p className="mx-8 mb-3">{description}</p>
+                <p className="ml-8 text-xs">
+                    <span className="mr-5">{author}</span>
+                    <span className="mr-5">{published}</span>
+                    <a
+                        href={url}
+                        className="text-blue-700 hover:text-black"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {source}
+                    </a>
+                </p>
+                <div className="flex-grow"></div>{' '}
+                {/* This creates space to push the button to the bottom */}
+                <button
+                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
+                    onMouseEnter={handleHover}
+                    onMouseLeave={handleHover}
+                    onClick={handleLike}
+                >
+                    {isLiked || isHovered ? heart : filledHeart}
+                    Nr of likes
+                </button>
+            </div>
         </div>
     );
 }

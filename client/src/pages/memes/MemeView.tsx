@@ -16,7 +16,7 @@ function MemeView({
 }) {
     console.log(memeData);
     return (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
+        <div className="bg-orange-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
                 <button
                     className="btn btn-accent mt-10 mr-10"
@@ -40,7 +40,13 @@ function MemeView({
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
                 {memeData ? (
                     memeData.map((memeObject, index) => {
-                        return <Card key={index} image={memeObject.url}></Card>;
+                        return (
+                            <Card
+                                type="meme"
+                                key={index}
+                                image={memeObject.url}
+                            ></Card>
+                        );
                     })
                 ) : (
                     <div>No meme data available</div>

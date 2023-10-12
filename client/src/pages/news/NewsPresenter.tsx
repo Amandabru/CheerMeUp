@@ -3,20 +3,44 @@ import NewsView from './NewsView';
 import { useState, useEffect } from 'react';
 import { NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
+import promiseNoData from '../../PromiseNoData';
 
 function NewsPresenter({ model }: { model: CheerModel }) {
     const [newsData, setNewsData] = useState<NewsType[]>([]);
-    const [count, setCount] = useState<number>(0);
+    const storedCount = localStorage.getItem('newsCount');
+    const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
+    const [count, setCount] = useState<number>(initialCount);
     const [error, setError] = useState<Error | null>(null);
 
-    // Function to increment the count
+    const lastFetchDate = localStorage.getItem('lastFetchDateNews');
+
+    const shouldFetchData = () => {
+        if (!lastFetchDate) return true;
+        const lastFetchTime = new Date(lastFetchDate).getTime();
+        const currentTime = new Date().getTime();
+        const twentyFourHours = 24 * 60 * 60 * 1000;
+        return currentTime - lastFetchTime >= twentyFourHours;
+    };
+
+    const fetchData = () => {
+        getHappyNews()
+            .then((res) => {
+                setNewsData(res);
+                localStorage.setItem('newsData', JSON.stringify(res));
+                localStorage.setItem(
+                    'lastFetchDateNews',
+                    new Date().toISOString()
+                );
+            })
+            .catch((err) => setError(err));
+    };
+
     const increment = () => {
         if (count < 2) {
             setCount(count + 1);
         }
     };
 
-    // Function to decrement the count
     const decrement = () => {
         if (count > 0) {
             setCount(count - 1);
@@ -24,10 +48,19 @@ function NewsPresenter({ model }: { model: CheerModel }) {
     };
 
     useEffect(() => {
-        getHappyNews()
-            .then((res) => setNewsData(res))
-            .catch((err) => setError(err));
+        if (shouldFetchData()) {
+            fetchData();
+        } else {
+            const storedNewsData = localStorage.getItem('newsData');
+            if (storedNewsData) {
+                setNewsData(JSON.parse(storedNewsData));
+            }
+        }
     }, []); // Empty dependency array means this effect runs only once on component mount
+
+    useEffect(() => {
+        localStorage.setItem('newsCount', count.toString());
+    }, [count]);
 
     function newsDataSlice(data: NewsType[], count: number): NewsType[] {
         if (count === 0) {
@@ -42,19 +75,6 @@ function NewsPresenter({ model }: { model: CheerModel }) {
         return [];
     }
 
-    return newsData.length > 0 ? (
-        <NewsView
-            newsData={newsDataSlice(newsData, count)}
-            onIncrement={increment}
-            onDecrement={decrement}
-        />
-    ) : (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
-            No Data
-        </div>
-    );
-
-    /*
     return (
         promiseNoData(
             getHappyNews(),
@@ -68,7 +88,7 @@ function NewsPresenter({ model }: { model: CheerModel }) {
                 onDecrement={decrement}
             />
         )
-    );*/
+    );
 }
 
 export default NewsPresenter;

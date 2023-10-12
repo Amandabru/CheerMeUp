@@ -3,7 +3,10 @@ import { API_URL } from './config';
 import { User } from '../userModel.ts';
 
 export async function getLoggedInUser(): Promise<User> {
-    const response = await fetchData(`${API_URL}/users`, { method: 'GET', credentials: "include",});
+    const response = await fetchData(`${API_URL}/users`, {
+        method: 'GET',
+        credentials: 'include'
+    });
     return response.json();
 }
 
@@ -20,7 +23,7 @@ export async function signUp(credentials: SignUpCredentials): Promise<User> {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(credentials),
-        credentials: "include",
+        credentials: 'include'
     });
     return response.json();
 }
@@ -37,15 +40,22 @@ export async function login(credentials: LoginCredentials): Promise<User> {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(credentials),
-        credentials: "include",
+        credentials: 'include'
     });
     return response.json();
 }
 
 export async function logout() {
-    await fetchData(`${API_URL}/users/logout`, { method: 'POST', credentials: "include",});
+    await fetchData(`${API_URL}/users/logout`, {
+        method: 'POST',
+        credentials: 'include'
+    });
 }
 
 export async function getLikedJoys() {
-    await fetchData(`${API_URL}/users/likedJoys`, { method: 'GET', credentials: "include",});
+    const response = await fetchData(`${API_URL}/users/likedJoys`, {
+        method: 'GET',
+        credentials: 'include'
+    });
+    return response.json();
 }
