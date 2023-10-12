@@ -38,9 +38,14 @@ function NewsView({
                     newsData.map((newsObject, index) => {
                         return (
                             <Card
+                                type="news"
                                 key={index}
                                 image={newsObject.urlToImage}
                                 title={newsObject.title}
+                                description={newsObject.description}
+                                author={newsObject.author}
+                                published={newsObject.publishedAt}
+                                source={newsObject.url}
                             ></Card>
                         );
                     })
