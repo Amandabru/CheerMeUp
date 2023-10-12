@@ -4,15 +4,16 @@ import { useState } from 'react';
 import usePromise from '../../hooks/usePromise';
 import { getJoke } from '../../api/getJoke';
 import { JokeType } from '../../Types';
+import santa from '../../assets/audio/santa.mp3';
+import spooky from '../../assets/audio/spooky.mp3';
 
 function JokePresenter() {
     const [promise, setPromise] = useState<Promise<JokeType> | null>(null);
     const [data, error] = usePromise(promise);
     const [jokeType, setJokeType] = useState<string[]>([]);
-
     const [liked, isLiked] = useState<boolean>(false);
-    let santaLaugh = new Audio('../../assets/audio/santa.mp3');
-    let spookyLaugh = new Audio('../../assets/audio/spooky.mp3');
+    let santaLaugh = new Audio(santa);
+    let spookyLaugh = new Audio(spooky);
 
     const categories: string[] = [
         'programming',
@@ -23,10 +24,11 @@ function JokePresenter() {
     ];
 
     const playSantaLaugh = () => {
+        console.log('here');
         santaLaugh.play();
     };
 
-    const playspookyLaugh = () => {
+    const playSpookyLaugh = () => {
         spookyLaugh.play();
     };
 
@@ -41,6 +43,8 @@ function JokePresenter() {
                 promiseNoData(promise, data, error, 'Choose a Type') ||
                 data?.text
             }
+            onChristmasClick={() => playSantaLaugh()}
+            onSpookyClick={() => playSpookyLaugh()}
             jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
                 getRandomJoke(newType);
