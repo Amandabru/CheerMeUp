@@ -49,7 +49,19 @@ export type DataBaseType = {
 };
 
 export type JoyToUpdateType = {
-    id: string;
+    id?: string;
     type: string;
     searchParamValue: string | number;
+};
+
+export type DataStructure = {
+    jokes: Array<JokeType>;
+    suggestions: Array<SuggestionType>;
+    memes: Array<MemeType>;
+    news: Array<NewsType>;
+};
+
+export type ExistingJoy = {
+    exists: boolean;
+    id?: string;
 };

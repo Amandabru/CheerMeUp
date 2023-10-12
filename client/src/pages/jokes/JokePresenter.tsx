@@ -6,14 +6,16 @@ import { getJoke } from '../../api/getJoke';
 import { JokeType } from '../../Types';
 import santa from '../../assets/audio/santa.mp3';
 import spooky from '../../assets/audio/spooky.mp3';
+import { CheerModel } from '../../models/model';
+import useModelProp from '../../hooks/useModelProp';
 
-function JokePresenter() {
+function JokePresenter({ model }: { model: CheerModel }) {
     const [promise, setPromise] = useState<Promise<JokeType> | null>(null);
-    const [data, error] = usePromise(promise);
+    const [joke, error] = usePromise(promise);
     const [jokeType, setJokeType] = useState<string[]>([]);
-    const [liked, isLiked] = useState<boolean>(false);
     let santaLaugh = new Audio(santa);
     let spookyLaugh = new Audio(spooky);
+    const likedJoys = useModelProp(model, 'likedJoys');
 
     const categories: string[] = [
         'programming',
@@ -24,7 +26,6 @@ function JokePresenter() {
     ];
 
     const playSantaLaugh = () => {
-        console.log('here');
         santaLaugh.play();
     };
 
@@ -36,21 +37,25 @@ function JokePresenter() {
         setJokeType(newJokeType);
         setPromise(getJoke(newJokeType));
     };
+    console.log(likedJoys.jokes);
 
     return (
         <JokeView
-            randomJoke={
-                promiseNoData(promise, data, error, 'Choose a Type') ||
-                data?.text
+            randomJokeText={
+                promiseNoData(promise, joke, error, 'Choose a Type') ||
+                joke.text
             }
+            randomJokeData={joke ? joke : null}
             onChristmasClick={() => playSantaLaugh()}
             onSpookyClick={() => playSpookyLaugh()}
             jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
                 getRandomJoke(newType);
             }}
-            liked={liked}
-            isLiked={(l: boolean) => isLiked(l)}
+            likedJokes={likedJoys.jokes}
+            isLiked={(joke: JokeType) => {
+                model.likeOrUnlikeJoke(joke);
+            }}
             categories={categories}
         />
     );
