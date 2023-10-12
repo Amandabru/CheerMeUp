@@ -81,7 +81,16 @@ app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
     res.status(statusCode).json({ error: errorMessage });
 });
 
-mongoose.connect(process.env.MONGO_URL!).then(() => {
-    console.log(`listening on port ${PORT}`);
-    app.listen(PORT);
-});
+if(process.env.MONGODB == "local"){
+    mongoose.connect(process.env.MONGO_LOCAL_URL!).then(() => {
+        console.log(`listening on port ${PORT}`);
+        app.listen(PORT);
+    });
+}
+else{
+    mongoose.connect(process.env.MONGO_URL!).then(() => {
+        console.log(`listening on port ${PORT}`);
+        app.listen(PORT);
+    });
+}
+
