@@ -1,9 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import HomeView from './pages/home/HomeView';
-import MemeView from './pages/memes/MemeView';
-import NewsView from './pages/news/NewsView';
-import NotFoundView from './pages/NotFoundView';
 import NavBarPresenter from './components/NavBar/NavBarPresenter';
 import { useState, useEffect } from 'react';
 import { User } from './userModel';
@@ -42,7 +39,18 @@ function App() {
                 console.log(error);
             }
         }
+        async function updateLikedJokes() {
+            try {
+                if (loggedInUser) {
+                    const likedJoys = await userApi.getLikedJoys();
+                    model.setLikedJoys(likedJoys);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
         fetchLoggedInUser();
+        updateLikedJokes();
     }, []);
 
     return (
@@ -57,7 +65,10 @@ function App() {
             <div>
                 <Routes>
                     <Route path="/" element={<HomeView />} />
-                    <Route path="/jokes" element={<JokePresenter />} />
+                    <Route
+                        path="/jokes"
+                        element={<JokePresenter model={model} />}
+                    />
                     <Route
                         path="/memes"
                         element={<MemePresenter model={model} />}

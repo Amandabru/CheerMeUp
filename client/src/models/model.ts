@@ -1,8 +1,109 @@
+import { patchLike } from '../api/patchLike';
+import { getJoy } from '../api/getJoy';
+import { postLike } from '../api/postLike';
+import { JoyToUpdateType } from '../Types';
+import { DataStructure, MemeType, JokeType, NewsType } from '../Types';
+
 export class CheerModel {
     private observers: (() => void)[];
+    public likedJoys: DataStructure;
 
-    constructor(observers = []) {
+    constructor(
+        observers = [],
+        likedJoys: DataStructure = {
+            jokes: [],
+            suggestions: [],
+            memes: [],
+            news: []
+        }
+    ) {
         this.observers = observers;
+        this.likedJoys = likedJoys;
+    }
+
+    setLikedJoys(likedJoys: DataStructure | undefined) {
+        if (likedJoys) {
+            this.likedJoys = { ...likedJoys };
+            this.notifyObservers();
+        }
+    }
+
+    async likeOrUnlikeMeme(likedMeme: MemeType) {
+        const meme = await getJoy('url', likedMeme.url, 'meme');
+        if (meme.exists) {
+            const memeToUpdate: JoyToUpdateType = {
+                id: meme.id,
+                type: 'meme',
+                searchParamValue: likedMeme.url
+            };
+            patchLike(memeToUpdate);
+            const index = this.likedJoys.memes.findIndex(
+                (meme) => meme.url === likedMeme.url
+            );
+
+            if (index !== -1) {
+                this.likedJoys.memes.splice(index, 1);
+            } else {
+                this.likedJoys.memes.push(likedMeme);
+            }
+        } else {
+            postLike(likedMeme);
+            this.likedJoys.memes.push(likedMeme);
+        }
+        this.notifyObservers();
+    }
+
+    async likeOrUnlikeJoke(likedJoke: JokeType) {
+        const joke = await getJoy('apiId', likedJoke.apiId, 'joke');
+        if (joke.exists) {
+            const jokeToUpdate: JoyToUpdateType = {
+                id: joke.id,
+                type: 'joke',
+                searchParamValue: likedJoke.apiId
+            };
+            patchLike(jokeToUpdate);
+            const index = this.likedJoys.jokes.findIndex(
+                (joke) => joke.apiId === likedJoke.apiId
+            );
+
+            if (index !== -1) {
+                console.log('Removing from liked Joys');
+                this.likedJoys.jokes.splice(index, 1);
+            } else {
+                console.log('Adding existing joy to liked Joys');
+                this.likedJoys.jokes.push(likedJoke);
+            }
+        } else {
+            console.log('Adding to liked Joys');
+            postLike(likedJoke);
+            this.likedJoys.jokes.push(likedJoke);
+        }
+        this.notifyObservers();
+    }
+
+    async likeOrUnlikeNews(likedNews: NewsType) {
+        const news = await getJoy('url', likedNews.url, 'news');
+        if (news.exists) {
+            const newsToUpdate: JoyToUpdateType = {
+                id: news.id,
+                type: 'news',
+                searchParamValue: likedNews.url
+            };
+            patchLike(newsToUpdate);
+            const index = this.likedJoys.news.findIndex(
+                (news) => news.url === likedNews.url
+            );
+
+            if (index !== -1) {
+                this.likedJoys.news.splice(index, 1);
+            } else {
+                this.likedJoys.news.push(likedNews);
+            }
+        } else {
+            postLike(likedNews);
+            this.likedJoys.news.push(likedNews);
+        }
+        this.notifyObservers();
     }
 
     addObserver(callback: () => void) {

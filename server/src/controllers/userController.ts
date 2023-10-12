@@ -6,9 +6,10 @@ import * as EmailValidator from 'email-validator';
 import { assertIsDefined } from '../utils/assertIsDefined';
 import JoyModel from '../models/Joys';
 import validate from 'deep-email-validator';
+import { DataStructure } from '../../../client/src/Types';
 
 async function isEmailValid(email: string) {
-    return validate(email)
+    return validate(email);
 }
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
@@ -51,9 +52,9 @@ export const signUp: RequestHandler<
                 'Username already taken. Please choose a different one.'
             );
         }
-        const {valid, reason} = await isEmailValid(email);
+        const { valid, reason } = await isEmailValid(email);
         if (!valid) {
-             throw createHttpError(400, `Invalid email. Reason: ${reason}`);
+            throw createHttpError(400, `Invalid email. Reason: ${reason}`);
         }
         const existingEmail = await UserModel.findOne({ email: email }).exec();
         if (existingEmail) {

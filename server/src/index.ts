@@ -53,11 +53,7 @@ app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
 app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
 
-app.get(
-    '/joyExists/:type/:searchParam/:searchParamValue',
-    requiresAuth,
-    getJoyController
-);
+app.get('/joyExists/:type/:searchParam/:searchParamValue', getJoyController);
 app.patch('/like', requiresAuth, patchLikeController);
 app.post('/like', requiresAuth, postLikeController);
 app.get('/popular/:sortBy/:number', getPopularController);
