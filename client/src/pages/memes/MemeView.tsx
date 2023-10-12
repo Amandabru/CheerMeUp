@@ -16,7 +16,7 @@ function MemeView({
 }) {
     console.log(memeData);
     return (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
+        <div className="bg-orange-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
                 <button
                     className="btn btn-accent mt-10 mr-10"
