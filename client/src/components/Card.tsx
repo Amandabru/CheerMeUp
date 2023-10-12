@@ -32,13 +32,13 @@ function Card({
 
     const cardSizeClasses = {
         joke: 'w-48 h-64',
-        meme: 'w-144 h-96',
+        meme: 'w-128 h-128',
         news: 'w-144 h-128'
     };
 
     const imageClasses = {
         joke: '',
-        meme: 'object-contain w-128 h-4/6 mx-auto mt-5',
+        meme: 'object-contain w-128 h-5/6 mx-auto ',
         news: 'object-contain w-96 h-2/6 mx-auto my-5'
     };
 
@@ -83,9 +83,6 @@ function Card({
                 <p className="ml-8 text-xs">
                     <span className="mr-5">{author}</span>
                     <span className="mr-5">{published}</span>
-                    {type === 'news' && (
-                        <span className="mr-1">Read More:</span>
-                    )}
                     <a
                         href={url}
                         className="text-blue-700 hover:text-black"
