@@ -7,7 +7,8 @@ function Card({
     description,
     author,
     published,
-    source
+    source,
+    url
 }: {
     type: 'joke' | 'meme' | 'news';
     image?: string;
@@ -16,6 +17,7 @@ function Card({
     author?: string;
     published?: string;
     source?: string;
+    url?: string;
 }) {
     const [isHovered, setIsHovered] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
@@ -36,7 +38,7 @@ function Card({
 
     const imageClasses = {
         joke: '',
-        meme: 'object-contain w-128 h-5/6 mx-auto mt-5',
+        meme: 'object-contain w-128 h-4/6 mx-auto mt-5',
         news: 'object-contain w-96 h-2/6 mx-auto my-5'
     };
 
@@ -78,18 +80,18 @@ function Card({
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
                 <img className={`${imageClasses[type]}`} src={image} />
                 <p className="mx-8 mb-3">{description}</p>
-                <p className="mx-8 text-xs mb-1">
+                <p className="ml-8 text-xs">
                     <span className="mr-5">{author}</span>
-                    <span>{published}</span>
+                    <span className="mr-5">{published}</span>
+                    <a
+                        href={url}
+                        className="text-blue-700 hover:text-black"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {source}
+                    </a>
                 </p>
-                <a
-                    href={source}
-                    className="mx-8 block text-xs text-blue-700 hover:text-black"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {source}
-                </a>
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
                 <button

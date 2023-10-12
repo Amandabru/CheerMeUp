@@ -45,7 +45,8 @@ function NewsView({
                                 description={newsObject.description}
                                 author={newsObject.author}
                                 published={newsObject.publishedAt}
-                                source={newsObject.url}
+                                source={newsObject.source.name}
+                                url={newsObject.url}
                             ></Card>
                         );
                     })
