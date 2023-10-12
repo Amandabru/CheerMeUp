@@ -1,5 +1,4 @@
 import { CheerModel } from '../../models/model';
-import useModelProp from '../../hooks/useModelProp';
 import MemeView from './MemeView';
 import { useState, useEffect } from 'react';
 import { MemeType } from '../../Types';
@@ -9,7 +8,7 @@ import promiseNoData from '../../PromiseNoData';
 function MemePresenter({ model }: { model: CheerModel }) {
     const [memeData, setMemeData] = useState<MemeType[]>([]);
     const storedCount = localStorage.getItem('count');
-    const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
+    const initialCount = storedCount ? parseInt(storedCount) : 0;
     const [count, setCount] = useState<number>(initialCount);
 
     const [error, setError] = useState<Error | null>(null);
