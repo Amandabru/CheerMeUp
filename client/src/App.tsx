@@ -13,10 +13,10 @@ import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
+import useModelProp from './hooks/useModelProp';
 
-function App() {
+function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
-    const model = new CheerModel();
 
     function closeModal(modalId: string) {
         if (document) {
@@ -39,19 +39,27 @@ function App() {
                 console.log(error);
             }
         }
-        async function updateLikedJokes() {
+        if (loggedInUser) {
+            fetchLoggedInUser();
+        }
+    }, []);
+
+    useEffect(() => {
+        async function fetchLikedJokes() {
             try {
                 if (loggedInUser) {
                     const likedJoys = await userApi.getLikedJoys();
+                    console.log('liked app', likedJoys);
                     model.setLikedJoys(likedJoys);
                 }
             } catch (error) {
                 console.log(error);
             }
         }
-        fetchLoggedInUser();
-        updateLikedJokes();
-    }, []);
+        if (loggedInUser) {
+            fetchLikedJokes();
+        }
+    }, [loggedInUser]);
 
     return (
         <>

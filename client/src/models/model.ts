@@ -21,11 +21,15 @@ export class CheerModel {
         this.likedJoys = likedJoys;
     }
 
+    getLikedJoys(): DataStructure {
+        return { ...this.likedJoys };
+    }
+
     setLikedJoys(likedJoys: DataStructure | undefined) {
         if (likedJoys) {
             this.likedJoys = { ...likedJoys };
-            this.notifyObservers();
         }
+        this.notifyObservers();
     }
 
     async likeOrUnlikeMeme(likedMeme: MemeType) {
@@ -54,6 +58,8 @@ export class CheerModel {
     }
 
     async likeOrUnlikeJoke(likedJoke: JokeType) {
+        const likedJoysCopy = { ...this.likedJoys }; // Make a shallow copy
+
         const joke = await getJoy('apiId', likedJoke.apiId, 'joke');
         if (joke.exists) {
             const jokeToUpdate: JoyToUpdateType = {
@@ -62,22 +68,25 @@ export class CheerModel {
                 searchParamValue: likedJoke.apiId
             };
             patchLike(jokeToUpdate);
-            const index = this.likedJoys.jokes.findIndex(
-                (joke) => joke.apiId === likedJoke.apiId
+            const index = likedJoysCopy.jokes.findIndex(
+                (j) => j.apiId === likedJoke.apiId
             );
 
             if (index !== -1) {
                 console.log('Removing from liked Joys');
-                this.likedJoys.jokes.splice(index, 1);
+                likedJoysCopy.jokes.splice(index, 1);
             } else {
                 console.log('Adding existing joy to liked Joys');
-                this.likedJoys.jokes.push(likedJoke);
+                likedJoysCopy.jokes.push(likedJoke);
             }
         } else {
             console.log('Adding to liked Joys');
             postLike(likedJoke);
-            this.likedJoys.jokes.push(likedJoke);
+            likedJoysCopy.jokes.push(likedJoke);
         }
+
+        // Set the state with the modified copy
+        this.setLikedJoys(likedJoysCopy);
         this.notifyObservers();
     }
 

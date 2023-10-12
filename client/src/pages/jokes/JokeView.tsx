@@ -26,7 +26,6 @@ function JokeView({
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
-    console.log('IN VIEW LOGGING LIKED JOKES:', likedJokes);
     return (
         <div className="bg-lime-200	text-black h-full w-full fixed">
             <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 text-center">

@@ -8,7 +8,7 @@ function useModelProp(model: CheerModel, property: string) {
         return function () {
             model.removeObserver(model[property]);
         };
-    }, [model]);
+    }, [model, property]);
     return value;
 }
 

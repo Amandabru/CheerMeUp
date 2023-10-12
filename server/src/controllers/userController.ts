@@ -130,22 +130,22 @@ export const getLikedJoys: RequestHandler = async (req, res, next) => {
             _id: authenticatedUserId
         }).exec();
         const likedMemes = await Promise.all(
-            (user?.likedPosts?.meme || []).map(async (joyId) => {
-                const meme = await JoyModel.findOne({ _id: joyId }).exec();
+            (user?.likedPosts?.meme || []).map(async (joy) => {
+                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
 
         const likedJokes = await Promise.all(
-            (user?.likedPosts?.joke || []).map(async (joyId) => {
-                const meme = await JoyModel.findOne({ _id: joyId }).exec();
+            (user?.likedPosts?.joke || []).map(async (joy) => {
+                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
 
         const likedNews = await Promise.all(
-            (user?.likedPosts?.news || []).map(async (joyId) => {
-                const meme = await JoyModel.findOne({ _id: joyId }).exec();
+            (user?.likedPosts?.news || []).map(async (joy) => {
+                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
