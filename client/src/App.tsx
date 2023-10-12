@@ -75,7 +75,13 @@ function App({ model }: { model: CheerModel }) {
                     <Route path="/" element={<HomeView />} />
                     <Route
                         path="/jokes"
-                        element={<JokePresenter model={model} />}
+                        element={
+                            <JokePresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
                     />
                     <Route
                         path="/memes"

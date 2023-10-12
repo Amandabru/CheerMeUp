@@ -1,6 +1,7 @@
 import { DataStructure, JokeType } from '../../Types';
 import HeartIcon from '../../components/UI/HeartIcon';
 import { useState } from 'react';
+import { User } from '../../userModel';
 
 function JokeView({
     randomJokeText,
@@ -11,7 +12,9 @@ function JokeView({
     onNewJoke,
     likedJokes,
     isLiked,
-    categories
+    categories,
+    user,
+    showUserMustLogin
 }: {
     randomJokeText: string;
     randomJokeData: JokeType;
@@ -22,6 +25,8 @@ function JokeView({
     likedJokes: JokeType[];
     isLiked: Function;
     categories: string[];
+    user: User | null;
+    showUserMustLogin: Function;
 }) {
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
@@ -71,7 +76,9 @@ function JokeView({
                     <span
                         // TODO: Implement with model
                         onClick={() => {
-                            isLiked(randomJokeData);
+                            user
+                                ? isLiked(randomJokeData)
+                                : showUserMustLogin();
                         }}
                         style={{ visibility: hidden }}
                     >

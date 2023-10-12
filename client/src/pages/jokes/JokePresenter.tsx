@@ -8,8 +8,17 @@ import santa from '../../assets/audio/santa.mp3';
 import spooky from '../../assets/audio/spooky.mp3';
 import { CheerModel } from '../../models/model';
 import useModelProp from '../../hooks/useModelProp';
+import { User } from '../../userModel';
 
-function JokePresenter({ model }: { model: CheerModel }) {
+function JokePresenter({
+    model,
+    user,
+    directToLogin
+}: {
+    model: CheerModel;
+    user: User | null;
+    directToLogin: Function;
+}) {
     const [promise, setPromise] = useState<Promise<JokeType> | null>(null);
     const [joke, error] = usePromise(promise);
     const [jokeType, setJokeType] = useState<string[]>([]);
@@ -57,6 +66,8 @@ function JokePresenter({ model }: { model: CheerModel }) {
                 model.likeOrUnlikeJoke(joke);
             }}
             categories={categories}
+            user={user}
+            showUserMustLogin={() => directToLogin()}
         />
     );
 }
