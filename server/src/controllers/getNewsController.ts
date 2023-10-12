@@ -19,14 +19,14 @@ export async function getNewsController(
     res: Response,
     next: NextFunction
 ) {
-    const api_url =
-        'https://newsapi.org/v2/everything?q=heartwarming OR wholesome OR heartening OR heartfelt OR kindhearted OR cheerful OR touching OR virtous OR adorable NOT dead NOT sad NOT bad&apiKey=8fafe083ade7461a8b3cfa565c54a21d';
+    const api_url = `https://newsapi.org/v2/everything?q=heartwarming OR wholesome OR heartening OR heartfelt OR kindhearted OR cheerful OR touching OR virtous OR adorable NOT dead NOT sad NOT bad&apiKey=8fafe083ade7461a8b3cfa565c54a21d`;
 
     try {
         const response = await fetch(api_url);
         if (!response.ok) {
             throw createHttpError(response.status, response.statusText);
         }
+
         const data = await response.json();
 
         const filteredArticles = data.articles.map((article: NewsArticle) => ({

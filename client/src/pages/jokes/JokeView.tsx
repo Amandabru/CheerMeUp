@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 function JokeView({
     randomJoke,
+    onChristmasClick,
+    onSpookyClick,
     jokeType,
     onNewJoke,
     liked,
@@ -10,6 +12,8 @@ function JokeView({
     categories
 }: {
     randomJoke: string;
+    onChristmasClick: Function;
+    onSpookyClick: Function;
     jokeType: string[];
     onNewJoke: Function;
     liked: boolean;
@@ -37,7 +41,14 @@ function JokeView({
                             data-title={category}
                             className="btn"
                             value={category}
-                            key ={category}
+                            key={category}
+                            onClick={() => {
+                                if (category === 'christmas') {
+                                    onChristmasClick();
+                                } else if (category === 'spooky') {
+                                    onSpookyClick();
+                                }
+                            }}
                         />
                     ))}
                     <input
