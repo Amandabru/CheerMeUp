@@ -83,7 +83,9 @@ function Card({
                 <p className="ml-8 text-xs">
                     <span className="mr-5">{author}</span>
                     <span className="mr-5">{published}</span>
-                    <span className="mr-1">Read More:</span>
+                    {type === 'news' && (
+                        <span className="mr-1">Read More:</span>
+                    )}
                     <a
                         href={url}
                         className="text-blue-700 hover:text-black"
