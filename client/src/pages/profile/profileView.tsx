@@ -1,11 +1,11 @@
 import { User } from '../../userModel';
 import { getLikedJoys } from '../../api/user';
 
-interface ProfileViweProps {
+interface ProfileViewProps {
     loggedInUser: User | null;
 }
 
-function ProfileView({ loggedInUser }: ProfileViweProps) {
+function ProfileView({ loggedInUser }: ProfileViewProps) {
     const user = loggedInUser;
     return (
         <div>
