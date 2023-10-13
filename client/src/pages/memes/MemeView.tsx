@@ -6,6 +6,7 @@ function MemeView({
     memeData,
     onIncrement,
     onDecrement,
+    count,
     likedMemes,
     likePost,
     user,
@@ -14,6 +15,7 @@ function MemeView({
     memeData: MemeType[];
     onIncrement: () => void;
     onDecrement: () => void;
+    count: number;
     likedMemes: MemeType[];
     likePost: Function;
     user: User | null;
@@ -22,15 +24,18 @@ function MemeView({
     return (
         <div className="bg-orange-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
-                <button
-                    className="btn btn-accent mt-10 mr-10"
-                    onClick={() => {
-                        onDecrement();
-                        console.log('- pressed');
-                    }}
-                >
-                    -
-                </button>
+                {count ? (
+                    <button
+                        className="btn btn-accent mt-10 mr-10"
+                        onClick={() => {
+                            onDecrement();
+                            console.log('- pressed');
+                        }}
+                    >
+                        ←
+                    </button>
+                ) : null}
+
                 <button
                     className="btn btn-accent mt-10"
                     onClick={() => {
@@ -38,7 +43,7 @@ function MemeView({
                         console.log('+ pressed');
                     }}
                 >
-                    +
+                    →
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
@@ -68,12 +73,26 @@ function MemeView({
                     <div>No meme data available</div>
                 )}
             </section>
-            <div className="flex justify-center items-center !scroll-smooth">
-                <button className="btn btn-accent mt-10 hidden">
-                    More memes
+            <div className="flex justify-center items-center !scroll-smooth pb-5">
+                <button
+                    className="btn btn-accent mt-10 mr-10"
+                    onClick={() => {
+                        onDecrement();
+                        console.log('- pressed');
+                    }}
+                >
+                    ←
+                </button>
+                <button
+                    className="btn btn-accent mt-10"
+                    onClick={() => {
+                        onIncrement();
+                        console.log('+ pressed');
+                    }}
+                >
+                    →
                 </button>
             </div>
-            <div className="h-15"></div>
         </div>
     );
 

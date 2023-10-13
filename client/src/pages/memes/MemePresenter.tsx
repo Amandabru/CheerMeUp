@@ -93,6 +93,7 @@ function MemePresenter({
                 memeData={memeDataSlice(memeData, count)}
                 onIncrement={increment}
                 onDecrement={decrement}
+                count={count}
                 likedMemes={likedJoys.memes}
                 likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
                 user={user}
