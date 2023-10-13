@@ -22,22 +22,23 @@ function NavBarView({
                 src={logoImage}
                 alt={'Logo'}
             ></img>
-
-            <Link to="/">
-                <a className="normal-case text-2xl mr-10">CheerMeUp</a>
+            <Link to="/" className="btn btn-ghost normal-case text-xl">
+                CheerMeUp
             </Link>
-            <Link to="/news">
-                <a className="normal-case text-lg mr-10">News</a>
+            <Link to="/news" className="btn btn-ghost normal-case text-xl">
+                News
             </Link>
-            <Link to="/memes">
-                <a className="normal-case text-lg mr-10">Memes</a>
+            <Link to="/memes" className="btn btn-ghost normal-case text-xl">
+                Memes
             </Link>
-
-            <Link to="/jokes">
-                <a className="normal-case text-lg mr-10">Jokes</a>
+            <Link to="/jokes" className="btn btn-ghost normal-case text-xl">
+                Jokes
             </Link>
-            <Link to="/suggestions">
-                <a className="normal-case text-lg mr-10">Suggestions</a>
+            <Link
+                to="/suggestions"
+                className="btn btn-ghost normal-case text-xl"
+            >
+                Suggestions
             </Link>
             {loggedInUser ? (
                 <>

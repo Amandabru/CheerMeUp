@@ -6,10 +6,30 @@ const userSchema = new Schema({
     password: { type: String, required: true, select: false },
     profilePicture: { type: String, required: false },
     likedPosts: {
-        joke: [Schema.Types.ObjectId],
-        suggestion: [Schema.Types.ObjectId],
-        meme: [Schema.Types.ObjectId],
-        news: [Schema.Types.ObjectId]
+        joke: [
+            {
+                id: Schema.Types.ObjectId,
+                key: Number
+            }
+        ],
+        suggestion: [
+            {
+                id: Schema.Types.ObjectId,
+                key: String
+            }
+        ],
+        meme: [
+            {
+                id: Schema.Types.ObjectId,
+                key: String
+            }
+        ],
+        news: [
+            {
+                id: Schema.Types.ObjectId,
+                key: String
+            }
+        ]
     }
 });
 

@@ -5,6 +5,12 @@ import createHttpError from 'http-errors';
 import * as EmailValidator from 'email-validator';
 import { assertIsDefined } from '../utils/assertIsDefined';
 import JoyModel from '../models/Joys';
+import validate from 'deep-email-validator';
+import { DataStructure } from '../../../client/src/Types';
+
+async function isEmailValid(email: string) {
+    return validate(email);
+}
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
     try {
@@ -46,9 +52,9 @@ export const signUp: RequestHandler<
                 'Username already taken. Please choose a different one.'
             );
         }
-        const validatedEmail = EmailValidator.validate(email);
-        if (!validatedEmail) {
-            throw createHttpError(400, 'Invalid e-mail');
+        const { valid, reason } = await isEmailValid(email);
+        if (!valid) {
+            throw createHttpError(400, `Invalid email. Reason: ${reason}`);
         }
         const existingEmail = await UserModel.findOne({ email: email }).exec();
         if (existingEmail) {
@@ -124,24 +130,22 @@ export const getLikedJoys: RequestHandler = async (req, res, next) => {
             _id: authenticatedUserId
         }).exec();
         const likedMemes = await Promise.all(
-            (user?.likedPosts?.meme || []).map(async (joyId) => {
-                console.log('here2');
-                const meme = await JoyModel.findOne({ _id: joyId }).exec();
-                console.log(meme);
+            (user?.likedPosts?.meme || []).map(async (joy) => {
+                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
 
         const likedJokes = await Promise.all(
-            (user?.likedPosts?.joke || []).map(async (joyId) => {
-                const meme = await JoyModel.findOne({ _id: joyId }).exec();
+            (user?.likedPosts?.joke || []).map(async (joy) => {
+                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
 
         const likedNews = await Promise.all(
-            (user?.likedPosts?.news || []).map(async (joyId) => {
-                const meme = await JoyModel.findOne({ _id: joyId }).exec();
+            (user?.likedPosts?.news || []).map(async (joy) => {
+                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );

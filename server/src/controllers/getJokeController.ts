@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import fetch from 'node-fetch';
+import UserModel from '../models/User';
 
 export async function getJokeController(
     req: Request,
@@ -24,8 +25,22 @@ export async function getJokeController(
                 data.type === 'single'
                     ? data.joke
                     : data.setup + '\n' + data.delivery,
-            apiId: data.id
+            apiId: data.id,
+            liked: false,
         };
+
+        if(!req.session.userId){
+            res.status(200).json(selectedData);
+            return;
+        }
+
+        const likedByUser = await UserModel.findOne(
+            { _id: req.session.userId,
+            'likedPosts.joke.key': selectedData.apiId }
+            ).exec();
+
+        selectedData.liked = likedByUser ? true : false;
+
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);
