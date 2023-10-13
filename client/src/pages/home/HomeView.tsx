@@ -21,7 +21,6 @@ function HomeView({
     likeJoke: Function;
     showUserMustLogin: Function;
 }) {
-    console.log(likedJoys);
     return (
         <div className="bg-pink-300 text-black h-full w-full fixed">
             <div>

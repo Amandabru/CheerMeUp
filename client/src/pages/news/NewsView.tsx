@@ -19,8 +19,6 @@ function NewsView({
     user: User | null;
     showUserMustLogin: Function;
 }) {
-    console.log('data', newsData);
-    console.log('liked', likedNews);
     return (
         <div className="bg-blue-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center items-center !scroll-smooth">
