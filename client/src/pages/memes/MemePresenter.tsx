@@ -4,14 +4,25 @@ import { useState, useEffect } from 'react';
 import { MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
 import promiseNoData from '../../PromiseNoData';
+import { User } from '../../userModel';
+import useModelProp from '../../hooks/useModelProp';
 
-function MemePresenter({ model }: { model: CheerModel }) {
+function MemePresenter({
+    model,
+    user,
+    directToLogin
+}: {
+    model: CheerModel;
+    user: User | null;
+    directToLogin: Function;
+}) {
     const [memeData, setMemeData] = useState<MemeType[]>([]);
     const storedCount = localStorage.getItem('memeCount');
     const initialCount = storedCount ? parseInt(storedCount) : 0;
     const [count, setCount] = useState<number>(initialCount);
 
     const [error, setError] = useState<Error | null>(null);
+    const likedJoys = useModelProp(model, 'likedJoys');
 
     const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
 
@@ -82,6 +93,10 @@ function MemePresenter({ model }: { model: CheerModel }) {
                 memeData={memeDataSlice(memeData, count)}
                 onIncrement={increment}
                 onDecrement={decrement}
+                likedMemes={likedJoys.memes}
+                likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
+                user={user}
+                showUserMustLogin={() => directToLogin()}
             />
         )
     );

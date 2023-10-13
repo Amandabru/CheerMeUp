@@ -90,7 +90,13 @@ function App({ model }: { model: CheerModel }) {
                     />
                     <Route
                         path="/memes"
-                        element={<MemePresenter model={model} />}
+                        element={
+                            <MemePresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
                     />
                     <Route
                         path="/news"

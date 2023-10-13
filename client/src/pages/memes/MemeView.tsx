@@ -1,18 +1,23 @@
-import { useState } from 'react';
-import RandomMemeView from './RandomMemeView';
-import BestMemeView from './BestMemeView';
 import Card from '../../components/Card';
-import testMemes from './TestMemes';
 import { MemeType } from '../../Types';
+import { User } from '../../userModel';
 
 function MemeView({
     memeData,
     onIncrement,
-    onDecrement
+    onDecrement,
+    likedMemes,
+    likePost,
+    user,
+    showUserMustLogin
 }: {
     memeData: MemeType[];
     onIncrement: () => void;
     onDecrement: () => void;
+    likedMemes: MemeType[];
+    likePost: Function;
+    user: User | null;
+    showUserMustLogin: Function;
 }) {
     console.log(memeData);
     return (
@@ -45,6 +50,18 @@ function MemeView({
                                 type="meme"
                                 key={index}
                                 image={memeObject.url}
+                                isLiked={
+                                    likedMemes.find(
+                                        (meme) => meme.url === memeObject.url
+                                    )
+                                        ? true
+                                        : false
+                                }
+                                handleLike={() => {
+                                    user
+                                        ? likePost(memeObject)
+                                        : showUserMustLogin();
+                                }}
                             ></Card>
                         );
                     })
