@@ -25,22 +25,13 @@ export async function getJokeController(
                 data.type === 'single'
                     ? data.joke
                     : data.setup + '\n' + data.delivery,
-            apiId: data.id,
-            liked: false,
+            apiId: data.id
         };
 
-        if(!req.session.userId){
+        if (!req.session.userId) {
             res.status(200).json(selectedData);
             return;
         }
-
-        const likedByUser = await UserModel.findOne(
-            { _id: req.session.userId,
-            'likedPosts.joke.key': selectedData.apiId }
-            ).exec();
-
-        selectedData.liked = likedByUser ? true : false;
-
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);

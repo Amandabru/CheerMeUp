@@ -22,20 +22,23 @@ function NavBarView({
                 src={logoImage}
                 alt={'Logo'}
             ></img>
-            <Link to="/">
-                <a className="btn btn-ghost normal-case text-xl">CheerMeUp</a>
+            <Link to="/" className="btn btn-ghost normal-case text-xl">
+                CheerMeUp
             </Link>
-            <Link to="/news">
-                <a className="btn btn-ghost normal-case text-xl">News</a>
+            <Link to="/news" className="btn btn-ghost normal-case text-xl">
+                News
             </Link>
-            <Link to="/memes">
-                <a className="btn btn-ghost normal-case text-xl">Memes</a>
+            <Link to="/memes" className="btn btn-ghost normal-case text-xl">
+                Memes
             </Link>
-            <Link to="/jokes">
-                <a className="btn btn-ghost normal-case text-xl">Jokes</a>
+            <Link to="/jokes" className="btn btn-ghost normal-case text-xl">
+                Jokes
             </Link>
-            <Link to="/suggestions">
-                <a className="btn btn-ghost normal-case text-xl">Suggestions</a>
+            <Link
+                to="/suggestions"
+                className="btn btn-ghost normal-case text-xl"
+            >
+                Suggestions
             </Link>
             <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

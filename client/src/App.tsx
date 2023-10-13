@@ -13,6 +13,7 @@ import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
+import HomePresenter from './pages/home/HomePresenter';
 import ProfilePresenter from './pages/profile/ProfilePresenter';
 
 function App({ model }: { model: CheerModel }) {
@@ -78,7 +79,12 @@ function App({ model }: { model: CheerModel }) {
             {loggedInUser && <AnimationPresenter user={loggedInUser} />}
             <div>
                 <Routes>
-                    <Route path="/" element={<HomeView />} />
+                    <Route
+                        path="/"
+                        element={
+                            <HomePresenter model={model} user={loggedInUser} />
+                        }
+                    />
                     <Route
                         path="/jokes"
                         element={
