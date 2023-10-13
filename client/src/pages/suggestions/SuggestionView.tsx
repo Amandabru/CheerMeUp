@@ -35,26 +35,28 @@ function SuggestionView({
                     </label>
                 </div>
 
-                <select
-                    className="select select-bordered select-sm bg-violet-200"
-                    value={activityType}
-                    onChange={(e) => {
-                        const newActivityType = e.target.value;
-                        onNewSuggestion(newActivityType);
-                        console.log(
-                            'onchange ' + newActivityType + ' ' + isToggled
-                        );
-                    }}
-                >
-                    <option value="" disabled>
-                        Type of Activity
-                    </option>
-                    {options.map(({ value, label }, index) => (
-                        <option value={value} key={index}>
-                            {label}
+                <div className="text-left mb-2">
+                    <select
+                        className="select select-bordered select-sm bg-violet-200"
+                        value={activityType}
+                        onChange={(e) => {
+                            const newActivityType = e.target.value;
+                            onNewSuggestion(newActivityType);
+                            console.log(
+                                'onchange ' + newActivityType + ' ' + isToggled
+                            );
+                        }}
+                    >
+                        <option value="" disabled>
+                            Type of Activity
                         </option>
-                    ))}
-                </select>
+                        {options.map(({ value, label }, index) => (
+                            <option value={value} key={index}>
+                                {label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
                 <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
                     <span>{randomSuggestion}</span>
