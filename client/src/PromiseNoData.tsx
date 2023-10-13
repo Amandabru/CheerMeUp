@@ -34,7 +34,9 @@ function promiseNoData(
         (!data || (Array.isArray(data) && data.length === 0)) &&
         !error
     ) {
-        return <span className="loading loading-dots loading-md"></span>;
+        return (
+            <span className="loading loading-dots loading-md top-1/2 left-1/2 absolute"></span>
+        );
     } else if (!data && error) {
         return <span> {error.message} </span>;
     }
