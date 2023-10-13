@@ -30,7 +30,7 @@
 .speechBubble {
     position: absolute;
     top: -40%;
-    left: 80%;
+    left: 100%;
     width: 200px;
     opacity: 0;
     animation: fadeInOut 2s;

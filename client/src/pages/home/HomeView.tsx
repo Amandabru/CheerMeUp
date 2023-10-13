@@ -1,6 +1,17 @@
+import { DataBaseType, DataStructure } from '../../Types';
 import Card from '../../components/Card';
+import { User } from '../../userModel';
 
-function HomeView() {
+function HomeView({
+    user,
+    popularJoys,
+    likedJoys
+}: {
+    user: User | null;
+    popularJoys: DataBaseType[];
+    likedJoys: DataStructure;
+}) {
+    console.log(likedJoys);
     return (
         <div className="bg-pink-300 text-black h-full w-full fixed">
             <div>
@@ -9,18 +20,12 @@ function HomeView() {
                     yet so im moving on to the meme page
                 </h1>
                 <section className="m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {/* First Card*/}
-                    <Card image="/src/images/shoe.jpeg" />
-                    {/* Second Card*/}
+                    {/* <Card image="/src/images/shoe.jpeg" />
                     <Card image="/src/images/cute.avif" />
-                    {/* Third Card*/}
                     <Card image="/src/images/queen.png" />
-                    {/* First Card*/}
                     <Card image="/src/images/shoe.jpeg" />
-                    {/* Second Card*/}
                     <Card image="/src/images/cute.avif" />
-                    {/* Third Card*/}
-                    <Card image="/src/images/queen.png" />
+                    <Card image="/src/images/queen.png" /> */}
                 </section>
             </div>
         </div>
