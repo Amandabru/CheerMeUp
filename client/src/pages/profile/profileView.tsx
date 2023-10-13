@@ -8,7 +8,7 @@ interface ProfileViewProps {
 function ProfileView({ loggedInUser }: ProfileViewProps) {
     const user = loggedInUser;
     return (
-        <div>
+        <div className="bg-red-300 text-black min-h-screen bg-fixed">
             <h1>Hi {user?.username}</h1>
         </div>
     );

@@ -13,6 +13,7 @@ import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
+import ProfilePresenter from './pages/profile/profilePresenter';
 
 function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -112,7 +113,15 @@ function App({ model }: { model: CheerModel }) {
                         path="/suggestions"
                         element={<SuggestionPresenter />}
                     />
-                    <Route path="/profile" element={<SuggestionPresenter />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProfilePresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                            />
+                        }
+                    />
                 </Routes>
             </div>
             <SignUpPresenter
