@@ -1,8 +1,20 @@
-import { MemeType, NewsType, JokeType, SuggestionType } from './Types';
+import {
+    MemeType,
+    NewsType,
+    JokeType,
+    SuggestionType,
+    DataBaseType
+} from './Types';
 
 function promiseNoData(
     promise: Promise<
-        string | MemeType[] | NewsType[] | JokeType | SuggestionType | null
+        | string
+        | MemeType[]
+        | NewsType[]
+        | JokeType
+        | SuggestionType
+        | DataBaseType[]
+        | null
     > | null,
     data:
         | string
@@ -11,6 +23,7 @@ function promiseNoData(
         | NewsType[]
         | JokeType
         | SuggestionType
+        | DataBaseType[]
         | null,
     error: Error | null,
     noDataMessage: string
