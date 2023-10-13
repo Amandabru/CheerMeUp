@@ -1,12 +1,12 @@
-function SuggestionView({
-    randomSuggestion,
+function ActivityView({
+    randomActivity,
     isToggled,
     onToggle,
     options,
     activityType,
-    onNewSuggestion
+    onNewActivity
 }: {
-    randomSuggestion: string | React.ReactElement | undefined;
+    randomActivity: string | React.ReactElement | undefined;
     isToggled: boolean;
     onToggle: Function;
     options: {
@@ -14,7 +14,7 @@ function SuggestionView({
         label: string;
     }[];
     activityType: string;
-    onNewSuggestion: Function;
+    onNewActivity: Function;
 }) {
     return (
         <div className="bg-violet-300 text-black h-full w-full fixed">
@@ -41,7 +41,7 @@ function SuggestionView({
                         value={activityType}
                         onChange={(e) => {
                             const newActivityType = e.target.value;
-                            onNewSuggestion(newActivityType);
+                            onNewActivity(newActivityType);
                             console.log(
                                 'onchange ' + newActivityType + ' ' + isToggled
                             );
@@ -59,22 +59,22 @@ function SuggestionView({
                 </div>
 
                 <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
-                    <span>{randomSuggestion}</span>
+                    <span>{randomActivity}</span>
                 </div>
                 <button
                     className="btn mt-5 transition-transform min-w-fit"
                     onClick={() => {
-                        onNewSuggestion(activityType);
+                        onNewActivity(activityType);
                         console.log(
                             'onclick ' + activityType + ' ' + isToggled
                         );
                     }}
                 >
-                    Get new suggestion
+                    Get new activity
                 </button>
             </div>
         </div>
     );
 }
 
-export default SuggestionView;
+export default ActivityView;

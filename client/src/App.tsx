@@ -1,13 +1,12 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import HomeView from './pages/home/HomeView';
 import NavBarPresenter from './components/NavBar/NavBarPresenter';
 import { useState, useEffect } from 'react';
 import { User } from './userModel';
 import * as userApi from './api/user';
 import LoginPresenter from './components/Login/LoginPresenter';
 import SignUpPresenter from './components/SignUp/SignUpPresenter';
-import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
+import ActivityPresenter from './pages/activities/ActivityPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
@@ -60,7 +59,7 @@ function App({ model }: { model: CheerModel }) {
         } else {
             model.setLikedJoys({
                 jokes: [],
-                suggestions: [],
+                activities: [],
                 memes: [],
                 news: []
             });
@@ -118,11 +117,8 @@ function App({ model }: { model: CheerModel }) {
                             />
                         }
                     />
-                    <Route
-                        path="/suggestions"
-                        element={<SuggestionPresenter />}
-                    />
-                    <Route path="/profile" element={<SuggestionPresenter />} />
+                    <Route path="/activities" element={<ActivityPresenter />} />
+                    <Route path="/profile" element={<ActivityPresenter />} />
                 </Routes>
             </div>
             <SignUpPresenter

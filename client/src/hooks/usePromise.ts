@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { JokeType, SuggestionType } from '../Types';
+import { JokeType, ActivityType } from '../Types';
 
 // TODO: any
 
 function usePromise<T>(promise: Promise<T> | null): any {
-    const [data, setData] = useState<SuggestionType | null>(null);
+    const [data, setData] = useState<ActivityType | null>(null);
     const [error, setError] = useState<Error | null>(null);
     useEffect(
         function () {

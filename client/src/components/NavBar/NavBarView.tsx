@@ -35,10 +35,10 @@ function NavBarView({
                 Jokes
             </Link>
             <Link
-                to="/suggestions"
+                to="/activities"
                 className="btn btn-ghost normal-case text-xl"
             >
-                Suggestions
+                Activities
             </Link>
             {loggedInUser ? (
                 <>

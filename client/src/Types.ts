@@ -1,4 +1,4 @@
-export type SuggestionType = {
+export type ActivityType = {
     text: string;
 };
 
@@ -38,7 +38,7 @@ export type JoyToUpdateType = {
 
 export type DataStructure = {
     jokes: Array<JokeType>;
-    suggestions: Array<SuggestionType>;
+    activities: Array<ActivityType>;
     memes: Array<MemeType>;
     news: Array<NewsType>;
 };
