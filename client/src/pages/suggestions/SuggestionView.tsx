@@ -18,7 +18,7 @@ function SuggestionView({
 }) {
     return (
         <div className="bg-violet-300 text-black h-full w-full fixed">
-            <div className="absolute top-[20%] left-1/4 w-144">
+            <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div className="form-control w-fit">
                     <label className="label cursor-pointer">
                         <span>Alone</span>
@@ -35,34 +35,30 @@ function SuggestionView({
                     </label>
                 </div>
 
-                <div>
-                    <select
-                        className="select select-bordered select-sm w-full max-w-xs bg-violet-200"
-                        value={activityType}
-                        onChange={(e) => {
-                            const newActivityType = e.target.value;
-                            onNewSuggestion(newActivityType);
-                            console.log(
-                                'onchange ' + newActivityType + ' ' + isToggled
-                            );
-                        }}
-                    >
-                        <option value="" disabled>
-                            Type of Activity
+                <select
+                    className="select select-bordered select-sm bg-violet-200"
+                    value={activityType}
+                    onChange={(e) => {
+                        const newActivityType = e.target.value;
+                        onNewSuggestion(newActivityType);
+                        console.log(
+                            'onchange ' + newActivityType + ' ' + isToggled
+                        );
+                    }}
+                >
+                    <option value="" disabled>
+                        Type of Activity
+                    </option>
+                    {options.map(({ value, label }, index) => (
+                        <option value={value} key={index}>
+                            {label}
                         </option>
-                        {options.map(({ value, label }, index) => (
-                            <option value={value} key={index}>
-                                {label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </div>
+                    ))}
+                </select>
 
-            <div className="absolute top-1/3 left-1/4 w-144 min-w-fit m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100">
-                <span>{randomSuggestion}</span>
-            </div>
-            <div className="absolute top-[50%] left-1/4 w-144 text-center">
+                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
+                    <span>{randomSuggestion}</span>
+                </div>
                 <button
                     className="btn mt-5 transition-transform min-w-fit"
                     onClick={() => {
