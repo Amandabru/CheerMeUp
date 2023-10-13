@@ -6,7 +6,7 @@ function SuggestionView({
     activityType,
     onNewSuggestion
 }: {
-    randomSuggestion: string;
+    randomSuggestion: string | React.ReactElement | undefined;
     isToggled: boolean;
     onToggle: Function;
     options: {
@@ -18,7 +18,7 @@ function SuggestionView({
 }) {
     return (
         <div className="bg-violet-300 text-black h-full w-full fixed">
-            <div className="absolute top-[20%] left-1/4 w-1/2">
+            <div className="absolute top-[20%] left-1/4 w-144">
                 <div className="form-control w-fit">
                     <label className="label cursor-pointer">
                         <span>Alone</span>
@@ -59,12 +59,12 @@ function SuggestionView({
                 </div>
             </div>
 
-            <div className="absolute top-1/3 left-1/4 w-1/2 min-w-fit m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100">
-                {randomSuggestion}
+            <div className="absolute top-1/3 left-1/4 w-144 min-w-fit m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100">
+                <span>{randomSuggestion}</span>
             </div>
-            <div className="absolute top-[50%] left-1/4 w-1/2 text-center">
+            <div className="absolute top-[50%] left-1/4 w-144 text-center">
                 <button
-                    className="btn transition-transform min-w-fit"
+                    className="btn mt-5 transition-transform min-w-fit"
                     onClick={() => {
                         onNewSuggestion(activityType);
                         console.log(
