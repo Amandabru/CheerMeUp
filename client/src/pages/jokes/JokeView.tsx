@@ -32,7 +32,10 @@ function JokeView({
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
     return (
-        <div className="bg-lime-200	text-black h-full w-full fixed">
+        <div
+            className="bg-green-200 text-black h-full w-full fixed
+        dark:bg-emerald-950"
+        >
             <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div
                     className="btn-group mb-5"
@@ -72,7 +75,10 @@ function JokeView({
                         ]}
                     />
                 </div>
-                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-lime-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
+                <div
+                    className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-green-100 h-40 w-full overflow-x-auto flex items-center justify-center relative 
+                dark:bg-emerald-900 dark:text-gray-300 dark:border-emerald-800"
+                >
                     <span
                         onClick={() => {
                             user

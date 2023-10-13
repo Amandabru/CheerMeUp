@@ -17,10 +17,16 @@ function SuggestionView({
     onNewSuggestion: Function;
 }) {
     return (
-        <div className="bg-violet-300 text-black h-full w-full fixed">
-            <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
-                <div className="form-control w-fit">
-                    <label className="label cursor-pointer">
+        <div
+            className="bg-violet-300 text-black h-full w-full fixed
+        dark:bg-indigo-950"
+        >
+            <div
+                className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144
+            "
+            >
+                <div className="form-control w-fit ">
+                    <label className="label cursor-pointer dark:text-gray-300 ">
                         <span>Alone</span>
                         <input
                             type="checkbox"
@@ -37,7 +43,8 @@ function SuggestionView({
 
                 <div className="text-left mb-2">
                     <select
-                        className="select select-bordered select-sm bg-violet-200"
+                        className="select select-bordered select-sm bg-violet-200
+                        dark:bg-indigo-900 dark:text-gray-300 "
                         value={activityType}
                         onChange={(e) => {
                             const newActivityType = e.target.value;
@@ -58,7 +65,10 @@ function SuggestionView({
                     </select>
                 </div>
 
-                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
+                <div
+                    className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative
+                 dark:bg-indigo-900 dark:text-gray-300 dark:border-indigo-800"
+                >
                     <span>{randomSuggestion}</span>
                 </div>
                 <button

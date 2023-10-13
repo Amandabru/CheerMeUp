@@ -30,5 +30,19 @@ export default {
             }
         }
     },
-    plugins: [require('daisyui')]
+    plugins: [require('daisyui')],
+    daisyui: {
+        themes: [
+            'light',
+            {
+                dark: {
+                    ...require('daisyui/src/theming/themes')[
+                        '[data-theme=dark]'
+                    ],
+                    primary: 'mediumgreen',
+                    'primary-focus': 'mediumgreen'
+                }
+            }
+        ]
+    }
 };
