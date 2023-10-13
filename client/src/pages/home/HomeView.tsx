@@ -2,7 +2,7 @@ import Card from '../../components/Card';
 
 function HomeView() {
     return (
-        <div className="bg-pink-300 text-black h-full w-full fixed">
+        <body className="bg-pink-300 text-black h-full w-full fixed">
             <div>
                 <h1>
                     Home page in progress, not sure how to structure this page
@@ -23,7 +23,7 @@ function HomeView() {
                     <Card image="/src/images/queen.png" />
                 </section>
             </div>
-        </div>
+        </body>
     );
 }
 
