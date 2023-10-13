@@ -4,28 +4,80 @@ import { User } from '../../userModel';
 
 function HomeView({
     user,
-    popularJoys,
-    likedJoys
+    mostLikedJoys,
+    recentlyLikedJoys,
+    likedJoys,
+    likeMeme,
+    likeNews,
+    likeJoke,
+    showUserMustLogin
 }: {
     user: User | null;
-    popularJoys: DataBaseType[];
+    mostLikedJoys: DataBaseType[];
+    recentlyLikedJoys: DataBaseType[];
     likedJoys: DataStructure;
+    likeMeme: Function;
+    likeNews: Function;
+    likeJoke: Function;
+    showUserMustLogin: Function;
 }) {
     console.log(likedJoys);
     return (
         <div className="bg-pink-300 text-black h-full w-full fixed">
             <div>
-                <h1>
-                    Home page in progress, not sure how to structure this page
-                    yet so im moving on to the meme page
-                </h1>
                 <section className="m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {/* <Card image="/src/images/shoe.jpeg" />
-                    <Card image="/src/images/cute.avif" />
-                    <Card image="/src/images/queen.png" />
-                    <Card image="/src/images/shoe.jpeg" />
-                    <Card image="/src/images/cute.avif" />
-                    <Card image="/src/images/queen.png" /> */}
+                    <div>
+                        {'Most Liked Joys'}
+                        {mostLikedJoys.map((joy, index) => {
+                            return (
+                                //Return the card here instead, keep the functionality for liking
+                                <div
+                                    onClick={() => {
+                                        if (user) {
+                                            if (joy.type === 'meme') {
+                                                likeMeme(joy.content);
+                                            } else if (joy.type === 'news') {
+                                                likeNews(joy.content);
+                                            } else {
+                                                likeJoke(joy.content);
+                                            }
+                                        } else {
+                                            showUserMustLogin();
+                                        }
+                                    }}
+                                >
+                                    {'Likeable Incognito Joy'}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </section>
+                <section className="m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div>
+                        {'Recently Liked Joys'}
+                        {recentlyLikedJoys.map((joy, index) => {
+                            return (
+                                //Return the card here instead, keep the functionality for liking
+                                <div
+                                    onClick={() => {
+                                        if (user) {
+                                            if (joy.type === 'meme') {
+                                                likeMeme(joy.content);
+                                            } else if (joy.type === 'news') {
+                                                likeNews(joy.content);
+                                            } else {
+                                                likeJoke(joy.content);
+                                            }
+                                        } else {
+                                            showUserMustLogin();
+                                        }
+                                    }}
+                                >
+                                    {'Likeable Incognito Joy'}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </section>
             </div>
         </div>

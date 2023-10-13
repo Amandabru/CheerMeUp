@@ -31,7 +31,13 @@ export async function getNewsController(
 
         const filteredArticles = data.articles.map((article: NewsArticle) => ({
             type: 'news',
-            ...article
+            source: article.source.name,
+            author: article.author,
+            title: article.title,
+            text: article.description,
+            url: article.url,
+            urlToImage: article.urlToImage,
+            publishedAt: article.publishedAt
         }));
 
         if (!req.session.userId) {

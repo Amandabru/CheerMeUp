@@ -7,7 +7,7 @@ import { getJokeController } from './controllers/getJokeController';
 import { getSuggestionsController } from './controllers/getSuggestionsController';
 import { postLikeController } from './controllers/postLikeController';
 import * as UserController from './controllers/userController';
-import { getPopularController } from './controllers/getPopularController';
+import { getPopularController } from './controllers/getPopularController2';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';

@@ -5,18 +5,20 @@ const contentSchema = new Schema({
     text: String,
     apiId: Number,
     url: String,
-    image: String,
-})
+    source: String,
+    author: String,
+    urlToImage: String,
+    publishedAt: String
+});
 
 const JoySchema = new Schema({
-    type: {type: String, required: true},
-    likes: {type: Number, required: true},
+    type: { type: String, required: true },
+    likes: { type: Number, required: true },
     lastLiked: {
         type: Date,
-        default: () => Date.now(),
+        default: () => Date.now()
     },
-    content: contentSchema,
-
+    content: { type: contentSchema, required: true }
 });
 
 type Joy = InferSchemaType<typeof JoySchema>;

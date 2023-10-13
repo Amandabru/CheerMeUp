@@ -32,7 +32,14 @@ export async function postLikeController(
             text: likedJoy.hasOwnProperty('text') ? likedJoy.text : '',
             apiId: likedJoy.hasOwnProperty('apiId') ? likedJoy.apiId : 0,
             url: likedJoy.hasOwnProperty('url') ? likedJoy.url : '',
-            image: likedJoy.hasOwnProperty('image') ? likedJoy.image : ''
+            source: likedJoy.hasOwnProperty('source') ? likedJoy.source : '',
+            author: likedJoy.hasOwnProperty('author') ? likedJoy.author : '',
+            urlToImage: likedJoy.hasOwnProperty('urlToImage')
+                ? likedJoy.urlToImage
+                : '',
+            publishedAt: likedJoy.hasOwnProperty('publishedAt')
+                ? likedJoy.publishedAt
+                : ''
         }
     })
         .then(async (createdJoy) => {

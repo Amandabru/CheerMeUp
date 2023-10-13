@@ -81,7 +81,11 @@ function App({ model }: { model: CheerModel }) {
                     <Route
                         path="/"
                         element={
-                            <HomePresenter model={model} user={loggedInUser} />
+                            <HomePresenter
+                                model={model}
+                                user={loggedInUser}
+                                directToLogin={() => showModal('login_modal')}
+                            />
                         }
                     />
                     <Route
