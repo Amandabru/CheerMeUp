@@ -33,14 +33,25 @@ export default {
     plugins: [require('daisyui')],
     daisyui: {
         themes: [
-            'light',
             {
+                light: {
+                    ...require('daisyui/src/theming/themes')[
+                        '[data-theme=light]'
+                    ],
+                    '.navbar': {
+                        color: '#d0d0d0',
+                        'background-color': '#202020'
+                    }
+                },
                 dark: {
                     ...require('daisyui/src/theming/themes')[
                         '[data-theme=dark]'
                     ],
                     primary: 'mediumgreen',
-                    'primary-focus': 'mediumgreen'
+                    'primary-focus': 'mediumgreen',
+                    '.navbar': {
+                        'background-color': '#202020'
+                    }
                 }
             }
         ]
