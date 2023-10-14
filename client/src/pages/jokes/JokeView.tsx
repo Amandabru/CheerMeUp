@@ -104,7 +104,7 @@ function JokeView({
                 <button
                     className="btn mt-5 transition-transform min-w-fit"
                     onClick={() => {
-                        if (jokeType != null) {
+                        if (jokeType.length) {
                             onNewJoke([jokeType]);
                             setVisability('visible');
                         }

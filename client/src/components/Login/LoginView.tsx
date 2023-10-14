@@ -30,22 +30,24 @@ const LoginView = ({
                 {errorText && <div>{errorText}</div>}
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
-                        name="usernameLogin"
+                        id="LoginUsername"
+                        name="username"
                         label="Username"
                         type="text"
                         placeholder="Username"
                         register={register}
                         registerOptions={{ required: 'Required' }}
-                        errors={errors.usernameLogin}
+                        errors={errors.username}
                     ></TextInputField>
                     <TextInputField
-                        name="passwordSignup"
+                        id="LoginPassword"
+                        name="password"
                         label="Password"
                         type="password"
                         placeholder="Password"
                         register={register}
                         registerOptions={{ required: 'Required' }}
-                        errors={errors.passwordLogin}
+                        errors={errors.password}
                     ></TextInputField>
                     <button
                         className="btn btn-primary"

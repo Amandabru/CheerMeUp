@@ -67,20 +67,20 @@ function NavBarView({
                         <>
                             <li>
                                 <Link to="/profile">
-                                    <a className="justify-between">Profile</a>
+                                    <p className="justify-between">Profile</p>
                                 </Link>
                                 <Link to="/">
-                                    <a onClick={onLogoutClicked}>Logout</a>
+                                    <p onClick={onLogoutClicked}>Logout</p>
                                 </Link>
                             </li>
                         </>
                     ) : (
                         <>
                             <li>
-                                <a onClick={onSignUpClicked}>Sign Up</a>
+                                <p onClick={onSignUpClicked}>Sign Up</p>
                             </li>
                             <li>
-                                <a onClick={onLoginClicked}>Log In</a>
+                                <p onClick={onLoginClicked}>Log In</p>
                             </li>
                         </>
                     )}

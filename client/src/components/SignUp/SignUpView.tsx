@@ -30,15 +30,17 @@ const SignUpView = ({
                 <p>{errorText}</p>
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
-                        name="usernameSignup"
+                        id="SignupUsername"
+                        name="username"
                         label="Username"
                         type="text"
                         placeholder="Username"
                         register={register}
                         registerOptions={{ required: 'Required' }}
-                        error={errors.usernameSignup}
+                        error={errors.username}
                     />
                     <TextInputField
+                        id="SignupEmail"
                         name="email"
                         label="Email"
                         type="email"
@@ -48,13 +50,14 @@ const SignUpView = ({
                         error={errors.email}
                     />
                     <TextInputField
-                        name="passwordSignup"
+                        id="SignupPassword"
+                        name="password"
                         label="Password"
                         type="password"
                         placeholder="Password"
                         register={register}
                         registerOptions={{ required: 'Required' }}
-                        error={errors.passwordSignup}
+                        error={errors.password}
                     />
                     <button
                         className="btn btn-primary"
