@@ -4,10 +4,10 @@ import { User } from '../../userModel';
 import promiseNoData from '../../PromiseNoData';
 import useModelProp from '../../hooks/useModelProp';
 import { useState, useEffect } from 'react';
-import { MemeType } from '../../Types';
+import { DataStructure, MemeType } from '../../Types';
 
 function ProfilePresenter({ model, user }: { model: CheerModel; user: User }) {
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
 
     return (
         <ProfileView
