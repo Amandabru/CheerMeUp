@@ -21,59 +21,69 @@ function MemeView({
 }) {
     return (
         <div className="bg-orange-300 text-black min-h-screen bg-fixed">
-            <div className="flex justify-center items-center !scroll-smooth">
-                <button
-                    className="btn btn-accent mt-10 mr-10"
-                    onClick={() => {
-                        onDecrement();
-                        console.log('- pressed');
-                    }}
-                >
-                    -
-                </button>
-                <button
-                    className="btn btn-accent mt-10"
-                    onClick={() => {
-                        onIncrement();
-                        console.log('+ pressed');
-                    }}
-                >
-                    +
-                </button>
+            <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                {' '}
+                Craving a Smile?
+            </h1>
+            <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                Memes may brighten your day!
+            </h2>
+            <div className="absolute top-[28%] bg-orange-300 ">
+                <div className="flex justify-center items-center !scroll-smooth">
+                    <button
+                        className="btn btn-accent mt-10 mr-10"
+                        onClick={() => {
+                            onDecrement();
+                            console.log('- pressed');
+                        }}
+                    >
+                        -
+                    </button>
+                    <button
+                        className="btn btn-accent mt-10"
+                        onClick={() => {
+                            onIncrement();
+                            console.log('+ pressed');
+                        }}
+                    >
+                        +
+                    </button>
+                </div>
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+                    {memeData ? (
+                        memeData.map((memeObject, index) => {
+                            return (
+                                <Card
+                                    type="meme"
+                                    key={index}
+                                    image={memeObject.url}
+                                    isLiked={
+                                        likedMemes.find(
+                                            (meme) =>
+                                                meme.url === memeObject.url
+                                        )
+                                            ? true
+                                            : false
+                                    }
+                                    handleLike={() => {
+                                        user
+                                            ? likePost(memeObject)
+                                            : showUserMustLogin();
+                                    }}
+                                ></Card>
+                            );
+                        })
+                    ) : (
+                        <div>No meme data available</div>
+                    )}
+                </section>
+                <div className="flex justify-center items-center !scroll-smooth">
+                    <button className="btn btn-accent mt-10 hidden">
+                        More memes
+                    </button>
+                </div>
+                <div className="h-15"></div>
             </div>
-            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
-                {memeData ? (
-                    memeData.map((memeObject, index) => {
-                        return (
-                            <Card
-                                type="meme"
-                                key={index}
-                                image={memeObject.url}
-                                isLiked={
-                                    likedMemes.find(
-                                        (meme) => meme.url === memeObject.url
-                                    )
-                                        ? true
-                                        : false
-                                }
-                                handleLike={() => {
-                                    user
-                                        ? likePost(memeObject)
-                                        : showUserMustLogin();
-                                }}
-                            ></Card>
-                        );
-                    })
-                ) : (
-                    <div>No meme data available</div>
-                )}
-            </section>
-            <div className="flex justify-center items-center !scroll-smooth">
-                <button className="btn btn-accent mt-10 hidden">
-                    More memes
-                </button>
-            </div>
-            <div className="h-15"></div>
         </div>
     );
 

@@ -33,7 +33,14 @@ function JokeView({
     >('hidden');
     return (
         <div className="bg-lime-200	text-black h-full w-full fixed">
-            <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                {' '}
+                Need a Good Laugh?
+            </h1>
+            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                Say no more!
+            </h2>
+            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div
                     className="btn-group mb-5"
                     onClick={(e) => {
