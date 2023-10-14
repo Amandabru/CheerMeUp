@@ -1,6 +1,7 @@
 import { NewsType } from '../../Types';
 import Card from '../../components/Card';
 import { User } from '../../userModel';
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
 function NewsView({
     newsData,
@@ -35,7 +36,7 @@ function NewsView({
                             console.log('- pressed');
                         }}
                     >
-                        ←
+                        <AiOutlineArrowLeft style={{ scale: '2' }} />
                     </button>
                 ) : null}
                 <button
@@ -45,7 +46,7 @@ function NewsView({
                         console.log('+ pressed');
                     }}
                 >
-                    →
+                    <AiOutlineArrowRight style={{ scale: '2' }} />
                 </button>
             </div>
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
@@ -90,7 +91,7 @@ function NewsView({
                             console.log('- pressed');
                         }}
                     >
-                        ←
+                        <AiOutlineArrowLeft style={{ scale: '2' }} />
                     </button>
                 ) : null}
                 <button
@@ -100,7 +101,7 @@ function NewsView({
                         console.log('+ pressed');
                     }}
                 >
-                    →
+                    <AiOutlineArrowRight style={{ scale: '2' }} />
                 </button>
             </div>
         </div>
