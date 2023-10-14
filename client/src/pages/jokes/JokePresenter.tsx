@@ -36,10 +36,12 @@ function JokePresenter({
 
     const playSantaLaugh = () => {
         santaLaugh.play();
+        santaLaugh.volume = 0.1;
     };
 
     const playSpookyLaugh = () => {
         spookyLaugh.play();
+        spookyLaugh.volume = 0.1;
     };
 
     const getRandomJoke = async (newJokeType: string[]) => {
