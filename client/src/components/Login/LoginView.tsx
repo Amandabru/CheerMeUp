@@ -48,7 +48,7 @@ const LoginView = ({
                         errors={errors.password}
                     ></TextInputField>
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-secondary"
                         type="submit"
                         disabled={isSubmitting}
                     >

@@ -57,7 +57,7 @@ const SignUpView = ({
                         error={errors.password}
                     />
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-secondary"
                         type="submit"
                         disabled={isSubmitting}
                     >
