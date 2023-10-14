@@ -3,29 +3,38 @@ import HomeView from './HomeView';
 import { User } from '../../userModel';
 import { getPopular } from '../../api/getPopular';
 import { useEffect, useState } from 'react';
-import { DataBaseType } from '../../Types';
+import { DataBaseType, JokeType, MemeType, NewsType } from '../../Types';
 import useModelProp from '../../hooks/useModelProp';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
 
 function HomePresenter({
     model,
-    user
+    user,
+    directToLogin
 }: {
     model: CheerModel;
     user: User | null;
+    directToLogin: Function;
 }) {
-    const [promise, setPromise] = useState<Promise<DataBaseType[]> | null>(
-        null
-    );
-    const [popularJoys, error] = usePromise(promise);
+    const [promiseMostLiked, setPromiseMostLiked] = useState<Promise<
+        DataBaseType[]
+    > | null>(null);
+    const [dataMostLiked, errorMostliked] = usePromise(promiseMostLiked);
+
+    const [promiseRecentlyLiked, setPromiseRecentlyLiked] = useState<Promise<
+        DataBaseType[]
+    > | null>(null);
+    const [dataRecentlyLiked, errorRecentlyLiked] =
+        usePromise(promiseRecentlyLiked);
 
     const likedJoys = useModelProp(model, 'likedJoys');
 
     useEffect(() => {
         async function getPopularJoys() {
             try {
-                setPromise(getPopular(20, 'likes'));
+                setPromiseMostLiked(getPopular(20, 'likes'));
+                setPromiseRecentlyLiked(getPopular(20, 'recentlyLiked'));
             } catch (error) {
                 console.log(error);
             }
@@ -34,15 +43,32 @@ function HomePresenter({
     }, []);
     return (
         promiseNoData(
-            promise,
-            popularJoys,
-            error,
-            'Could not fetch popular joys'
+            promiseMostLiked,
+            dataMostLiked,
+            errorMostliked,
+            'Could not fetch most liked joys'
+        ) ||
+        promiseNoData(
+            promiseRecentlyLiked,
+            dataRecentlyLiked,
+            errorRecentlyLiked,
+            'Could not fetch recently liked joys'
         ) || (
             <HomeView
                 user={user}
-                popularJoys={popularJoys}
+                mostLikedJoys={dataMostLiked}
+                recentlyLikedJoys={dataRecentlyLiked}
                 likedJoys={likedJoys}
+                likeMeme={(meme: MemeType) => {
+                    model.likeOrUnlikeMeme(meme);
+                }}
+                likeJoke={(joke: JokeType) => {
+                    model.likeOrUnlikeJoke(joke);
+                }}
+                likeNews={(news: NewsType) => {
+                    model.likeOrUnlikeNews(news);
+                }}
+                showUserMustLogin={() => directToLogin()}
             />
         )
     );

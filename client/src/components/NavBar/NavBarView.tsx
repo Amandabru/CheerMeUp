@@ -18,7 +18,7 @@ function NavBarView({
     return (
         <div className="navbar bg-base-100">
             <img
-                className="btn btn-ghost normal-case text-xl animate-wiggle"
+                className="h-10 normal-case animate-wiggle mr-5"
                 src={logoImage}
                 alt={'Logo'}
             ></img>
@@ -35,10 +35,10 @@ function NavBarView({
                 Jokes
             </Link>
             <Link
-                to="/suggestions"
+                to="/activities"
                 className="btn btn-ghost normal-case text-xl"
             >
-                Suggestions
+                Activities
             </Link>
             <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

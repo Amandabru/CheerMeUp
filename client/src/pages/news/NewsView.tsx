@@ -50,10 +50,10 @@ function NewsView({
                                 key={index}
                                 image={newsObject.urlToImage}
                                 title={newsObject.title}
-                                description={newsObject.description}
+                                text={newsObject.text}
                                 author={newsObject.author}
                                 published={newsObject.publishedAt}
-                                source={newsObject.source.name}
+                                source={newsObject.source}
                                 url={newsObject.url}
                                 isLiked={
                                     likedNews.find(

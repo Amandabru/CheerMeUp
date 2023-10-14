@@ -7,7 +7,7 @@ import { User } from './userModel';
 import * as userApi from './api/user';
 import LoginPresenter from './components/Login/LoginPresenter';
 import SignUpPresenter from './components/SignUp/SignUpPresenter';
-import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
+import ActivityPresenter from './pages/activities/ActivityPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
@@ -61,7 +61,7 @@ function App({ model }: { model: CheerModel }) {
         } else {
             model.setLikedJoys({
                 jokes: [],
-                suggestions: [],
+                activities: [],
                 memes: [],
                 news: []
             });
@@ -82,7 +82,11 @@ function App({ model }: { model: CheerModel }) {
                     <Route
                         path="/"
                         element={
-                            <HomePresenter model={model} user={loggedInUser} />
+                            <HomePresenter
+                                model={model}
+                                user={loggedInUser}
+                                directToLogin={() => showModal('login_modal')}
+                            />
                         }
                     />
                     <Route
@@ -115,10 +119,7 @@ function App({ model }: { model: CheerModel }) {
                             />
                         }
                     />
-                    <Route
-                        path="/suggestions"
-                        element={<SuggestionPresenter />}
-                    />
+                    <Route path="/activities" element={<ActivityPresenter />} />
                     {loggedInUser ? (
                         <Route
                             path="/profile"

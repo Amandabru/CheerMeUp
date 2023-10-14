@@ -129,26 +129,30 @@ export const getLikedJoys: RequestHandler = async (req, res, next) => {
         const user = await UserModel.findOne({
             _id: authenticatedUserId
         }).exec();
-        const likedMemes = await Promise.all(
+        let likedMemes = await Promise.all(
             (user?.likedPosts?.meme || []).map(async (joy) => {
                 const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
+        likedMemes = likedMemes.filter((meme) => meme !== null);
 
-        const likedJokes = await Promise.all(
+        let likedJokes = await Promise.all(
             (user?.likedPosts?.joke || []).map(async (joy) => {
                 const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
 
-        const likedNews = await Promise.all(
+        likedJokes = likedJokes.filter((joke) => joke !== null);
+
+        let likedNews = await Promise.all(
             (user?.likedPosts?.news || []).map(async (joy) => {
                 const meme = await JoyModel.findOne({ _id: joy.id }).exec();
                 return meme ? meme.content : null;
             })
         );
+        likedNews = likedNews.filter((news) => news !== null);
 
         const likedJoys = {
             memes: likedMemes,
