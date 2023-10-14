@@ -18,7 +18,14 @@ function ActivityView({
 }) {
     return (
         <div className="bg-violet-300 text-black h-full w-full fixed">
-            <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                {' '}
+                Bored?
+            </h1>
+            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                Your cure is right here!
+            </h2>
+            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div className="form-control w-fit">
                     <label className="label cursor-pointer">
                         <span>Alone</span>

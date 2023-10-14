@@ -2,6 +2,7 @@ import { FieldError, RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 
 interface TextInputFieldProps {
+    id: string;
     name: string;
     label: string;
     register: UseFormRegister<any>;
@@ -11,6 +12,7 @@ interface TextInputFieldProps {
 }
 
 const TextInputField = ({
+    id,
     name,
     label,
     register,
@@ -19,7 +21,7 @@ const TextInputField = ({
     ...props
 }: TextInputFieldProps) => {
     return (
-        <Form.Group className="mb-3" controlId={name + '-input'}>
+        <Form.Group className="mb-3" id={id}>
             <Form.Label>{label}</Form.Label>
             <Form.Control
                 {...props}
