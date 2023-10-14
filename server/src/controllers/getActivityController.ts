@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import fetch from 'node-fetch';
-import UserModel from '../models/User';
 
-export async function getSuggestionsController(
+export async function getActivityController(
     req: Request,
     res: Response,
     next: NextFunction
@@ -18,7 +17,7 @@ export async function getSuggestionsController(
     try {
         const response = await fetch(api_url);
         if (!response.ok) {
-            throw createHttpError(500, 'Failed to fetch suggestion');
+            throw createHttpError(500, 'Failed to fetch activity');
         }
         const data = await response.json();
 
@@ -27,23 +26,14 @@ export async function getSuggestionsController(
             throw createHttpError(500, data.error);
         }
         const selectedData = {
-            type: 'suggestion',
-            text: data.activity,
-            liked: false,
+            type: 'activity',
+            text: data.activity
         };
 
-        if(!req.session.userId){
+        if (!req.session.userId) {
             res.status(200).json(selectedData);
             return;
         }
-
-        const likedByUser = await UserModel.findOne(
-            { _id: req.session.userId,
-            'likedPosts.suggestion.key': selectedData.text }
-            ).exec();
-
-        selectedData.liked = likedByUser ? true : false;
-
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);

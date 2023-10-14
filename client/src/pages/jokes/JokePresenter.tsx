@@ -1,19 +1,30 @@
-import { CheerModel } from '../../models/model';
-import useModelProp from '../../hooks/useModelProp';
 import promiseNoData from '../../PromiseNoData';
 import JokeView from './JokeView';
 import { useState } from 'react';
+import usePromise from '../../hooks/usePromise';
+import { getJoke } from '../../api/getJoke';
+import { JokeType } from '../../Types';
+import santa from '../../assets/audio/santa.mp3';
+import spooky from '../../assets/audio/spooky.mp3';
+import { CheerModel } from '../../models/model';
+import useModelProp from '../../hooks/useModelProp';
+import { User } from '../../userModel';
 
-function JokePresenter({ model }: { model: CheerModel }) {
-    const type = useModelProp(model, 'jokeType');
-    const data = useModelProp(model, 'currentJokeData');
-    const error = useModelProp(model, 'currentJokeError');
-
-    // TODO: Implement with model
-
-    const [liked, isLiked] = useState<boolean>(false);
-    let santaLaugh = new Audio('../../assets/audio/santa.mp3');
-    let spookyLaugh = new Audio('../../assets/audio/spooky.mp3');
+function JokePresenter({
+    model,
+    user,
+    directToLogin
+}: {
+    model: CheerModel;
+    user: User | null;
+    directToLogin: Function;
+}) {
+    const [promise, setPromise] = useState<Promise<JokeType> | null>(null);
+    const [joke, error] = usePromise(promise);
+    const [jokeType, setJokeType] = useState<string[]>([]);
+    let santaLaugh = new Audio(santa);
+    let spookyLaugh = new Audio(spooky);
+    const likedJoys = useModelProp(model, 'likedJoys');
 
     const categories: string[] = [
         'programming',
@@ -25,24 +36,43 @@ function JokePresenter({ model }: { model: CheerModel }) {
 
     const playSantaLaugh = () => {
         santaLaugh.play();
+        santaLaugh.volume = 0.1;
     };
 
-    const playspookyLaugh = () => {
+    const playSpookyLaugh = () => {
         spookyLaugh.play();
+        spookyLaugh.volume = 0.1;
+    };
+
+    const getRandomJoke = async (newJokeType: string[]) => {
+        setJokeType(newJokeType);
+        setPromise(getJoke(newJokeType));
     };
 
     return (
         <JokeView
-            randomJoke={
-                promiseNoData(type, data, error, 'Choose a Type') || data.text
+            randomJokeText={
+                promiseNoData(
+                    promise,
+                    joke,
+                    error,
+                    'Choose the type of joke you want'
+                ) || joke.text
             }
-            jokeType={type}
+            randomJokeData={joke ? joke : null}
+            onChristmasClick={() => playSantaLaugh()}
+            onSpookyClick={() => playSpookyLaugh()}
+            jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
-                model.setJoke(newType);
+                newType && getRandomJoke(newType);
             }}
-            liked={liked}
-            isLiked={(l: boolean) => isLiked(l)}
+            likedJokes={likedJoys.jokes}
+            isLiked={(joke: JokeType) => {
+                model.likeOrUnlikeJoke(joke);
+            }}
             categories={categories}
+            user={user}
+            showUserMustLogin={() => directToLogin()}
         />
     );
 }

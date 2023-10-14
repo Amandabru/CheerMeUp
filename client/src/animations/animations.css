@@ -19,6 +19,22 @@
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(calc(-50% - 121px));
+    box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.speechBubble {
+    position: absolute;
+    top: -40%;
+    left: 100%;
+    width: 200px;
+    opacity: 0;
+    animation: fadeInOut 2s;
+    animation-delay: 2s;
 }
 
 .mouth {
@@ -76,27 +92,6 @@
     margin-top: 20%;
 }
 
-.speech-bubble {
-    position: relative;
-    background: #ffffff;
-    border-radius: 0.4em;
-}
-
-.speech-bubble:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 50px solid transparent;
-    border-right-color: #ffffff;
-    border-left: 0;
-    border-bottom: 0;
-    margin-top: -25px;
-    margin-left: -50px;
-}
-
 @keyframes slideIn {
     from {
         margin-left: 100%;
@@ -118,6 +113,28 @@
     to {
         margin-left: -100%;
         width: 100%;
+    }
+}
+
+@keyframes fadeInOut {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    20% {
+        display: block;
+        opacity: 1;
+    }
+
+    85% {
+        display: block;
+        opacity: 1;
+    }
+
+    100% {
+        display: none;
+        opacity: 0;
     }
 }
 

@@ -1,14 +1,16 @@
 import { API_URL } from './config';
-import { SuggestionType, MemeType, NewsType, JokeType } from '../Types';
+import { ActivityType, MemeType, NewsType, JokeType } from '../Types';
 
-export async function postLike(likedJoy: SuggestionType | MemeType | NewsType | JokeType): Promise<Response> {
-    const response = await fetch(`${API_URL}/like`, {
-        method: "POST",
+export async function postLike(
+    likedJoy: ActivityType | MemeType | NewsType | JokeType
+) {
+    fetch(`${API_URL}/like`, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' //test
         },
-        body: JSON.stringify({likedJoy: likedJoy}),
-      });
-    return response.json();
+        body: JSON.stringify(likedJoy),
+        credentials: 'include'
+    });
 }
-  

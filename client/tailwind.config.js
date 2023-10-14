@@ -1,4 +1,4 @@
-import { transform } from 'typescript'
+import { transform } from 'typescript';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,7 +7,8 @@ export default {
         './src/*.{js,ts,jsx,tsx}',
         './src/components/*/*.{js,ts,jsx,tsx}',
         './src/components/Card.tsx',
-        './src/pages/*/*.{js,ts,jsx,tsx}'
+        './src/pages/*/*.{js,ts,jsx,tsx}',
+        './src/animations/*.{js,ts,jsx,tsx}'
     ],
     theme: {
         extend: {
@@ -17,14 +18,14 @@ export default {
                 128: '32rem',
                 144: '36rem'
             },
-            animation:{
-                spin: "spin 6s linear infinite",
-                wiggle: "wiggle 2s ease-in-out infinite"
+            animation: {
+                spin: 'spin 6s linear infinite',
+                wiggle: 'wiggle 2s ease-in-out infinite'
             },
             keyframes: {
                 wiggle: {
-                    '0%, 100%': {transform: 'rotate(-10deg)'},
-                    '50%': {transform: 'rotate(10deg)'}
+                    '0%, 100%': { transform: 'rotate(-10deg)' },
+                    '50%': { transform: 'rotate(10deg)' }
                 }
             }
         }
