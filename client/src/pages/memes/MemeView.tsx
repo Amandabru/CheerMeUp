@@ -26,7 +26,7 @@ function MemeView({
                 Craving a Smile?
             </h1>
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
-                Memes may brighten your day!
+                Memes will brighten your day!
             </h2>
             <div className="absolute top-[28%] bg-orange-300 ">
                 <div className="flex justify-center items-center !scroll-smooth">
