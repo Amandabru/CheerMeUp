@@ -4,7 +4,7 @@ function Card({
     type,
     image,
     title,
-    description,
+    text,
     author,
     published,
     source,
@@ -15,7 +15,7 @@ function Card({
     type: 'joke' | 'meme' | 'news';
     image?: string;
     title?: string;
-    description?: string;
+    text?: string;
     author?: string;
     published?: string;
     source?: string;
@@ -42,7 +42,7 @@ function Card({
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
                 <img className={`${imageClasses[type]}`} src={image} />
-                <p className="mx-8 mb-3">{description}</p>
+                <p className="mx-8 mb-3">{text}</p>
                 <p className="ml-8 text-xs">
                     <span className="mr-5">{author}</span>
                     <span className="mr-5">{published}</span>

@@ -1,20 +1,20 @@
 import { API_URL } from './config';
-import { SuggestionType } from '../Types';
+import { ActivityType } from '../Types';
 
-export async function getSuggestions(
+export async function getActivity(
     type: string,
     multipleParticipants: boolean
-): Promise<SuggestionType> {
+): Promise<ActivityType> {
     const response = await fetch(
-        `${API_URL}/suggestions/${type}/:${multipleParticipants}`
+        `${API_URL}/activities/${type}/:${multipleParticipants}`
     );
     return response.json();
 }
 
 /*
-export function getSuggestions(type: string, multipleParticipants: boolean) {
+export function getActivities(type: string, multipleParticipants: boolean) {
     return (
-        fetch(`${API_URL}/suggestions/${type}/:${multipleParticipants}`)
+        fetch(`${API_URL}/activities/${type}/:${multipleParticipants}`)
             .then((response) => {
                 if (response.ok) {
                     return response;

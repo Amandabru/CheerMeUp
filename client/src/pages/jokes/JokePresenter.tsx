@@ -36,10 +36,12 @@ function JokePresenter({
 
     const playSantaLaugh = () => {
         santaLaugh.play();
+        santaLaugh.volume = 0.1;
     };
 
     const playSpookyLaugh = () => {
         spookyLaugh.play();
+        spookyLaugh.volume = 0.1;
     };
 
     const getRandomJoke = async (newJokeType: string[]) => {
@@ -50,15 +52,19 @@ function JokePresenter({
     return (
         <JokeView
             randomJokeText={
-                promiseNoData(promise, joke, error, 'Choose a Type') ||
-                joke.text
+                promiseNoData(
+                    promise,
+                    joke,
+                    error,
+                    'Choose the type of joke you want'
+                ) || joke.text
             }
             randomJokeData={joke ? joke : null}
             onChristmasClick={() => playSantaLaugh()}
             onSpookyClick={() => playSpookyLaugh()}
             jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
-                getRandomJoke(newType);
+                newType && getRandomJoke(newType);
             }}
             likedJokes={likedJoys.jokes}
             isLiked={(joke: JokeType) => {
