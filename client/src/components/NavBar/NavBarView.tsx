@@ -23,7 +23,7 @@ function NavBarView({
                 alt={'Logo'}
             ></img>
             <Link to="/" className="btn btn-ghost normal-case text-xl">
-                CheerMeUp
+                CheerMeUp!
             </Link>
             <Link to="/news" className="btn btn-ghost normal-case text-xl">
                 News
