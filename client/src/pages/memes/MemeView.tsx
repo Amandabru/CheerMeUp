@@ -22,7 +22,10 @@ function MemeView({
     showUserMustLogin: Function;
 }) {
     return (
-        <div className="bg-orange-300 text-black min-h-screen bg-fixed">
+        <div
+            className="bg-orange-300 text-black min-h-screen bg-fixed
+        dark:bg-[#43291f]"
+        >
             <div className="flex justify-center items-center !scroll-smooth">
                 {count ? (
                     <button
@@ -74,15 +77,17 @@ function MemeView({
                 )}
             </section>
             <div className="flex justify-center items-center !scroll-smooth pb-5">
-                <button
-                    className="btn btn-accent mt-10 mr-10"
-                    onClick={() => {
-                        onDecrement();
-                        console.log('- pressed');
-                    }}
-                >
-                    ←
-                </button>
+                {count ? (
+                    <button
+                        className="btn btn-accent mt-10 mr-10"
+                        onClick={() => {
+                            onDecrement();
+                            console.log('- pressed');
+                        }}
+                    >
+                        ←
+                    </button>
+                ) : null}
                 <button
                     className="btn btn-accent mt-10"
                     onClick={() => {

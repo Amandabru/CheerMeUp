@@ -37,7 +37,8 @@ function Card({
 
     return (
         <div
-            className={`bg-white rounded-3xl overflow-hidden shadow-lg ${cardSizeClasses[type]}`}
+            className={`bg-white rounded-3xl overflow-hidden shadow-lg ${cardSizeClasses[type]}
+            dark:bg-base-300 dark:text-gray-200`}
         >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>

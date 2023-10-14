@@ -13,7 +13,10 @@ function HomeView({
 }) {
     console.log(likedJoys);
     return (
-        <div className="bg-pink-300 text-black h-full w-full fixed">
+        <div
+            className="bg-pink-300 text-black h-full w-full fixed
+        dark:bg-[#461220]"
+        >
             <div>
                 <h1>
                     Home page in progress, not sure how to structure this page

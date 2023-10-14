@@ -33,8 +33,9 @@ export default {
     plugins: [require('daisyui')],
     daisyui: {
         themes: [
+            'valentine',
             {
-                light: {
+                /*light: {
                     ...require('daisyui/src/theming/themes')[
                         '[data-theme=light]'
                     ],
@@ -42,13 +43,13 @@ export default {
                         color: '#d0d0d0',
                         'background-color': '#202020'
                     }
-                },
+                },*/
                 dark: {
                     ...require('daisyui/src/theming/themes')[
-                        '[data-theme=dark]'
+                        '[data-theme=dracula]'
                     ],
-                    primary: 'mediumgreen',
-                    'primary-focus': 'mediumgreen',
+                    primary: ' #31572C',
+                    'primary-focus': '#31572C',
                     '.navbar': {
                         'background-color': '#202020'
                     }

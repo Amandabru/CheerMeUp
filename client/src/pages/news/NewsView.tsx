@@ -22,7 +22,10 @@ function NewsView({
     showUserMustLogin: Function;
 }) {
     return (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
+        <div
+            className="bg-blue-300 text-black min-h-screen bg-fixed
+        dark:bg-[#04052e]"
+        >
             <div className="flex justify-center items-center !scroll-smooth">
                 {count ? (
                     <button
