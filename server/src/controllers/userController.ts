@@ -11,9 +11,9 @@ import nodemailer from 'nodemailer';
 import path from 'path';
 
 interface SignUpBody {
-    usernameSignup?: string;
+    username?: string;
     email?: string;
-    passwordSignup?: string;
+    password?: string;
 }
 
 // Nodemailer
@@ -130,9 +130,9 @@ export const signUp: RequestHandler<
     SignUpBody,
     unknown
 > = async (req, res, next) => {
-    const username = req.body.usernameSignup;
+    const username = req.body.username;
     const email = req.body.email;
-    const passwordRaw = req.body.passwordSignup;
+    const passwordRaw = req.body.password;
 
     try {
         if (!username || !email || !passwordRaw) {
@@ -174,8 +174,8 @@ export const signUp: RequestHandler<
 };
 
 interface LoginBody {
-    usernameLogin?: string;
-    passwordLogin?: string;
+    username?: string;
+    password?: string;
 }
 
 export const login: RequestHandler<
@@ -184,8 +184,8 @@ export const login: RequestHandler<
     LoginBody,
     unknown
 > = async (req, res, next) => {
-    const username = req.body.usernameLogin;
-    const password = req.body.passwordLogin;
+    const username = req.body.username;
+    const password = req.body.password;
     try {
         if (!username || !password) {
             throw createHttpError(400, 'Parameters missing');

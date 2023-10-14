@@ -11,9 +11,9 @@ export async function getLoggedInUser(): Promise<User> {
 }
 
 export interface SignUpCredentials {
-    usernameSignup: string;
+    username: string;
     email: string;
-    passwordSignup: string;
+    password: string;
 }
 
 export async function signUp(credentials: SignUpCredentials): Promise<User> {
@@ -29,8 +29,8 @@ export async function signUp(credentials: SignUpCredentials): Promise<User> {
 }
 
 export interface LoginCredentials {
-    usernameLogin: string;
-    passwordLogin: string;
+    username: string;
+    password: string;
 }
 
 export async function login(credentials: LoginCredentials): Promise<User> {

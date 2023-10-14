@@ -39,8 +39,12 @@ function ActivityPresenter() {
         <>
             <ActivityView
                 randomActivity={
-                    promiseNoData(promise, data, error, 'Choose an Activity') ||
-                    data?.text
+                    promiseNoData(
+                        promise,
+                        data,
+                        error,
+                        'Choose the type of activity you want'
+                    ) || data?.text
                 }
                 isToggled={company}
                 onToggle={(c: boolean) => setCompany(c)}

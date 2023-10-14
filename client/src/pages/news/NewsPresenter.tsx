@@ -96,6 +96,7 @@ function NewsPresenter({
                 newsData={newsDataSlice(newsData, count)}
                 onIncrement={increment}
                 onDecrement={decrement}
+                count={count}
                 likedNews={likedJoys.news}
                 likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
                 user={user}
