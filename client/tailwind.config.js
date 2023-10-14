@@ -33,17 +33,12 @@ export default {
     plugins: [require('daisyui')],
     daisyui: {
         themes: [
-            'valentine',
             {
-                /*light: {
+                light: {
                     ...require('daisyui/src/theming/themes')[
-                        '[data-theme=light]'
-                    ],
-                    '.navbar': {
-                        color: '#d0d0d0',
-                        'background-color': '#202020'
-                    }
-                },*/
+                        '[data-theme=valentine]'
+                    ]
+                },
                 dark: {
                     ...require('daisyui/src/theming/themes')[
                         '[data-theme=dracula]'
