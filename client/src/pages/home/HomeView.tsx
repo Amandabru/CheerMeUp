@@ -31,6 +31,7 @@ function HomeView({
                             return (
                                 //Return the card here instead, keep the functionality for liking
                                 <div
+                                    key={index}
                                     onClick={() => {
                                         if (user) {
                                             if (joy.type === 'meme') {
@@ -58,6 +59,7 @@ function HomeView({
                             return (
                                 //Return the card here instead, keep the functionality for liking
                                 <div
+                                    key={index}
                                     onClick={() => {
                                         if (user) {
                                             if (joy.type === 'meme') {

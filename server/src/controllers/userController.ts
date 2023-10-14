@@ -24,9 +24,9 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
 };
 
 interface SignUpBody {
-    username?: string;
+    usernameSignup?: string;
     email?: string;
-    password?: string;
+    passwordSignup?: string;
 }
 
 export const signUp: RequestHandler<
@@ -35,9 +35,9 @@ export const signUp: RequestHandler<
     SignUpBody,
     unknown
 > = async (req, res, next) => {
-    const username = req.body.username;
+    const username = req.body.usernameSignup;
     const email = req.body.email;
-    const passwordRaw = req.body.password;
+    const passwordRaw = req.body.passwordSignup;
 
     try {
         if (!username || !email || !passwordRaw) {
@@ -77,8 +77,8 @@ export const signUp: RequestHandler<
 };
 
 interface LoginBody {
-    username?: string;
-    password?: string;
+    usernameLogin?: string;
+    passwordLogin?: string;
 }
 
 export const login: RequestHandler<
@@ -87,8 +87,8 @@ export const login: RequestHandler<
     LoginBody,
     unknown
 > = async (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.usernameLogin;
+    const password = req.body.passwordLogin;
     try {
         if (!username || !password) {
             throw createHttpError(400, 'Parameters missing');
