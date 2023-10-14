@@ -24,7 +24,7 @@ function MemeView({
     return (
         <div
             className="bg-orange-300 text-black min-h-screen bg-fixed
-        dark:bg-[#43291f]"
+        dark:bg-[#001f20]"
         >
             <div className="flex justify-center items-center !scroll-smooth">
                 {count ? (
