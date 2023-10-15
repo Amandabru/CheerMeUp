@@ -12,7 +12,7 @@ export class CheerModel {
         observers = [],
         likedJoys: DataStructure = {
             jokes: [],
-            suggestions: [],
+            activities: [],
             memes: [],
             news: []
         }

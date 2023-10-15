@@ -34,9 +34,16 @@ function JokeView({
     return (
         <div
             className="bg-green-200 text-black h-full w-full fixed
-        dark:bg-[#132A13]"
+        dark:bg-[#132A13] dark:text-white"
         >
-            <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                {' '}
+                Need a Good Laugh?
+            </h1>
+            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                Say no more!
+            </h2>
+            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div
                     className="btn-group mb-5"
                     onClick={(e) => {
@@ -110,7 +117,7 @@ function JokeView({
                 <button
                     className="btn mt-5 transition-transform min-w-fit"
                     onClick={() => {
-                        if (jokeType != null) {
+                        if (jokeType.length) {
                             onNewJoke([jokeType]);
                             setVisability('visible');
                         }

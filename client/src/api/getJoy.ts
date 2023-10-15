@@ -3,7 +3,7 @@ import { API_URL } from './config';
 
 // searchParam: the parameter to check after in the database, are the following for the different types:
 // meme: "url"
-// suggestions: "text"
+// activities: "text"
 // joke & news: "apiId"
 // searchParamValue: the actual value for the searchParam, so for instance the url for a meme.
 // type: it is the type of joy to be get, e.g. meme, joke etc

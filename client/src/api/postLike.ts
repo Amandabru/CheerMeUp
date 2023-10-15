@@ -1,8 +1,8 @@
 import { API_URL } from './config';
-import { SuggestionType, MemeType, NewsType, JokeType } from '../Types';
+import { ActivityType, MemeType, NewsType, JokeType } from '../Types';
 
 export async function postLike(
-    likedJoy: SuggestionType | MemeType | NewsType | JokeType
+    likedJoy: ActivityType | MemeType | NewsType | JokeType
 ) {
     fetch(`${API_URL}/like`, {
         method: 'POST',

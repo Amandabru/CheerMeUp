@@ -30,6 +30,7 @@ const SignUpView = ({
                 <p>{errorText}</p>
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
+                        id="SignupUsername"
                         name="username"
                         label="Username"
                         type="text"
@@ -39,6 +40,7 @@ const SignUpView = ({
                         error={errors.username}
                     />
                     <TextInputField
+                        id="SignupEmail"
                         name="email"
                         label="Email"
                         type="email"
@@ -48,6 +50,7 @@ const SignUpView = ({
                         error={errors.email}
                     />
                     <TextInputField
+                        id="SignupPassword"
                         name="password"
                         label="Password"
                         type="password"

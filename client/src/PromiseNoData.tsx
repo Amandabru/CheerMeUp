@@ -2,7 +2,7 @@ import {
     MemeType,
     NewsType,
     JokeType,
-    SuggestionType,
+    ActivityType,
     DataBaseType
 } from './Types';
 
@@ -12,7 +12,7 @@ function promiseNoData(
         | MemeType[]
         | NewsType[]
         | JokeType
-        | SuggestionType
+        | ActivityType
         | DataBaseType[]
         | null
     > | null,
@@ -22,7 +22,7 @@ function promiseNoData(
         | MemeType[]
         | NewsType[]
         | JokeType
-        | SuggestionType
+        | ActivityType
         | DataBaseType[]
         | null,
     error: Error | null,
