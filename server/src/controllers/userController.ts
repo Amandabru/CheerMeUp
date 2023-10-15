@@ -84,8 +84,7 @@ async function sendVerificationEmail(result: any, res: any) {
                 .then(() => {
                     // email sent and user verification saved
                     res.status(202).json({
-                        message:
-                            'Verify your email address to complete the signup'
+                        message: 'A verification email has been sent to you'
                     });
                 })
                 .catch(() => {

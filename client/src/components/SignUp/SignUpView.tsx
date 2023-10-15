@@ -64,7 +64,9 @@ const SignUpView = ({
                     />
                     <p className="mt-2 mb-3">
                         {verificationMessage}
-                        <AiOutlineCheck className="inline mb-1 ml-2" />
+                        {verificationMessage && (
+                            <AiOutlineCheck className="inline mb-1 ml-2" />
+                        )}
                     </p>
                     <button
                         className="btn btn-primary"
