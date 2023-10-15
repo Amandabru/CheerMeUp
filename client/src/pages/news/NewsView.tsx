@@ -65,7 +65,7 @@ function NewsView({
                                     text={newsObject.text}
                                     author={newsObject.author}
                                     published={newsObject.publishedAt}
-                                    source={newsObject.source.name}
+                                    source={newsObject.source}
                                     url={newsObject.url}
                                     isLiked={
                                         likedNews.find(
