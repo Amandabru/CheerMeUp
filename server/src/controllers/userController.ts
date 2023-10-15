@@ -1,17 +1,17 @@
-import { RequestHandler, Request, Response } from 'express';
+import { RequestHandler } from 'express';
 import UserModel from '../models/User';
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 import { assertIsDefined } from '../utils/assertIsDefined';
 import JoyModel from '../models/Joys';
-import { DataStructure } from '../../../client/src/Types';
 import { v4 as uuidv4 } from 'uuid';
 import UserVerification from '../models/UserVerification';
 import nodemailer from 'nodemailer';
 import path from 'path';
 import * as fs from 'fs';
-import { ObjectId, Types } from 'mongoose';
-require('dotenv').config();
+import { config } from 'dotenv';
+
+config();
 
 // type UserModelType = {
 //     username: string,
@@ -210,9 +210,6 @@ export const signUp: RequestHandler<
             // Handle email verification
             sendVerificationEmail(result, res);
         });
-
-        // req.session.userId = newUser._id;
-        // res.status(201).json(newUser);
     } catch (error) {
         next(error);
     }
