@@ -5,7 +5,7 @@ import createHttpError from 'http-errors';
 import { assertIsDefined } from '../utils/assertIsDefined';
 import JoyModel from '../models/Joys';
 import { DataStructure } from '../../../client/src/Types';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import UserVerification from '../models/UserVerification';
 import nodemailer from 'nodemailer';
 import path from 'path';
@@ -18,11 +18,11 @@ interface SignUpBody {
 
 // Nodemailer
 let transporter = nodemailer.createTransport({
-    service: "hotmail",
+    service: 'hotmail', // e.g., 'hotmail' or 'Gmail'
     auth: {
-        user: process.env.AUTH_EMAIL,
-        pass: process.env.AUTH_PASS,
-    }
+        user:'cheermeupnow@outlook.com', // Your email address
+        pass:'Bajskorvimunnen98', // Your email password
+  },
 })
 
 // transporter.verify((error: Error | null) => {
@@ -36,20 +36,20 @@ let transporter = nodemailer.createTransport({
 // fix any
 async function sendVerificationEmail(result: any, res: any){
    const url = process.env.URL;
-   const uniqueString = uuid() + result._id;
+   const uniqueString = uuidv4() + result._id;
 
    const mailOptions = {
     from: process.env.AUTH_EMAIL,
     to: result.email,
     subject: "Verify Your Email",
     html: `<p>Verify your email address to complete the signup.</p>
-    <p>Press <a href=${url + "user/verify/" + result._id + "/" + uniqueString } > here </a> to proceed </p>`,
+    <p>Press <a href=${"http://localhost:5000/users/verifyUser/" + result._id + "/" + uniqueString } > here </a> to proceed </p>`,
    }
 
    bcrypt
    .hash(uniqueString, 10)
    .then(async (hashedUniqueString) => {
-        const newVerification = await UserVerification.create({
+        await UserVerification.create({
             userId: result._id,
             uniqueString: hashedUniqueString,
         })
@@ -62,10 +62,12 @@ async function sendVerificationEmail(result: any, res: any){
         .catch(()=>{
             throw createHttpError(500, 'Internal server error');
         })
-   })
-   .catch(() => {
-        throw createHttpError(500, 'Internal server error');
-   })
+    })
+    .catch(() => {
+         throw createHttpError(500, 'Internal server error');
+    })
+
+
 }
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
@@ -93,7 +95,7 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
                 .then(() => {
                     UserVerification.deleteOne({userId})
                     .then(() => {
-                        res.redirect("users/verifiedPage");
+                        res.redirect("/users/verifiedPage");
                     })
                     .catch((error) => {
                         next(error);
@@ -120,7 +122,7 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
 
 export const getVerifiedPage: RequestHandler = (req, res) =>
 {
-    res.sendFile(path.join(__dirname, "./../verifiedView.html"))
+    res.sendFile(path.join(__dirname, "../verifiedView.html"))
 }
 
 
