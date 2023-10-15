@@ -56,7 +56,7 @@ function ActivityView({
                         <input
                             type="radio"
                             name="radio-1"
-                            className="radio border-black align-middle"
+                            className="radio border-black align-middle dark:border-white"
                             checked={!isToggled}
                             onChange={() => onToggle(false)}
                         />
@@ -66,7 +66,7 @@ function ActivityView({
                         <input
                             type="radio"
                             name="radio-1"
-                            className="radio border-black align-middle"
+                            className="radio border-black align-middle  dark:border-white"
                             checked={isToggled}
                             onChange={() => onToggle(true)}
                         />
