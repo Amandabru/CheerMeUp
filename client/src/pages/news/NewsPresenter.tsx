@@ -1,7 +1,7 @@
 import { CheerModel } from '../../models/model';
 import NewsView from './NewsView';
 import { useState, useEffect } from 'react';
-import { NewsType } from '../../Types';
+import { DataStructure, NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
 import promiseNoData from '../../PromiseNoData';
 import useModelProp from '../../hooks/useModelProp';
@@ -21,7 +21,7 @@ function NewsPresenter({
     const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
     const [count, setCount] = useState<number>(initialCount);
     const [error, setError] = useState<Error | null>(null);
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
 
     const lastFetchDate = localStorage.getItem('lastFetchDateNews');
 
