@@ -5,7 +5,7 @@ import SignUpView from './SignUpView';
 import { useState } from 'react';
 import { ConflictError } from '../../errors/httpErrors';
 
-const SignUpPresenter = () => {
+const SignUpPresenter = ({ directToLogin }: { directToLogin: Function }) => {
     const [errorText, setErrorText] = useState<string | null>(null);
     const [verificationMessage, setVerificationMessage] = useState<string>('');
     useState<boolean>(false);
@@ -38,6 +38,7 @@ const SignUpPresenter = () => {
             errorText={errorText}
             verificationMessage={verificationMessage}
             isSubmitting={isSubmitting}
+            directToLogin={directToLogin}
         ></SignUpView>
     );
 };

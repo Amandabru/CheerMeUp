@@ -11,6 +11,7 @@ interface SignUpViewProps {
     errorText: string | null;
     verificationMessage: string;
     isSubmitting: boolean;
+    directToLogin: Function;
 }
 
 const SignUpView = ({
@@ -19,17 +20,18 @@ const SignUpView = ({
     errors,
     errorText,
     verificationMessage,
-    isSubmitting
+    isSubmitting,
+    directToLogin
 }: SignUpViewProps) => {
     return (
         <dialog id="signup_modal" className="modal">
-            <div className="modal-box">
+            <div className="modal-box w-80">
                 <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                         ✕
                     </button>
                 </form>
-                <h3 className="font-bold text-lg">Sign Up</h3>
+                <h3 className="font-bold text-2xl mb-3 text-center">Sign Up</h3>
                 <p>{errorText}</p>
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
@@ -69,12 +71,23 @@ const SignUpView = ({
                         )}
                     </p>
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary mt-2 w-full"
                         type="submit"
                         disabled={isSubmitting}
                     >
                         Sign Up
                     </button>
+                    <div className="text-sm mt-2">
+                        {' '}
+                        Already have an account?{' '}
+                        <a
+                            className="text-decoration-line: underline cursor-pointer"
+                            onClick={() => directToLogin()}
+                        >
+                            {' '}
+                            Login{' '}
+                        </a>
+                    </div>
                 </Form>
             </div>
         </dialog>

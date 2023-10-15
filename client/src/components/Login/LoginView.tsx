@@ -9,6 +9,7 @@ interface LoginViewProps {
     errors: FieldErrors<LoginCredentials>;
     errorText: string | null;
     isSubmitting: boolean;
+    directToSignup: Function;
 }
 
 const LoginView = ({
@@ -16,17 +17,18 @@ const LoginView = ({
     handleSubmit,
     errors,
     errorText,
-    isSubmitting
+    isSubmitting,
+    directToSignup
 }: LoginViewProps) => {
     return (
         <dialog id="login_modal" className="modal">
-            <div className="modal-box">
+            <div className="modal-box w-80">
                 <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                         ✕
                     </button>
                 </form>
-                <h3 className="font-bold text-lg">Log In</h3>
+                <h3 className="font-bold text-2xl mb-3 text-center">Log In</h3>
                 {errorText && <div>{errorText}</div>}
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
@@ -50,12 +52,23 @@ const LoginView = ({
                         errors={errors.password}
                     ></TextInputField>
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary mt-2 w-full"
                         type="submit"
                         disabled={isSubmitting}
                     >
                         Log In
                     </button>
+                    <div className="text-sm mt-2">
+                        {' '}
+                        Don't have an account?{' '}
+                        <a
+                            className="text-decoration-line: underline cursor-pointer"
+                            onClick={() => directToSignup()}
+                        >
+                            {' '}
+                            Signup{' '}
+                        </a>
+                    </div>
                 </Form>
             </div>
         </dialog>

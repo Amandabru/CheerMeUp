@@ -139,15 +139,19 @@ function App({ model }: { model: CheerModel }) {
                 </Routes>
             </div>
             <SignUpPresenter
-                onSignUpSuccessful={(user) => {
-                    setLoggedInUser(user);
+                directToLogin={() => {
                     closeModal('signup_modal');
+                    showModal('login_modal');
                 }}
             />
             <LoginPresenter
                 onLoginSuccessful={(user) => {
                     setLoggedInUser(user);
                     closeModal('login_modal');
+                }}
+                directToSignup={() => {
+                    closeModal('login_modal');
+                    showModal('signup_modal');
                 }}
             />
         </>
