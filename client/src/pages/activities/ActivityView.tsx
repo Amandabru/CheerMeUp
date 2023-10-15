@@ -26,22 +26,6 @@ function ActivityView({
                 Your cure is right here!
             </h2>
             <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
-                <div className="form-control w-fit">
-                    <label className="label cursor-pointer">
-                        <span>Alone</span>
-                        <input
-                            type="checkbox"
-                            className="toggle"
-                            defaultChecked={false}
-                            onClick={() => {
-                                isToggled = !isToggled;
-                                onToggle(isToggled);
-                            }}
-                        />
-                        <span>With Friends</span>
-                    </label>
-                </div>
-
                 <div className="text-left mb-2">
                     <select
                         className="select select-bordered select-sm bg-violet-200"
@@ -63,6 +47,26 @@ function ActivityView({
                             </option>
                         ))}
                     </select>
+                    <span>
+                        <span className="ml-10 mr-1">Activities alone</span>
+                        <input
+                            type="radio"
+                            name="radio-1"
+                            className="radio border-black align-middle"
+                            checked={!isToggled}
+                            onChange={() => onToggle(false)}
+                        />
+                        <span className="ml-3 mr-1">
+                            Activities with friends
+                        </span>
+                        <input
+                            type="radio"
+                            name="radio-1"
+                            className="radio border-black align-middle"
+                            checked={isToggled}
+                            onChange={() => onToggle(true)}
+                        />
+                    </span>
                 </div>
 
                 <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
