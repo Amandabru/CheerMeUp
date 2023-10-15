@@ -17,7 +17,7 @@ export interface SignUpCredentials {
     password: string;
 }
 
-export async function signUp(credentials: SignUpCredentials): Promise<User> {
+export async function signUp(credentials: SignUpCredentials) {
     const response = await fetchData(`${API_URL}/users/signup`, {
         method: 'POST',
         headers: {

@@ -11,6 +11,7 @@ import nodemailer from 'nodemailer';
 import path from 'path';
 import * as fs from 'fs';
 import { ObjectId, Types } from 'mongoose';
+require('dotenv').config();
 
 // type UserModelType = {
 //     username: string,
@@ -49,50 +50,51 @@ interface SignUpBody {
 let transporter = nodemailer.createTransport({
     service: 'hotmail',
     auth: {
-        // TODO: fix so it reads from .env
-        user:'cheermeupnow@outlook.com',
-        pass:'Bajskorvimunnen98', 
-  },
-})
+        user: process.env.AUTH_EMAIL as string,
+        pass: process.env.AUTH_PASS as string
+    }
+});
 
 // TODO: fix any
-async function sendVerificationEmail(result: any, res: any){
-    console.log(result)
-    console.log(res)
+async function sendVerificationEmail(result: any, res: any) {
+    const email = process.env.AUTH_EMAIL;
+    const url = process.env.URL;
+    const uniqueString = uuidv4() + result._id;
 
-   const url = process.env.URL;
-   const uniqueString = uuidv4() + result._id;
+    const mailOptions = {
+        from: process.env.AUTH_EMAIL,
+        to: result.email,
+        subject: 'Verify Your Email',
+        html: `<p>Verify your email address to complete the signup.</p>
+    <p>Press <a href=${
+        url + 'users/verifyUser/' + result._id + '/' + uniqueString
+    } >here</a> to proceed </p>`
+    };
 
-   const mailOptions = {
-    from: process.env.AUTH_EMAIL,
-    to: result.email,
-    subject: "Verify Your Email",
-    html: `<p>Verify your email address to complete the signup.</p>
-    <p>Press <a href=${url + "users/verifyUser/" + result._id + "/" + uniqueString } >here</a> to proceed </p>`,
-   }
+    bcrypt
+        .hash(uniqueString, 10)
+        .then(async (hashedUniqueString) => {
+            await UserVerification.create({
+                userId: result._id,
+                uniqueString: hashedUniqueString
+            });
 
-   bcrypt
-   .hash(uniqueString, 10)
-   .then(async (hashedUniqueString) => {
-        await UserVerification.create({
-            userId: result._id,
-            uniqueString: hashedUniqueString,
+            transporter
+                .sendMail(mailOptions)
+                .then(() => {
+                    // email sent and user verification saved
+                    res.status(202).json({
+                        message:
+                            'Verify your email address to complete the signup'
+                    });
+                })
+                .catch(() => {
+                    throw createHttpError(500, 'Internal server error');
+                });
         })
-
-        transporter.sendMail(mailOptions)
-        .then(() => {
-            // email sent and user verification saved
-            res.status(202).json({message: "Verification email sent"});
-        })
-        .catch(()=>{
+        .catch(() => {
             throw createHttpError(500, 'Internal server error');
-        })
-    })
-    .catch(() => {
-         throw createHttpError(500, 'Internal server error');
-    })
-
-
+        });
 }
 
 export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
@@ -107,53 +109,67 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
 };
 
 export const getVerifiedUser: RequestHandler = async (req, res, next) => {
-    let {userId, uniqueString} = req.params;
+    let { userId, uniqueString } = req.params;
 
-    UserVerification.find({userId})
-    .then(async (result) => {
-        if(result.length > 0){
-            const hashedUniqueString = result[0].uniqueString ?? "";
-            const correctString = await bcrypt.compare(uniqueString, hashedUniqueString);
-            
-            if(correctString){
-                UserModel.updateOne({_id: userId}, {verified: true})
-                .then(() => {
-                    UserVerification.deleteOne({userId})
-                    .then(() => {
-                        let message = "You have successfully verified your email. Head back to the website and proceed to login.";
-                        res.redirect(`/users/verifiedPage?message=${encodeURIComponent(message)}`);
-                    })
-                    .catch((error) => {
-                        next(error);
-                    });
-                })
-                .catch((error) => {
-                    next(error);
-                });
-            }
-            else{
-                throw createHttpError(
-                    400,
-                    'Invalid verification details passed.'
+    UserVerification.find({ userId })
+        .then(async (result) => {
+            if (result.length > 0) {
+                const hashedUniqueString = result[0].uniqueString ?? '';
+                const correctString = await bcrypt.compare(
+                    uniqueString,
+                    hashedUniqueString
                 );
+
+                if (correctString) {
+                    UserModel.updateOne({ _id: userId }, { verified: true })
+                        .then(() => {
+                            UserVerification.deleteOne({ userId })
+                                .then(() => {
+                                    let message =
+                                        'You have successfully verified your email. Head back to the website and proceed to login.';
+                                    res.redirect(
+                                        `/users/verifiedPage?message=${encodeURIComponent(
+                                            message
+                                        )}`
+                                    );
+                                })
+                                .catch((error) => {
+                                    next(error);
+                                });
+                        })
+                        .catch((error) => {
+                            next(error);
+                        });
+                } else {
+                    throw createHttpError(
+                        400,
+                        'Invalid verification details passed.'
+                    );
+                }
             }
-        }})
+        })
 
-    .catch(() => {
-        let message = "An error occured while checking for existing user verification record. Please try again."
-        res.redirect(`/users/verifiedPage?message=${encodeURIComponent(message)}`);
-    })
-
+        .catch(() => {
+            let message =
+                'An error occured while checking for existing user verification record. Please try again.';
+            res.redirect(
+                `/users/verifiedPage?message=${encodeURIComponent(message)}`
+            );
+        });
 };
 
-export const getVerifiedPage: RequestHandler = (req, res) =>
-{
+export const getVerifiedPage: RequestHandler = (req, res) => {
     const message: any = req.query.message || '';
-    const htmlContent = fs.readFileSync(path.join(__dirname, "../verifiedView.html"), 'utf8');
-    const updatedHtmlContent = htmlContent.replace('<!-- Message will be displayed here -->', message);
+    const htmlContent = fs.readFileSync(
+        path.join(__dirname, '../verifiedView.html'),
+        'utf8'
+    );
+    const updatedHtmlContent = htmlContent.replace(
+        '<!-- Message will be displayed here -->',
+        message
+    );
     res.send(updatedHtmlContent);
-}
-
+};
 
 export const signUp: RequestHandler<
     unknown,
@@ -190,8 +206,8 @@ export const signUp: RequestHandler<
             username: username,
             email: email,
             password: passwordHashed,
-            verified: false,
-        }).then(result => {
+            verified: false
+        }).then((result) => {
             // Handle email verification
             sendVerificationEmail(result, res);
         });
@@ -227,7 +243,7 @@ export const login: RequestHandler<
             throw createHttpError(401, 'Invalid credentials');
         }
 
-        if(!user.verified){
+        if (!user.verified) {
             throw createHttpError(401, 'Email address not verified');
         }
 
