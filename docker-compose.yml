@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo:latest  # This specifies the MongoDB image to use
+    container_name: mongodb
+    ports:
+      - "27017:27017"  # Map the container's port to your host's port
+    volumes:
+      - ./mongodb-data:/data/db  # Mount a volume to persist MongoDB data

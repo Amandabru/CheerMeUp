@@ -83,12 +83,14 @@ app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
 
 if(process.env.MONGODB == "local"){
     mongoose.connect(process.env.MONGO_LOCAL_URL!).then(() => {
+        console.log("Connected to local database");
         console.log(`listening on port ${PORT}`);
         app.listen(PORT);
     });
 }
 else{
     mongoose.connect(process.env.MONGO_URL!).then(() => {
+        console.log("Connected to external database");
         console.log(`listening on port ${PORT}`);
         app.listen(PORT);
     });

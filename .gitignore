@@ -1,0 +1,8 @@
+/volumes/
+.docker/
+.cache/
+/logs/
+*.tmp
+*.log
+*.swp
+mongodb-data/
