@@ -1,17 +1,14 @@
 import { useState } from 'react';
-import SuggestionView from './SuggestionView';
+import ActivityView from './ActivityView';
 import promiseNoData from '../../PromiseNoData';
-import { getSuggestions } from '../../api/getSuggestions';
+import { getActivity } from '../../api/getActivity';
 import usePromise from '../../hooks/usePromise';
-import { SuggestionType } from '../../Types';
+import { ActivityType } from '../../Types';
 
-function SuggestionPresenter() {
-    const [promise, setPromise] = useState<Promise<SuggestionType> | null>(
-        null
-    );
+function ActivityPresenter() {
+    const [promise, setPromise] = useState<Promise<ActivityType> | null>(null);
     const [data, error] = usePromise(promise);
     const [company, setCompany] = useState<boolean>(false);
-    // const [suggestion, setSuggestion] = useState<string>('');
     const [activityType, setActivityType] = useState<string>('');
 
     const options: {
@@ -29,32 +26,36 @@ function SuggestionPresenter() {
         { value: 'busywork', label: 'busywork' }
     ];
 
-    const getRandomSuggestion = async (
+    const getRandomActivity = async (
         newActivityType: string,
         company: boolean
     ) => {
         setActivityType(newActivityType);
         setCompany(company);
-        setPromise(getSuggestions(newActivityType, company));
+        setPromise(getActivity(newActivityType, company));
     };
 
     return (
         <>
-            <SuggestionView
-                randomSuggestion={
-                    promiseNoData(promise, data, error, 'Choose an Activity') ||
-                    data?.text
+            <ActivityView
+                randomActivity={
+                    promiseNoData(
+                        promise,
+                        data,
+                        error,
+                        'Choose the type of activity you want'
+                    ) || data?.text
                 }
                 isToggled={company}
                 onToggle={(c: boolean) => setCompany(c)}
                 options={options}
                 activityType={activityType}
-                onNewSuggestion={(newType: string) => {
-                    newType && getRandomSuggestion(newType, company);
+                onNewActivity={(newType: string) => {
+                    newType && getRandomActivity(newType, company);
                 }}
             />
         </>
     );
 }
 
-export default SuggestionPresenter;
+export default ActivityPresenter;

@@ -3,7 +3,7 @@ import JokeView from './JokeView';
 import { useState } from 'react';
 import usePromise from '../../hooks/usePromise';
 import { getJoke } from '../../api/getJoke';
-import { JokeType } from '../../Types';
+import { DataStructure, JokeType } from '../../Types';
 import santa from '../../assets/audio/santa.mp3';
 import spooky from '../../assets/audio/spooky.mp3';
 import { CheerModel } from '../../models/model';
@@ -24,7 +24,7 @@ function JokePresenter({
     const [jokeType, setJokeType] = useState<string[]>([]);
     let santaLaugh = new Audio(santa);
     let spookyLaugh = new Audio(spooky);
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
 
     const categories: string[] = [
         'programming',
@@ -36,30 +36,35 @@ function JokePresenter({
 
     const playSantaLaugh = () => {
         santaLaugh.play();
+        santaLaugh.volume = 0.1;
     };
 
     const playSpookyLaugh = () => {
         spookyLaugh.play();
+        spookyLaugh.volume = 0.1;
     };
 
     const getRandomJoke = async (newJokeType: string[]) => {
         setJokeType(newJokeType);
         setPromise(getJoke(newJokeType));
     };
-    console.log(likedJoys.jokes);
 
     return (
         <JokeView
             randomJokeText={
-                promiseNoData(promise, joke, error, 'Choose a Type') ||
-                joke.text
+                promiseNoData(
+                    promise,
+                    joke,
+                    error,
+                    'Choose the type of joke you want'
+                ) || joke.text
             }
             randomJokeData={joke ? joke : null}
             onChristmasClick={() => playSantaLaugh()}
             onSpookyClick={() => playSpookyLaugh()}
             jokeType={jokeType}
             onNewJoke={(newType: string[]) => {
-                getRandomJoke(newType);
+                newType && getRandomJoke(newType);
             }}
             likedJokes={likedJoys.jokes}
             isLiked={(joke: JokeType) => {

@@ -30,6 +30,7 @@ const LoginView = ({
                 {errorText && <div>{errorText}</div>}
                 <Form onSubmit={handleSubmit}>
                     <TextInputField
+                        id="LoginUsername"
                         name="username"
                         label="Username"
                         type="text"
@@ -39,6 +40,7 @@ const LoginView = ({
                         errors={errors.username}
                     ></TextInputField>
                     <TextInputField
+                        id="LoginPassword"
                         name="password"
                         label="Password"
                         type="password"

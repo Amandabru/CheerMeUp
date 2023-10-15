@@ -12,7 +12,7 @@ const userSchema = new Schema({
                 key: Number
             }
         ],
-        suggestion: [
+        activity: [
             {
                 id: Schema.Types.ObjectId,
                 key: String
@@ -27,7 +27,7 @@ const userSchema = new Schema({
         news: [
             {
                 id: Schema.Types.ObjectId,
-                key: Number
+                key: String
             }
         ]
     }

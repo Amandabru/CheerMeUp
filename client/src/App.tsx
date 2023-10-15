@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import HomeView from './pages/home/HomeView';
 import NavBarPresenter from './components/NavBar/NavBarPresenter';
 import { useState, useEffect } from 'react';
@@ -7,13 +7,14 @@ import { User } from './userModel';
 import * as userApi from './api/user';
 import LoginPresenter from './components/Login/LoginPresenter';
 import SignUpPresenter from './components/SignUp/SignUpPresenter';
-import SuggestionPresenter from './pages/suggestions/SuggestionPresenter';
+import ActivityPresenter from './pages/activities/ActivityPresenter';
 import { CheerModel } from './models/model';
 import JokePresenter from './pages/jokes/JokePresenter';
 import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
-import useModelProp from './hooks/useModelProp';
+import HomePresenter from './pages/home/HomePresenter';
+import ProfilePresenter from './pages/profile/ProfilePresenter';
 
 function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -49,7 +50,6 @@ function App({ model }: { model: CheerModel }) {
             try {
                 if (loggedInUser) {
                     const likedJoys = await userApi.getLikedJoys();
-                    console.log('liked app', likedJoys);
                     model.setLikedJoys(likedJoys);
                 }
             } catch (error) {
@@ -58,6 +58,13 @@ function App({ model }: { model: CheerModel }) {
         }
         if (loggedInUser) {
             fetchLikedJokes();
+        } else {
+            model.setLikedJoys({
+                jokes: [],
+                activities: [],
+                memes: [],
+                news: []
+            });
         }
     }, [loggedInUser]);
 
@@ -72,7 +79,16 @@ function App({ model }: { model: CheerModel }) {
             {loggedInUser && <AnimationPresenter user={loggedInUser} />}
             <div>
                 <Routes>
-                    <Route path="/" element={<HomeView />} />
+                    <Route
+                        path="/"
+                        element={
+                            <HomePresenter
+                                model={model}
+                                user={loggedInUser}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
+                    />
                     <Route
                         path="/jokes"
                         element={
@@ -85,17 +101,41 @@ function App({ model }: { model: CheerModel }) {
                     />
                     <Route
                         path="/memes"
-                        element={<MemePresenter model={model} />}
+                        element={
+                            <MemePresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
                     />
                     <Route
                         path="/news"
-                        element={<NewsPresenter model={model} />}
+                        element={
+                            <NewsPresenter
+                                model={model}
+                                user={loggedInUser ? loggedInUser : null}
+                                directToLogin={() => showModal('login_modal')}
+                            />
+                        }
                     />
-                    <Route
-                        path="/suggestions"
-                        element={<SuggestionPresenter />}
-                    />
-                    <Route path="/profile" element={<SuggestionPresenter />} />
+                    <Route path="/activities" element={<ActivityPresenter />} />
+                    {loggedInUser ? (
+                        <Route
+                            path="/profile"
+                            element={
+                                <ProfilePresenter
+                                    model={model}
+                                    user={loggedInUser}
+                                />
+                            }
+                        />
+                    ) : (
+                        <Route
+                            path="/profile"
+                            element={<Navigate to="/" replace />}
+                        />
+                    )}
                 </Routes>
             </div>
             <SignUpPresenter

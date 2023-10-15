@@ -4,10 +4,10 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { getMemesController } from './controllers/getMemesController';
 import { getJokeController } from './controllers/getJokeController';
-import { getSuggestionsController } from './controllers/getSuggestionsController';
+import { getActivityController } from './controllers/getActivityController';
 import { postLikeController } from './controllers/postLikeController';
 import * as UserController from './controllers/userController';
-import { getPopularController } from './controllers/getPopularController';
+import { getPopularController } from './controllers/getPopularController2';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
@@ -51,7 +51,7 @@ app.use(
 app.get('/news', getNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
-app.get('/suggestions/:type/:multipleParticipants', getSuggestionsController);
+app.get('/activities/:type/:multipleParticipants', getActivityController);
 
 app.get('/joyExists/:type/:searchParam/:searchParamValue', getJoyController);
 app.patch('/like', requiresAuth, patchLikeController);

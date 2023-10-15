@@ -1,8 +1,20 @@
-import { MemeType, NewsType, JokeType, SuggestionType } from './Types';
+import {
+    MemeType,
+    NewsType,
+    JokeType,
+    ActivityType,
+    DataBaseType
+} from './Types';
 
 function promiseNoData(
     promise: Promise<
-        string | MemeType[] | NewsType[] | JokeType | SuggestionType | null
+        | string
+        | MemeType[]
+        | NewsType[]
+        | JokeType
+        | ActivityType
+        | DataBaseType[]
+        | null
     > | null,
     data:
         | string
@@ -10,7 +22,8 @@ function promiseNoData(
         | MemeType[]
         | NewsType[]
         | JokeType
-        | SuggestionType
+        | ActivityType
+        | DataBaseType[]
         | null,
     error: Error | null,
     noDataMessage: string
@@ -21,7 +34,9 @@ function promiseNoData(
         (!data || (Array.isArray(data) && data.length === 0)) &&
         !error
     ) {
-        return <span className="loading loading-dots loading-md"></span>;
+        return (
+            <span className="loading loading-dots loading-md top-1/2 left-1/2 absolute"></span>
+        );
     } else if (!data && error) {
         return <span> {error.message} </span>;
     }
