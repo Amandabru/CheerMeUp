@@ -78,7 +78,7 @@ function MemeView({
                                             ? likePost(memeObject)
                                             : showUserMustLogin();
                                     }}
-                                    darkAttributes=" dark:bg-[#135961] dark:text-gray-200"
+                                    darkAttributes=" dark:bg-[#0e464d] dark:text-gray-200"
                                 ></Card>
                             );
                         })
