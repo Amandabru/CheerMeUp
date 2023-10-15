@@ -56,7 +56,9 @@ function HomeView({
                                             : false
                                     }
                                     handleLike={() => {
-                                        likeMeme(joy.content);
+                                        user
+                                            ? likeMeme(joy.content)
+                                            : showUserMustLogin();
                                     }}
                                 ></MemeCard>
                             );
@@ -83,7 +85,9 @@ function HomeView({
                                             : false
                                     }
                                     handleLike={() => {
-                                        likeNews(joy.content);
+                                        user
+                                            ? likeNews(joy.content)
+                                            : showUserMustLogin();
                                     }}
                                 ></NewsCard>
                             );
@@ -102,7 +106,9 @@ function HomeView({
                                             : false
                                     }
                                     handleLike={() => {
-                                        likeJoke(joy.content);
+                                        user
+                                            ? likeJoke(joy.content)
+                                            : showUserMustLogin();
                                     }}
                                 ></JokeCard>
                             );
