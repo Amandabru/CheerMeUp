@@ -28,7 +28,7 @@ function ActivityView({
             <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div className="text-left mb-2">
                     <select
-                        className="select select-bordered select-sm bg-violet-200"
+                        className="select select-bordered select-sm bg-violet-200 shadow-md"
                         value={activityType}
                         onChange={(e) => {
                             const newActivityType = e.target.value;
@@ -69,11 +69,14 @@ function ActivityView({
                     </span>
                 </div>
 
-                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
+                <div
+                    className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full 
+                    overflow-x-auto flex items-center justify-center shadow-lg relative"
+                >
                     <span>{randomActivity}</span>
                 </div>
                 <button
-                    className="btn mt-5 transition-transform min-w-fit"
+                    className="btn mt-5 transition-transform min-w-fit shadow-lg"
                     onClick={() => {
                         onNewActivity(activityType);
                         console.log(
