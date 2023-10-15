@@ -1,5 +1,5 @@
 import { NewsType } from '../../Types';
-import Card from '../../components/Card';
+import { NewsCard } from '../../components/Card';
 import { User } from '../../userModel';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
@@ -57,15 +57,14 @@ function NewsView({
                     {newsData ? (
                         newsData.map((newsObject, index) => {
                             return (
-                                <Card
-                                    type="news"
+                                <NewsCard
                                     key={index}
                                     image={newsObject.urlToImage}
                                     title={newsObject.title}
                                     text={newsObject.text}
                                     author={newsObject.author}
                                     published={newsObject.publishedAt}
-                                    source={newsObject.source.name}
+                                    source={newsObject.source}
                                     url={newsObject.url}
                                     isLiked={
                                         likedNews.find(
@@ -80,7 +79,7 @@ function NewsView({
                                             ? likePost(newsObject)
                                             : showUserMustLogin();
                                     }}
-                                ></Card>
+                                ></NewsCard>
                             );
                         })
                     ) : (

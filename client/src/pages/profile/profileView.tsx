@@ -1,6 +1,6 @@
 import { User } from '../../userModel';
 import { MemeType, NewsType, JokeType } from '../../Types';
-import Card from '../../components/Card';
+import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
 import { SadSmiley } from '../../components/UI/Icons';
 import { Link } from 'react-router-dom';
 
@@ -43,8 +43,7 @@ function ProfileView({
                 {likedMemes.length > 0 ? (
                     likedMemes.map((memeObject, index) => {
                         return (
-                            <Card
-                                type="meme"
+                            <MemeCard
                                 key={index}
                                 image={memeObject.url}
                                 isLiked={
@@ -57,7 +56,7 @@ function ProfileView({
                                 handleLike={() => {
                                     likeMemePost(memeObject);
                                 }}
-                            ></Card>
+                            ></MemeCard>
                         );
                     })
                 ) : (
@@ -76,8 +75,7 @@ function ProfileView({
                 {likedNews.length > 0 ? (
                     likedNews.map((newsObject, index) => {
                         return (
-                            <Card
-                                type="news"
+                            <NewsCard
                                 key={index}
                                 image={newsObject.urlToImage}
                                 title={newsObject.title}
@@ -96,7 +94,7 @@ function ProfileView({
                                 handleLike={() => {
                                     likeNewsPost(newsObject);
                                 }}
-                            ></Card>
+                            ></NewsCard>
                         );
                     })
                 ) : (
@@ -115,8 +113,7 @@ function ProfileView({
                 {likedJokes.length > 0 ? (
                     likedJokes.map((jokeObject, index) => {
                         return (
-                            <Card
-                                type="joke"
+                            <JokeCard
                                 key={index}
                                 text={jokeObject.text}
                                 isLiked={
@@ -129,7 +126,7 @@ function ProfileView({
                                 handleLike={() => {
                                     likeJokePost(jokeObject);
                                 }}
-                            ></Card>
+                            ></JokeCard>
                         );
                     })
                 ) : (

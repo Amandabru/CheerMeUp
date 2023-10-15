@@ -1,4 +1,4 @@
-import Card from '../../components/Card';
+import { MemeCard } from '../../components/Card';
 import { MemeType } from '../../Types';
 import { User } from '../../userModel';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
@@ -58,8 +58,7 @@ function MemeView({
                     {memeData ? (
                         memeData.map((memeObject, index) => {
                             return (
-                                <Card
-                                    type="meme"
+                                <MemeCard
                                     key={index}
                                     image={memeObject.url}
                                     isLiked={
@@ -75,7 +74,7 @@ function MemeView({
                                             ? likePost(memeObject)
                                             : showUserMustLogin();
                                     }}
-                                ></Card>
+                                ></MemeCard>
                             );
                         })
                     ) : (
