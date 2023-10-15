@@ -15,7 +15,7 @@ function HomeView({
     return (
         <div
             className="bg-pink-300 text-black h-full w-full fixed
-        dark:bg-[#461220]"
+        dark:bg-[#531942]"
         >
             <div>
                 <h1>
