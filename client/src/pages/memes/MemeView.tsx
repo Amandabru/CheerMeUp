@@ -86,15 +86,17 @@ function MemeView({
                     )}
                 </section>
                 <div className="flex justify-center items-center !scroll-smooth pb-5">
-                    <button
-                        className="btn btn-accent mt-10 mr-10"
-                        onClick={() => {
-                            onDecrement();
-                            console.log('- pressed');
-                        }}
-                    >
-                        <AiOutlineArrowLeft style={{ scale: '2' }} />
-                    </button>
+                    {count ? (
+                        <button
+                            className="btn btn-accent mt-10 mr-10"
+                            onClick={() => {
+                                onDecrement();
+                                console.log('- pressed');
+                            }}
+                        >
+                            <AiOutlineArrowLeft style={{ scale: '2' }} />
+                        </button>
+                    ) : null}
                     <button
                         className="btn btn-accent mt-10"
                         onClick={() => {
