@@ -9,6 +9,35 @@ import { v4 as uuidv4 } from 'uuid';
 import UserVerification from '../models/UserVerification';
 import nodemailer from 'nodemailer';
 import path from 'path';
+import * as fs from 'fs';
+import { ObjectId, Types } from 'mongoose';
+
+// type UserModelType = {
+//     username: string,
+//     email: string,
+//     password: string,
+//     verified?: boolean | undefined,
+//     profilePicture?: string | undefined;
+//     likedPosts?: {
+//         joke: {
+//             id?: Types.ObjectId | undefined;
+//             key?: number | undefined;
+//         }[];
+//         activity: {
+//             id?: Types.ObjectId | undefined;
+//             key?: string | undefined;
+//         }[];
+//         meme: {
+//             id?: Types.ObjectId | undefined;
+//             key?: string | undefined;
+//         }[];
+//         news: {
+//             id?: Types.ObjectId | undefined;
+//             key?: string | undefined;
+//         }[];
+//     } | undefined;
+//     _id: ObjectId,
+// }
 
 interface SignUpBody {
     username?: string;
@@ -18,23 +47,19 @@ interface SignUpBody {
 
 // Nodemailer
 let transporter = nodemailer.createTransport({
-    service: 'hotmail', // e.g., 'hotmail' or 'Gmail'
+    service: 'hotmail',
     auth: {
-        user:'cheermeupnow@outlook.com', // Your email address
-        pass:'Bajskorvimunnen98', // Your email password
+        // TODO: fix so it reads from .env
+        user:'cheermeupnow@outlook.com',
+        pass:'Bajskorvimunnen98', 
   },
 })
 
-// transporter.verify((error: Error | null) => {
-//     if(error)
-//         console.log(error)
-//     else{
-//         console.log("Ready to send messages")
-//     }
-// })
-
-// fix any
+// TODO: fix any
 async function sendVerificationEmail(result: any, res: any){
+    console.log(result)
+    console.log(res)
+
    const url = process.env.URL;
    const uniqueString = uuidv4() + result._id;
 
@@ -43,7 +68,7 @@ async function sendVerificationEmail(result: any, res: any){
     to: result.email,
     subject: "Verify Your Email",
     html: `<p>Verify your email address to complete the signup.</p>
-    <p>Press <a href=${"http://localhost:5000/users/verifyUser/" + result._id + "/" + uniqueString } > here </a> to proceed </p>`,
+    <p>Press <a href=${url + "users/verifyUser/" + result._id + "/" + uniqueString } >here</a> to proceed </p>`,
    }
 
    bcrypt
@@ -95,7 +120,8 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
                 .then(() => {
                     UserVerification.deleteOne({userId})
                     .then(() => {
-                        res.redirect("/users/verifiedPage");
+                        let message = "You have successfully verified your email. Head back to the website and proceed to login.";
+                        res.redirect(`/users/verifiedPage?message=${encodeURIComponent(message)}`);
                     })
                     .catch((error) => {
                         next(error);
@@ -114,15 +140,18 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
         }})
 
     .catch(() => {
-        let message = "An error occured while checking for existing user verification record."
-        res.redirect("users/verifiedPage");
+        let message = "An error occured while checking for existing user verification record. Please try again."
+        res.redirect(`/users/verifiedPage?message=${encodeURIComponent(message)}`);
     })
 
 };
 
 export const getVerifiedPage: RequestHandler = (req, res) =>
 {
-    res.sendFile(path.join(__dirname, "../verifiedView.html"))
+    const message: any = req.query.message || '';
+    const htmlContent = fs.readFileSync(path.join(__dirname, "../verifiedView.html"), 'utf8');
+    const updatedHtmlContent = htmlContent.replace('<!-- Message will be displayed here -->', message);
+    res.send(updatedHtmlContent);
 }
 
 
@@ -166,7 +195,6 @@ export const signUp: RequestHandler<
             // Handle email verification
             sendVerificationEmail(result, res);
         });
-
 
         // req.session.userId = newUser._id;
         // res.status(201).json(newUser);
