@@ -23,7 +23,7 @@ function ProfileView({
     likeJokePost
 }: {
     loggedInUser: User;
-    likedJoys: (MemeType | NewsType | JokeType)[];
+    likedJoys: any[]; // objects inside of array is of MemeType, NewsType, JokeType
     likedMemes: MemeType[];
     likedNews: NewsType[];
     likedJokes: JokeType[];
@@ -38,71 +38,77 @@ function ProfileView({
             <div className="flex justify-center text-3xl font-bold">
                 <h1 className="my-10">Hi {user?.username}</h1>
             </div>
-            
+
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
                 {likedJoys.length > 0 ? (
                     likedJoys.map((object, index) => {
                         let cardComponent = null;
 
-                        if ('meme' in object) {
+                        if (object.type === 'meme') {
                             // This is a MemeType object
                             cardComponent = (
                                 <MemeCard
                                     key={index}
                                     image={object.url}
-                                    isLiked={likedMemes.find((meme) => meme.url === object.url) ? true : false}
+                                    isLiked={
+                                        likedMemes.find(
+                                            (meme) => meme.url === object.url
+                                        )
+                                            ? true
+                                            : false
+                                    }
                                     handleLike={() => {
                                         likeMemePost(object);
                                     }}
-                                    ></Card>
+                                ></MemeCard>
                             );
-                        } else if ('news' in object) {
+                        } else if (object.type === 'news') {
                             // This is a NewsType object
                             cardComponent = (
                                 <NewsCard
-                                key={index}
-                                title={object.title}
-                                image={object.urlToImage}
-                                text={object.text}
-                                author={object.author}
-                                published={object.publishedAt}
-                                source={object.source}
-                                url={object.url}
-                                isLiked={
-                                    likedNews.find(
-                                        (news) => news.url === object.url
-                                    )
-                                        ? true
-                                        : false
-                                }
-                                handleLike={() => {
-                                    likeNewsPost(object);
-                                }}
-                            ></NewsCard>
+                                    key={index}
+                                    title={object.title}
+                                    image={object.urlToImage}
+                                    text={object.text}
+                                    author={object.author}
+                                    published={object.publishedAt}
+                                    source={object.source}
+                                    url={object.url}
+                                    isLiked={
+                                        likedNews.find(
+                                            (news) => news.url === object.url
+                                        )
+                                            ? true
+                                            : false
+                                    }
+                                    handleLike={() => {
+                                        likeNewsPost(object);
+                                    }}
+                                ></NewsCard>
                             );
-                        } else if ('joke' in object) {
+                        } else if (object.type === 'joke') {
                             // This is a JokeType object
                             cardComponent = (
                                 <JokeCard
-                                key={index}
-                                text={object.text}
-                                isLiked={
-                                    likedJokes.find(
-                                        (joke) => joke.text === object.text
-                                    )
-                                        ? true
-                                        : false
-                                }
-                                handleLike={() => {
-                                    likeJokePost(object);
-                                }}
-                            ></JokeCard>
+                                    key={index}
+                                    text={object.text}
+                                    isLiked={
+                                        likedJokes.find(
+                                            (joke) => joke.text === object.text
+                                        )
+                                            ? true
+                                            : false
+                                    }
+                                    handleLike={() => {
+                                        likeJokePost(object);
+                                    }}
+                                ></JokeCard>
                             );
                         }
 
                         return cardComponent;
                     })
-                )  : (
+                ) : (
                     <>
                         <div>You have no liked content {SadSmiley()}</div>
                         <Link to="/memes">
@@ -113,9 +119,6 @@ function ProfileView({
                     </>
                 )}{' '}
             </section>
-           
-         
-            
         </div>
     );
 }
@@ -228,5 +231,3 @@ export default ProfileView;
                 )}
             </section>
         </div> */
-
-
