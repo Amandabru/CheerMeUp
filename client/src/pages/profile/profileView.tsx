@@ -38,6 +38,93 @@ function ProfileView({
             <div className="flex justify-center text-3xl font-bold">
                 <h1 className="my-10">Hi {user?.username}</h1>
             </div>
+            
+            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+                {likedJoys.length > 0 ? (
+                    likedJoys.map((object, index) => {
+                        let cardComponent = null;
+
+                        if ('meme' in object) {
+                            // This is a MemeType object
+                            cardComponent = (
+                                <MemeCard
+                                    key={index}
+                                    image={object.url}
+                                    isLiked={likedMemes.find((meme) => meme.url === object.url) ? true : false}
+                                    handleLike={() => {
+                                        likeMemePost(object);
+                                    }}
+                                    ></Card>
+                            );
+                        } else if ('news' in object) {
+                            // This is a NewsType object
+                            cardComponent = (
+                                <NewsCard
+                                key={index}
+                                title={object.title}
+                                image={object.urlToImage}
+                                text={object.text}
+                                author={object.author}
+                                published={object.publishedAt}
+                                source={object.source}
+                                url={object.url}
+                                isLiked={
+                                    likedNews.find(
+                                        (news) => news.url === object.url
+                                    )
+                                        ? true
+                                        : false
+                                }
+                                handleLike={() => {
+                                    likeNewsPost(object);
+                                }}
+                            ></NewsCard>
+                            );
+                        } else if ('joke' in object) {
+                            // This is a JokeType object
+                            cardComponent = (
+                                <JokeCard
+                                key={index}
+                                text={object.text}
+                                isLiked={
+                                    likedJokes.find(
+                                        (joke) => joke.text === object.text
+                                    )
+                                        ? true
+                                        : false
+                                }
+                                handleLike={() => {
+                                    likeJokePost(object);
+                                }}
+                            ></JokeCard>
+                            );
+                        }
+
+                        return cardComponent;
+                    })
+                )  : (
+                    <>
+                        <div>You have no liked content {SadSmiley()}</div>
+                        <Link to="/memes">
+                            <button className="btn btn-accent mt-10">
+                                Show me memes!
+                            </button>
+                        </Link>
+                    </>
+                )}{' '}
+            </section>
+           
+         
+            
+        </div>
+    );
+}
+export default ProfileView;
+
+/* <div className="bg-red-300 text-black min-h-screen bg-fixed">
+            <div className="flex justify-center text-3xl font-bold">
+                <h1 className="my-10">Hi {user?.username}</h1>
+            </div>
             {SectionHeader('Memes')}
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
                 {likedMemes.length > 0 ? (
@@ -73,26 +160,26 @@ function ProfileView({
             {SectionHeader('News')}
             <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
                 {likedNews.length > 0 ? (
-                    likedNews.map((newsObject, index) => {
+                    likedNews.map((object, index) => {
                         return (
                             <NewsCard
                                 key={index}
-                                image={newsObject.urlToImage}
-                                title={newsObject.title}
-                                text={newsObject.text}
-                                author={newsObject.author}
-                                published={newsObject.publishedAt}
-                                source={newsObject.source}
-                                url={newsObject.url}
+                                image={object.urlToImage}
+                                title={object.title}
+                                text={object.text}
+                                author={object.author}
+                                published={object.publishedAt}
+                                source={object.source}
+                                url={object.url}
                                 isLiked={
                                     likedNews.find(
-                                        (news) => news.url === newsObject.url
+                                        (news) => news.url === object.url
                                     )
                                         ? true
                                         : false
                                 }
                                 handleLike={() => {
-                                    likeNewsPost(newsObject);
+                                    likeNewsPost(object);
                                 }}
                             ></NewsCard>
                         );
@@ -140,8 +227,6 @@ function ProfileView({
                     </>
                 )}
             </section>
-        </div>
-    );
-}
+        </div> */
 
-export default ProfileView;
+
