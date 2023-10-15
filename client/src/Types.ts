@@ -1,8 +1,10 @@
 export type ActivityType = {
+    type: string;
     text: string;
 };
 
 export type NewsType = {
+    type: string;
     source: string;
     author: string;
     title: string;
@@ -13,11 +15,13 @@ export type NewsType = {
 };
 
 export type MemeType = {
+    type: string;
     title: string;
     url: string;
 };
 
 export type JokeType = {
+    type: string;
     text: string;
     apiId: number;
 };
