@@ -62,12 +62,23 @@ const SignUpView = ({
                         error={errors.password}
                     />
                     <button
-                        className="btn btn-secondary mt-2 w-full"
+                        className={
+                            isSubmitting
+                                ? 'invisible'
+                                : 'btn btn-secondary mt-2 w-full visible'
+                        }
                         type="submit"
                         disabled={isSubmitting}
                     >
                         Sign Up
                     </button>
+                    <span
+                        className={
+                            isSubmitting
+                                ? 'loading loading-dots loading-md'
+                                : 'invisible'
+                        }
+                    ></span>
                     <div className="text-sm mt-2">
                         {' '}
                         Already have an account?{' '}
