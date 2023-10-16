@@ -1,7 +1,13 @@
 import { fetchData } from './fetchData';
 import { API_URL } from './config';
 import { User } from '../userModel.ts';
-import { DataBaseType, JokeType, MemeType, NewsType } from '../Types.ts';
+import {
+    DataBaseType,
+    DataStructure,
+    JokeType,
+    MemeType,
+    NewsType
+} from '../Types.ts';
 
 export async function getLoggedInUser(): Promise<User> {
     const response = await fetchData(`${API_URL}/users`, {
@@ -53,9 +59,7 @@ export async function logout() {
     });
 }
 
-export async function getLikedJoys(): Promise<
-    DataBaseType[] | JokeType[] | MemeType[] | NewsType[]
-> {
+export async function getLikedJoys(): Promise<DataStructure> {
     const response = await fetchData(`${API_URL}/users/likedJoys`, {
         method: 'GET',
         credentials: 'include'
