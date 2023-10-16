@@ -51,7 +51,7 @@ export function NewsCard({
 }) {
     return (
         <div
-            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg}
+            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg
            ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
@@ -94,14 +94,19 @@ export function NewsCard({
 export function MemeCard({
     image,
     handleLike,
-    isLiked
+    isLiked,
+    darkAttributes
 }: {
     image: string;
     handleLike: Function;
     isLiked: boolean;
+    darkAttributes: string;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg shadow-lg
+        ${darkAttributes} `}
+        >
             <div className="flex flex-col h-full">
                 <img
                     className="object-contain w-128 h-5/6 mx-auto"
