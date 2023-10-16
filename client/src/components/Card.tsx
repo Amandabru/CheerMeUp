@@ -93,7 +93,7 @@ export function MemeCard({
         <div className="bg-white w-96 md:w-144 h-96 md:h-128 rounded-xl overflow-hidden shadow-xl">
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-80 md:w-128 h-5/6 mx-auto"
+                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8"
                     src={image}
                 />
                 <div className="flex-grow"></div>{' '}
