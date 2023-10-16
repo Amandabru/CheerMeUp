@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import HomeView from './pages/home/HomeView';
 import NavBarPresenter from './components/NavBar/NavBarPresenter';
 import { useState, useEffect } from 'react';
 import { User } from './userModel';
@@ -139,15 +138,19 @@ function App({ model }: { model: CheerModel }) {
                 </Routes>
             </div>
             <SignUpPresenter
-                onSignUpSuccessful={(user) => {
-                    setLoggedInUser(user);
+                directToLogin={() => {
                     closeModal('signup_modal');
+                    showModal('login_modal');
                 }}
             />
             <LoginPresenter
                 onLoginSuccessful={(user) => {
                     setLoggedInUser(user);
                     closeModal('login_modal');
+                }}
+                directToSignup={() => {
+                    closeModal('login_modal');
+                    showModal('signup_modal');
                 }}
             />
         </>

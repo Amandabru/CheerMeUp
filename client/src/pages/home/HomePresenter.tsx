@@ -3,10 +3,16 @@ import HomeView from './HomeView';
 import { User } from '../../userModel';
 import { getPopular } from '../../api/getPopular';
 import { useEffect, useState } from 'react';
-import { DataBaseType, JokeType, MemeType, NewsType } from '../../Types';
-import useModelProp from '../../hooks/useModelProp';
+import {
+    DataBaseType,
+    DataStructure,
+    MemeType,
+    NewsType,
+    JokeType
+} from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
+import useModelProp from '../../hooks/useModelProp';
 
 function HomePresenter({
     model,
@@ -28,7 +34,7 @@ function HomePresenter({
     const [dataRecentlyLiked, errorRecentlyLiked] =
         usePromise(promiseRecentlyLiked);
 
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     useEffect(() => {
         async function getPopularJoys() {

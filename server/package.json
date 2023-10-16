@@ -21,7 +21,10 @@
     "express-session": "^1.17.3",
     "http-errors": "^2.0.0",
     "mongoose": "^7.5.1",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^6.9.6",
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -31,6 +34,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.7.1",
     "@types/node-fetch": "^2.6.5",
+    "@types/nodemailer": "^6.4.11",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "tsx": "^3.13.0",
