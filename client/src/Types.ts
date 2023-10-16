@@ -31,7 +31,7 @@ export type DataBaseType = {
     type: string;
     likes: number;
     content: JokeType | MemeType | NewsType;
-    lastliked: Date;
+    lastLiked: Date;
 };
 
 export type JoyToUpdateType = {

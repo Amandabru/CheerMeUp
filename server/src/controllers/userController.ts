@@ -10,6 +10,7 @@ import nodemailer from 'nodemailer';
 import path from 'path';
 import * as fs from 'fs';
 import { config } from 'dotenv';
+import { MemeType, JokeType, NewsType } from '../../../client/src/Types';
 
 config();
 
@@ -272,35 +273,66 @@ export const getLikedJoys: RequestHandler = async (req, res, next) => {
         const user = await UserModel.findOne({
             _id: authenticatedUserId
         }).exec();
-        let likedMemes = await Promise.all(
+
+        let likedMemes: Array<MemeType | null> = await Promise.all(
             (user?.likedPosts?.meme || []).map(async (joy) => {
                 const meme = await JoyModel.findOne({ _id: joy.id }).exec();
-                return meme ? meme.content : null;
+                return meme
+                    ? {
+                          type: meme.type,
+                          title: meme.content.title,
+                          url: meme.content.url
+                      }
+                    : null;
             })
         );
-        likedMemes = likedMemes.filter((meme) => meme !== null);
 
-        let likedJokes = await Promise.all(
+        const likedMemesNotNull: Array<MemeType> = likedMemes.filter(
+            (meme): meme is MemeType => meme !== null
+        ) as MemeType[];
+
+        let likedJokes: Array<JokeType | null> = await Promise.all(
             (user?.likedPosts?.joke || []).map(async (joy) => {
-                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
-                return meme ? meme.content : null;
+                const joke = await JoyModel.findOne({ _id: joy.id }).exec();
+                return joke
+                    ? {
+                          type: joke.type,
+                          text: joke.content.text,
+                          apiId: joke.content.apiId
+                      }
+                    : null;
             })
         );
 
-        likedJokes = likedJokes.filter((joke) => joke !== null);
+        const likedJokesNotNull: Array<JokeType> = likedJokes.filter(
+            (joke): joke is JokeType => joke !== null
+        ) as JokeType[];
 
-        let likedNews = await Promise.all(
+        const likedNews: Array<NewsType | null> = await Promise.all(
             (user?.likedPosts?.news || []).map(async (joy) => {
-                const meme = await JoyModel.findOne({ _id: joy.id }).exec();
-                return meme ? meme.content : null;
+                const news = await JoyModel.findOne({ _id: joy.id }).exec();
+                return news
+                    ? {
+                          type: news.type,
+                          source: news.content.source,
+                          author: news.content.author,
+                          title: news.content.title,
+                          text: news.content.text,
+                          url: news.content.url,
+                          urlToImage: news.content.urlToImage,
+                          publishedAt: news.content.publishedAt
+                      }
+                    : null;
             })
         );
-        likedNews = likedNews.filter((news) => news !== null);
+        const likedNewsNotNull: Array<NewsType> = likedNews.filter(
+            (news): news is NewsType => news !== null
+        ) as NewsType[];
 
         const likedJoys = {
-            memes: likedMemes,
-            jokes: likedJokes,
-            news: likedNews
+            memes: likedMemesNotNull,
+            jokes: likedJokesNotNull,
+            news: likedNewsNotNull
         };
         res.status(200).json(likedJoys);
     } catch (error) {
