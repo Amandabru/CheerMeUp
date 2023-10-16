@@ -45,7 +45,7 @@ function JokeView({
             </h2>
             <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div
-                    className="btn-group mb-5 shadow-lg"
+                    className="btn-group mb-5 drop-shadow-lg"
                     onClick={(e) => {
                         const target = e.target as HTMLInputElement;
                         jokeType = [target.value];
