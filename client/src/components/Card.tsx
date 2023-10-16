@@ -6,10 +6,7 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={true}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)',
-                right: '-505px',
-                top: '-450px',
-                position: 'relative'
+                transform: 'scale(1.5)'
             }}
         />
     ) : (
@@ -17,10 +14,7 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={false}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)',
-                right: '-505px',
-                top: '-450px',
-                position: 'relative'
+                transform: 'scale(1.5)'
             }}
         />
     );
@@ -36,7 +30,8 @@ export function NewsCard({
     url,
     handleLike,
     isLiked,
-    darkAttributes
+    darkAttributes,
+    numberLikes
 }: {
     image: string;
     title: string;
@@ -47,11 +42,12 @@ export function NewsCard({
     url: string;
     handleLike: Function;
     isLiked: boolean;
-    darkAttributes: string;
+    darkAttributes?: string;
+    numberLikes?: number;
 }) {
     return (
         <div
-            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg
+            className={`bg-white w-96 md:w-144 h-128 md:h-128 rounded-xl overflow-hidden shadow-xl
            ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
@@ -79,12 +75,13 @@ export function NewsCard({
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
                 <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
+                    className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
                     onClick={() => {
                         handleLike();
                     }}
                 >
                     {CheckIfLiked(isLiked)}
+                    <span className="text-s">{numberLikes}</span>
                 </button>
             </div>
         </div>
@@ -95,16 +92,18 @@ export function MemeCard({
     image,
     handleLike,
     isLiked,
-    darkAttributes
+    darkAttributes,
+    numberLikes
 }: {
     image: string;
     handleLike: Function;
     isLiked: boolean;
-    darkAttributes: string;
+    darkAttributes?: string;
+    numberLikes: any;
 }) {
     return (
         <div
-            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg shadow-lg
+            className={`bg-white w-96 md:w-144 h-96 md:h-128 rounded-xl overflow-hidden shadow-xl
         ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
@@ -115,12 +114,13 @@ export function MemeCard({
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
                 <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
+                    className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
                     onClick={() => {
                         handleLike();
                     }}
                 >
                     {CheckIfLiked(isLiked)}
+                    <span className="text-s">{numberLikes}</span>
                 </button>
             </div>
         </div>
@@ -131,12 +131,14 @@ export function JokeCard({
     text,
     handleLike,
     isLiked,
-    darkAttributes
+    darkAttributes,
+    numberLikes
 }: {
     text: string;
     handleLike: Function;
     isLiked: boolean;
-    darkAttributes: string;
+    darkAttributes?: string;
+    numberLikes?: any;
 }) {
     return (
         <div
@@ -150,12 +152,13 @@ export function JokeCard({
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
                 <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
+                    className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
                     onClick={() => {
                         handleLike();
                     }}
                 >
                     {CheckIfLiked(isLiked)}
+                    <span className="text-s">{numberLikes}</span>
                 </button>
             </div>
         </div>

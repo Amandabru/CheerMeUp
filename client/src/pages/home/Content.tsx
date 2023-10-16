@@ -43,6 +43,7 @@ function Content({
                     handleLike={() => {
                         user ? likeMeme(joy.content) : showUserMustLogin();
                     }}
+                    numberLikes={joy.likes}
                 ></MemeCard>
             );
         } else if (joy.type === 'news') {
@@ -66,6 +67,7 @@ function Content({
                     handleLike={() => {
                         user ? likeNews(joy.content) : showUserMustLogin();
                     }}
+                    numberLikes={joy.likes}
                 ></NewsCard>
             );
         } else if (joy.type === 'joke') {
@@ -84,6 +86,7 @@ function Content({
                     handleLike={() => {
                         user ? likeJoke(joy.content) : showUserMustLogin();
                     }}
+                    numberLikes={joy.likes}
                 ></JokeCard>
             );
         }
