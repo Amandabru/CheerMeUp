@@ -22,7 +22,6 @@ function HomeView({
     likeJoke: Function;
     showUserMustLogin: Function;
 }) {
-    console.log('mostlikedJoys', mostLikedJoys);
     const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
         'best'
     );
