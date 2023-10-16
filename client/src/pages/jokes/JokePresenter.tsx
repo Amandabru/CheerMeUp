@@ -3,7 +3,7 @@ import JokeView from './JokeView';
 import { useState } from 'react';
 import usePromise from '../../hooks/usePromise';
 import { getJoke } from '../../api/getJoke';
-import { JokeType } from '../../Types';
+import { DataStructure, JokeType } from '../../Types';
 import santa from '../../assets/audio/santa.mp3';
 import spooky from '../../assets/audio/spooky.mp3';
 import { CheerModel } from '../../models/model';
@@ -24,7 +24,7 @@ function JokePresenter({
     const [jokeType, setJokeType] = useState<string[]>([]);
     let santaLaugh = new Audio(santa);
     let spookyLaugh = new Audio(spooky);
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     const categories: string[] = [
         'programming',

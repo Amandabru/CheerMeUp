@@ -1,7 +1,7 @@
 import { CheerModel } from '../../models/model';
 import MemeView from './MemeView';
 import { useState, useEffect } from 'react';
-import { MemeType } from '../../Types';
+import { DataStructure, MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
 import promiseNoData from '../../PromiseNoData';
 import { User } from '../../userModel';
@@ -22,7 +22,7 @@ function MemePresenter({
     const [count, setCount] = useState<number>(initialCount);
 
     const [error, setError] = useState<Error | null>(null);
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
 

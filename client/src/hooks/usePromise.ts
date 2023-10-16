@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { JokeType, ActivityType } from '../Types';
+import { ActivityType } from '../Types';
 
 // TODO: any
 
