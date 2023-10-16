@@ -57,9 +57,9 @@ function JokePresenter({
                     joke,
                     error,
                     'Choose the type of joke you want'
-                ) || joke.text
+                ) || joke?.text
             }
-            randomJokeData={joke ? joke : null}
+            randomJokeData={(joke as JokeType) ? (joke as JokeType) : null}
             onChristmasClick={() => playSantaLaugh()}
             onSpookyClick={() => playSpookyLaugh()}
             jokeType={jokeType}
