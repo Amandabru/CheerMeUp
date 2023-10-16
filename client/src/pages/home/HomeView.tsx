@@ -1,8 +1,7 @@
 import { CheerModel } from '../../models/model';
 import { useState } from 'react';
 import { User } from '../../userModel';
-import { DataBaseType, DataStructure } from '../../Types';
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
+import { DataBaseType } from '../../Types';
 import ContentPresenter from './ContentPresenter';
 
 function HomeView({

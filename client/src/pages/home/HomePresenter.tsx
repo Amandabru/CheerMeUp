@@ -3,8 +3,7 @@ import HomeView from './HomeView';
 import { User } from '../../userModel';
 import { getPopular } from '../../api/getPopular';
 import { useEffect, useState } from 'react';
-import { DataBaseType, JokeType, MemeType, NewsType } from '../../Types';
-import useModelProp from '../../hooks/useModelProp';
+import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
 

@@ -1,13 +1,7 @@
 import { fetchData } from './fetchData';
 import { API_URL } from './config';
 import { User } from '../userModel.ts';
-import {
-    DataBaseType,
-    DataStructure,
-    JokeType,
-    MemeType,
-    NewsType
-} from '../Types.ts';
+import { DataStructure } from '../Types.ts';
 
 export async function getLoggedInUser(): Promise<User> {
     const response = await fetchData(`${API_URL}/users`, {

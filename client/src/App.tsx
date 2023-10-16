@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import HomeView from './pages/home/HomeView';
 import NavBarPresenter from './components/NavBar/NavBarPresenter';
 import { useState, useEffect } from 'react';
 import { User } from './userModel';
