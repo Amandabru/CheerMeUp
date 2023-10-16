@@ -90,7 +90,7 @@ export function MemeCard({
     isLiked: boolean;
 }) {
     return (
-        <div className="bg-white w-128 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
             <div className="flex flex-col h-full">
                 <img
                     className="object-contain w-128 h-5/6 mx-auto"
@@ -121,7 +121,7 @@ export function JokeCard({
     isLiked: boolean;
 }) {
     return (
-        <div className="bg-white w-96 h-64 rounded-3xl overflow-hidden shadow-lg">
+        <div className="bg-white w-144 h-64 rounded-3xl overflow-hidden shadow-lg">
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{text}</h1>
                 <div className="flex-grow"></div>{' '}
