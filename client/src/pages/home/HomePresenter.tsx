@@ -62,8 +62,8 @@ function HomePresenter({
         ) || (
             <HomeView
                 user={user}
-                mostLikedJoys={dataMostLiked}
-                recentlyLikedJoys={dataRecentlyLiked}
+                mostLikedJoys={dataMostLiked as DataBaseType[]}
+                recentlyLikedJoys={dataRecentlyLiked as DataBaseType[]}
                 likedJoys={likedJoys}
                 likeMeme={(meme: MemeType) => {
                     model.likeOrUnlikeMeme(meme);

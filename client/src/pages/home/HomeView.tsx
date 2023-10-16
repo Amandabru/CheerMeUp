@@ -30,7 +30,7 @@ function HomeView({
             return (
                 <Content
                     user={user}
-                    joys={mostLikedJoys}
+                    joys={mostLikedJoys as DataBaseType[]}
                     likedJoys={likedJoys}
                     likeMeme={likeMeme}
                     likeJoke={likeJoke}
@@ -42,7 +42,7 @@ function HomeView({
             return (
                 <Content
                     user={user}
-                    joys={recentlyLikedJoys}
+                    joys={recentlyLikedJoys as DataBaseType[]}
                     likedJoys={likedJoys}
                     likeMeme={likeMeme}
                     likeJoke={likeJoke}

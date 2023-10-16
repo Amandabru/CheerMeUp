@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { JokeType, ActivityType, MemeType, NewsType } from '../Types';
+import { JokeType, ActivityType, DataBaseType } from '../Types';
 
 // TODO: any
 
 function usePromise(
-    promise: Promise<ActivityType | JokeType> | null
-): [ActivityType | JokeType | null, Error | null] {
-    const [data, setData] = useState<ActivityType | JokeType | null>(null);
+    promise: Promise<ActivityType | JokeType | DataBaseType[]> | null
+): [ActivityType | JokeType | DataBaseType[] | null, Error | null] {
+    const [data, setData] = useState<
+        ActivityType | JokeType | DataBaseType[] | null
+    >(null);
     const [error, setError] = useState<Error | null>(null);
     useEffect(
         function () {
@@ -15,7 +17,7 @@ function usePromise(
             let cancelled = false;
             if (promise)
                 promise
-                    .then((dt: ActivityType | JokeType) => {
+                    .then((dt: ActivityType | JokeType | DataBaseType[]) => {
                         if (!cancelled) setData(dt);
                     })
                     .catch((er: Error) => {
