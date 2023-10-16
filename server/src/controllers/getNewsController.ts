@@ -37,7 +37,7 @@ export async function getNewsController(
             text: article.description,
             url: article.url,
             urlToImage: article.urlToImage,
-            publishedAt: article.publishedAt
+            publishedAt: article.publishedAt.substring(0, 10)
         }));
 
         if (!req.session.userId) {
