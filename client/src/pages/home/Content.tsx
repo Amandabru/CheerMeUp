@@ -8,7 +8,7 @@ import {
 } from '../../Types';
 import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
 
-function ContentView({
+function Content({
     user,
     joys,
     likedJoys,
@@ -92,4 +92,4 @@ function ContentView({
     });
 }
 
-export default ContentView;
+export default Content;

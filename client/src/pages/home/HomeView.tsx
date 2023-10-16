@@ -1,20 +1,25 @@
-import { CheerModel } from '../../models/model';
 import { useState } from 'react';
 import { User } from '../../userModel';
-import { DataBaseType } from '../../Types';
-import ContentPresenter from './ContentPresenter';
+import { DataBaseType, DataStructure } from '../../Types';
+import Content from './Content';
 
 function HomeView({
-    model,
     user,
     mostLikedJoys,
     recentlyLikedJoys,
+    likedJoys,
+    likeMeme,
+    likeNews,
+    likeJoke,
     showUserMustLogin
 }: {
-    model: CheerModel;
     user: User | null;
     mostLikedJoys: DataBaseType[];
     recentlyLikedJoys: DataBaseType[];
+    likedJoys: DataStructure;
+    likeMeme: Function;
+    likeNews: Function;
+    likeJoke: Function;
     showUserMustLogin: Function;
 }) {
     console.log(mostLikedJoys);
@@ -24,21 +29,27 @@ function HomeView({
     const renderSelectedView = () => {
         if (selectedView === 'best') {
             return (
-                <ContentPresenter
-                    model={model}
+                <Content
                     user={user}
                     joys={mostLikedJoys}
-                    directToLogin={showUserMustLogin}
-                ></ContentPresenter>
+                    likedJoys={likedJoys}
+                    likeMeme={likeMeme}
+                    likeJoke={likeJoke}
+                    likeNews={likeNews}
+                    showUserMustLogin={showUserMustLogin}
+                ></Content>
             );
         } else if (selectedView === 'recently') {
             return (
-                <ContentPresenter
-                    model={model}
+                <Content
                     user={user}
                     joys={recentlyLikedJoys}
-                    directToLogin={showUserMustLogin}
-                ></ContentPresenter>
+                    likedJoys={likedJoys}
+                    likeMeme={likeMeme}
+                    likeJoke={likeJoke}
+                    likeNews={likeNews}
+                    showUserMustLogin={showUserMustLogin}
+                ></Content>
             );
         }
     };
