@@ -20,6 +20,33 @@ function CheckIfLiked(isLiked: Boolean) {
     );
 }
 
+// check if card is displayed on home page or not
+function CheckIfHome({
+    handleLike,
+    isLiked,
+    numberLikes
+}: {
+    handleLike: Function | undefined;
+    isLiked: boolean | undefined;
+    numberLikes: number | undefined;
+}) {
+    return handleLike !== undefined && isLiked !== undefined ? (
+        <button
+            className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
+            onClick={() => {
+                handleLike();
+            }}
+        >
+            {CheckIfLiked(isLiked)}
+            <span className="text-s">{numberLikes}</span>
+        </button>
+    ) : (
+        <h1 className="text-md ml-8 mb-2">
+            Number of likes: <span className="ml-2 text-xl">{numberLikes}</span>
+        </h1>
+    );
+}
+
 export function NewsCard({
     image,
     title,
@@ -40,10 +67,10 @@ export function NewsCard({
     published: string;
     source: string;
     url: string;
-    handleLike: Function;
-    isLiked: boolean;
-    darkAttributes?: string;
-    numberLikes?: number;
+    darkAttributes: string;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
         <div
@@ -74,15 +101,7 @@ export function NewsCard({
                 </p>
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                    <span className="text-s">{numberLikes}</span>
-                </button>
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );
@@ -96,10 +115,10 @@ export function MemeCard({
     numberLikes
 }: {
     image: string;
-    handleLike: Function;
-    isLiked: boolean;
-    darkAttributes?: string;
-    numberLikes?: number;
+    darkAttributes: string;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
         <div
@@ -113,15 +132,7 @@ export function MemeCard({
                 />
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                    <span className="text-s">{numberLikes}</span>
-                </button>
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );
@@ -135,10 +146,10 @@ export function JokeCard({
     numberLikes
 }: {
     text: string;
-    handleLike: Function;
-    isLiked: boolean;
-    darkAttributes?: string;
-    numberLikes?: number;
+    darkAttributes: string;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
         <div
@@ -151,15 +162,7 @@ export function JokeCard({
                 </h1>
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                    <span className="text-s">{numberLikes}</span>
-                </button>
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );

@@ -62,6 +62,7 @@ function MemeView({
                                 <MemeCard
                                     key={index}
                                     image={memeObject.url}
+                                    darkAttributes=" dark:bg-[#0e464d] dark:text-gray-200"
                                     isLiked={
                                         likedMemes.find(
                                             (meme) =>
@@ -75,7 +76,6 @@ function MemeView({
                                             ? likePost(memeObject)
                                             : showUserMustLogin();
                                     }}
-                                    darkAttributes=" dark:bg-[#0e464d] dark:text-gray-200"
                                 ></MemeCard>
                             );
                         })

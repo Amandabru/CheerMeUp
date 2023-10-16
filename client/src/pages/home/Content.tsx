@@ -33,16 +33,7 @@ function Content({
                 <MemeCard
                     key={index}
                     image={(joy.content as MemeType).url}
-                    isLiked={
-                        likedJoys.memes.find(
-                            (meme) => meme.url === (joy.content as MemeType).url
-                        )
-                            ? true
-                            : false
-                    }
-                    handleLike={() => {
-                        user ? likeMeme(joy.content) : showUserMustLogin();
-                    }}
+                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></MemeCard>
             );
@@ -57,16 +48,7 @@ function Content({
                     published={(joy.content as NewsType).publishedAt}
                     source={(joy.content as NewsType).source}
                     url={(joy.content as NewsType).url}
-                    isLiked={
-                        likedJoys.news.find(
-                            (news) => news.url === (joy.content as NewsType).url
-                        )
-                            ? true
-                            : false
-                    }
-                    handleLike={() => {
-                        user ? likeNews(joy.content) : showUserMustLogin();
-                    }}
+                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></NewsCard>
             );
@@ -75,17 +57,7 @@ function Content({
                 <JokeCard
                     key={index}
                     text={(joy.content as JokeType).text}
-                    isLiked={
-                        likedJoys.jokes.find(
-                            (joke) =>
-                                joke.text === (joy.content as JokeType).text
-                        )
-                            ? true
-                            : false
-                    }
-                    handleLike={() => {
-                        user ? likeJoke(joy.content) : showUserMustLogin();
-                    }}
+                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></JokeCard>
             );
