@@ -5,9 +5,14 @@ import SignUpView from './SignUpView';
 import { useState } from 'react';
 import { ConflictError } from '../../errors/httpErrors';
 
-const SignUpPresenter = ({ directToLogin }: { directToLogin: Function }) => {
+const SignUpPresenter = ({
+    directToLogin,
+    directToVerification
+}: {
+    directToLogin: Function;
+    directToVerification: Function;
+}) => {
     const [errorText, setErrorText] = useState<string | null>(null);
-    const [verificationMessage, setVerificationMessage] = useState<string>('');
     useState<boolean>(false);
 
     const {
@@ -18,8 +23,8 @@ const SignUpPresenter = ({ directToLogin }: { directToLogin: Function }) => {
 
     async function onSubmit(credentials: SignUpCredentials) {
         try {
-            const signUpResult = await userApi.signUp(credentials);
-            setVerificationMessage(signUpResult.message);
+            await userApi.signUp(credentials);
+            directToVerification();
         } catch (error) {
             if (error instanceof ConflictError) {
                 setErrorText(error.message);
@@ -36,7 +41,6 @@ const SignUpPresenter = ({ directToLogin }: { directToLogin: Function }) => {
             handleSubmit={handleSubmit(onSubmit)}
             errors={errors}
             errorText={errorText}
-            verificationMessage={verificationMessage}
             isSubmitting={isSubmitting}
             directToLogin={directToLogin}
         ></SignUpView>
