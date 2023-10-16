@@ -71,7 +71,10 @@ function Card({
                             isSolid={true}
                             style={{
                                 cursor: 'pointer',
-                                transform: 'scale(1.5)'
+                                transform: 'scale(1.5)',
+                                right: '-505px',
+                                top: '-450px',
+                                position: 'relative'
                             }}
                         />
                     ) : (
@@ -79,7 +82,10 @@ function Card({
                             isSolid={false}
                             style={{
                                 cursor: 'pointer',
-                                transform: 'scale(1.5)'
+                                transform: 'scale(1.5)',
+                                right: '-505px',
+                                top: '-450px',
+                                position: 'relative'
                             }}
                         />
                     )}
