@@ -1,4 +1,3 @@
-import { User } from '../../userModel';
 import { useForm } from 'react-hook-form';
 import * as userApi from '../../api/user';
 import { SignUpCredentials } from '../../api/user';
@@ -6,12 +5,10 @@ import SignUpView from './SignUpView';
 import { useState } from 'react';
 import { ConflictError } from '../../errors/httpErrors';
 
-interface SignUpPresenterProps {
-    onSignUpSuccessful: (user: User) => void;
-}
-
-const SignUpPresenter = ({ onSignUpSuccessful }: SignUpPresenterProps) => {
+const SignUpPresenter = ({ directToLogin }: { directToLogin: Function }) => {
     const [errorText, setErrorText] = useState<string | null>(null);
+    const [verificationMessage, setVerificationMessage] = useState<string>('');
+    useState<boolean>(false);
 
     const {
         register,
@@ -21,8 +18,8 @@ const SignUpPresenter = ({ onSignUpSuccessful }: SignUpPresenterProps) => {
 
     async function onSubmit(credentials: SignUpCredentials) {
         try {
-            const newUser = await userApi.signUp(credentials);
-            onSignUpSuccessful(newUser);
+            const signUpResult = await userApi.signUp(credentials);
+            setVerificationMessage(signUpResult.message);
         } catch (error) {
             if (error instanceof ConflictError) {
                 setErrorText(error.message);
@@ -39,7 +36,9 @@ const SignUpPresenter = ({ onSignUpSuccessful }: SignUpPresenterProps) => {
             handleSubmit={handleSubmit(onSubmit)}
             errors={errors}
             errorText={errorText}
+            verificationMessage={verificationMessage}
             isSubmitting={isSubmitting}
+            directToLogin={directToLogin}
         ></SignUpView>
     );
 };

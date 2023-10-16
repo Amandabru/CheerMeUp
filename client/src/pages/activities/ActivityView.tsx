@@ -80,7 +80,7 @@ function ActivityView({
                     <span>{randomActivity}</span>
                 </div>
                 <button
-                    className="btn mt-5 transition-transform min-w-fit"
+                    className="btn mt-5 transition-transform min-w-fit shadow-lg"
                     onClick={() => {
                         onNewActivity(activityType);
                         console.log(

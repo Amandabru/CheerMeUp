@@ -1,6 +1,7 @@
 import { fetchData } from './fetchData';
 import { API_URL } from './config';
 import { User } from '../userModel.ts';
+import { DataStructure } from '../Types.ts';
 
 export async function getLoggedInUser(): Promise<User> {
     const response = await fetchData(`${API_URL}/users`, {
@@ -16,7 +17,7 @@ export interface SignUpCredentials {
     password: string;
 }
 
-export async function signUp(credentials: SignUpCredentials): Promise<User> {
+export async function signUp(credentials: SignUpCredentials) {
     const response = await fetchData(`${API_URL}/users/signup`, {
         method: 'POST',
         headers: {
@@ -52,7 +53,7 @@ export async function logout() {
     });
 }
 
-export async function getLikedJoys() {
+export async function getLikedJoys(): Promise<DataStructure> {
     const response = await fetchData(`${API_URL}/users/likedJoys`, {
         method: 'GET',
         credentials: 'include'

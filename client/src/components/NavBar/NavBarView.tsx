@@ -69,9 +69,8 @@ function NavBarView({
                                 <Link to="/profile">
                                     <p className="justify-between">Profile</p>
                                 </Link>
-                                <Link to="/">
-                                    <p onClick={onLogoutClicked}>Logout</p>
-                                </Link>
+
+                                <p onClick={onLogoutClicked}>Logout</p>
                             </li>
                         </>
                     ) : (

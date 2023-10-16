@@ -45,7 +45,7 @@ function JokeView({
             </h2>
             <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div
-                    className="btn-group mb-5"
+                    className="btn-group mb-5 shadow-lg"
                     onClick={(e) => {
                         const target = e.target as HTMLInputElement;
                         jokeType = [target.value];
@@ -56,7 +56,7 @@ function JokeView({
                             type="radio"
                             name="options"
                             data-title={category}
-                            className="btn"
+                            className="btn "
                             value={category}
                             key={category}
                             onClick={() => {
@@ -115,7 +115,7 @@ function JokeView({
                     <span>{randomJokeText}</span>
                 </div>
                 <button
-                    className="btn mt-5 transition-transform min-w-fit"
+                    className="btn mt-5 transition-transform min-w-fit shadow-lg"
                     onClick={() => {
                         if (jokeType.length) {
                             onNewJoke([jokeType]);
