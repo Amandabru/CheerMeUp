@@ -97,6 +97,7 @@ function ProfileView({
                                     handleLike={() => {
                                         likeJokePost(object);
                                     }}
+                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></JokeCard>
                             );
                         }

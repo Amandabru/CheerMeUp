@@ -130,14 +130,19 @@ export function MemeCard({
 export function JokeCard({
     text,
     handleLike,
-    isLiked
+    isLiked,
+    darkAttributes
 }: {
     text: string;
     handleLike: Function;
     isLiked: boolean;
+    darkAttributes: string;
 }) {
     return (
-        <div className="bg-white w-96 md:w-144 h-32 md:h-64 rounded-xl overflow-hidden shadow-xl">
+        <div
+            className={`bg-white w-96 md:w-144 h-32 md:h-64 rounded-xl overflow-hidden shadow-xl
+        ${darkAttributes} `}
+        >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 md:mt-15 text-lg md:text-3xl font-bold">
                     {text}
