@@ -78,7 +78,7 @@ function HomeView({
                         }`}
                         onClick={() => setSelectedView('best')}
                     >
-                        Best
+                        Most liked
                     </button>
                     <button
                         className={`btn btn-accent${
@@ -86,7 +86,7 @@ function HomeView({
                         }`}
                         onClick={() => setSelectedView('recently')}
                     >
-                        recently
+                        Recently liked
                     </button>
                 </div>
                 <section className="grid auto-cols-max grid-cols-1 md:grid-cols-2 place-items-center mt-20 mx-40 gap-20 ">
