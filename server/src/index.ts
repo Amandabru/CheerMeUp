@@ -67,9 +67,9 @@ app.post('/users/logout', requiresAuth, UserController.logout);
 app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint
-app.use((_req, _res, next) => {
-    next(createHttpError(404, 'Endpoint not found'));
-});
+// app.use((_req, _res, next) => {
+//     next(createHttpError(404, 'Endpoint not found'));
+// });
 
 // Any error
 app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
