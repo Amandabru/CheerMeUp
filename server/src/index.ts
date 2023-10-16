@@ -60,7 +60,10 @@ app.get('/popular/:sortBy/:number', getPopularController);
 
 app.get('/users', UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
-app.get('/users/verifyUser/:userId/:uniqueString', UserController.getVerifiedUser);
+app.get(
+    '/users/verifyUser/:userId/:uniqueString',
+    UserController.getVerifiedUser
+);
 app.get('/users/verifiedPage', UserController.getVerifiedPage);
 app.post('/users/login', UserController.login);
 app.post('/users/logout', requiresAuth, UserController.logout);

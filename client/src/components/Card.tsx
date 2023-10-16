@@ -6,7 +6,10 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={true}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)'
+                transform: 'scale(1.5)',
+                right: '-505px',
+                top: '-450px',
+                position: 'relative'
             }}
         />
     ) : (
@@ -14,7 +17,10 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={false}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)'
+                transform: 'scale(1.5)',
+                right: '-505px',
+                top: '-450px',
+                position: 'relative'
             }}
         />
     );
@@ -29,7 +35,8 @@ export function NewsCard({
     source,
     url,
     handleLike,
-    isLiked
+    isLiked,
+    darkAttributes
 }: {
     image: string;
     title: string;
@@ -40,9 +47,13 @@ export function NewsCard({
     url: string;
     handleLike: Function;
     isLiked: boolean;
+    darkAttributes: string;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg
+           ${darkAttributes} `}
+        >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
                 <img
@@ -83,17 +94,22 @@ export function NewsCard({
 export function MemeCard({
     image,
     handleLike,
-    isLiked
+    isLiked,
+    darkAttributes
 }: {
     image: string;
     handleLike: Function;
     isLiked: boolean;
+    darkAttributes: string;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg shadow-lg
+        ${darkAttributes} `}
+        >
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-128 h-5/6 mx-auto"
+                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8"
                     src={image}
                 />
                 <div className="flex-grow"></div>{' '}
@@ -114,16 +130,23 @@ export function MemeCard({
 export function JokeCard({
     text,
     handleLike,
-    isLiked
+    isLiked,
+    darkAttributes
 }: {
     text: string;
     handleLike: Function;
     isLiked: boolean;
+    darkAttributes: string;
 }) {
     return (
-        <div className="bg-white w-144 h-64 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-96 md:w-144 h-32 md:h-64 rounded-xl overflow-hidden shadow-xl
+        ${darkAttributes} `}
+        >
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 mt-5 text-lg font-bold">{text}</h1>
+                <h1 className="mx-8 mt-5 md:mt-15 text-lg md:text-3xl font-bold">
+                    {text}
+                </h1>
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
                 <button
