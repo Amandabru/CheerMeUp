@@ -57,7 +57,7 @@ function HomeView({
             className="bg-pink-300 text-black min-h-screen bg-fixed 
          dark:bg-[#531942] dark:text-white"
         >
-            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 {' '}
                 Cheer Me Up!
             </h1>
@@ -68,7 +68,7 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[42%] bg-pink-300 w-full
+                className="absolute top-[46%] bg-pink-300 w-full
                     dark:bg-[#531942] dark:text-black"
             >
                 <div className="flex justify-center w-full !scroll-smooth">
