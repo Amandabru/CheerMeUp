@@ -99,7 +99,7 @@ export function MemeCard({
     handleLike: Function;
     isLiked: boolean;
     darkAttributes?: string;
-    numberLikes: any;
+    numberLikes?: number;
 }) {
     return (
         <div
@@ -138,7 +138,7 @@ export function JokeCard({
     handleLike: Function;
     isLiked: boolean;
     darkAttributes?: string;
-    numberLikes?: any;
+    numberLikes?: number;
 }) {
     return (
         <div
