@@ -74,7 +74,7 @@ const SignUpView = ({
                         )}
                     </p>
                     <button
-                        className="btn btn-primary mt-2 w-full"
+                        className="btn btn-secondary mt-2 w-full"
                         type="submit"
                         disabled={isSubmitting}
                     >

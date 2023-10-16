@@ -23,21 +23,26 @@ function NewsView({
     showUserMustLogin: Function;
 }) {
     return (
-        <div className="bg-blue-300 text-black min-h-screen bg-fixed">
+        <div
+            className="bg-blue-300 text-black min-h-screen bg-fixed
+            dark:bg-[#04052e] dark:text-white"
+        >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Tired of Bad News?
             </h1>
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 We only serve good ones!
             </h2>
-            <div className="absolute top-[28%] bg-blue-300">
+            <div
+                className="absolute top-[28%] bg-blue-300 text-black min-h-screen bg-fixed
+                dark:bg-[#04052e] "
+            >
                 <div className="flex justify-center items-center !scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
                             onClick={() => {
                                 onDecrement();
-                                console.log('- pressed');
                             }}
                         >
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
@@ -47,7 +52,6 @@ function NewsView({
                         className="btn btn-accent mt-10"
                         onClick={() => {
                             onIncrement();
-                            console.log('+ pressed');
                         }}
                     >
                         <AiOutlineArrowRight style={{ scale: '2' }} />
@@ -79,6 +83,7 @@ function NewsView({
                                             ? likePost(newsObject)
                                             : showUserMustLogin();
                                     }}
+                                    darkAttributes=" dark:bg-slate-800 dark:text-gray-200"
                                 ></NewsCard>
                             );
                         })
@@ -92,7 +97,7 @@ function NewsView({
                             className="btn btn-accent mt-10 mr-10"
                             onClick={() => {
                                 onDecrement();
-                                console.log('- pressed');
+                                window.scrollTo(0, 0);
                             }}
                         >
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
@@ -102,7 +107,7 @@ function NewsView({
                         className="btn btn-accent mt-10"
                         onClick={() => {
                             onIncrement();
-                            console.log('+ pressed');
+                            window.scrollTo(0, 0);
                         }}
                     >
                         <AiOutlineArrowRight style={{ scale: '2' }} />

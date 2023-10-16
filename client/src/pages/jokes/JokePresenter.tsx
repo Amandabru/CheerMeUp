@@ -24,7 +24,7 @@ function JokePresenter({
     const [jokeType, setJokeType] = useState<string[]>([]);
     let santaLaugh = new Audio(santa);
     let spookyLaugh = new Audio(spooky);
-    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     const categories: string[] = [
         'programming',

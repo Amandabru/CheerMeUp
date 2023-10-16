@@ -23,21 +23,23 @@ function MemeView({
     showUserMustLogin: Function;
 }) {
     return (
-        <div className="bg-orange-300 text-black min-h-screen bg-fixed">
+        <div
+            className="bg-teal-100 text-black min-h-screen bg-fixed
+        dark:bg-[#0d3b40] dark:text-white"
+        >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Craving a Smile?
             </h1>
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Memes may brighten your day!
             </h2>
-            <div className="absolute top-[28%] bg-orange-300 ">
+            <div className="absolute top-[28%] bg-teal-100 dark:bg-[#0d3b40]">
                 <div className="flex justify-center items-center !scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
                             onClick={() => {
                                 onDecrement();
-                                console.log('- pressed');
                             }}
                         >
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
@@ -48,7 +50,6 @@ function MemeView({
                         className="btn btn-accent mt-10"
                         onClick={() => {
                             onIncrement();
-                            console.log('+ pressed');
                         }}
                     >
                         <AiOutlineArrowRight style={{ scale: '2' }} />
@@ -74,6 +75,7 @@ function MemeView({
                                             ? likePost(memeObject)
                                             : showUserMustLogin();
                                     }}
+                                    darkAttributes=" dark:bg-[#0e464d] dark:text-gray-200"
                                 ></MemeCard>
                             );
                         })
@@ -82,20 +84,22 @@ function MemeView({
                     )}
                 </section>
                 <div className="flex justify-center items-center !scroll-smooth pb-5">
-                    <button
-                        className="btn btn-accent mt-10 mr-10"
-                        onClick={() => {
-                            onDecrement();
-                            console.log('- pressed');
-                        }}
-                    >
-                        <AiOutlineArrowLeft style={{ scale: '2' }} />
-                    </button>
+                    {count ? (
+                        <button
+                            className="btn btn-accent mt-10 mr-10"
+                            onClick={() => {
+                                onDecrement();
+                                window.scrollTo(0, 0);
+                            }}
+                        >
+                            <AiOutlineArrowLeft style={{ scale: '2' }} />
+                        </button>
+                    ) : null}
                     <button
                         className="btn btn-accent mt-10"
                         onClick={() => {
                             onIncrement();
-                            console.log('+ pressed');
+                            window.scrollTo(0, 0);
                         }}
                     >
                         <AiOutlineArrowRight style={{ scale: '2' }} />

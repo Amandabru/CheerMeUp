@@ -3,9 +3,16 @@ import HomeView from './HomeView';
 import { User } from '../../userModel';
 import { getPopular } from '../../api/getPopular';
 import { useEffect, useState } from 'react';
-import { DataBaseType } from '../../Types';
+import {
+    DataBaseType,
+    DataStructure,
+    MemeType,
+    NewsType,
+    JokeType
+} from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
+import useModelProp from '../../hooks/useModelProp';
 
 function HomePresenter({
     model,
@@ -26,6 +33,8 @@ function HomePresenter({
     > | null>(null);
     const [dataRecentlyLiked, errorRecentlyLiked] =
         usePromise(promiseRecentlyLiked);
+
+    const likedJoys: DataStructure = useModelProp(model);
 
     useEffect(() => {
         async function getPopularJoys() {
@@ -52,10 +61,19 @@ function HomePresenter({
             'Could not fetch recently liked joys'
         ) || (
             <HomeView
-                model={model}
                 user={user}
                 mostLikedJoys={dataMostLiked}
                 recentlyLikedJoys={dataRecentlyLiked}
+                likedJoys={likedJoys}
+                likeMeme={(meme: MemeType) => {
+                    model.likeOrUnlikeMeme(meme);
+                }}
+                likeJoke={(joke: JokeType) => {
+                    model.likeOrUnlikeJoke(joke);
+                }}
+                likeNews={(news: NewsType) => {
+                    model.likeOrUnlikeNews(news);
+                }}
                 showUserMustLogin={() => directToLogin()}
             />
         )

@@ -24,7 +24,6 @@ function ProfileView({
     likeJokePost: Function;
 }) {
     const user = loggedInUser;
-
     return (
         <div className="bg-red-300 text-black min-h-screen bg-fixed">
             <div className="flex justify-center text-3xl font-bold">
@@ -35,7 +34,6 @@ function ProfileView({
                 {likedJoys.length > 0 ? (
                     likedJoys.map((object, index) => {
                         let cardComponent = null;
-
                         if (object.type === 'meme') {
                             cardComponent = (
                                 <MemeCard
@@ -53,6 +51,7 @@ function ProfileView({
                                     handleLike={() => {
                                         likeMemePost(object);
                                     }}
+                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></MemeCard>
                             );
                         } else if (object.type === 'news') {
@@ -78,6 +77,7 @@ function ProfileView({
                                     handleLike={() => {
                                         likeNewsPost(object);
                                     }}
+                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></NewsCard>
                             );
                         } else if (object.type === 'joke') {
@@ -97,6 +97,7 @@ function ProfileView({
                                     handleLike={() => {
                                         likeJokePost(object);
                                     }}
+                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></JokeCard>
                             );
                         }

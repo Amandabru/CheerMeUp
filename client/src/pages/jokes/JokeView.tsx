@@ -32,7 +32,10 @@ function JokeView({
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
     return (
-        <div className="bg-lime-200	text-black h-full w-full fixed">
+        <div
+            className="bg-green-200 text-black h-full w-full fixed
+        dark:bg-[#132A13] dark:text-white"
+        >
             <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 {' '}
                 Need a Good Laugh?
@@ -42,7 +45,7 @@ function JokeView({
             </h2>
             <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 <div
-                    className="btn-group mb-5"
+                    className="btn-group mb-5 shadow-lg"
                     onClick={(e) => {
                         const target = e.target as HTMLInputElement;
                         jokeType = [target.value];
@@ -53,7 +56,7 @@ function JokeView({
                             type="radio"
                             name="options"
                             data-title={category}
-                            className="btn"
+                            className="btn "
                             value={category}
                             key={category}
                             onClick={() => {
@@ -79,7 +82,10 @@ function JokeView({
                         ]}
                     />
                 </div>
-                <div className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-lime-100 h-40 w-full overflow-x-auto flex items-center justify-center relative">
+                <div
+                    className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-green-100 h-40 w-full overflow-x-auto flex items-center justify-center relative 
+                    dark:bg-[#183618] dark:text-gray-300 dark:border-[#1f471f]"
+                >
                     <span
                         onClick={() => {
                             user
@@ -109,7 +115,7 @@ function JokeView({
                     <span>{randomJokeText}</span>
                 </div>
                 <button
-                    className="btn mt-5 transition-transform min-w-fit"
+                    className="btn mt-5 transition-transform min-w-fit shadow-lg"
                     onClick={() => {
                         if (jokeType.length) {
                             onNewJoke([jokeType]);

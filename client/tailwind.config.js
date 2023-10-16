@@ -30,5 +30,26 @@ export default {
             }
         }
     },
-    plugins: [require('daisyui')]
+    plugins: [require('daisyui')],
+    daisyui: {
+        themes: [
+            {
+                light: {
+                    ...require('daisyui/src/theming/themes')[
+                        '[data-theme=valentine]'
+                    ]
+                },
+                dark: {
+                    ...require('daisyui/src/theming/themes')[
+                        '[data-theme=dracula]'
+                    ],
+                    primary: '#31572C',
+                    accent: '#000000',
+                    '.navbar': {
+                        'background-color': '#202020'
+                    }
+                }
+            }
+        ]
+    }
 };

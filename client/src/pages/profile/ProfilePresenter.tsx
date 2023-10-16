@@ -1,11 +1,11 @@
-import ProfileView from './ProfileView';
+import ProfileView from './profileView';
 import { CheerModel } from '../../models/model';
 import { User } from '../../userModel';
 import useModelProp from '../../hooks/useModelProp';
 import { DataStructure, MemeType, NewsType, JokeType } from '../../Types';
 
 function ProfilePresenter({ model, user }: { model: CheerModel; user: User }) {
-    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     // Function to shuffle an array (Fisher-Yates shuffle)
     const shuffleArray = (array: (MemeType | NewsType | JokeType)[]) => {
