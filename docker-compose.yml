@@ -1,10 +1,37 @@
-version: '3.7'
+version: '3'
 
 services:
-  mongodb:
-    image: mongo:latest  # This specifies the MongoDB image to use
-    container_name: mongodb
+  react-app:
+    image: react-app
+    build: ./client/
+    stdin_open: true
+    ports: 
+      - "5173:5173"
+    networks:
+      - mern-app
+
+  api-server:
+    image: api-server
+    build: ./server/
     ports:
-      - "27017:27017"  # Map the container's port to your host's port
+      - "5000:5000"
+    networks:
+      - mern-app
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest 
+    ports:
+      - "27017:27017" 
+    networks:
+      - mern-app
     volumes:
-      - ./mongodb-data:/data/db  # Mount a volume to persist MongoDB data
+      - mongo-data:/data/db  
+
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo:data:
+    driver: local
