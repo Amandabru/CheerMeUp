@@ -30,7 +30,7 @@ function ProfileView({
                 <h1 className="my-10">Hi {user?.username}</h1>
             </div>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10">
                 {likedJoys.length > 0 ? (
                     likedJoys.map((object, index) => {
                         let cardComponent = null;

@@ -68,10 +68,10 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[42%] bg-pink-300 
+                className="absolute top-[42%] bg-pink-300 w-full
                     dark:bg-[#531942] dark:text-black"
             >
-                <div className="flex justify-center  !scroll-smooth">
+                <div className="flex justify-center w-full !scroll-smooth">
                     <button
                         className={`mr-10 btn btn-accent${
                             selectedView === 'best' ? 'btn-active' : ''
@@ -89,9 +89,10 @@ function HomeView({
                         Recently liked
                     </button>
                 </div>
-                <section className="grid auto-cols-max grid-cols-1 md:grid-cols-2 place-items-center mt-20 mx-40 gap-20 ">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
                     {renderSelectedView()}
                 </section>
+                <div className="h-20"></div>
             </div>
         </div>
     );

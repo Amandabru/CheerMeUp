@@ -34,10 +34,10 @@ function NewsView({
                 We only serve good ones!
             </h2>
             <div
-                className="absolute top-[28%] bg-blue-300 text-black min-h-screen bg-fixed
+                className="absolute top-[28%] bg-blue-300 w-full
                 dark:bg-[#04052e] "
             >
-                <div className="flex justify-center items-center !scroll-smooth">
+                <div className="flex justify-center items-center w-full !scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
@@ -57,7 +57,7 @@ function NewsView({
                         <AiOutlineArrowRight style={{ scale: '2' }} />
                     </button>
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
                     {newsData ? (
                         newsData.map((newsObject, index) => {
                             return (

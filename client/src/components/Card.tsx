@@ -74,7 +74,7 @@ export function NewsCard({
 }) {
     return (
         <div
-            className={`bg-white w-96 md:w-144 h-128 md:h-128 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
            ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
@@ -84,7 +84,7 @@ export function NewsCard({
                     src={image}
                 />
                 <p className="mx-8 mb-3">{text}</p>
-                <p className="ml-8 text-xs">
+                <p className="mx-8 mb-10 text-xs">
                     <span className="mr-5">{author}</span>
                     <span className="mr-5">{published}</span>
 
@@ -99,8 +99,7 @@ export function NewsCard({
                         {source}
                     </a>
                 </p>
-                <div className="flex-grow"></div>{' '}
-                {/* This creates space to push the button to the bottom */}
+
                 {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
@@ -122,16 +121,15 @@ export function MemeCard({
 }) {
     return (
         <div
-            className={`bg-white w-96 md:w-144 h-96 md:h-128 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
         ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8"
+                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8 mb-10"
                     src={image}
                 />
-                <div className="flex-grow"></div>{' '}
-                {/* This creates space to push the button to the bottom */}
+
                 {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
@@ -153,14 +151,14 @@ export function JokeCard({
 }) {
     return (
         <div
-            className={`bg-white w-96 md:w-144 h-32 md:h-64 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
         ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 mt-5 md:mt-15 text-lg md:text-3xl font-bold">
+                <h1 className="mx-8 my-10 md:my-20 text-lg md:text-3xl font-bold">
                     {text}
                 </h1>
-                <div className="flex-grow"></div>{' '}
+
                 {/* This creates space to push the button to the bottom */}
                 {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>

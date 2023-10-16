@@ -33,8 +33,8 @@ function MemeView({
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Memes may brighten your day!
             </h2>
-            <div className="absolute top-[28%] bg-teal-100 dark:bg-[#0d3b40]">
-                <div className="flex justify-center items-center !scroll-smooth">
+            <div className="absolute top-[28%] bg-teal-100 w-full dark:bg-[#0d3b40]">
+                <div className="flex justify-center items-center w-full !scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
@@ -55,7 +55,7 @@ function MemeView({
                         <AiOutlineArrowRight style={{ scale: '2' }} />
                     </button>
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-5">
                     {memeData ? (
                         memeData.map((memeObject, index) => {
                             return (
