@@ -40,7 +40,6 @@ function MemeView({
                             className="btn btn-accent mt-10 mr-10"
                             onClick={() => {
                                 onDecrement();
-                                console.log('- pressed');
                             }}
                         >
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
@@ -51,7 +50,6 @@ function MemeView({
                         className="btn btn-accent mt-10"
                         onClick={() => {
                             onIncrement();
-                            console.log('+ pressed');
                         }}
                     >
                         <AiOutlineArrowRight style={{ scale: '2' }} />
@@ -91,7 +89,7 @@ function MemeView({
                             className="btn btn-accent mt-10 mr-10"
                             onClick={() => {
                                 onDecrement();
-                                console.log('- pressed');
+                                window.scrollTo(0, 0);
                             }}
                         >
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
@@ -101,7 +99,7 @@ function MemeView({
                         className="btn btn-accent mt-10"
                         onClick={() => {
                             onIncrement();
-                            console.log('+ pressed');
+                            window.scrollTo(0, 0);
                         }}
                     >
                         <AiOutlineArrowRight style={{ scale: '2' }} />
