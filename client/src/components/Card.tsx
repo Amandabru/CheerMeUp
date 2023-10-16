@@ -6,7 +6,10 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={true}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)'
+                transform: 'scale(1.5)',
+                right: '-505px',
+                top: '-450px',
+                position: 'relative'
             }}
         />
     ) : (
@@ -14,7 +17,10 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={false}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)'
+                transform: 'scale(1.5)',
+                right: '-505px',
+                top: '-450px',
+                position: 'relative'
             }}
         />
     );
@@ -73,29 +79,7 @@ export function NewsCard({
                         handleLike();
                     }}
                 >
-                    {isLiked ? (
-                        <HeartIcon
-                            isSolid={true}
-                            style={{
-                                cursor: 'pointer',
-                                transform: 'scale(1.5)',
-                                right: '-505px',
-                                top: '-450px',
-                                position: 'relative'
-                            }}
-                        />
-                    ) : (
-                        <HeartIcon
-                            isSolid={false}
-                            style={{
-                                cursor: 'pointer',
-                                transform: 'scale(1.5)',
-                                right: '-505px',
-                                top: '-450px',
-                                position: 'relative'
-                            }}
-                        />
-                    )}
+                    {CheckIfLiked(isLiked)}
                 </button>
             </div>
         </div>
