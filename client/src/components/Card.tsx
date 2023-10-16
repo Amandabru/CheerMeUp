@@ -42,7 +42,7 @@ export function NewsCard({
     isLiked: boolean;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div className="bg-white w-96 md:w-144 h-128 md:h-128 rounded-xl overflow-hidden shadow-xl">
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
                 <img
@@ -90,10 +90,10 @@ export function MemeCard({
     isLiked: boolean;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div className="bg-white w-96 md:w-144 h-96 md:h-128 rounded-xl overflow-hidden shadow-xl">
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-128 h-5/6 mx-auto"
+                    className="object-contain w-80 md:w-128 h-5/6 mx-auto"
                     src={image}
                 />
                 <div className="flex-grow"></div>{' '}
@@ -121,9 +121,11 @@ export function JokeCard({
     isLiked: boolean;
 }) {
     return (
-        <div className="bg-white w-144 h-64 rounded-3xl overflow-hidden shadow-lg">
+        <div className="bg-white w-96 md:w-144 h-32 md:h-64 rounded-xl overflow-hidden shadow-xl">
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 mt-5 text-lg font-bold">{text}</h1>
+                <h1 className="mx-8 mt-5 md:mt-15 text-lg md:text-3xl font-bold">
+                    {text}
+                </h1>
                 <div className="flex-grow"></div>{' '}
                 {/* This creates space to push the button to the bottom */}
                 <button
