@@ -28,8 +28,6 @@ function HomePresenter({
     const [dataRecentlyLiked, errorRecentlyLiked] =
         usePromise(promiseRecentlyLiked);
 
-    const likedJoys = useModelProp(model, 'likedJoys');
-
     useEffect(() => {
         async function getPopularJoys() {
             try {
@@ -55,19 +53,10 @@ function HomePresenter({
             'Could not fetch recently liked joys'
         ) || (
             <HomeView
+                model={model}
                 user={user}
                 mostLikedJoys={dataMostLiked}
                 recentlyLikedJoys={dataRecentlyLiked}
-                likedJoys={likedJoys}
-                likeMeme={(meme: MemeType) => {
-                    model.likeOrUnlikeMeme(meme);
-                }}
-                likeJoke={(joke: JokeType) => {
-                    model.likeOrUnlikeJoke(joke);
-                }}
-                likeNews={(news: NewsType) => {
-                    model.likeOrUnlikeNews(news);
-                }}
                 showUserMustLogin={() => directToLogin()}
             />
         )
