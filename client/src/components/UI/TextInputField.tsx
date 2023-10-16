@@ -21,9 +21,10 @@ const TextInputField = ({
     ...props
 }: TextInputFieldProps) => {
     return (
-        <Form.Group className="mb-3" id={id}>
-            <Form.Label>{label}</Form.Label>
+        <Form.Group className="mb-3 mt-1" id={id}>
+            <Form.Label className="rounded-lg mb-2 w-full">{label}</Form.Label>
             <Form.Control
+                className="rounded-lg mb-2 mt-2 p-1 pl-2 w-full"
                 {...props}
                 {...register(name, registerOptions)}
                 isInvalid={!error}

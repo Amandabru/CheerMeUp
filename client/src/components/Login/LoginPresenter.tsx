@@ -8,9 +8,13 @@ import { UnathorizedError } from '../../errors/httpErrors';
 
 interface LoginPresenterProps {
     onLoginSuccessful: (user: User) => void;
+    directToSignup: () => void;
 }
 
-const LoginPresenter = ({ onLoginSuccessful }: LoginPresenterProps) => {
+const LoginPresenter = ({
+    onLoginSuccessful,
+    directToSignup
+}: LoginPresenterProps) => {
     const [errorText, setErrorText] = useState<string | null>(null);
     const {
         register,
@@ -39,6 +43,7 @@ const LoginPresenter = ({ onLoginSuccessful }: LoginPresenterProps) => {
             errors={errors}
             errorText={errorText}
             isSubmitting={isSubmitting}
+            directToSignup={directToSignup}
         ></LoginView>
     );
 };
