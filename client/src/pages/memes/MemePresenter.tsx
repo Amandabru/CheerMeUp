@@ -22,7 +22,7 @@ function MemePresenter({
     const [count, setCount] = useState<number>(initialCount);
 
     const [error, setError] = useState<Error | null>(null);
-    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
 

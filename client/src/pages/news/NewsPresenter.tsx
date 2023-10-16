@@ -21,7 +21,7 @@ function NewsPresenter({
     const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
     const [count, setCount] = useState<number>(initialCount);
     const [error, setError] = useState<Error | null>(null);
-    const likedJoys: DataStructure = useModelProp(model, 'likedJoys');
+    const likedJoys: DataStructure = useModelProp(model);
 
     const lastFetchDate = localStorage.getItem('lastFetchDateNews');
 

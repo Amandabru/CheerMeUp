@@ -15,7 +15,7 @@ function ContentPresenter({
     directToLogin: Function;
     joys: DataBaseType[];
 }) {
-    const likedJoys = useModelProp(model, 'likedJoys');
+    const likedJoys = useModelProp(model);
 
     return (
         <ContentView

@@ -1,14 +1,23 @@
 import React from 'react';
 import { CheerModel } from '../models/model';
 
-function useModelProp(model: CheerModel, property: string) {
-    const [value, setValue] = React.useState(model[property]);
+function useModelProp(model: CheerModel) {
+    const [value, setValue] = React.useState(model.likedJoys);
+
     React.useEffect(() => {
-        model.addObserver(() => setValue(model[property]));
+        // Define a callback function to set the value
+        const observerCallback = () => setValue(model.likedJoys);
+
+        // Add the observer callback to the model
+        model.addObserver(observerCallback);
+
+        // Return a cleanup function to remove the observer
         return function () {
-            model.removeObserver(model[property]);
+            // Remove the observer callback from the model
+            model.removeObserver(observerCallback);
         };
-    }, [model, property]);
+    }, [model.likedJoys]);
+
     return value;
 }
 
