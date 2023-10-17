@@ -47,7 +47,7 @@ function ActivityView({
                 </div>
 
                 <div
-                    className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full overflow-x-auto flex items-center justify-center relative
+                    className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-violet-100 h-40 w-full flex items-center justify-center relative
                     dark:bg-[#240046] dark:text-gray-300 dark:border-[#3C096C]"
                 >
                     <span>{randomActivity}</span>

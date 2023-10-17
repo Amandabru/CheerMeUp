@@ -36,7 +36,7 @@ function promiseNoData(
         !error
     ) {
         return (
-            <div className={`min-h-screen min-w-screen ${bgc}`}>
+            <div className={`min-h-screen min-w-screen overflow-hidden ${bgc}`}>
                 <span className="loading loading-dots loading-md top-1/2 left-1/2 absolute"></span>
             </div>
         );
