@@ -89,7 +89,7 @@ function HomeView({
                         Recently liked
                     </button>
                 </div>
-                <section className="grid auto-cols-max grid-cols-1 md:grid-cols-2 place-items-center mt-20 mx-40 gap-20 ">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
                     {renderSelectedView()}
                 </section>
             </div>
