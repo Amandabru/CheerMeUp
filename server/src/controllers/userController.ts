@@ -100,11 +100,6 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
                                     let msg =
                                         'You have successfully verified your email. You can now login and start liking your favorites!';
                                     res.status(200).json({message: msg});
-                                    // res.redirect(
-                                    //     `/users/verifiedPage?message=${encodeURIComponent(
-                                    //         message
-                                    //     )}`
-                                    // );
                                     return;
                                 })
                                 .catch((error) => {

@@ -11,7 +11,7 @@ import { getPopularController } from './controllers/getPopularController2';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
-import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
+import { requiresAuth } from './middleware/auth';
 import { getJoyController } from './controllers/getJoyController';
 import { patchLikeController } from './controllers/patchLikeController';
 import { getNewsController } from './controllers/getNewsController';
@@ -70,9 +70,9 @@ app.post('/users/logout', requiresAuth, UserController.logout);
 app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint
-// app.use((_req, _res, next) => {
-//     next(createHttpError(404, 'Endpoint not found'));
-// });
+app.use((_req, _res, next) => {
+    next(createHttpError(404, 'Endpoint not found'));
+});
 
 // Any error
 app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {

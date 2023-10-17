@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import fetch from 'node-fetch';
 import createHttpError from 'http-errors';
-import UserModel from '../models/User';
 
 export type NewsArticle = {
     source: { id: string; name: string };
