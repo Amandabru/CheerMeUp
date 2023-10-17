@@ -25,7 +25,9 @@ export async function getMemesController(
 
     try {
         const response = await fetch(api_url);
-        if (!response.ok) throw createHttpError(500, response.statusText);
+        if (!response.ok) {
+            throw createHttpError(response.status, response.statusText);
+        }
         const data = await response.json();
         if (data.error) {
             throw createHttpError(500, 'Failed to fetch memes');
@@ -37,11 +39,6 @@ export async function getMemesController(
                 url: item.url
             })
         );
-
-        if (!req.session.userId) {
-            res.status(200).json(filteredArrayWithSelectedProperties);
-            return;
-        }
         res.status(200).json(filteredArrayWithSelectedProperties);
     } catch (error) {
         next(error);
