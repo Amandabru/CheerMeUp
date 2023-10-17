@@ -8,33 +8,6 @@ function CheckIfLiked(isLiked: Boolean) {
     );
 }
 
-// check if card is displayed on home page or not
-function CheckIfHome({
-    handleLike,
-    isLiked,
-    numberLikes
-}: {
-    handleLike: Function | undefined;
-    isLiked: boolean | undefined;
-    numberLikes: number | undefined;
-}) {
-    return handleLike !== undefined && isLiked !== undefined ? (
-        <button
-            className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
-            onClick={() => {
-                handleLike();
-            }}
-        >
-            {CheckIfLiked(isLiked)}
-            <span className="text-s">{numberLikes}</span>
-        </button>
-    ) : (
-        <h1 className="text-md ml-8 mb-2">
-            Number of likes: <span className="ml-2 text-xl">{numberLikes}</span>
-        </h1>
-    );
-}
-
 export function NewsCard({
     image,
     title,
@@ -85,8 +58,24 @@ export function NewsCard({
                         {source}
                     </a>
                 </p>
+                {handleLike !== undefined && isLiked !== undefined ? (
+                    <button
+                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        onClick={() => {
+                            handleLike();
+                        }}
+                    >
+                        {CheckIfLiked(isLiked)}
+                        <span className="text-s">{numberLikes}</span>
+                    </button>
+                ) : null}
 
-                {CheckIfHome({ handleLike, isLiked, numberLikes })}
+                {numberLikes !== undefined ? (
+                    <h1 className="text-md ml-8 mb-2">
+                        Number of likes:{' '}
+                        <span className="ml-2 text-xl">{numberLikes}</span>
+                    </h1>
+                ) : null}
             </div>
         </div>
     );
@@ -114,7 +103,24 @@ export function MemeCard({
                     src={image}
                 />
 
-                {CheckIfHome({ handleLike, isLiked, numberLikes })}
+                {handleLike !== undefined && isLiked !== undefined ? (
+                    <button
+                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        onClick={() => {
+                            handleLike();
+                        }}
+                    >
+                        {CheckIfLiked(isLiked)}
+                        <span className="text-s">{numberLikes}</span>
+                    </button>
+                ) : null}
+
+                {numberLikes !== undefined ? (
+                    <h1 className="text-md ml-8 mb-2">
+                        Number of likes:{' '}
+                        <span className="ml-2 text-xl">{numberLikes}</span>
+                    </h1>
+                ) : null}
             </div>
         </div>
     );
@@ -141,8 +147,24 @@ export function JokeCard({
                     {text}
                 </h1>
 
-                {/* This creates space to push the button to the bottom */}
-                {CheckIfHome({ handleLike, isLiked, numberLikes })}
+                {handleLike !== undefined && isLiked !== undefined ? (
+                    <button
+                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        onClick={() => {
+                            handleLike();
+                        }}
+                    >
+                        {CheckIfLiked(isLiked)}
+                        <span className="text-s">{numberLikes}</span>
+                    </button>
+                ) : null}
+
+                {numberLikes !== undefined ? (
+                    <h1 className="text-md ml-8 mb-2">
+                        Number of likes:{' '}
+                        <span className="ml-2 text-xl">{numberLikes}</span>
+                    </h1>
+                ) : null}
             </div>
         </div>
     );
