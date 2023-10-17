@@ -85,9 +85,6 @@ function App({ model }: { model: CheerModel }) {
                         path="/"
                         element={
                             <HomePresenter
-                                model={model}
-                                user={loggedInUser}
-                                directToLogin={() => showModal('login_modal')}
                             />
                         }
                     />
