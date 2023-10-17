@@ -51,7 +51,6 @@ function App({ model }: { model: CheerModel }) {
                 if (loggedInUser) {
                     const likedJoys = await userApi.getLikedJoys();
                     model.setLikedJoys(likedJoys);
-                    console.log('liked joys', likedJoys);
                 }
             } catch (error) {
                 console.log(error);
