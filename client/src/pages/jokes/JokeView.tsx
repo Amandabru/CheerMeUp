@@ -31,6 +31,8 @@ function JokeView({
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
+    const [effect, setEffect] = useState(false);
+
     return (
         <div
             className="bg-gradient-to-r from-green-100 to-green-300 text-black h-full w-full fixed
@@ -87,10 +89,13 @@ function JokeView({
                     dark:bg-[#193d28] dark:text-gray-300 dark:border-[#1f471f]"
                 >
                     <span
+                        className={'absolute top-[15px] right-[15px]'}
                         onClick={() => {
-                            user
-                                ? isLiked(randomJokeData)
-                                : showUserMustLogin();
+                            {
+                                user
+                                    ? isLiked(randomJokeData)
+                                    : showUserMustLogin();
+                            }
                         }}
                         style={{ visibility: hidden }}
                     >
@@ -103,13 +108,6 @@ function JokeView({
                                     ? true
                                     : false
                             }
-                            style={{
-                                position: 'absolute',
-                                top: '15px',
-                                right: '15px',
-                                cursor: 'pointer',
-                                transform: 'scale(1.5)'
-                            }}
                         />
                     </span>
                     <span>{randomJokeText}</span>
