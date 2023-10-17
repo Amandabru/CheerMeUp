@@ -19,7 +19,7 @@ function ActivityView({
     return (
         <div
             className="bg-violet-300 text-black h-full w-full fixed
-        dark:bg-[#10002B] dark:text-white"
+        dark:bg-gradient-to-r from-[#360145] to-[#10002B] dark:text-white"
         >
             <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 {' '}
