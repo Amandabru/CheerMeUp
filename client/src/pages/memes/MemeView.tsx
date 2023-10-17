@@ -34,7 +34,7 @@ function MemeView({
                 Memes will brighten your day!
             </h2>
             <div
-                className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 
+                className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
             dark:from-[#0d3b40]  dark:to-[#0a2d30]"
             >
                 <div className="flex justify-center items-center w-full!scroll-smooth">
