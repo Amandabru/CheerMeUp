@@ -11,13 +11,44 @@ interface NavBarViewProps {
     onLogoutClicked: () => void;
 }
 
+function NavLink({
+    to,
+    text,
+    isActive,
+    onClick
+}: {
+    to: string;
+    text: string;
+    isActive: boolean;
+    onClick: () => void;
+}) {
+    const decoration = isActive ? 'underline' : '';
+
+    return (
+        <Link
+            to={to}
+            className={`normal-case text-xl mr-10 ${decoration}`}
+            onClick={onClick}
+        >
+            {text}
+        </Link>
+    );
+}
+
 function NavBarView({
     loggedInUser,
     onSignUpClicked,
     onLoginClicked,
     onLogoutClicked
 }: NavBarViewProps) {
-    const [decoration, setDecoration] = useState<string[]>(['', '', '', '']);
+    const [activeLink, setActiveLink] = useState<number | null>(null);
+
+    const links = [
+        { to: '/news', text: 'News' },
+        { to: '/memes', text: 'Memes' },
+        { to: '/jokes', text: 'Jokes' },
+        { to: '/activities', text: 'Activities' }
+    ];
 
     return (
         <div className="navbar bg-base-100 fixed top-0 z-40 pr-10">
@@ -43,87 +74,42 @@ function NavBarView({
                         tabIndex={0}
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
-                        <li>
-                            <Link
-                                to="/news"
-                                className="normal-case text-xl mr-10 "
-                            >
-                                <span className="">News</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/memes"
-                                className="normal-case text-xl mr-10"
-                            >
-                                Memes
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/jokes"
-                                className="normal-case text-xl mr-10"
-                            >
-                                Jokes
-                            </Link>
-                        </li>
-                        <li>
-                            {' '}
-                            <Link
-                                to="/activities"
-                                className="normal-case text-xl mr-10"
-                            >
-                                Activities
-                            </Link>
-                        </li>
+                        {links.map((link, index) => (
+                            <li key={link.to}>
+                                <NavLink
+                                    to={link.to}
+                                    text={link.text}
+                                    isActive={index === activeLink}
+                                    onClick={() => setActiveLink(index)}
+                                />
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
                 <img
                     className="h-10 normal-case animate-wiggle mr-5"
                     src={logoImage}
-                    alt={'Logo'}
+                    alt="Logo"
                 ></img>
                 <Link
                     className="normal-case text-xl mr-5"
                     to="/"
-                    onClick={() => setDecoration(['', '', '', ''])}
+                    onClick={() => setActiveLink(null)}
                 >
                     CheerMeUp!
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <Link
-                    className={`normal-case text-xl mr-10 ${decoration[0]}`}
-                    to="/news"
-                    onClick={() => setDecoration(['underline', '', '', ''])}
-                >
-                    News
-                </Link>
-
-                <Link
-                    className={`normal-case text-xl mr-10 ${decoration[1]}`}
-                    to="/memes"
-                    onClick={() => setDecoration(['', 'underline', '', ''])}
-                >
-                    Memes
-                </Link>
-
-                <Link
-                    className={`normal-case text-xl mr-10 ${decoration[2]}`}
-                    to="/jokes"
-                    onClick={() => setDecoration(['', '', 'underline', ''])}
-                >
-                    Jokes
-                </Link>
-
-                <Link
-                    className={`normal-case text-xl mr-10 ${decoration[3]}`}
-                    to="/activities"
-                    onClick={() => setDecoration(['', '', '', 'underline'])}
-                >
-                    Activities
-                </Link>
+                {links.map((link, index) => (
+                    <NavLink
+                        key={link.to}
+                        to={link.to}
+                        text={link.text}
+                        isActive={index === activeLink}
+                        onClick={() => setActiveLink(index)}
+                    />
+                ))}
             </div>
             <div className="navbar-end">
                 <div className="dropdown dropdown-end">
@@ -148,9 +134,7 @@ function NavBarView({
                                 <li>
                                     <Link
                                         to="/profile"
-                                        onClick={() =>
-                                            setDecoration(['', '', '', ''])
-                                        }
+                                        onClick={() => setActiveLink(null)}
                                     >
                                         <p className="justify-between">
                                             Profile
