@@ -1,14 +1,10 @@
 function ActivityView({
     randomActivity,
-    isToggled,
-    onToggle,
     options,
     activityType,
     onNewActivity
 }: {
     randomActivity: string | React.ReactElement | undefined;
-    isToggled: boolean;
-    onToggle: Function;
     options: {
         value: string;
         label: string;
@@ -37,9 +33,6 @@ function ActivityView({
                         onChange={(e) => {
                             const newActivityType = e.target.value;
                             onNewActivity(newActivityType);
-                            console.log(
-                                'onchange ' + newActivityType + ' ' + isToggled
-                            );
                         }}
                     >
                         <option value="" disabled>
@@ -51,26 +44,6 @@ function ActivityView({
                             </option>
                         ))}
                     </select>
-                    <span>
-                        <span className="ml-10 mr-1">Activities alone</span>
-                        <input
-                            type="radio"
-                            name="radio-1"
-                            className="radio border-black align-middle dark:border-white"
-                            checked={!isToggled}
-                            onChange={() => onToggle(false)}
-                        />
-                        <span className="ml-3 mr-1">
-                            Activities with friends
-                        </span>
-                        <input
-                            type="radio"
-                            name="radio-1"
-                            className="radio border-black align-middle  dark:border-white"
-                            checked={isToggled}
-                            onChange={() => onToggle(true)}
-                        />
-                    </span>
                 </div>
 
                 <div
@@ -83,9 +56,6 @@ function ActivityView({
                     className="btn mt-5 transition-transform min-w-fit shadow-lg"
                     onClick={() => {
                         onNewActivity(activityType);
-                        console.log(
-                            'onclick ' + activityType + ' ' + isToggled
-                        );
                     }}
                 >
                     Get new activity

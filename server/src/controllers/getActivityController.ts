@@ -8,12 +8,11 @@ export async function getActivityController(
     next: NextFunction
 ) {
     const type = req.params.type;
-    const multipleParticipants = req.params.multipleParticipants;
 
     let participantsQuery: string = '';
-    if (multipleParticipants == 'false') participantsQuery = 'participants=1';
+    if (type == 'social') participantsQuery = 'participants=4';
 
-    const api_url = `http://www.boredapi.com/api/activity?${participantsQuery}&type=${type}`;
+    const api_url = `http://www.boredapi.com/api/activity?type=${type}`;
     try {
         const response = await fetch(api_url);
         if (!response.ok) {
