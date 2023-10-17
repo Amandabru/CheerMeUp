@@ -39,7 +39,7 @@ function ProfileView({
                 className="absolute top-[38%] bg-gradient-to-r from-red-200 to-red-300 dark:from-[#08094d] dark:to-[#04052e] text-black
                    "
             >
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mb-20">
                     {likedJoys.length > 0 ? (
                         likedJoys.map((object, index) => {
                             let cardComponent = null;
