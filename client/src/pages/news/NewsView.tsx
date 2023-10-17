@@ -48,14 +48,16 @@ function NewsView({
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
                         </button>
                     ) : null}
-                    <button
-                        className="btn btn-accent mt-10"
-                        onClick={() => {
-                            onIncrement();
-                        }}
-                    >
-                        <AiOutlineArrowRight style={{ scale: '2' }} />
-                    </button>
+                    {count < 2 ? (
+                        <button
+                            className="btn btn-accent mt-10"
+                            onClick={() => {
+                                onIncrement();
+                            }}
+                        >
+                            <AiOutlineArrowRight style={{ scale: '2' }} />
+                        </button>
+                    ) : null}
                 </div>
                 <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
                     {newsData ? (
@@ -103,15 +105,17 @@ function NewsView({
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
                         </button>
                     ) : null}
-                    <button
-                        className="btn btn-accent mt-10"
-                        onClick={() => {
-                            onIncrement();
-                            window.scrollTo(0, 0);
-                        }}
-                    >
-                        <AiOutlineArrowRight style={{ scale: '2' }} />
-                    </button>
+                    {count < 2 ? (
+                        <button
+                            className="btn btn-accent mt-10"
+                            onClick={() => {
+                                onIncrement();
+                                window.scrollTo(0, 0);
+                            }}
+                        >
+                            <AiOutlineArrowRight style={{ scale: '2' }} />
+                        </button>
+                    ) : null}
                 </div>
             </div>
         </div>
