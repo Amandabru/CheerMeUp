@@ -38,7 +38,7 @@ function ProfileView({
                 </h2>
             </div>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10">
+            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 dark:text-black">
                 {likedJoys.length > 0 ? (
                     likedJoys.map((object, index) => {
                         let cardComponent = null;
@@ -59,7 +59,6 @@ function ProfileView({
                                     handleLike={() => {
                                         likeMemePost(object);
                                     }}
-                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></MemeCard>
                             );
                         } else if (object.type === 'news') {
@@ -85,7 +84,6 @@ function ProfileView({
                                     handleLike={() => {
                                         likeNewsPost(object);
                                     }}
-                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></NewsCard>
                             );
                         } else if (object.type === 'joke') {
@@ -105,7 +103,6 @@ function ProfileView({
                                     handleLike={() => {
                                         likeJokePost(object);
                                     }}
-                                    darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                 ></JokeCard>
                             );
                         }
