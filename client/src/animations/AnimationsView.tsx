@@ -9,7 +9,7 @@ export const AnimationsView = ({
     user: User | null;
 }) => {
     return (
-        <>
+        <div className="smileyOuterContainer">
             <div className="smileyContainer">
                 <div className={`smiley ${smileyState}`}>
                     <div className="eyes">
@@ -19,11 +19,11 @@ export const AnimationsView = ({
                     <div className="mouth"></div>
                     <div className="chat chat-start speechBubble">
                         <div className="chat-bubble">
-                            Hi {user?.username}! You look radiant today
+                            Hi {user?.username}! You look radiant today!
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
