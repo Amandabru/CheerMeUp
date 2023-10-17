@@ -11,7 +11,7 @@ function ActivityPresenter() {
     const [company, setCompany] = useState<boolean>(false);
     const [activityType, setActivityType] = useState<string>('');
 
-    const options: {
+    let options: {
         value: string;
         label: string;
     }[] = [
@@ -25,6 +25,10 @@ function ActivityPresenter() {
         { value: 'charity', label: 'charity' },
         { value: 'busywork', label: 'busywork' }
     ];
+
+    if (company) {
+        options = options.slice(0, 2);
+    }
 
     const getRandomActivity = async (
         newActivityType: string,
