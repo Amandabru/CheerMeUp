@@ -121,13 +121,9 @@ function App({ model }: { model: CheerModel }) {
                             />
                         }
                     />
-                     <Route
+                    <Route
                         path="/verify/:userId/:uniqueString"
-                        element={
-                            <VerifyPresenter
-                            />
-                        }
-                    />
+                        element={<VerifyPresenter/>}/>
                     <Route path="/activities" element={<ActivityPresenter />} />
                     <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/404" replace />} />

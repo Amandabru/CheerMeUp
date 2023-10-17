@@ -97,9 +97,8 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
                         .then(() => {
                             UserVerification.deleteOne({ userId })
                                 .then(() => {
-                                    console.log("success");
                                     let msg =
-                                        'You have successfully verified your email. Head back to the website and proceed to login.';
+                                        'You have successfully verified your email. You can now login and start liking your favorites!';
                                     res.status(200).json({message: msg});
                                     // res.redirect(
                                     //     `/users/verifiedPage?message=${encodeURIComponent(
@@ -125,11 +124,9 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
         })
 
         .catch(() => {
-            let message =
+            let msg =
                 'An error occured while checking for existing user verification record. Please try again.';
-            res.redirect(
-                `/users/verifiedPage?message=${encodeURIComponent(message)}`
-            );
+            res.status(200).json({message: msg});
         });
 };
 
