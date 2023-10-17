@@ -24,8 +24,8 @@ function NewsView({
 }) {
     return (
         <div
-            className="bg-blue-300 text-black min-h-screen bg-fixed
-            dark:bg-gradient-to-r from-[#08094d] to-[#04052e] dark:text-white"
+            className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
+            dark:from-[#08094d] to-[#04052e] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Tired of Bad News?
@@ -34,8 +34,8 @@ function NewsView({
                 We only serve good ones!
             </h2>
             <div
-                className="absolute top-[28%] bg-blue-300 text-black min-h-screen bg-fixed
-                dark:bg-gradient-to-r from-[#08094d] to-[#04052e] "
+                className="absolute top-[28%] bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
+                dark:from-[#08094d] to-[#04052e] "
             >
                 <div className="flex justify-center items-center !scroll-smooth">
                     {count ? (

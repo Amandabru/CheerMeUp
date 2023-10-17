@@ -24,8 +24,8 @@ function MemeView({
 }) {
     return (
         <div
-            className="bg-teal-100 text-black min-h-screen bg-fixed
-            dark:bg-gradient-to-r from-[#0d3b40] to-[#0a2d30] dark:text-white"
+            className="bg-gradient-to-r from-teal-100 to-teal-300 text-black min-h-screen bg-fixed
+            dark:from-[#0d3b40] to-[#0a2d30] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Craving a Smile?
@@ -34,8 +34,8 @@ function MemeView({
                 Memes may brighten your day!
             </h2>
             <div
-                className="absolute top-[28%] bg-teal-100 
-            dark:bg-gradient-to-r from-[#0d3b40] to-[#0a2d30]"
+                className="absolute top-[28%] bg-gradient-to-r from-teal-100 to-teal-300 
+            dark:from-[#0d3b40] to-[#0a2d30]"
             >
                 <div className="flex justify-center items-center !scroll-smooth">
                     {count ? (
