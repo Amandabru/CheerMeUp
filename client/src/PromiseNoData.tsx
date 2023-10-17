@@ -3,7 +3,8 @@ import {
     NewsType,
     JokeType,
     ActivityType,
-    DataBaseType
+    DataBaseType,
+    MessageType
 } from './Types';
 
 function promiseNoData(
@@ -14,6 +15,7 @@ function promiseNoData(
         | JokeType
         | ActivityType
         | DataBaseType[]
+        | MessageType
         | null
     > | null,
     data:
@@ -24,6 +26,7 @@ function promiseNoData(
         | JokeType
         | ActivityType
         | DataBaseType[]
+        | MessageType
         | null,
     error: Error | null,
     noDataMessage: string,

@@ -51,3 +51,7 @@ export type ExistingJoy = {
     exists: boolean;
     id?: string;
 };
+
+export type MessageType = {
+    message: string,
+}

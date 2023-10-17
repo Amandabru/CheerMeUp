@@ -1,8 +1,6 @@
 import { User } from '../../userModel';
 import { MemeType, NewsType, JokeType } from '../../Types';
 import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
-import { SadSmiley } from '../../components/UI/SadSmileyIcon';
-import { Link } from 'react-router-dom';
 
 function ProfileView({
     loggedInUser,
@@ -35,10 +33,7 @@ function ProfileView({
             <h2 className="absolute top-[28%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-80 md:w-144">
                 Take a moment to smile – here are all your previous laughs!
             </h2>
-            <div
-                className="absolute top-[38%] bg-gradient-to-r from-red-200 to-red-300 dark:from-[#08094d] dark:to-[#04052e] text-black
-                   "
-            >
+            <div className="absolute top-[38%]  text-black">
                 <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mb-20">
                     {likedJoys.length > 0 ? (
                         likedJoys.map((object, index) => {
@@ -113,15 +108,12 @@ function ProfileView({
                             return cardComponent;
                         })
                     ) : (
-                        <>
-                            <div>You have no liked content {SadSmiley()}</div>
-                            <Link to="/memes">
-                                <button className="btn btn-accent mt-10">
-                                    Show me memes!
-                                </button>
-                            </Link>
-                        </>
-                    )}{' '}
+                        <div className="w-full">
+                            <h2 className="text-2xl font-light text-center dark:text-white">
+                                You have no liked content
+                            </h2>
+                        </div>
+                    )}
                 </section>
             </div>
         </div>

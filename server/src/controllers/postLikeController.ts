@@ -3,7 +3,6 @@ import JoyModel from '../models/Joys';
 import UserModel from '../models/User';
 import createHttpError from 'http-errors';
 
-// CHECK: possible bug when you try to like when you just have recently signed up as user - might get error unautharized
 export async function postLikeController(
     req: Request,
     res: Response,
@@ -21,8 +20,6 @@ export async function postLikeController(
     } else {
         searchParamValue = likedJoy.text;
     }
-
-    // const searchParam = Object.keys(likedJoy).find(key => likedJoy[key] === searchParamValue);
 
     await JoyModel.create({
         type: type,

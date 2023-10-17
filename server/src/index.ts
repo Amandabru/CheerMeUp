@@ -11,7 +11,7 @@ import { getPopularController } from './controllers/getPopularController2';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import createHttpError, { isHttpError } from 'http-errors';
-import { requiresAuth } from './middleware/auth'; //to be used at endpoints that need authentication
+import { requiresAuth } from './middleware/auth';
 import { getJoyController } from './controllers/getJoyController';
 import { patchLikeController } from './controllers/patchLikeController';
 import { getNewsController } from './controllers/getNewsController';
