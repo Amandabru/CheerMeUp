@@ -14,33 +14,6 @@ import { MemeType, JokeType, NewsType } from '../../../client/src/Types';
 
 config();
 
-// type UserModelType = {
-//     username: string,
-//     email: string,
-//     password: string,
-//     verified?: boolean | undefined,
-//     profilePicture?: string | undefined;
-//     likedPosts?: {
-//         joke: {
-//             id?: Types.ObjectId | undefined;
-//             key?: number | undefined;
-//         }[];
-//         activity: {
-//             id?: Types.ObjectId | undefined;
-//             key?: string | undefined;
-//         }[];
-//         meme: {
-//             id?: Types.ObjectId | undefined;
-//             key?: string | undefined;
-//         }[];
-//         news: {
-//             id?: Types.ObjectId | undefined;
-//             key?: string | undefined;
-//         }[];
-//     } | undefined;
-//     _id: ObjectId,
-// }
-
 interface SignUpBody {
     username?: string;
     email?: string;
@@ -56,7 +29,6 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-// TODO: fix any
 async function sendVerificationEmail(result: any, res: any) {
     const email = process.env.AUTH_EMAIL;
     const url = process.env.URL;

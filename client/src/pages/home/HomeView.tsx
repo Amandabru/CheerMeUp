@@ -54,8 +54,8 @@ function HomeView({
     };
     return (
         <div
-            className="bg-pink-300 text-black min-h-screen bg-fixed 
-         dark:bg-[#531942] dark:text-white"
+            className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen bg-fixed 
+            dark:from-[#611d4d] dark:to-[#4d173d] dark:text-white"
         >
             <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 {' '}
@@ -68,8 +68,8 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[42%] bg-pink-300 
-                    dark:bg-[#531942] dark:text-black"
+                className="absolute top-[42%] bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
+                    dark:from-[#611d4d] dark:to-[#4d173d]"
             >
                 <div className="flex justify-center  !scroll-smooth">
                     <button

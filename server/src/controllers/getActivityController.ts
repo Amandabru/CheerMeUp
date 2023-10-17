@@ -16,7 +16,6 @@ export async function getActivityController(
     try {
         const response = await fetch(api_url);
         if (!response.ok) {
-            console.log(response);
             throw createHttpError(response.status, response.statusText);
         }
         const data = await response.json();

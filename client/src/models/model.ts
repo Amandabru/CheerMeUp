@@ -121,7 +121,6 @@ export class CheerModel {
                 postLike(likedNews);
                 likedJoysCopy.news.push(likedNews);
             }
-
             this.setLikedJoys(likedJoysCopy);
             this.notifyObservers();
         } catch (error) {
