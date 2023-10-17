@@ -127,7 +127,7 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
                                     let message =
                                         'You have successfully verified your email. Head back to the website and proceed to login.';
                                     res.redirect(
-                                        `https://cheer-me-up.netlify.app/users/verifiedPage?message=${encodeURIComponent(
+                                        `/users/verifiedPage?message=${encodeURIComponent(
                                             message
                                         )}`
                                     );
