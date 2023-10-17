@@ -1,6 +1,7 @@
 import { User } from '../../userModel';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/images/LogoTest.png';
+import { useState } from 'react';
 
 interface NavBarViewProps {
     loggedInUser: User | null;
@@ -15,6 +16,8 @@ function NavBarView({
     onLoginClicked,
     onLogoutClicked
 }: NavBarViewProps) {
+    const [decoration, setDecoration] = useState<string[]>(['', '', '', '']);
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -80,37 +83,43 @@ function NavBarView({
                     src={logoImage}
                     alt={'Logo'}
                 ></img>
-                <Link to="/">
-                    <button className="normal-case text-xl mr-5">
-                        CheerMeUp!
-                    </button>
+                <Link
+                    className="normal-case text-xl mr-5"
+                    to="/"
+                    onClick={() => setDecoration(['', '', '', ''])}
+                >
+                    CheerMeUp!
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[0]}`}
                     to="/news"
+                    onClick={() => setDecoration(['underline', '', '', ''])}
                 >
                     News
                 </Link>
 
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[1]}`}
                     to="/memes"
+                    onClick={() => setDecoration(['', 'underline', '', ''])}
                 >
                     Memes
                 </Link>
 
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[2]}`}
                     to="/jokes"
+                    onClick={() => setDecoration(['', '', 'underline', ''])}
                 >
                     Jokes
                 </Link>
 
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[3]}`}
                     to="/activities"
+                    onClick={() => setDecoration(['', '', '', 'underline'])}
                 >
                     Activities
                 </Link>
@@ -121,7 +130,10 @@ function NavBarView({
                         tabIndex={0}
                         className="btn btn-ghost btn-circle avatar"
                     >
-                        <div className="w-10 rounded-full">
+                        <div
+                            className="w-10 rounded-full"
+                            onClick={() => setDecoration(['', '', '', ''])}
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
