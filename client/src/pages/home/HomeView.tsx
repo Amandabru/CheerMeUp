@@ -57,7 +57,7 @@ function HomeView({
             className="bg-pink-300 text-black min-h-screen bg-fixed 
          dark:bg-[#531942] dark:text-white"
         >
-            <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 {' '}
                 Cheer Me Up!
             </h1>
@@ -68,12 +68,12 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[46%] bg-pink-300 w-full
+                className="absolute top-[42%] bg-pink-300 
                     dark:bg-[#531942] dark:text-black"
             >
-                <div className="flex justify-center w-full !scroll-smooth">
+                <div className="flex justify-center  !scroll-smooth">
                     <button
-                        className={`mr-10 btn btn-accent${
+                        className={`mr-10 btn btn-outline${
                             selectedView === 'best' ? 'btn-active' : ''
                         }`}
                         onClick={() => setSelectedView('best')}
@@ -81,7 +81,7 @@ function HomeView({
                         Most liked
                     </button>
                     <button
-                        className={`btn btn-accent${
+                        className={`btn btn-outline${
                             selectedView === 'recently' ? 'btn-active' : ''
                         }`}
                         onClick={() => setSelectedView('recently')}
@@ -89,10 +89,9 @@ function HomeView({
                         Recently liked
                     </button>
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
+                <section className="grid auto-cols-max grid-cols-1 md:grid-cols-2 place-items-center mt-20 mx-40 gap-20 ">
                     {renderSelectedView()}
                 </section>
-                <div className="h-20"></div>
             </div>
         </div>
     );
