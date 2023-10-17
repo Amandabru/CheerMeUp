@@ -34,7 +34,7 @@ function ProfileView({
                     Hi {user?.username}!
                 </h1>
                 <h2 className="text-2xl mb-10">
-                    Take a moment to smile – here are your previous laughs!
+                    Take a moment to smile – here are all your previous laughs!
                 </h2>
             </div>
 
