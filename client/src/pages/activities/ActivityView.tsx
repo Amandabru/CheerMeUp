@@ -1,14 +1,10 @@
 function ActivityView({
     randomActivity,
-    isToggled,
-    onToggle,
     options,
     activityType,
     onNewActivity
 }: {
     randomActivity: string | React.ReactElement | undefined;
-    isToggled: boolean;
-    onToggle: Function;
     options: {
         value: string;
         label: string;
@@ -48,26 +44,6 @@ function ActivityView({
                             </option>
                         ))}
                     </select>
-                    <span>
-                        <span className="ml-10 mr-1">Activities alone</span>
-                        <input
-                            type="radio"
-                            name="radio-1"
-                            className="radio border-black align-middle dark:border-white"
-                            checked={!isToggled}
-                            onChange={() => onToggle(false)}
-                        />
-                        <span className="ml-3 mr-1">
-                            Activities with friends
-                        </span>
-                        <input
-                            type="radio"
-                            name="radio-1"
-                            className="radio border-black align-middle  dark:border-white"
-                            checked={isToggled}
-                            onChange={() => onToggle(true)}
-                        />
-                    </span>
                 </div>
 
                 <div
