@@ -68,8 +68,8 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[42%] bg-gradient-to-r from-pink-300 to-[#ff82c9]
-                    dark:from-[#611d4d] dark:to-[#4d173d] dark:text-white"
+                className="absolute top-[42%] bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
+                    dark:from-[#611d4d] dark:to-[#4d173d]"
             >
                 <div className="flex justify-center  !scroll-smooth">
                     <button
