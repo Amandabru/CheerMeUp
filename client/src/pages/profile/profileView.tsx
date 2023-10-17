@@ -29,7 +29,7 @@ function ProfileView({
             className="bg-gradient-to-r from-red-200 to-red-300 text-black min-h-screen bg-fixed pb-8
         dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
         >
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center mt-20">
                 <h1 className="mt-10 text-4xl font-bold">
                     Hi {user?.username}!
                 </h1>
