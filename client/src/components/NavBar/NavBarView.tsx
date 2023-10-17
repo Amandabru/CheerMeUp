@@ -1,6 +1,7 @@
 import { User } from '../../userModel';
 import { Link } from 'react-router-dom';
 import logoImage from '../../assets/images/LogoTest.png';
+import { useState } from 'react';
 
 interface NavBarViewProps {
     loggedInUser: User | null;
@@ -15,8 +16,10 @@ function NavBarView({
     onLoginClicked,
     onLogoutClicked
 }: NavBarViewProps) {
+    const [decoration, setDecoration] = useState<string[]>(['', '', '', '']);
+
     return (
-        <div className="navbar bg-base-100 fixed top-0 z-40">
+        <div className="navbar bg-base-100 fixed top-0 z-40 pr-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -80,37 +83,43 @@ function NavBarView({
                     src={logoImage}
                     alt={'Logo'}
                 ></img>
-                <Link to="/">
-                    <button className="normal-case text-xl mr-5">
-                        CheerMeUp!
-                    </button>
+                <Link
+                    className="normal-case text-xl mr-5"
+                    to="/"
+                    onClick={() => setDecoration(['', '', '', ''])}
+                >
+                    CheerMeUp!
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[0]}`}
                     to="/news"
+                    onClick={() => setDecoration(['underline', '', '', ''])}
                 >
                     News
                 </Link>
 
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[1]}`}
                     to="/memes"
+                    onClick={() => setDecoration(['', 'underline', '', ''])}
                 >
                     Memes
                 </Link>
 
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[2]}`}
                     to="/jokes"
+                    onClick={() => setDecoration(['', '', 'underline', ''])}
                 >
                     Jokes
                 </Link>
 
                 <Link
-                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    className={`normal-case text-xl mr-10 ${decoration[3]}`}
                     to="/activities"
+                    onClick={() => setDecoration(['', '', '', 'underline'])}
                 >
                     Activities
                 </Link>
@@ -145,7 +154,12 @@ function NavBarView({
                         {loggedInUser ? (
                             <>
                                 <li>
-                                    <Link to="/profile">
+                                    <Link
+                                        to="/profile"
+                                        onClick={() =>
+                                            setDecoration(['', '', '', ''])
+                                        }
+                                    >
                                         <p className="justify-between">
                                             Profile
                                         </p>
@@ -168,9 +182,7 @@ function NavBarView({
                 </div>
                 {loggedInUser ? (
                     <>
-                        <p className="ml-4">
-                            Signed in as: {loggedInUser.username}
-                        </p>
+                        <p className="ml-4">{loggedInUser.username}</p>
                     </>
                 ) : null}
             </div>
