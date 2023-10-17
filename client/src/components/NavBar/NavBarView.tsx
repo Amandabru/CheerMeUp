@@ -16,7 +16,7 @@ function NavBarView({
     onLogoutClicked
 }: NavBarViewProps) {
     return (
-        <div className="navbar bg-base-100 fixed top-0 z-40">
+        <div className="navbar bg-base-100 fixed top-0 z-40 pr-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -168,9 +168,7 @@ function NavBarView({
                 </div>
                 {loggedInUser ? (
                     <>
-                        <p className="ml-4">
-                            Signed in as: {loggedInUser.username}
-                        </p>
+                        <p className="ml-4">{loggedInUser.username}</p>
                     </>
                 ) : null}
             </div>
