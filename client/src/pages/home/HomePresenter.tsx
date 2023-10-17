@@ -5,7 +5,7 @@ import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
 
-function HomePresenter({}: {}) {
+function HomePresenter() {
     const [promiseMostLiked, setPromiseMostLiked] = useState<Promise<
         DataBaseType[]
     > | null>(null);
