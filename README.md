@@ -2,6 +2,8 @@
 
 # Run locally with Docker
 
+!Change to **develop** branch!
+
 Open a terminal in the project and run the following command
 ```
 cd server && make build
