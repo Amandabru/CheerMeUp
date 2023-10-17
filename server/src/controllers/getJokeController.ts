@@ -12,12 +12,15 @@ export async function getJokeController(
     const api_url = `https://v2.jokeapi.dev/joke/${categories}?blacklistFlags=nsfw,religious,political,racist,sexist,explicit`;
     try {
         const response = await fetch(api_url);
-        if (!response.ok) throw createHttpError(500, 'Failed to fetch joke');
+        if (!response.ok) {
+            throw createHttpError(response.status, response.statusText);
+        }
         const data = await response.json();
 
-        /* External Jokes API response errors are stored in boolean error parameter*/
+        /* External Jokes API returns whether an error occured in a boolean error 
+        parameter and the error message in data.message*/
         if (data.error) {
-            throw createHttpError(500, data.data);
+            throw createHttpError(500, data.message);
         }
         const selectedData = {
             type: 'joke',
@@ -27,11 +30,6 @@ export async function getJokeController(
                     : data.setup + '\n' + data.delivery,
             apiId: data.id
         };
-
-        if (!req.session.userId) {
-            res.status(200).json(selectedData);
-            return;
-        }
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);

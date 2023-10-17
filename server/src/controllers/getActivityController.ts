@@ -17,11 +17,12 @@ export async function getActivityController(
     try {
         const response = await fetch(api_url);
         if (!response.ok) {
-            throw createHttpError(500, 'Failed to fetch activity');
+            console.log(response);
+            throw createHttpError(response.status, response.statusText);
         }
         const data = await response.json();
 
-        /* External Jokes API response errors are stored in boolean error parameter*/
+        /* Bored API errors response messages are stored in data.error*/
         if (data.error) {
             throw createHttpError(500, data.error);
         }
@@ -29,11 +30,6 @@ export async function getActivityController(
             type: 'activity',
             text: data.activity
         };
-
-        if (!req.session.userId) {
-            res.status(200).json(selectedData);
-            return;
-        }
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);
