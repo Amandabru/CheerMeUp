@@ -26,7 +26,7 @@ function ProfileView({
     const user = loggedInUser;
     return (
         <div
-            className="bg-gradient-to-r from-red-200 to-red-300 text-black min-h-screen bg-fixed
+            className="bg-gradient-to-r from-red-200 to-red-300 text-black min-h-screen bg-fixed pb-8
         dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
         >
             <div className="flex flex-col items-center">
