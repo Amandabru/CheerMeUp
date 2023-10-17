@@ -33,5 +33,5 @@ networks:
   mern-app:
     driver: bridge
 volumes:
-  mongo:data:
+  mongo-data:
     driver: local
