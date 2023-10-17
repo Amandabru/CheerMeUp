@@ -20,7 +20,8 @@ export default {
             },
             animation: {
                 spin: 'spin 6s linear infinite',
-                wiggle: 'wiggle 2s ease-in-out infinite'
+                wiggle: 'wiggle 2s ease-in-out infinite',
+                pulse: 'pulse 500ms'
             },
             keyframes: {
                 wiggle: {
@@ -30,5 +31,26 @@ export default {
             }
         }
     },
-    plugins: [require('daisyui')]
+    plugins: [require('daisyui')],
+    daisyui: {
+        themes: [
+            {
+                light: {
+                    ...require('daisyui/src/theming/themes')[
+                        '[data-theme=valentine]'
+                    ]
+                },
+                dark: {
+                    ...require('daisyui/src/theming/themes')[
+                        '[data-theme=dracula]'
+                    ],
+                    primary: '#31572C',
+                    accent: '#000000',
+                    '.navbar': {
+                        'background-color': '#202020'
+                    }
+                }
+            }
+        ]
+    }
 };

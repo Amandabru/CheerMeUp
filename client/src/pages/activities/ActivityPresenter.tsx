@@ -8,10 +8,9 @@ import { ActivityType } from '../../Types';
 function ActivityPresenter() {
     const [promise, setPromise] = useState<Promise<ActivityType> | null>(null);
     const [data, error] = usePromise(promise);
-    const [company, setCompany] = useState<boolean>(false);
     const [activityType, setActivityType] = useState<string>('');
 
-    const options: {
+    let options: {
         value: string;
         label: string;
     }[] = [
@@ -26,13 +25,9 @@ function ActivityPresenter() {
         { value: 'busywork', label: 'busywork' }
     ];
 
-    const getRandomActivity = async (
-        newActivityType: string,
-        company: boolean
-    ) => {
+    const getRandomActivity = async (newActivityType: string) => {
         setActivityType(newActivityType);
-        setCompany(company);
-        setPromise(getActivity(newActivityType, company));
+        setPromise(getActivity(newActivityType));
     };
 
     return (
@@ -43,15 +38,14 @@ function ActivityPresenter() {
                         promise,
                         data,
                         error,
-                        'Choose the type of activity you want'
+                        'Choose the type of activity you want',
+                        ''
                     ) || data?.text
                 }
-                isToggled={company}
-                onToggle={(c: boolean) => setCompany(c)}
                 options={options}
                 activityType={activityType}
                 onNewActivity={(newType: string) => {
-                    newType && getRandomActivity(newType, company);
+                    newType && getRandomActivity(newType);
                 }}
             />
         </>

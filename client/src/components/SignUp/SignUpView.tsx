@@ -2,14 +2,12 @@ import { Form } from 'react-bootstrap';
 import TextInputField from '../UI/TextInputField';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import * as userApi from '../../api/user';
-import { AiOutlineCheck } from 'react-icons/ai';
 
 interface SignUpViewProps {
     register: UseFormRegister<userApi.SignUpCredentials>;
     handleSubmit: () => void;
     errors: FieldErrors<userApi.SignUpCredentials>;
     errorText: string | null;
-    verificationMessage: string;
     isSubmitting: boolean;
     directToLogin: Function;
 }
@@ -19,7 +17,6 @@ const SignUpView = ({
     handleSubmit,
     errors,
     errorText,
-    verificationMessage,
     isSubmitting,
     directToLogin
 }: SignUpViewProps) => {
@@ -64,22 +61,24 @@ const SignUpView = ({
                         registerOptions={{ required: 'Required' }}
                         error={errors.password}
                     />
-                    <p className="mt-2 mb-3">
-                        {verificationMessage}
-                        {verificationMessage && (
-                            <AiOutlineCheck
-                                color="green"
-                                className="inline mb-1 ml-2"
-                            />
-                        )}
-                    </p>
                     <button
-                        className="btn btn-primary mt-2 w-full"
+                        className={
+                            isSubmitting
+                                ? 'invisible'
+                                : 'btn btn-secondary mt-2 w-full visible'
+                        }
                         type="submit"
                         disabled={isSubmitting}
                     >
                         Sign Up
                     </button>
+                    <span
+                        className={
+                            isSubmitting
+                                ? 'loading loading-dots loading-md'
+                                : 'invisible'
+                        }
+                    ></span>
                     <div className="text-sm mt-2">
                         {' '}
                         Already have an account?{' '}

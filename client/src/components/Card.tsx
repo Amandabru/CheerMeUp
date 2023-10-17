@@ -2,21 +2,36 @@ import HeartIcon from './UI/HeartIcon';
 
 function CheckIfLiked(isLiked: Boolean) {
     return isLiked ? (
-        <HeartIcon
-            isSolid={true}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
+        <HeartIcon isSolid={true} />
     ) : (
-        <HeartIcon
-            isSolid={false}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
+        <HeartIcon isSolid={false} />
+    );
+}
+
+// check if card is displayed on home page or not
+function CheckIfHome({
+    handleLike,
+    isLiked,
+    numberLikes
+}: {
+    handleLike: Function | undefined;
+    isLiked: boolean | undefined;
+    numberLikes: number | undefined;
+}) {
+    return handleLike !== undefined && isLiked !== undefined ? (
+        <button
+            className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
+            onClick={() => {
+                handleLike();
             }}
-        />
+        >
+            {CheckIfLiked(isLiked)}
+            <span className="text-s">{numberLikes}</span>
+        </button>
+    ) : (
+        <h1 className="text-md ml-8 mb-2">
+            Number of likes: <span className="ml-2 text-xl">{numberLikes}</span>
+        </h1>
     );
 }
 
@@ -29,7 +44,8 @@ export function NewsCard({
     source,
     url,
     handleLike,
-    isLiked
+    isLiked,
+    numberLikes
 }: {
     image: string;
     title: string;
@@ -38,11 +54,15 @@ export function NewsCard({
     published: string;
     source: string;
     url: string;
-    handleLike: Function;
-    isLiked: boolean;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
+            `}
+        >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
                 <img
@@ -50,7 +70,7 @@ export function NewsCard({
                     src={image}
                 />
                 <p className="mx-8 mb-3">{text}</p>
-                <p className="ml-8 text-xs">
+                <p className="mx-8 mb-10 text-xs">
                     <span className="mr-5">{author}</span>
                     <span className="mr-5">{published}</span>
 
@@ -65,16 +85,8 @@ export function NewsCard({
                         {source}
                     </a>
                 </p>
-                <div className="flex-grow"></div>{' '}
-                {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                </button>
+
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );
@@ -83,29 +95,26 @@ export function NewsCard({
 export function MemeCard({
     image,
     handleLike,
-    isLiked
+    isLiked,
+    numberLikes
 }: {
     image: string;
-    handleLike: Function;
-    isLiked: boolean;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
-        <div className="bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
+       `}
+        >
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-128 h-5/6 mx-auto"
+                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8 mb-10"
                     src={image}
                 />
-                <div className="flex-grow"></div>{' '}
-                {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                </button>
+
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );
@@ -114,26 +123,26 @@ export function MemeCard({
 export function JokeCard({
     text,
     handleLike,
-    isLiked
+    isLiked,
+    numberLikes
 }: {
     text: string;
-    handleLike: Function;
-    isLiked: boolean;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
-        <div className="bg-white w-144 h-64 rounded-3xl overflow-hidden shadow-lg">
+        <div
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
+        `}
+        >
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 mt-5 text-lg font-bold">{text}</h1>
-                <div className="flex-grow"></div>{' '}
+                <h1 className="mx-8 my-10 md:my-20 text-lg md:text-3xl font-bold">
+                    {text}
+                </h1>
+
                 {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                </button>
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );

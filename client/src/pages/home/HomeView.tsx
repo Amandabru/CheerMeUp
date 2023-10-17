@@ -22,7 +22,6 @@ function HomeView({
     likeJoke: Function;
     showUserMustLogin: Function;
 }) {
-    console.log(mostLikedJoys);
     const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
         'best'
     );
@@ -54,36 +53,43 @@ function HomeView({
         }
     };
     return (
-        <div className="bg-pink-300 text-black min-h-screen">
+        <div
+            className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen bg-fixed
+            dark:from-[#611d4d] dark:to-[#4d173d] dark:text-white"
+        >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+                {' '}
                 Cheer Me Up!
             </h1>
-            <h2 className="absolute top-[32%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h2 className="absolute top-[44%]  md:top-[32%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-80 md:w-144">
                 Welcome to the hub of happiness! If you're feeling bored, in
                 need of a good laugh, or have temporarily lost faith in
                 humanity, you're in the right place. Our mission is simple: to
                 brighten your day!
             </h2>
-            <div className="absolute top-[42%] bg-pink-300 ">
-                <div className="flex justify-center  !scroll-smooth">
+            <div
+                className="absolute top-[65%]  md:top-[45%] bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
+                    dark:from-[#611d4d] dark:to-[#4d173d]"
+            >
+                <div className="flex justify-center w-full !scroll-smooth">
                     <button
-                        className={`mr-10 btn btn-accent${
+                        className={`mr-10 btn btn-outline${
                             selectedView === 'best' ? 'btn-active' : ''
                         }`}
                         onClick={() => setSelectedView('best')}
                     >
-                        Best
+                        Most liked
                     </button>
                     <button
-                        className={`btn btn-accent${
+                        className={`btn btn-outline${
                             selectedView === 'recently' ? 'btn-active' : ''
                         }`}
                         onClick={() => setSelectedView('recently')}
                     >
-                        recently
+                        Recently liked
                     </button>
                 </div>
-                <section className="grid auto-cols-max grid-cols-1 md:grid-cols-2 place-items-center mt-20 mx-40 gap-20 ">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10 mb-20">
                     {renderSelectedView()}
                 </section>
             </div>

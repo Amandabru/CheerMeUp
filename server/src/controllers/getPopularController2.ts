@@ -10,46 +10,68 @@ export async function getPopularController(
     const number = parseInt(req.params.number);
     const sortBy = req.params.sortBy;
 
-    JoyModel.find()
-        .sort(sortBy === 'likes' ? { likes: -1 } : { lastLiked: -1 })
-        .limit(number)
-        .then((topList) => {
-            if (topList) {
-                const transformedList = topList.map((item) => {
-                    switch (item.type) {
-                        case 'meme':
-                            item.content = {
-                                title: item.content.title,
-                                url: item.content.url
-                            };
-                            break;
-                        case 'joke':
-                            item.content = {
-                                text: item.content.text,
-                                apiId: item.content.apiId
-                            };
-                            break;
-                        case 'news':
-                            item.content = {
-                                source: item.content.source,
-                                author: item.content.author,
-                                title: item.content.title,
-                                text: item.content.text,
-                                url: item.content.url,
-                                urlToImage: item.content.urlToImage,
-                                publishedAt: item.content.publishedAt
-                            };
-                            break;
-                    }
-                    return item;
-                });
+    try {
+        const topList = await JoyModel.find()
+            .sort(sortBy === 'likes' ? { likes: -1 } : { lastLiked: -1 })
+            .limit(number);
 
-                res.status(200).json(transformedList);
-            } else {
-                throw createHttpError(500, 'Could not get toplist');
-            }
-        })
-        .catch((error) => {
-            next(error);
-        });
+        if (topList) {
+            const transformedList = topList.map((item) => {
+                let transformedItem = {};
+                if (item.type === 'meme') {
+                    const { title, url } = item.content;
+                    transformedItem = {
+                        id: item._id.toString(),
+                        type: item.type,
+                        likes: item.likes,
+                        content: { type: item.type, title, url },
+                        lastLiked: item.lastLiked
+                    };
+                } else if (item.type === 'joke') {
+                    const { text, apiId } = item.content;
+                    transformedItem = {
+                        id: item._id.toString(),
+                        type: item.type,
+                        likes: item.likes,
+                        content: { type: item.type, text, apiId },
+                        lastLiked: item.lastLiked
+                    };
+                } else if (item.type === 'news') {
+                    const {
+                        source,
+                        author,
+                        title,
+                        text,
+                        url,
+                        urlToImage,
+                        publishedAt
+                    } = item.content;
+                    transformedItem = {
+                        id: item._id.toString(),
+                        type: item.type,
+                        likes: item.likes,
+                        content: {
+                            type: item.type,
+                            source,
+                            author,
+                            title,
+                            text,
+                            url,
+                            urlToImage,
+                            publishedAt
+                        },
+                        lastLiked: item.lastLiked
+                    };
+                }
+
+                return transformedItem;
+            });
+
+            res.status(200).json(transformedList);
+        } else {
+            throw createHttpError(500, 'Could not get toplist');
+        }
+    } catch (error) {
+        next(error);
+    }
 }

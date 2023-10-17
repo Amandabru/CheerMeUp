@@ -51,7 +51,7 @@ app.use(
 app.get('/news', getNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
-app.get('/activities/:type/:multipleParticipants', getActivityController);
+app.get('/activities/:type', getActivityController);
 
 app.get('/joyExists/:type/:searchParam/:searchParamValue', getJoyController);
 app.patch('/like', requiresAuth, patchLikeController);
@@ -60,7 +60,10 @@ app.get('/popular/:sortBy/:number', getPopularController);
 
 app.get('/users', UserController.getAuthenticatedUser);
 app.post('/users/signup', UserController.signUp);
-app.get('/users/verifyUser/:userId/:uniqueString', UserController.getVerifiedUser);
+app.get(
+    '/users/verifyUser/:userId/:uniqueString',
+    UserController.getVerifiedUser
+);
 app.get('/users/verifiedPage', UserController.getVerifiedPage);
 app.post('/users/login', UserController.login);
 app.post('/users/logout', requiresAuth, UserController.logout);
