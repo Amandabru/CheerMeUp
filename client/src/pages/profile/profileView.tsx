@@ -1,7 +1,7 @@
 import { User } from '../../userModel';
 import { MemeType, NewsType, JokeType } from '../../Types';
 import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
-import { SadSmiley } from '../../components/UI/SadSmileyIcon';
+import { SadSmiley } from '../../components/UI/Icons';
 import { Link } from 'react-router-dom';
 
 function ProfileView({

@@ -4,12 +4,29 @@
 @tailwind components;
 @tailwind utilities;
 
-h1,
-a {
+
+.App {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.App form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.App h1 {
+    font-size: 32px;
+    text-align: center;
+}
+
+h1, a{
     font-family: 'Baloo 2', sans-serif;
 }
 
-p,
-h2 {
+p, h2{
     font-family: 'Quicksand', sans-serif;
 }

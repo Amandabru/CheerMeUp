@@ -1,7 +1,30 @@
-import { DataBaseType, MemeType, JokeType, NewsType } from '../../Types';
+import { User } from '../../userModel';
+import {
+    DataBaseType,
+    DataStructure,
+    MemeType,
+    JokeType,
+    NewsType
+} from '../../Types';
 import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
 
-function Content({ joys }: { joys: DataBaseType[] }) {
+function Content({
+    user,
+    joys,
+    likedJoys,
+    likeMeme,
+    likeNews,
+    likeJoke,
+    showUserMustLogin
+}: {
+    user: User | null;
+    joys: DataBaseType[];
+    likedJoys: DataStructure;
+    likeMeme: Function;
+    likeNews: Function;
+    likeJoke: Function;
+    showUserMustLogin: Function;
+}) {
     return joys.map((joy, index) => {
         let cardComponent = null;
 
