@@ -130,10 +130,7 @@ function NavBarView({
                         tabIndex={0}
                         className="btn btn-ghost btn-circle avatar"
                     >
-                        <div
-                            className="w-10 rounded-full"
-                            onClick={() => setDecoration(['', '', '', ''])}
-                        >
+                        <div className="w-10 rounded-full">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -157,7 +154,12 @@ function NavBarView({
                         {loggedInUser ? (
                             <>
                                 <li>
-                                    <Link to="/profile">
+                                    <Link
+                                        to="/profile"
+                                        onClick={() =>
+                                            setDecoration(['', '', '', ''])
+                                        }
+                                    >
                                         <p className="justify-between">
                                             Profile
                                         </p>
