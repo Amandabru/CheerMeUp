@@ -70,9 +70,9 @@ app.post('/users/logout', requiresAuth, UserController.logout);
 app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint
-app.use((_req, _res, next) => {
-    next(createHttpError(404, 'Endpoint not found'));
-});
+//app.use((_req, _res, next) => {
+//  next(createHttpError(404, 'Endpoint not found'));
+//});
 
 // Any error
 app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
@@ -86,18 +86,16 @@ app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
     res.status(statusCode).json({ error: errorMessage });
 });
 
-if(process.env.MONGODB == "local"){
+if (process.env.MONGODB == 'local') {
     mongoose.connect(process.env.MONGO_LOCAL_URL!).then(() => {
-        console.log("Connected to local database");
+        console.log('Connected to local database');
         console.log(`listening on port ${PORT}`);
         app.listen(PORT);
     });
-}
-else{
+} else {
     mongoose.connect(process.env.MONGO_URL!).then(() => {
-        console.log("Connected to external database");
+        console.log('Connected to external database');
         console.log(`listening on port ${PORT}`);
         app.listen(PORT);
     });
 }
-
