@@ -11,6 +11,7 @@ export async function postLikeController(
 ) {
     const likedJoy = req.body;
     const type = likedJoy.type;
+    console.log('likedJoy', likedJoy);
 
     let searchParamValue: number | string;
 
@@ -28,18 +29,18 @@ export async function postLikeController(
         type: type,
         likes: 1,
         content: {
-            title: likedJoy.hasOwnProperty('title') ? likedJoy.title : '',
-            text: likedJoy.hasOwnProperty('text') ? likedJoy.text : '',
+            title: likedJoy.hasOwnProperty('title') ? likedJoy.title : ' ',
+            text: likedJoy.hasOwnProperty('text') ? likedJoy.text : ' ',
             apiId: likedJoy.hasOwnProperty('apiId') ? likedJoy.apiId : 0,
-            url: likedJoy.hasOwnProperty('url') ? likedJoy.url : '',
-            source: likedJoy.hasOwnProperty('source') ? likedJoy.source : '',
-            author: likedJoy.hasOwnProperty('author') ? likedJoy.author : '',
+            url: likedJoy.hasOwnProperty('url') ? likedJoy.url : ' ',
+            source: likedJoy.hasOwnProperty('source') ? likedJoy.source : ' ',
+            author: likedJoy.hasOwnProperty('author') ? likedJoy.author : ' ',
             urlToImage: likedJoy.hasOwnProperty('urlToImage')
                 ? likedJoy.urlToImage
-                : '',
+                : ' ',
             publishedAt: likedJoy.hasOwnProperty('publishedAt')
                 ? likedJoy.publishedAt
-                : ''
+                : ' '
         }
     })
         .then(async (createdJoy) => {
