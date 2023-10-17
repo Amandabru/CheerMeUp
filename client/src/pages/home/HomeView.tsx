@@ -1,55 +1,22 @@
 import { useState } from 'react';
-import { User } from '../../userModel';
-import { DataBaseType, DataStructure } from '../../Types';
+import { DataBaseType } from '../../Types';
 import Content from './Content';
 
 function HomeView({
-    user,
     mostLikedJoys,
-    recentlyLikedJoys,
-    likedJoys,
-    likeMeme,
-    likeNews,
-    likeJoke,
-    showUserMustLogin
+    recentlyLikedJoys
 }: {
-    user: User | null;
     mostLikedJoys: DataBaseType[];
     recentlyLikedJoys: DataBaseType[];
-    likedJoys: DataStructure;
-    likeMeme: Function;
-    likeNews: Function;
-    likeJoke: Function;
-    showUserMustLogin: Function;
 }) {
     const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
         'best'
     );
     const renderSelectedView = () => {
         if (selectedView === 'best') {
-            return (
-                <Content
-                    user={user}
-                    joys={mostLikedJoys}
-                    likedJoys={likedJoys}
-                    likeMeme={likeMeme}
-                    likeJoke={likeJoke}
-                    likeNews={likeNews}
-                    showUserMustLogin={showUserMustLogin}
-                ></Content>
-            );
+            return <Content joys={mostLikedJoys}></Content>;
         } else if (selectedView === 'recently') {
-            return (
-                <Content
-                    user={user}
-                    joys={recentlyLikedJoys}
-                    likedJoys={likedJoys}
-                    likeMeme={likeMeme}
-                    likeJoke={likeJoke}
-                    likeNews={likeNews}
-                    showUserMustLogin={showUserMustLogin}
-                ></Content>
-            );
+            return <Content joys={recentlyLikedJoys}></Content>;
         }
     };
     return (

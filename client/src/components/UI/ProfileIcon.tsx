@@ -10,13 +10,13 @@ function ProfileIcon(props: ProfileIconProps) {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 stroke="#ffffff"
-                stroke-width="0.00024000000000000003"
+                strokeWidth="0.00024000000000000003"
             >
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g
                     id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                 ></g>
                 <g id="SVGRepo_iconCarrier">
                     <path
