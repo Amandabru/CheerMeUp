@@ -13,6 +13,7 @@ import MemePresenter from './pages/memes/MemePresenter';
 import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
 import HomePresenter from './pages/home/HomePresenter';
+import VerifyPresenter from './pages/verify/VerifyPresenter';
 import ProfilePresenter from './pages/profile/ProfilePresenter';
 import { VerificationModal } from './components/VerificationModal';
 import NotFound from './pages/NotFound';
@@ -117,6 +118,13 @@ function App({ model }: { model: CheerModel }) {
                                 model={model}
                                 user={loggedInUser ? loggedInUser : null}
                                 directToLogin={() => showModal('login_modal')}
+                            />
+                        }
+                    />
+                     <Route
+                        path="/verify/:userId/:uniqueString"
+                        element={
+                            <VerifyPresenter
                             />
                         }
                     />

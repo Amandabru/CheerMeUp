@@ -40,7 +40,7 @@ async function sendVerificationEmail(result: any, res: any) {
         subject: 'Verify Your Email',
         html: `<p>Verify your email address to complete the signup.</p>
     <p>Press <a href=${
-        url + 'users/verifyUser/' + result._id + '/' + uniqueString
+        url + 'verify/' + result._id + '/' + uniqueString
     } >here</a> to proceed </p>`
     };
 
@@ -97,13 +97,16 @@ export const getVerifiedUser: RequestHandler = async (req, res, next) => {
                         .then(() => {
                             UserVerification.deleteOne({ userId })
                                 .then(() => {
-                                    let message =
+                                    console.log("success");
+                                    let msg =
                                         'You have successfully verified your email. Head back to the website and proceed to login.';
-                                    res.redirect(
-                                        `/users/verifiedPage?message=${encodeURIComponent(
-                                            message
-                                        )}`
-                                    );
+                                    res.status(200).json({message: msg});
+                                    // res.redirect(
+                                    //     `/users/verifiedPage?message=${encodeURIComponent(
+                                    //         message
+                                    //     )}`
+                                    // );
+                                    return;
                                 })
                                 .catch((error) => {
                                     next(error);
