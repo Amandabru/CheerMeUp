@@ -6,7 +6,7 @@ export async function getActivity(
     multipleParticipants: boolean
 ): Promise<ActivityType> {
     const response = await fetch(
-        `${API_URL}/activities/${type}/:${multipleParticipants}`
+        `${API_URL}/activities/${type}/${multipleParticipants}`
     );
     return response.json();
 }

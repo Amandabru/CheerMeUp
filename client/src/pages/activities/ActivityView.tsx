@@ -37,9 +37,6 @@ function ActivityView({
                         onChange={(e) => {
                             const newActivityType = e.target.value;
                             onNewActivity(newActivityType);
-                            console.log(
-                                'onchange ' + newActivityType + ' ' + isToggled
-                            );
                         }}
                     >
                         <option value="" disabled>
@@ -83,9 +80,6 @@ function ActivityView({
                     className="btn mt-5 transition-transform min-w-fit shadow-lg"
                     onClick={() => {
                         onNewActivity(activityType);
-                        console.log(
-                            'onclick ' + activityType + ' ' + isToggled
-                        );
                     }}
                 >
                     Get new activity
