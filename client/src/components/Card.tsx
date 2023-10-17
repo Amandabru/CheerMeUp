@@ -2,21 +2,9 @@ import HeartIcon from './UI/HeartIcon';
 
 function CheckIfLiked(isLiked: Boolean) {
     return isLiked ? (
-        <HeartIcon
-            isSolid={true}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
+        <HeartIcon isSolid={true} />
     ) : (
-        <HeartIcon
-            isSolid={false}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
+        <HeartIcon isSolid={false} />
     );
 }
 
