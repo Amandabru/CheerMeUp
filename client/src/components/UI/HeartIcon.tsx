@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti';
+import { BsSuitHeartFill, BsSuitHeart } from 'react-icons/bs';
 
 interface HeartIconProps {
     isSolid: boolean;
@@ -10,7 +10,7 @@ function HeartIcon(props: HeartIconProps) {
 
     if (props.isSolid) {
         return (
-            <TiHeartFullOutline
+            <BsSuitHeartFill
                 className={`${
                     effect && 'animate-pulse'
                 }  cursor-pointer transform scale-150`}
@@ -22,7 +22,7 @@ function HeartIcon(props: HeartIconProps) {
         );
     }
     return (
-        <TiHeartOutline
+        <BsSuitHeart
             className={`${
                 effect && 'animate-pulse'
             }  cursor-pointer transform scale-150`}
