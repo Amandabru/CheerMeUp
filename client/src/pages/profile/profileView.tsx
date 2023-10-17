@@ -60,7 +60,6 @@ function ProfileView({
                                         handleLike={() => {
                                             likeMemePost(object);
                                         }}
-                                        darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                     ></MemeCard>
                                 );
                             } else if (object.type === 'news') {
@@ -88,7 +87,6 @@ function ProfileView({
                                         handleLike={() => {
                                             likeNewsPost(object);
                                         }}
-                                        darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                     ></NewsCard>
                                 );
                             } else if (object.type === 'joke') {
@@ -108,7 +106,6 @@ function ProfileView({
                                         handleLike={() => {
                                             likeJokePost(object);
                                         }}
-                                        darkAttributes="dark:bg-slate-800 dark:text-gray-200"
                                     ></JokeCard>
                                 );
                             }
