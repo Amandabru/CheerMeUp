@@ -34,10 +34,10 @@ function MemeView({
                 Memes may brighten your day!
             </h2>
             <div
-                className="absolute top-[28%] bg-gradient-to-r from-teal-100 to-teal-300 
+                className="absolute top-[28%] w-full bg-gradient-to-r from-teal-100 to-teal-300 
             dark:from-[#0d3b40]  dark:to-[#0a2d30]"
             >
-                <div className="flex justify-center items-center !scroll-smooth">
+                <div className="flex justify-center items-center w-full!scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
