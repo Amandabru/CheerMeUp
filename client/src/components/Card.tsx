@@ -2,21 +2,9 @@ import HeartIcon from './UI/HeartIcon';
 
 function CheckIfLiked(isLiked: Boolean) {
     return isLiked ? (
-        <HeartIcon
-            isSolid={true}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
+        <HeartIcon isSolid={true} />
     ) : (
-        <HeartIcon
-            isSolid={false}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
+        <HeartIcon isSolid={false} />
     );
 }
 
@@ -57,7 +45,6 @@ export function NewsCard({
     url,
     handleLike,
     isLiked,
-    darkAttributes,
     numberLikes
 }: {
     image: string;
@@ -67,7 +54,6 @@ export function NewsCard({
     published: string;
     source: string;
     url: string;
-    darkAttributes: string;
     handleLike?: Function | undefined;
     isLiked?: boolean | undefined;
     numberLikes?: number | undefined;
@@ -75,7 +61,7 @@ export function NewsCard({
     return (
         <div
             className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
-           ${darkAttributes} `}
+            `}
         >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
@@ -110,11 +96,9 @@ export function MemeCard({
     image,
     handleLike,
     isLiked,
-    darkAttributes,
     numberLikes
 }: {
     image: string;
-    darkAttributes: string;
     handleLike?: Function | undefined;
     isLiked?: boolean | undefined;
     numberLikes?: number | undefined;
@@ -122,7 +106,7 @@ export function MemeCard({
     return (
         <div
             className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
-        ${darkAttributes} `}
+       `}
         >
             <div className="flex flex-col h-full">
                 <img
@@ -140,11 +124,9 @@ export function JokeCard({
     text,
     handleLike,
     isLiked,
-    darkAttributes,
     numberLikes
 }: {
     text: string;
-    darkAttributes: string;
     handleLike?: Function | undefined;
     isLiked?: boolean | undefined;
     numberLikes?: number | undefined;
@@ -152,7 +134,7 @@ export function JokeCard({
     return (
         <div
             className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
-        ${darkAttributes} `}
+        `}
         >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 my-10 md:my-20 text-lg md:text-3xl font-bold">

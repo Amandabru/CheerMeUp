@@ -38,7 +38,8 @@ function ActivityPresenter() {
                         promise,
                         data,
                         error,
-                        'Choose the type of activity you want'
+                        'Choose the type of activity you want',
+                        ''
                     ) || data?.text
                 }
                 options={options}
