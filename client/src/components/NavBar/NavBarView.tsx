@@ -81,32 +81,26 @@ function NavBarView({
                     alt={'Logo'}
                 ></img>
                 <Link to="/">
-                    <button className="btn btn-ghost focus:btn-active normal-case text-xl mr-5">
+                    <button className="normal-case text-xl mr-5">
                         CheerMeUp!
                     </button>
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <Link to="/news">
-                    <button className="btn btn-ghost focus:btn-active normal-case text-xl mr-10">
-                        News
-                    </button>
+                    <button className="normal-case text-xl mr-10">News</button>
                 </Link>
 
                 <Link to="/memes">
-                    <button className="btn btn-ghost focus:btn-active normal-case text-xl mr-10">
-                        Memes
-                    </button>
+                    <button className="normal-case text-xl mr-10">Memes</button>
                 </Link>
 
                 <Link to="/jokes">
-                    <button className="btn btn-ghost focus:btn-active normal-case text-xl mr-10">
-                        Jokes
-                    </button>
+                    <button className="normal-case text-xl mr-10">Jokes</button>
                 </Link>
 
                 <Link to="/activities">
-                    <button className="btn btn-ghost focus:btn-active normal-case text-xl mr-5">
+                    <button className="normal-case text-xl mr-5">
                         Activities
                     </button>
                 </Link>
