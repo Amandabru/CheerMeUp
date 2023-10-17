@@ -25,7 +25,10 @@ function ProfileView({
 }) {
     const user = loggedInUser;
     return (
-        <div className="bg-red-300 text-black min-h-screen bg-fixed">
+        <div
+            className="bg-gradient-to-r from-red-200 to-red-300 text-black min-h-screen bg-fixed
+        dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
+        >
             <div className="flex justify-center text-3xl font-bold">
                 <h1 className="my-10">Hi {user?.username}</h1>
             </div>

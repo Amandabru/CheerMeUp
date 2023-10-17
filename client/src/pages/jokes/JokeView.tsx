@@ -31,7 +31,6 @@ function JokeView({
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
-    const [effect, setEffect] = useState(false);
 
     return (
         <div
