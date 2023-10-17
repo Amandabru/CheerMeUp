@@ -11,7 +11,6 @@ export async function postLikeController(
 ) {
     const likedJoy = req.body;
     const type = likedJoy.type;
-    console.log('likedJoy', likedJoy);
 
     let searchParamValue: number | string;
 
