@@ -1,28 +1,11 @@
-import { CheerModel } from '../../models/model';
 import HomeView from './HomeView';
-import { User } from '../../userModel';
 import { getPopular } from '../../api/getPopular';
 import { useEffect, useState } from 'react';
-import {
-    DataBaseType,
-    DataStructure,
-    MemeType,
-    NewsType,
-    JokeType
-} from '../../Types';
+import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
-import useModelProp from '../../hooks/useModelProp';
 
-function HomePresenter({
-    model,
-    user,
-    directToLogin
-}: {
-    model: CheerModel;
-    user: User | null;
-    directToLogin: Function;
-}) {
+function HomePresenter({}: {}) {
     const [promiseMostLiked, setPromiseMostLiked] = useState<Promise<
         DataBaseType[]
     > | null>(null);
@@ -33,8 +16,6 @@ function HomePresenter({
     > | null>(null);
     const [dataRecentlyLiked, errorRecentlyLiked] =
         usePromise(promiseRecentlyLiked);
-
-    const likedJoys: DataStructure = useModelProp(model);
 
     useEffect(() => {
         async function getPopularJoys() {
