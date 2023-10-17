@@ -37,14 +37,14 @@ function JokeView({
             className="bg-gradient-to-r from-lime-100 to-green-300 text-black h-full w-full fixed
        dark:from-[#1d472f]  dark:to-[#143020] dark:text-white"
         >
-            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 {' '}
                 Need a Good Laugh?
             </h1>
-            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 Say no more!
             </h2>
-            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 <div
                     className="btn-group mb-5 drop-shadow-lg"
                     onClick={(e) => {
