@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
 import path from 'path';
 import * as fs from 'fs';
 import { config } from 'dotenv';
-import { MemeType, JokeType, NewsType } from '../../../client/src/Types';
+import { MemeType, JokeType, NewsType } from '../Types';
 
 config();
 
