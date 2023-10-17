@@ -88,7 +88,13 @@ function MemePresenter({
     }
 
     return (
-        promiseNoData(getMemes(), memeData, error, 'Could not fetch memes') || (
+        promiseNoData(
+            getMemes(),
+            memeData,
+            error,
+            'Could not fetch memes',
+            'bg-gradient-to-r from-rose-300 to-orange-300 dark:from-[#0d3b40] dark:to-[#0a2d30]'
+        ) || (
             <MemeView
                 memeData={memeDataSlice(memeData, count)}
                 onIncrement={increment}

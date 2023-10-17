@@ -56,7 +56,8 @@ function JokePresenter({
                     promise,
                     joke,
                     error,
-                    'Choose the type of joke you want'
+                    'Choose the type of joke you want',
+                    ''
                 ) || joke.text
             }
             randomJokeData={joke ? joke : null}
