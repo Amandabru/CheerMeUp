@@ -1,5 +1,5 @@
 import React from 'react';
-import { TiHeartOutline, TiHeartFullOutline } from 'react-icons/Ti';
+import { TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti';
 
 interface HeartIconProps {
     isSolid: boolean;
