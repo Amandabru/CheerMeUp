@@ -4,6 +4,12 @@ import { User } from '../userModel';
 
 const AnimationPresenter = ({ user }: { user: User | null }) => {
     const [smileyState, setSmileyState] = useState('normal');
+    const [isVisible, setIsVisible] = useState(true);
+
+    setTimeout(() => {
+        setIsVisible(false);
+    }, 6000);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setSmileyState('happy');
@@ -13,7 +19,11 @@ const AnimationPresenter = ({ user }: { user: User | null }) => {
         };
     }, []);
 
-    return <AnimationsView smileyState={smileyState} user={user} />;
+    if (isVisible) {
+        return <AnimationsView smileyState={smileyState} user={user} />;
+    } else {
+        return null;
+    }
 };
 
 export default AnimationPresenter;

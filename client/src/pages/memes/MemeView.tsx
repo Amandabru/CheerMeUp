@@ -34,7 +34,7 @@ function MemeView({
                 Memes may brighten your day!
             </h2>
             <div
-                className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 
+                className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
             dark:from-[#0d3b40]  dark:to-[#0a2d30]"
             >
                 <div className="flex justify-center items-center w-full!scroll-smooth">
@@ -66,7 +66,6 @@ function MemeView({
                                 <MemeCard
                                     key={index}
                                     image={memeObject.url}
-                                    darkAttributes=" dark:bg-[#0e464d] dark:text-gray-200"
                                     isLiked={
                                         likedMemes.find(
                                             (meme) =>

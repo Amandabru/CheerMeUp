@@ -1,30 +1,7 @@
-import { User } from '../../userModel';
-import {
-    DataBaseType,
-    DataStructure,
-    MemeType,
-    JokeType,
-    NewsType
-} from '../../Types';
+import { DataBaseType, MemeType, JokeType, NewsType } from '../../Types';
 import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
 
-function Content({
-    user,
-    joys,
-    likedJoys,
-    likeMeme,
-    likeNews,
-    likeJoke,
-    showUserMustLogin
-}: {
-    user: User | null;
-    joys: DataBaseType[];
-    likedJoys: DataStructure;
-    likeMeme: Function;
-    likeNews: Function;
-    likeJoke: Function;
-    showUserMustLogin: Function;
-}) {
+function Content({ joys }: { joys: DataBaseType[] }) {
     return joys.map((joy, index) => {
         let cardComponent = null;
 
@@ -33,7 +10,6 @@ function Content({
                 <MemeCard
                     key={index}
                     image={(joy.content as MemeType).url}
-                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></MemeCard>
             );
@@ -48,7 +24,6 @@ function Content({
                     published={(joy.content as NewsType).publishedAt}
                     source={(joy.content as NewsType).source}
                     url={(joy.content as NewsType).url}
-                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></NewsCard>
             );
@@ -57,7 +32,6 @@ function Content({
                 <JokeCard
                     key={index}
                     text={(joy.content as JokeType).text}
-                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></JokeCard>
             );

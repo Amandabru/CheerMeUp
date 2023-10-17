@@ -53,29 +53,19 @@ function HomePresenter({
             promiseMostLiked,
             dataMostLiked,
             errorMostliked,
-            'Could not fetch most liked joys'
+            'Could not fetch most liked joys',
+            'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
         ) ||
         promiseNoData(
             promiseRecentlyLiked,
             dataRecentlyLiked,
             errorRecentlyLiked,
-            'Could not fetch recently liked joys'
+            'Could not fetch recently liked joys',
+            'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
         ) || (
             <HomeView
-                user={user}
                 mostLikedJoys={dataMostLiked}
                 recentlyLikedJoys={dataRecentlyLiked}
-                likedJoys={likedJoys}
-                likeMeme={(meme: MemeType) => {
-                    model.likeOrUnlikeMeme(meme);
-                }}
-                likeJoke={(joke: JokeType) => {
-                    model.likeOrUnlikeJoke(joke);
-                }}
-                likeNews={(news: NewsType) => {
-                    model.likeOrUnlikeNews(news);
-                }}
-                showUserMustLogin={() => directToLogin()}
             />
         )
     );

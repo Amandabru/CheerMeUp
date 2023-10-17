@@ -1,13 +1,12 @@
-import React from 'react';
+import { useState } from 'react';
 import { TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti';
 
 interface HeartIconProps {
     isSolid: boolean;
-    style?: React.CSSProperties;
 }
 
 function HeartIcon(props: HeartIconProps) {
-    const [effect, setEffect] = React.useState(false);
+    const [effect, setEffect] = useState<boolean>(false);
 
     if (props.isSolid) {
         return (

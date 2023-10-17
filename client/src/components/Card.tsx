@@ -2,48 +2,9 @@ import HeartIcon from './UI/HeartIcon';
 
 function CheckIfLiked(isLiked: Boolean) {
     return isLiked ? (
-        <HeartIcon
-            isSolid={true}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
+        <HeartIcon isSolid={true} />
     ) : (
-        <HeartIcon
-            isSolid={false}
-            style={{
-                cursor: 'pointer',
-                transform: 'scale(1.5)'
-            }}
-        />
-    );
-}
-
-// check if card is displayed on home page or not
-function CheckIfHome({
-    handleLike,
-    isLiked,
-    numberLikes
-}: {
-    handleLike: Function | undefined;
-    isLiked: boolean | undefined;
-    numberLikes: number | undefined;
-}) {
-    return handleLike !== undefined && isLiked !== undefined ? (
-        <button
-            className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
-            onClick={() => {
-                handleLike();
-            }}
-        >
-            {CheckIfLiked(isLiked)}
-            <span className="text-s">{numberLikes}</span>
-        </button>
-    ) : (
-        <h1 className="text-md ml-8 mb-2">
-            Number of likes: <span className="ml-2 text-xl">{numberLikes}</span>
-        </h1>
+        <HeartIcon isSolid={false} />
     );
 }
 
@@ -57,7 +18,6 @@ export function NewsCard({
     url,
     handleLike,
     isLiked,
-    darkAttributes,
     numberLikes
 }: {
     image: string;
@@ -67,7 +27,6 @@ export function NewsCard({
     published: string;
     source: string;
     url: string;
-    darkAttributes: string;
     handleLike?: Function | undefined;
     isLiked?: boolean | undefined;
     numberLikes?: number | undefined;
@@ -75,7 +34,7 @@ export function NewsCard({
     return (
         <div
             className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
-           ${darkAttributes} `}
+            `}
         >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
@@ -99,8 +58,24 @@ export function NewsCard({
                         {source}
                     </a>
                 </p>
+                {handleLike !== undefined && isLiked !== undefined ? (
+                    <button
+                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        onClick={() => {
+                            handleLike();
+                        }}
+                    >
+                        {CheckIfLiked(isLiked)}
+                        <span className="text-s">{numberLikes}</span>
+                    </button>
+                ) : null}
 
-                {CheckIfHome({ handleLike, isLiked, numberLikes })}
+                {numberLikes !== undefined ? (
+                    <h1 className="text-md ml-8 mb-2">
+                        Number of likes:{' '}
+                        <span className="ml-2 text-xl">{numberLikes}</span>
+                    </h1>
+                ) : null}
             </div>
         </div>
     );
@@ -110,11 +85,9 @@ export function MemeCard({
     image,
     handleLike,
     isLiked,
-    darkAttributes,
     numberLikes
 }: {
     image: string;
-    darkAttributes: string;
     handleLike?: Function | undefined;
     isLiked?: boolean | undefined;
     numberLikes?: number | undefined;
@@ -122,7 +95,7 @@ export function MemeCard({
     return (
         <div
             className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
-        ${darkAttributes} `}
+       `}
         >
             <div className="flex flex-col h-full">
                 <img
@@ -130,7 +103,24 @@ export function MemeCard({
                     src={image}
                 />
 
-                {CheckIfHome({ handleLike, isLiked, numberLikes })}
+                {handleLike !== undefined && isLiked !== undefined ? (
+                    <button
+                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        onClick={() => {
+                            handleLike();
+                        }}
+                    >
+                        {CheckIfLiked(isLiked)}
+                        <span className="text-s">{numberLikes}</span>
+                    </button>
+                ) : null}
+
+                {numberLikes !== undefined ? (
+                    <h1 className="text-md ml-8 mb-2">
+                        Number of likes:{' '}
+                        <span className="ml-2 text-xl">{numberLikes}</span>
+                    </h1>
+                ) : null}
             </div>
         </div>
     );
@@ -140,11 +130,9 @@ export function JokeCard({
     text,
     handleLike,
     isLiked,
-    darkAttributes,
     numberLikes
 }: {
     text: string;
-    darkAttributes: string;
     handleLike?: Function | undefined;
     isLiked?: boolean | undefined;
     numberLikes?: number | undefined;
@@ -152,15 +140,31 @@ export function JokeCard({
     return (
         <div
             className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
-        ${darkAttributes} `}
+        `}
         >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 my-10 md:my-20 text-lg md:text-3xl font-bold">
                     {text}
                 </h1>
 
-                {/* This creates space to push the button to the bottom */}
-                {CheckIfHome({ handleLike, isLiked, numberLikes })}
+                {handleLike !== undefined && isLiked !== undefined ? (
+                    <button
+                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        onClick={() => {
+                            handleLike();
+                        }}
+                    >
+                        {CheckIfLiked(isLiked)}
+                        <span className="text-s">{numberLikes}</span>
+                    </button>
+                ) : null}
+
+                {numberLikes !== undefined ? (
+                    <h1 className="text-md ml-8 mb-2">
+                        Number of likes:{' '}
+                        <span className="ml-2 text-xl">{numberLikes}</span>
+                    </h1>
+                ) : null}
             </div>
         </div>
     );

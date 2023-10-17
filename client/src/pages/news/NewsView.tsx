@@ -72,7 +72,6 @@ function NewsView({
                                     published={newsObject.publishedAt}
                                     source={newsObject.source}
                                     url={newsObject.url}
-                                    darkAttributes=" dark:bg-slate-800 dark:text-gray-200"
                                     isLiked={
                                         likedNews.find(
                                             (news) =>

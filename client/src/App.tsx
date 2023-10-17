@@ -15,6 +15,7 @@ import AnimationPresenter from './animations/AnimationsPresenter';
 import HomePresenter from './pages/home/HomePresenter';
 import ProfilePresenter from './pages/profile/ProfilePresenter';
 import { VerificationModal } from './components/VerificationModal';
+import NotFound from './pages/NotFound';
 
 function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -120,6 +121,9 @@ function App({ model }: { model: CheerModel }) {
                         }
                     />
                     <Route path="/activities" element={<ActivityPresenter />} />
+                    <Route path="/404" element={<NotFound />} />
+                    <Route path="*" element={<Navigate to="/404" replace />} />
+
                     {loggedInUser ? (
                         <Route
                             path="/profile"

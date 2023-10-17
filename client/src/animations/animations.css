@@ -1,9 +1,16 @@
+.smileyOuterContainer {
+    z-index: 4;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    animation: blur 6s;
+}
+
 .smileyContainer {
     animation: slideIn 2s ease forwards;
     margin: 0 auto;
     margin-top: 50vh;
     position: fixed;
-    z-index: 4;
     animation-name: slideIn, slideOut;
     animation-duration: 2s, 2s;
     animation-delay: 0s, 4s;
@@ -113,6 +120,28 @@
     to {
         margin-left: -100%;
         width: 100%;
+    }
+}
+
+@keyframes blur {
+    0% {
+        backdrop-filter: none;
+    }
+
+    25% {
+        backdrop-filter: blur(2px);
+    }
+
+    50% {
+        backdrop-filter: blur(3px);
+    }
+
+    75% {
+        backdrop-filter: blur(2px);
+    }
+
+    100% {
+        backdrop-filter: none;
     }
 }
 
