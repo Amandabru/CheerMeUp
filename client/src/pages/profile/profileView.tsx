@@ -30,7 +30,7 @@ function ProfileView({
         dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
         >
             <div className="flex flex-col items-center">
-                <h1 className="mt-10 text-3xl font-bold">
+                <h1 className="mt-10 text-4xl font-bold">
                     Hi {user?.username}!
                 </h1>
                 <h2 className="text-2xl mb-10">
