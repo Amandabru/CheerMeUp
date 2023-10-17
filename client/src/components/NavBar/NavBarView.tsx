@@ -42,9 +42,9 @@ function NavBarView({
                         <li>
                             <Link
                                 to="/news"
-                                className="normal-case text-xl mr-10"
+                                className="normal-case text-xl mr-10 "
                             >
-                                News
+                                <span className="">News</span>
                             </Link>
                         </li>
                         <li>
@@ -87,22 +87,32 @@ function NavBarView({
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <Link to="/news">
-                    <button className="normal-case text-xl mr-10">News</button>
+                <Link
+                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    to="/news"
+                >
+                    News
                 </Link>
 
-                <Link to="/memes">
-                    <button className="normal-case text-xl mr-10">Memes</button>
+                <Link
+                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    to="/memes"
+                >
+                    Memes
                 </Link>
 
-                <Link to="/jokes">
-                    <button className="normal-case text-xl mr-10">Jokes</button>
+                <Link
+                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    to="/jokes"
+                >
+                    Jokes
                 </Link>
 
-                <Link to="/activities">
-                    <button className="normal-case text-xl mr-5">
-                        Activities
-                    </button>
+                <Link
+                    className="normal-case text-xl mr-10 no-underline focus:underline"
+                    to="/activities"
+                >
+                    Activities
                 </Link>
             </div>
             <div className="navbar-end">
