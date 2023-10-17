@@ -90,7 +90,8 @@ function NewsPresenter({
             getHappyNews(),
             newsData,
             error,
-            'Could not fetch news (promise denied)'
+            'Could not fetch news (promise denied)',
+            'bg-gradient-to-r from-blue-200 to-blue-300 dark:from-[#08094d] dark:to-[#04052e]'
         ) || (
             <NewsView
                 newsData={newsDataSlice(newsData, count)}

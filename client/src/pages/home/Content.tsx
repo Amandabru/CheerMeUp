@@ -33,7 +33,6 @@ function Content({
                 <MemeCard
                     key={index}
                     image={(joy.content as MemeType).url}
-                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></MemeCard>
             );
@@ -48,7 +47,6 @@ function Content({
                     published={(joy.content as NewsType).publishedAt}
                     source={(joy.content as NewsType).source}
                     url={(joy.content as NewsType).url}
-                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></NewsCard>
             );
@@ -57,7 +55,6 @@ function Content({
                 <JokeCard
                     key={index}
                     text={(joy.content as JokeType).text}
-                    darkAttributes=""
                     numberLikes={joy.likes}
                 ></JokeCard>
             );
