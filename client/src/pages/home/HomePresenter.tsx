@@ -47,6 +47,7 @@ function HomePresenter({
         }
         getPopularJoys();
     }, []);
+
     return (
         promiseNoData(
             promiseMostLiked,

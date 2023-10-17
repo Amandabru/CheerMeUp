@@ -20,7 +20,8 @@ export default {
             },
             animation: {
                 spin: 'spin 6s linear infinite',
-                wiggle: 'wiggle 2s ease-in-out infinite'
+                wiggle: 'wiggle 2s ease-in-out infinite',
+                pulse: 'pulse 500ms'
             },
             keyframes: {
                 wiggle: {

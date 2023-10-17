@@ -8,20 +8,19 @@ export async function getActivityController(
     next: NextFunction
 ) {
     const type = req.params.type;
-    const multipleParticipants = req.params.multipleParticipants;
 
     let participantsQuery: string = '';
-    if (multipleParticipants == 'false') participantsQuery = 'participants=1';
+    if (type == 'social') participantsQuery = 'participants=4';
 
-    const api_url = `http://www.boredapi.com/api/activity?${participantsQuery}&type=${type}`;
+    const api_url = `http://www.boredapi.com/api/activity?type=${type}`;
     try {
         const response = await fetch(api_url);
         if (!response.ok) {
-            throw createHttpError(500, 'Failed to fetch activity');
+            throw createHttpError(response.status, response.statusText);
         }
         const data = await response.json();
 
-        /* External Jokes API response errors are stored in boolean error parameter*/
+        /* Bored API errors response messages are stored in data.error*/
         if (data.error) {
             throw createHttpError(500, data.error);
         }
@@ -29,11 +28,6 @@ export async function getActivityController(
             type: 'activity',
             text: data.activity
         };
-
-        if (!req.session.userId) {
-            res.status(200).json(selectedData);
-            return;
-        }
         res.status(200).json(selectedData);
     } catch (error) {
         next(error);

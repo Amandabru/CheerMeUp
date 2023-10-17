@@ -14,6 +14,7 @@ import NewsPresenter from './pages/news/NewsPresenter';
 import AnimationPresenter from './animations/AnimationsPresenter';
 import HomePresenter from './pages/home/HomePresenter';
 import ProfilePresenter from './pages/profile/ProfilePresenter';
+import { VerificationModal } from './components/VerificationModal';
 
 function App({ model }: { model: CheerModel }) {
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
@@ -50,7 +51,6 @@ function App({ model }: { model: CheerModel }) {
                 if (loggedInUser) {
                     const likedJoys = await userApi.getLikedJoys();
                     model.setLikedJoys(likedJoys);
-                    console.log('liked joys', likedJoys);
                 }
             } catch (error) {
                 console.log(error);
@@ -143,6 +143,10 @@ function App({ model }: { model: CheerModel }) {
                     closeModal('signup_modal');
                     showModal('login_modal');
                 }}
+                directToVerification={() => {
+                    closeModal('signup_modal');
+                    showModal('verification_modal');
+                }}
             />
             <LoginPresenter
                 onLoginSuccessful={(user) => {
@@ -152,6 +156,12 @@ function App({ model }: { model: CheerModel }) {
                 directToSignup={() => {
                     closeModal('login_modal');
                     showModal('signup_modal');
+                }}
+            />
+            <VerificationModal
+                directToLogin={() => {
+                    closeModal('verification_modal');
+                    showModal('login_modal');
                 }}
             />
         </>

@@ -25,12 +25,20 @@ function ProfileView({
 }) {
     const user = loggedInUser;
     return (
-        <div className="bg-red-300 text-black min-h-screen bg-fixed">
-            <div className="flex justify-center text-3xl font-bold">
-                <h1 className="my-10">Hi {user?.username}</h1>
+        <div
+            className="bg-gradient-to-r from-red-200 to-red-300 text-black min-h-screen bg-fixed
+        dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
+        >
+            <div className="flex flex-col items-center">
+                <h1 className="mt-10 text-4xl font-bold">
+                    Hi {user?.username}!
+                </h1>
+                <h2 className="text-2xl mb-10">
+                    Take a moment to smile – here are all your previous laughs!
+                </h2>
             </div>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+            <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10">
                 {likedJoys.length > 0 ? (
                     likedJoys.map((object, index) => {
                         let cardComponent = null;

@@ -31,21 +31,22 @@ function JokeView({
     const [hidden, setVisability] = useState<
         'visible' | 'hidden' | 'collapse' | undefined
     >('hidden');
+
     return (
         <div
-            className="bg-green-200 text-black h-full w-full fixed
-        dark:bg-[#132A13] dark:text-white"
+            className="bg-gradient-to-r from-lime-100 to-green-300 text-black h-full w-full fixed
+       dark:from-[#1d472f]  dark:to-[#143020] dark:text-white"
         >
-            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 {' '}
                 Need a Good Laugh?
             </h1>
-            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h2 className=" absolute top-[19%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 Say no more!
             </h2>
-            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 <div
-                    className="btn-group mb-5 shadow-lg"
+                    className="btn-group mb-5 drop-shadow-lg"
                     onClick={(e) => {
                         const target = e.target as HTMLInputElement;
                         jokeType = [target.value];
@@ -84,13 +85,16 @@ function JokeView({
                 </div>
                 <div
                     className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-green-100 h-40 w-full overflow-x-auto flex items-center justify-center relative 
-                    dark:bg-[#183618] dark:text-gray-300 dark:border-[#1f471f]"
+                    dark:bg-[#193d28] dark:text-gray-300 dark:border-[#1f471f]"
                 >
                     <span
+                        className={'absolute top-[15px] right-[15px]'}
                         onClick={() => {
-                            user
-                                ? isLiked(randomJokeData)
-                                : showUserMustLogin();
+                            {
+                                user
+                                    ? isLiked(randomJokeData)
+                                    : showUserMustLogin();
+                            }
                         }}
                         style={{ visibility: hidden }}
                     >
@@ -103,13 +107,6 @@ function JokeView({
                                     ? true
                                     : false
                             }
-                            style={{
-                                position: 'absolute',
-                                top: '15px',
-                                right: '15px',
-                                cursor: 'pointer',
-                                transform: 'scale(1.5)'
-                            }}
                         />
                     </span>
                     <span>{randomJokeText}</span>

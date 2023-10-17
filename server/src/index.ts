@@ -51,7 +51,7 @@ app.use(
 app.get('/news', getNewsController);
 app.get('/memes', getMemesController);
 app.get('/jokes/:categories', getJokeController);
-app.get('/activities/:type/:multipleParticipants', getActivityController);
+app.get('/activities/:type', getActivityController);
 
 app.get('/joyExists/:type/:searchParam/:searchParamValue', getJoyController);
 app.patch('/like', requiresAuth, patchLikeController);

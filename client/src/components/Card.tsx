@@ -6,10 +6,7 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={true}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)',
-                right: '-505px',
-                top: '-450px',
-                position: 'relative'
+                transform: 'scale(1.5)'
             }}
         />
     ) : (
@@ -17,12 +14,36 @@ function CheckIfLiked(isLiked: Boolean) {
             isSolid={false}
             style={{
                 cursor: 'pointer',
-                transform: 'scale(1.5)',
-                right: '-505px',
-                top: '-450px',
-                position: 'relative'
+                transform: 'scale(1.5)'
             }}
         />
+    );
+}
+
+// check if card is displayed on home page or not
+function CheckIfHome({
+    handleLike,
+    isLiked,
+    numberLikes
+}: {
+    handleLike: Function | undefined;
+    isLiked: boolean | undefined;
+    numberLikes: number | undefined;
+}) {
+    return handleLike !== undefined && isLiked !== undefined ? (
+        <button
+            className="ml-8 mb-5 focus:outline-none flex items-center w-32 space-x-2"
+            onClick={() => {
+                handleLike();
+            }}
+        >
+            {CheckIfLiked(isLiked)}
+            <span className="text-s">{numberLikes}</span>
+        </button>
+    ) : (
+        <h1 className="text-md ml-8 mb-2">
+            Number of likes: <span className="ml-2 text-xl">{numberLikes}</span>
+        </h1>
     );
 }
 
@@ -36,7 +57,8 @@ export function NewsCard({
     url,
     handleLike,
     isLiked,
-    darkAttributes
+    darkAttributes,
+    numberLikes
 }: {
     image: string;
     title: string;
@@ -45,13 +67,14 @@ export function NewsCard({
     published: string;
     source: string;
     url: string;
-    handleLike: Function;
-    isLiked: boolean;
     darkAttributes: string;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
         <div
-            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
            ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
@@ -61,7 +84,7 @@ export function NewsCard({
                     src={image}
                 />
                 <p className="mx-8 mb-3">{text}</p>
-                <p className="ml-8 text-xs">
+                <p className="mx-8 mb-10 text-xs">
                     <span className="mr-5">{author}</span>
                     <span className="mr-5">{published}</span>
 
@@ -76,16 +99,8 @@ export function NewsCard({
                         {source}
                     </a>
                 </p>
-                <div className="flex-grow"></div>{' '}
-                {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                </button>
+
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );
@@ -95,33 +110,27 @@ export function MemeCard({
     image,
     handleLike,
     isLiked,
-    darkAttributes
+    darkAttributes,
+    numberLikes
 }: {
     image: string;
-    handleLike: Function;
-    isLiked: boolean;
     darkAttributes: string;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
         <div
-            className={`bg-white w-144 h-128 rounded-3xl overflow-hidden shadow-lg shadow-lg
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
         ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8"
+                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8 mb-10"
                     src={image}
                 />
-                <div className="flex-grow"></div>{' '}
-                {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                </button>
+
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );
@@ -131,32 +140,27 @@ export function JokeCard({
     text,
     handleLike,
     isLiked,
-    darkAttributes
+    darkAttributes,
+    numberLikes
 }: {
     text: string;
-    handleLike: Function;
-    isLiked: boolean;
     darkAttributes: string;
+    handleLike?: Function | undefined;
+    isLiked?: boolean | undefined;
+    numberLikes?: number | undefined;
 }) {
     return (
         <div
-            className={`bg-white w-96 md:w-144 h-32 md:h-64 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
         ${darkAttributes} `}
         >
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 mt-5 md:mt-15 text-lg md:text-3xl font-bold">
+                <h1 className="mx-8 my-10 md:my-20 text-lg md:text-3xl font-bold">
                     {text}
                 </h1>
-                <div className="flex-grow"></div>{' '}
+
                 {/* This creates space to push the button to the bottom */}
-                <button
-                    className="ml-8 mb-5 focus:outline-none flex items-center w-32"
-                    onClick={() => {
-                        handleLike();
-                    }}
-                >
-                    {CheckIfLiked(isLiked)}
-                </button>
+                {CheckIfHome({ handleLike, isLiked, numberLikes })}
             </div>
         </div>
     );

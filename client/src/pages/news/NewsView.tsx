@@ -24,8 +24,8 @@ function NewsView({
 }) {
     return (
         <div
-            className="bg-blue-300 text-black min-h-screen bg-fixed
-            dark:bg-[#04052e] dark:text-white"
+            className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
+            dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Tired of Bad News?
@@ -34,10 +34,10 @@ function NewsView({
                 We only serve good ones!
             </h2>
             <div
-                className="absolute top-[28%] bg-blue-300 text-black min-h-screen bg-fixed
-                dark:bg-[#04052e] "
+                className="absolute top-[28%] bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
+                dark:from-[#08094d]  dark:to-[#04052e] "
             >
-                <div className="flex justify-center items-center !scroll-smooth">
+                <div className="flex justify-center items-center w-full !scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
@@ -48,16 +48,18 @@ function NewsView({
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
                         </button>
                     ) : null}
-                    <button
-                        className="btn btn-accent mt-10"
-                        onClick={() => {
-                            onIncrement();
-                        }}
-                    >
-                        <AiOutlineArrowRight style={{ scale: '2' }} />
-                    </button>
+                    {count < 2 ? (
+                        <button
+                            className="btn btn-accent mt-10"
+                            onClick={() => {
+                                onIncrement();
+                            }}
+                        >
+                            <AiOutlineArrowRight style={{ scale: '2' }} />
+                        </button>
+                    ) : null}
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-20 ml-40 mr-40 mt-20">
+                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
                     {newsData ? (
                         newsData.map((newsObject, index) => {
                             return (
@@ -70,6 +72,7 @@ function NewsView({
                                     published={newsObject.publishedAt}
                                     source={newsObject.source}
                                     url={newsObject.url}
+                                    darkAttributes=" dark:bg-slate-800 dark:text-gray-200"
                                     isLiked={
                                         likedNews.find(
                                             (news) =>
@@ -83,7 +86,6 @@ function NewsView({
                                             ? likePost(newsObject)
                                             : showUserMustLogin();
                                     }}
-                                    darkAttributes=" dark:bg-slate-800 dark:text-gray-200"
                                 ></NewsCard>
                             );
                         })
@@ -103,15 +105,17 @@ function NewsView({
                             <AiOutlineArrowLeft style={{ scale: '2' }} />
                         </button>
                     ) : null}
-                    <button
-                        className="btn btn-accent mt-10"
-                        onClick={() => {
-                            onIncrement();
-                            window.scrollTo(0, 0);
-                        }}
-                    >
-                        <AiOutlineArrowRight style={{ scale: '2' }} />
-                    </button>
+                    {count < 2 ? (
+                        <button
+                            className="btn btn-accent mt-10"
+                            onClick={() => {
+                                onIncrement();
+                                window.scrollTo(0, 0);
+                            }}
+                        >
+                            <AiOutlineArrowRight style={{ scale: '2' }} />
+                        </button>
+                    ) : null}
                 </div>
             </div>
         </div>
