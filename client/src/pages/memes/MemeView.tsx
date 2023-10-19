@@ -4,7 +4,8 @@ import { User } from '../../userModel';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
 function MemeView({
-    memeData,
+    memeData1,
+    memeData2,
     onIncrement,
     onDecrement,
     count,
@@ -13,7 +14,8 @@ function MemeView({
     user,
     showUserMustLogin
 }: {
-    memeData: MemeType[];
+    memeData1: MemeType[];
+    memeData2: MemeType[];
     onIncrement: () => void;
     onDecrement: () => void;
     count: number;
@@ -22,6 +24,31 @@ function MemeView({
     user: User | null;
     showUserMustLogin: Function;
 }) {
+    function mapCards(memeData: MemeType[]) {
+        return memeData ? (
+            memeData.map((memeObject, index) => {
+                return (
+                    <MemeCard
+                        key={index}
+                        image={memeObject.url}
+                        isLiked={
+                            likedMemes.find(
+                                (meme) => meme.url === memeObject.url
+                            )
+                                ? true
+                                : false
+                        }
+                        handleLike={() => {
+                            user ? likePost(memeObject) : showUserMustLogin();
+                        }}
+                    ></MemeCard>
+                );
+            })
+        ) : (
+            <div>No meme data available</div>
+        );
+    }
+
     return (
         <div
             className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen bg-fixed
@@ -37,7 +64,7 @@ function MemeView({
                 className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
             dark:from-[#0d3b40]  dark:to-[#0a2d30]"
             >
-                <div className="flex justify-center items-center w-full!scroll-smooth">
+                <div className="flex justify-center items-center w-full !scroll-smooth">
                     {count ? (
                         <button
                             className="btn btn-accent mt-10 mr-10"
@@ -59,32 +86,15 @@ function MemeView({
                         </button>
                     ) : null}
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-5">
-                    {memeData ? (
-                        memeData.map((memeObject, index) => {
-                            return (
-                                <MemeCard
-                                    key={index}
-                                    image={memeObject.url}
-                                    isLiked={
-                                        likedMemes.find(
-                                            (meme) =>
-                                                meme.url === memeObject.url
-                                        )
-                                            ? true
-                                            : false
-                                    }
-                                    handleLike={() => {
-                                        user
-                                            ? likePost(memeObject)
-                                            : showUserMustLogin();
-                                    }}
-                                ></MemeCard>
-                            );
-                        })
-                    ) : (
-                        <div>No meme data available</div>
-                    )}
+                <section className="w-full">
+                    <div className="flex flex-col md:flex-row w-full">
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
+                            {mapCards(memeData1)}
+                        </div>
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
+                            {mapCards(memeData2)}
+                        </div>
+                    </div>
                 </section>
                 <div className="flex justify-center items-center !scroll-smooth pb-5">
                     {count ? (

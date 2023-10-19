@@ -94,18 +94,18 @@ export function MemeCard({
 }) {
     return (
         <div
-            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-5/6 rounded-xl overflow-hidden shadow-xl justify-self-center
        `}
         >
             <div className="flex flex-col h-full">
                 <img
-                    className="object-contain w-80 md:w-128 h-5/6 mx-auto mt-8 mb-10"
+                    className="object-contain w-8/12 mx-auto mt-8 mb-10"
                     src={image}
                 />
 
                 {handleLike !== undefined && isLiked !== undefined ? (
                     <button
-                        className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
+                        className="self-end mr-8 mb-5 focus:outline-none flex items-center"
                         onClick={() => {
                             handleLike();
                         }}
