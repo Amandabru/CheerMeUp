@@ -59,7 +59,7 @@ function NewsView({
                         </button>
                     ) : null}
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10">
+                <section className="grid grid-cols-1 md:grid-cols-2 items-start place-items-center gap-y-10 mt-10">
                     {newsData ? (
                         newsData.map((newsObject, index) => {
                             return (
