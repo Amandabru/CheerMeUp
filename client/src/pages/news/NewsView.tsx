@@ -1,10 +1,11 @@
 import { NewsType } from '../../Types';
 import { NewsCard } from '../../components/Card';
 import { User } from '../../userModel';
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
+import PaginationButtons from '../../components/UI/PaginationButtons';
 
 function NewsView({
-    newsData,
+    newsData1,
+    newsData2,
     onIncrement,
     onDecrement,
     count,
@@ -13,7 +14,8 @@ function NewsView({
     user,
     showUserMustLogin
 }: {
-    newsData: NewsType[];
+    newsData1: NewsType[];
+    newsData2: NewsType[];
     onIncrement: () => void;
     onDecrement: () => void;
     count: number;
@@ -22,6 +24,32 @@ function NewsView({
     user: User | null;
     showUserMustLogin: Function;
 }) {
+    function mapCards(newsData: NewsType[]) {
+        return newsData ? (
+            newsData.map((newsObject, index) => (
+                <NewsCard
+                    key={index}
+                    image={newsObject.urlToImage}
+                    title={newsObject.title}
+                    text={newsObject.text}
+                    author={newsObject.author}
+                    published={newsObject.publishedAt}
+                    source={newsObject.source}
+                    url={newsObject.url}
+                    isLiked={
+                        likedNews.find((news) => news.url === newsObject.url)
+                            ? true
+                            : false
+                    }
+                    handleLike={() => {
+                        user ? likePost(newsObject) : showUserMustLogin();
+                    }}
+                />
+            ))
+        ) : (
+            <div>No news data available</div>
+        );
+    }
     return (
         <div
             className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
@@ -37,85 +65,28 @@ function NewsView({
                 className="absolute top-[28%] bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
                 dark:from-[#08094d]  dark:to-[#04052e] "
             >
-                <div className="flex justify-center items-center w-full !scroll-smooth">
-                    {count ? (
-                        <button
-                            className="btn btn-accent mt-10 mr-10"
-                            onClick={() => {
-                                onDecrement();
-                            }}
-                        >
-                            <AiOutlineArrowLeft style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                    {count < 2 ? (
-                        <button
-                            className="btn btn-accent mt-10"
-                            onClick={() => {
-                                onIncrement();
-                            }}
-                        >
-                            <AiOutlineArrowRight style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 items-start place-items-center gap-y-10 mt-10">
-                    {newsData ? (
-                        newsData.map((newsObject, index) => {
-                            return (
-                                <NewsCard
-                                    key={index}
-                                    image={newsObject.urlToImage}
-                                    title={newsObject.title}
-                                    text={newsObject.text}
-                                    author={newsObject.author}
-                                    published={newsObject.publishedAt}
-                                    source={newsObject.source}
-                                    url={newsObject.url}
-                                    isLiked={
-                                        likedNews.find(
-                                            (news) =>
-                                                news.url === newsObject.url
-                                        )
-                                            ? true
-                                            : false
-                                    }
-                                    handleLike={() => {
-                                        user
-                                            ? likePost(newsObject)
-                                            : showUserMustLogin();
-                                    }}
-                                ></NewsCard>
-                            );
-                        })
-                    ) : (
-                        <div>No news data available</div>
-                    )}
+                <PaginationButtons
+                    count={count}
+                    onDecrement={onDecrement}
+                    onIncrement={onIncrement}
+                />
+                <section className="w-full !scroll-smooth">
+                    <div className="flex flex-col md:flex-row w-full">
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
+                            {mapCards(newsData1)}
+                        </div>
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
+                            {mapCards(newsData2)}
+                        </div>
+                    </div>
                 </section>
-                <div className="flex justify-center items-center !scroll-smooth pb-5">
-                    {count ? (
-                        <button
-                            className="btn btn-accent mt-10 mr-10"
-                            onClick={() => {
-                                onDecrement();
-                                window.scrollTo(0, 0);
-                            }}
-                        >
-                            <AiOutlineArrowLeft style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                    {count < 2 ? (
-                        <button
-                            className="btn btn-accent mt-10"
-                            onClick={() => {
-                                onIncrement();
-                                window.scrollTo(0, 0);
-                            }}
-                        >
-                            <AiOutlineArrowRight style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                </div>
+                <PaginationButtons
+                    count={count}
+                    onDecrement={onDecrement}
+                    onIncrement={onIncrement}
+                    position={'bottom'}
+                />
+                <div className="h-10"></div>
             </div>
         </div>
     );

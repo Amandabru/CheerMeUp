@@ -6,6 +6,7 @@ import { getHappyNews } from '../../api/getNews';
 import promiseNoData from '../../PromiseNoData';
 import useModelProp from '../../hooks/useModelProp';
 import { User } from '../../userModel';
+import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
 
 function NewsPresenter({
     model,
@@ -17,19 +18,33 @@ function NewsPresenter({
     directToLogin: Function;
 }) {
     const [newsData, setNewsData] = useState<NewsType[]>([]);
+    const [newsData1, newsData2] = splitArrayInHalf(newsData);
+    const [error, setError] = useState<Error | null>(null);
+    const likedJoys: DataStructure = useModelProp(model);
+    const lastFetchDate = localStorage.getItem('lastFetchDateNews');
+
+    // Count used for keeping track of the pagination
     const storedCount = localStorage.getItem('newsCount');
     const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
     const [count, setCount] = useState<number>(initialCount);
-    const [error, setError] = useState<Error | null>(null);
-    const likedJoys: DataStructure = useModelProp(model);
 
-    const lastFetchDate = localStorage.getItem('lastFetchDateNews');
+    const increment = () => {
+        if (count < 2) {
+            setCount(count + 1);
+        }
+    };
+
+    const decrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
+    };
 
     const shouldFetchData = () => {
         if (!lastFetchDate) return true;
         const lastFetchTime = new Date(lastFetchDate).getTime();
         const currentTime = new Date().getTime();
-        const twentyFourHours = 24 * 60 * 60 * 1000;
+        const twentyFourHours = 24 * 60 * 60 * 1000; // fetch new data one time per day
         return currentTime - lastFetchTime >= twentyFourHours;
     };
 
@@ -46,18 +61,6 @@ function NewsPresenter({
             .catch((err) => setError(err));
     };
 
-    const increment = () => {
-        if (count < 2) {
-            setCount(count + 1);
-        }
-    };
-
-    const decrement = () => {
-        if (count > 0) {
-            setCount(count - 1);
-        }
-    };
-
     useEffect(() => {
         if (shouldFetchData()) {
             fetchData();
@@ -67,24 +70,12 @@ function NewsPresenter({
                 setNewsData(JSON.parse(storedNewsData));
             }
         }
-    }, []); // Empty dependency array means this effect runs only once on component mount
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('newsCount', count.toString());
     }, [count]);
 
-    function newsDataSlice(data: NewsType[], count: number): NewsType[] {
-        if (count === 0) {
-            return data.slice(0, data.length / 3);
-        }
-        if (count === 1) {
-            return data.slice(data.length / 3, data.length - data.length / 3);
-        }
-        if (count === 2) {
-            return data.slice(data.length - data.length / 3, data.length);
-        }
-        return [];
-    }
     return (
         promiseNoData(
             getHappyNews(),
@@ -94,7 +85,8 @@ function NewsPresenter({
             'bg-gradient-to-r from-blue-200 to-blue-300 dark:from-[#08094d] dark:to-[#04052e]'
         ) || (
             <NewsView
-                newsData={newsDataSlice(newsData, count)}
+                newsData1={dataSlice(newsData1, count)}
+                newsData2={dataSlice(newsData2, count)}
                 onIncrement={increment}
                 onDecrement={decrement}
                 count={count}

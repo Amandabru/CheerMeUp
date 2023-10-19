@@ -33,13 +33,13 @@ export function NewsCard({
 }) {
     return (
         <div
-            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-5/6 rounded-xl overflow-hidden shadow-xl justify-self-center
             `}
         >
             <div className="flex flex-col h-full">
                 <h1 className="mx-8 mt-5 text-lg font-bold">{title}</h1>
                 <img
-                    className="object-contain w-96 h-2/6 mx-auto my-5"
+                    className="object-contain w-9/12 mx-auto my-5"
                     src={image}
                 />
                 <p className="mx-8 mb-3">{text}</p>

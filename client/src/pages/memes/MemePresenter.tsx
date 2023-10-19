@@ -23,7 +23,7 @@ function MemePresenter({
     const likedJoys: DataStructure = useModelProp(model);
     const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
 
-    // Count used for keeping track of the browsing on page
+    // Count used for keeping track of the pagination
     const storedCount = localStorage.getItem('memeCount');
     const initialCount = storedCount ? parseInt(storedCount) : 0;
     const [count, setCount] = useState<number>(initialCount);
@@ -44,7 +44,7 @@ function MemePresenter({
         if (!lastFetchDate) return true;
         const lastFetchTime = new Date(lastFetchDate).getTime();
         const currentTime = new Date().getTime();
-        const twentyFourHours = 24 * 60 * 60 * 1000;
+        const twentyFourHours = 24 * 60 * 60 * 1000; // fetch new data one time per day
         return currentTime - lastFetchTime >= twentyFourHours;
     };
 

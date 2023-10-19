@@ -1,7 +1,7 @@
 import { MemeCard } from '../../components/Card';
 import { MemeType } from '../../Types';
 import { User } from '../../userModel';
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
+import PaginationButtons from '../../components/UI/PaginationButtons';
 
 function MemeView({
     memeData1,
@@ -64,29 +64,12 @@ function MemeView({
                 className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
             dark:from-[#0d3b40]  dark:to-[#0a2d30]"
             >
-                <div className="flex justify-center items-center w-full !scroll-smooth">
-                    {count ? (
-                        <button
-                            className="btn btn-accent mt-10 mr-10"
-                            onClick={() => {
-                                onDecrement();
-                            }}
-                        >
-                            <AiOutlineArrowLeft style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                    {count < 2 ? (
-                        <button
-                            className="btn btn-accent mt-10"
-                            onClick={() => {
-                                onIncrement();
-                            }}
-                        >
-                            <AiOutlineArrowRight style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                </div>
-                <section className="w-full">
+                <PaginationButtons
+                    count={count}
+                    onDecrement={onDecrement}
+                    onIncrement={onIncrement}
+                />
+                <section className="w-full !scroll-smooth">
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
                             {mapCards(memeData1)}
@@ -96,30 +79,13 @@ function MemeView({
                         </div>
                     </div>
                 </section>
-                <div className="flex justify-center items-center !scroll-smooth pb-5">
-                    {count ? (
-                        <button
-                            className="btn btn-accent mt-10 mr-10"
-                            onClick={() => {
-                                onDecrement();
-                                window.scrollTo(0, 0);
-                            }}
-                        >
-                            <AiOutlineArrowLeft style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                    {count < 2 ? (
-                        <button
-                            className="btn btn-accent mt-10"
-                            onClick={() => {
-                                onIncrement();
-                                window.scrollTo(0, 0);
-                            }}
-                        >
-                            <AiOutlineArrowRight style={{ scale: '2' }} />
-                        </button>
-                    ) : null}
-                </div>
+                <PaginationButtons
+                    count={count}
+                    onDecrement={onDecrement}
+                    onIncrement={onIncrement}
+                    position={'bottom'}
+                />
+                <div className="h-10"></div>
             </div>
         </div>
     );
