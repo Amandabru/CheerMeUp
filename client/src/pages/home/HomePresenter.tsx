@@ -1,5 +1,5 @@
 import HomeView from './HomeView';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
@@ -27,8 +27,10 @@ function HomePresenter() {
         : [[], []];
 
     // Count used for keeping track of the pagination
-    const storedCount = localStorage.getItem('joyCount');
-    const initialCount = storedCount ? parseInt(storedCount) : 0;
+    const initialCount = useMemo(() => {
+        const storedCount = localStorage.getItem('newsCount');
+        return storedCount ? parseInt(storedCount, 10) : 0;
+    }, []);
     const [count, setCount] = useState<number>(initialCount);
 
     const increment = () => {

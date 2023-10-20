@@ -1,6 +1,6 @@
 import { CheerModel } from '../../models/model';
 import MemeView from './MemeView';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { DataStructure, MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
 import promiseNoData from '../../PromiseNoData';
@@ -23,8 +23,10 @@ function MemePresenter({
     const likedJoys: DataStructure = useModelProp(model);
 
     // Count used for keeping track of the pagination
-    const storedCount = localStorage.getItem('memeCount');
-    const initialCount = storedCount ? parseInt(storedCount) : 0;
+    const initialCount = useMemo(() => {
+        const storedCount = localStorage.getItem('newsCount');
+        return storedCount ? parseInt(storedCount, 10) : 0;
+    }, []);
     const [count, setCount] = useState<number>(initialCount);
 
     const increment = () => {
