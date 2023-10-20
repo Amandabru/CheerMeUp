@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
-import { splitArrayInHalf } from '../../DataFunctions';
+import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
 import { getPopular } from '../../api/getPopular';
 
 function HomePresenter() {
@@ -26,11 +26,28 @@ function HomePresenter() {
         ? splitArrayInHalf(dataRecentlyLiked)
         : [[], []];
 
+    // Count used for keeping track of the pagination
+    const storedCount = localStorage.getItem('joyCount');
+    const initialCount = storedCount ? parseInt(storedCount) : 0;
+    const [count, setCount] = useState<number>(initialCount);
+
+    const increment = () => {
+        if (count < 2) {
+            setCount(count + 1);
+        }
+    };
+
+    const decrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
+    };
+
     useEffect(() => {
         async function getPopularJoys() {
             try {
                 // Fetch most liked data
-                const mostLikedPromise = getPopular(20, 'likes').then(
+                const mostLikedPromise = getPopular(24, 'likes').then(
                     (data) => {
                         return data as DataBaseType[];
                     }
@@ -38,7 +55,7 @@ function HomePresenter() {
 
                 // Fetch recently liked data
                 const recentlyLikedPromise = getPopular(
-                    20,
+                    24,
                     'recentlyLiked'
                 ).then((data) => {
                     return data as DataBaseType[];
@@ -53,6 +70,10 @@ function HomePresenter() {
         }
         getPopularJoys();
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('joyCount', count.toString());
+    }, [count]);
 
     return (
         promiseNoData(
@@ -70,10 +91,13 @@ function HomePresenter() {
             'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
         ) || (
             <HomeView
-                mostLikedJoys1={dataMostLiked1}
-                mostLikedJoys2={dataMostLiked2}
-                recentlyLikedJoys1={dataRecentlyLiked1}
-                recentlyLikedJoys2={dataRecentlyLiked2}
+                mostLikedJoys1={dataSlice(dataMostLiked1, count)}
+                mostLikedJoys2={dataSlice(dataMostLiked2, count)}
+                recentlyLikedJoys1={dataSlice(dataRecentlyLiked1, count)}
+                recentlyLikedJoys2={dataSlice(dataRecentlyLiked2, count)}
+                onIncrement={increment}
+                onDecrement={decrement}
+                count={count}
             />
         )
     );

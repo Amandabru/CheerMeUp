@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { DataBaseType } from '../../Types';
 import Content from './Content';
+import PaginationButtons from '../../components/UI/PaginationButtons';
 
 function HomeView({
     mostLikedJoys1,
     mostLikedJoys2,
     recentlyLikedJoys1,
-    recentlyLikedJoys2
+    recentlyLikedJoys2,
+    onIncrement,
+    onDecrement,
+    count
 }: {
     mostLikedJoys1: DataBaseType[];
     mostLikedJoys2: DataBaseType[];
     recentlyLikedJoys1: DataBaseType[];
     recentlyLikedJoys2: DataBaseType[];
+    onIncrement: () => void;
+    onDecrement: () => void;
+    count: number;
 }) {
     const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
         'best'
@@ -54,6 +61,11 @@ function HomeView({
                         Recently liked
                     </button>
                 </div>
+                <PaginationButtons
+                    count={count}
+                    onDecrement={onDecrement}
+                    onIncrement={onIncrement}
+                />
                 <section className="w-full !scroll-smooth">
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
@@ -72,6 +84,12 @@ function HomeView({
                         </div>
                     </div>
                 </section>
+                <PaginationButtons
+                    count={count}
+                    onDecrement={onDecrement}
+                    onIncrement={onIncrement}
+                    position={'bottom'}
+                />
                 <div className="h-10"></div>
             </div>
         </div>
