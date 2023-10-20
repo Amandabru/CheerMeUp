@@ -61,8 +61,12 @@ function NewsView({
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 We only serve good ones!
             </h2>
+            <div className="absolute top-[30%] flex w-full place-items-center">
+                {' '}
+                <button className="btn btn-outline">More happy news!</button>
+            </div>
             <div
-                className="absolute top-[28%] bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
+                className="absolute top-[36%] bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
                 dark:from-[#08094d]  dark:to-[#04052e] "
             >
                 <PaginationButtons

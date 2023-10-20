@@ -60,8 +60,12 @@ function MemeView({
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Memes will brighten your day!
             </h2>
+            <div className="absolute top-[30%] flex w-full place-items-center">
+                {' '}
+                <button className="btn btn-outline">More memes!</button>
+            </div>
             <div
-                className="absolute top-[28%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
+                className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
             dark:from-[#0d3b40]  dark:to-[#0a2d30]"
             >
                 <PaginationButtons
