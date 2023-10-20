@@ -16,8 +16,8 @@ function JokeView({
     user,
     showUserMustLogin
 }: {
-    randomJokeText: string;
-    randomJokeData: JokeType;
+    randomJokeText: string | React.ReactElement | undefined;
+    randomJokeData: JokeType | null;
     onChristmasClick: Function;
     onSpookyClick: Function;
     jokeType: string[];

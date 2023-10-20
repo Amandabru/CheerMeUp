@@ -45,8 +45,8 @@ function HomePresenter() {
             'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
         ) || (
             <HomeView
-                mostLikedJoys={dataMostLiked}
-                recentlyLikedJoys={dataRecentlyLiked}
+                mostLikedJoys={dataMostLiked as DataBaseType[]}
+                recentlyLikedJoys={dataRecentlyLiked as DataBaseType[]}
             />
         )
     );
