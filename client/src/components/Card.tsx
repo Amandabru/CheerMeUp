@@ -143,8 +143,11 @@ export function JokeCard({
         `}
         >
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 my-10 text-3xl font-bold">{text}</h1>
-
+                {' '}
+                {/* change card size by changing text margin */}
+                <h1 className="mx-8 my-10 text-2xl font-bold md:my-36">
+                    {text}
+                </h1>
                 {handleLike !== undefined && isLiked !== undefined ? (
                     <button
                         className=" self-end mr-8 mb-5 focus:outline-none flex items-center"
@@ -156,7 +159,6 @@ export function JokeCard({
                         <span className="text-s">{numberLikes}</span>
                     </button>
                 ) : null}
-
                 {numberLikes !== undefined ? (
                     <h1 className="text-md ml-8 mb-2">
                         Number of likes:{' '}
