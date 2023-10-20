@@ -139,13 +139,11 @@ export function JokeCard({
 }) {
     return (
         <div
-            className={`bg-white w-2/3 rounded-xl overflow-hidden shadow-xl
+            className={`bg-white w-5/6 rounded-xl overflow-hidden shadow-xl justify-self-center
         `}
         >
             <div className="flex flex-col h-full">
-                <h1 className="mx-8 my-10 md:my-20 text-lg md:text-3xl font-bold">
-                    {text}
-                </h1>
+                <h1 className="mx-8 my-10 text-3xl font-bold">{text}</h1>
 
                 {handleLike !== undefined && isLiked !== undefined ? (
                     <button

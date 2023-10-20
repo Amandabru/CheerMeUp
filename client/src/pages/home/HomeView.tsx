@@ -3,22 +3,20 @@ import { DataBaseType } from '../../Types';
 import Content from './Content';
 
 function HomeView({
-    mostLikedJoys,
-    recentlyLikedJoys
+    mostLikedJoys1,
+    mostLikedJoys2,
+    recentlyLikedJoys1,
+    recentlyLikedJoys2
 }: {
-    mostLikedJoys: DataBaseType[];
-    recentlyLikedJoys: DataBaseType[];
+    mostLikedJoys1: DataBaseType[];
+    mostLikedJoys2: DataBaseType[];
+    recentlyLikedJoys1: DataBaseType[];
+    recentlyLikedJoys2: DataBaseType[];
 }) {
     const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
         'best'
     );
-    const renderSelectedView = () => {
-        if (selectedView === 'best') {
-            return <Content joys={mostLikedJoys}></Content>;
-        } else if (selectedView === 'recently') {
-            return <Content joys={recentlyLikedJoys}></Content>;
-        }
-    };
+
     return (
         <div
             className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen bg-fixed
@@ -56,9 +54,25 @@ function HomeView({
                         Recently liked
                     </button>
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10 mb-20">
-                    {renderSelectedView()}
+                <section className="w-full !scroll-smooth">
+                    <div className="flex flex-col md:flex-row w-full">
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
+                            {selectedView === 'best' ? (
+                                <Content joys={mostLikedJoys1} />
+                            ) : (
+                                <Content joys={recentlyLikedJoys1} />
+                            )}
+                        </div>
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
+                            {selectedView === 'best' ? (
+                                <Content joys={mostLikedJoys2} />
+                            ) : (
+                                <Content joys={recentlyLikedJoys2} />
+                            )}
+                        </div>
+                    </div>
                 </section>
+                <div className="h-10"></div>
             </div>
         </div>
     );
