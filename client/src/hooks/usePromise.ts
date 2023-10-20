@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
-import { ActivityType, DataBaseType, JokeType, MessageType } from '../Types';
+import { JokeType, ActivityType, DataBaseType, MessageType } from '../Types';
 
 function usePromise(
-    promise: Promise<ActivityType | JokeType | DataBaseType[] | MessageType | null> | null
-): any {
+    promise: Promise<
+        ActivityType | JokeType | DataBaseType[] | MessageType
+    > | null
+): [
+    ActivityType | JokeType | DataBaseType[] | MessageType | null,
+    Error | null
+] {
     const [data, setData] = useState<
-        ActivityType | JokeType | DataBaseType[] | MessageType| null
+        ActivityType | JokeType | DataBaseType[] | MessageType | null
     >(null);
     const [error, setError] = useState<Error | null>(null);
     useEffect(
@@ -17,12 +22,16 @@ function usePromise(
                 promise
                     .then(
                         (
-                            dt: ActivityType | JokeType | DataBaseType[] | MessageType | null
+                            dt:
+                                | ActivityType
+                                | JokeType
+                                | DataBaseType[]
+                                | MessageType
                         ) => {
                             if (!cancelled) setData(dt);
                         }
                     )
-                    .catch((er: Error | null) => {
+                    .catch((er: Error) => {
                         if (!cancelled) setError(er);
                     });
             return function () {

@@ -93,13 +93,8 @@ function HomePresenter() {
             'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
         ) || (
             <HomeView
-                mostLikedJoys1={dataSlice(dataMostLiked1, count)}
-                mostLikedJoys2={dataSlice(dataMostLiked2, count)}
-                recentlyLikedJoys1={dataSlice(dataRecentlyLiked1, count)}
-                recentlyLikedJoys2={dataSlice(dataRecentlyLiked2, count)}
-                onIncrement={increment}
-                onDecrement={decrement}
-                count={count}
+                mostLikedJoys={dataMostLiked as DataBaseType[]}
+                recentlyLikedJoys={dataRecentlyLiked as DataBaseType[]}
             />
         )
     );

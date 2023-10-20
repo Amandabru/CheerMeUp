@@ -40,7 +40,7 @@ function ActivityPresenter() {
                         error,
                         'Choose the type of activity you want',
                         ''
-                    ) || data?.text
+                    ) || (data as ActivityType)?.text
                 }
                 options={options}
                 activityType={activityType}
