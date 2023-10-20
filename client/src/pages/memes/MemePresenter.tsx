@@ -1,6 +1,6 @@
 import { CheerModel } from '../../models/model';
 import MemeView from './MemeView';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DataStructure, MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
 import promiseNoData from '../../PromiseNoData';
@@ -21,7 +21,6 @@ function MemePresenter({
     const [memeData1, memeData2] = splitArrayInHalf(memeData);
     const [error, setError] = useState<Error | null>(null);
     const likedJoys: DataStructure = useModelProp(model);
-    const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
 
     // Count used for keeping track of the pagination
     const storedCount = localStorage.getItem('memeCount');
@@ -40,36 +39,18 @@ function MemePresenter({
         }
     };
 
-    const shouldFetchData = () => {
-        if (!lastFetchDate) return true;
-        const lastFetchTime = new Date(lastFetchDate).getTime();
-        const currentTime = new Date().getTime();
-        const twentyFourHours = 24 * 60 * 60 * 1000; // fetch new data one time per day
-        return currentTime - lastFetchTime >= twentyFourHours;
-    };
-
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         getMemes()
-            .then((res) => {
-                setMemeData(res);
-                localStorage.setItem('memeData', JSON.stringify(res));
-                localStorage.setItem(
-                    'lastFetchDateMemes',
-                    new Date().toISOString()
-                );
+            .then((newData) => {
+                setMemeData(newData);
             })
-            .catch((err) => setError(err));
-    };
+            .catch((error) => {
+                setError(error);
+            });
+    }, []);
 
     useEffect(() => {
-        if (shouldFetchData()) {
-            fetchData();
-        } else {
-            const storedMemeData = localStorage.getItem('memeData');
-            if (storedMemeData) {
-                setMemeData(JSON.parse(storedMemeData));
-            }
-        }
+        fetchData();
     }, []);
 
     useEffect(() => {

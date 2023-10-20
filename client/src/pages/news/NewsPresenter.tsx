@@ -1,6 +1,6 @@
 import { CheerModel } from '../../models/model';
 import NewsView from './NewsView';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DataStructure, NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
 import promiseNoData from '../../PromiseNoData';
@@ -21,7 +21,6 @@ function NewsPresenter({
     const [newsData1, newsData2] = splitArrayInHalf(newsData);
     const [error, setError] = useState<Error | null>(null);
     const likedJoys: DataStructure = useModelProp(model);
-    const lastFetchDate = localStorage.getItem('lastFetchDateNews');
 
     // Count used for keeping track of the pagination
     const storedCount = localStorage.getItem('newsCount');
@@ -40,36 +39,18 @@ function NewsPresenter({
         }
     };
 
-    const shouldFetchData = () => {
-        if (!lastFetchDate) return true;
-        const lastFetchTime = new Date(lastFetchDate).getTime();
-        const currentTime = new Date().getTime();
-        const twentyFourHours = 24 * 60 * 60 * 1000; // fetch new data one time per day
-        return currentTime - lastFetchTime >= twentyFourHours;
-    };
-
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         getHappyNews()
-            .then((res) => {
-                setNewsData(res);
-                localStorage.setItem('newsData', JSON.stringify(res));
-                localStorage.setItem(
-                    'lastFetchDateNews',
-                    new Date().toISOString()
-                );
+            .then((newData) => {
+                setNewsData(newData);
             })
-            .catch((err) => setError(err));
-    };
+            .catch((error) => {
+                setError(error);
+            });
+    }, []);
 
     useEffect(() => {
-        if (shouldFetchData()) {
-            fetchData();
-        } else {
-            const storedNewsData = localStorage.getItem('newsData');
-            if (storedNewsData) {
-                setNewsData(JSON.parse(storedNewsData));
-            }
-        }
+        fetchData();
     }, []);
 
     useEffect(() => {
