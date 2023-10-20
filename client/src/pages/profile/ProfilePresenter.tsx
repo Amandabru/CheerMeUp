@@ -3,6 +3,7 @@ import { CheerModel } from '../../models/model';
 import { User } from '../../userModel';
 import useModelProp from '../../hooks/useModelProp';
 import { DataStructure, MemeType, NewsType, JokeType } from '../../Types';
+import { splitArrayInHalf } from '../../DataFunctions';
 
 function ProfilePresenter({ model, user }: { model: CheerModel; user: User }) {
     const likedJoys: DataStructure = useModelProp(model);
@@ -24,10 +25,13 @@ function ProfilePresenter({ model, user }: { model: CheerModel; user: User }) {
 
     shuffleArray(allLikedItems);
 
+    const [allLikedItems1, allLikedItems2] = splitArrayInHalf(allLikedItems);
+
     return (
         <ProfileView
             loggedInUser={user}
-            likedJoys={allLikedItems}
+            likedJoys1={allLikedItems1}
+            likedJoys2={allLikedItems2}
             likedMemes={likedJoys.memes}
             likedNews={likedJoys.news}
             likedJokes={likedJoys.jokes}

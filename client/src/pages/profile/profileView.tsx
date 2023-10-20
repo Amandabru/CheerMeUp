@@ -4,7 +4,8 @@ import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
 
 function ProfileView({
     loggedInUser,
-    likedJoys,
+    likedJoys1,
+    likedJoys2,
     likedMemes,
     likedNews,
     likedJokes,
@@ -13,7 +14,8 @@ function ProfileView({
     likeJokePost
 }: {
     loggedInUser: User;
-    likedJoys: (MemeType | NewsType | JokeType)[];
+    likedJoys1: (MemeType | NewsType | JokeType)[];
+    likedJoys2: (MemeType | NewsType | JokeType)[];
     likedMemes: MemeType[];
     likedNews: NewsType[];
     likedJokes: JokeType[];
@@ -22,6 +24,89 @@ function ProfileView({
     likeJokePost: Function;
 }) {
     const user = loggedInUser;
+
+    function mapCards(
+        likedJoys: (MemeType | NewsType | JokeType)[],
+        position?: 'right' | null
+    ) {
+        return likedJoys.length > 0 ? (
+            likedJoys.map((object, index) => {
+                let cardComponent = null;
+                if (object.type === 'meme') {
+                    cardComponent = (
+                        <MemeCard
+                            key={index}
+                            image={(object as MemeType).url}
+                            isLiked={
+                                likedMemes.find(
+                                    (meme) =>
+                                        meme.url === (object as MemeType).url
+                                )
+                                    ? true
+                                    : false
+                            }
+                            handleLike={() => {
+                                likeMemePost(object);
+                            }}
+                        ></MemeCard>
+                    );
+                } else if (object.type === 'news') {
+                    cardComponent = (
+                        <NewsCard
+                            key={index}
+                            title={(object as NewsType).title}
+                            image={(object as NewsType).urlToImage}
+                            text={(object as NewsType).text}
+                            author={(object as NewsType).author}
+                            published={(object as NewsType).publishedAt}
+                            source={(object as NewsType).source}
+                            url={(object as NewsType).url}
+                            isLiked={
+                                likedNews.find(
+                                    (news) =>
+                                        news.url === (object as NewsType).url
+                                )
+                                    ? true
+                                    : false
+                            }
+                            handleLike={() => {
+                                likeNewsPost(object);
+                            }}
+                        ></NewsCard>
+                    );
+                } else if (object.type === 'joke') {
+                    cardComponent = (
+                        <JokeCard
+                            key={index}
+                            text={(object as JokeType).text}
+                            isLiked={
+                                likedJokes.find(
+                                    (joke) =>
+                                        joke.text === (object as JokeType).text
+                                )
+                                    ? true
+                                    : false
+                            }
+                            handleLike={() => {
+                                likeJokePost(object);
+                            }}
+                        ></JokeCard>
+                    );
+                }
+
+                return cardComponent;
+            })
+        ) : (
+            <div className="w-full">
+                {position === 'right' && (
+                    <h2 className="text-2xl font-light text-center dark:text-white">
+                        You have no liked content
+                    </h2>
+                )}
+            </div>
+        );
+    }
+
     return (
         <div
             className="bg-gradient-to-r from-red-200 to-red-300 text-black min-h-screen bg-fixed pb-8
@@ -33,88 +118,21 @@ function ProfileView({
             <h2 className="absolute top-[28%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-80 md:w-144">
                 Take a moment to smile – here are all your previous laughs!
             </h2>
-            <div className="absolute top-[38%]  text-black">
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mb-20">
-                    {likedJoys.length > 0 ? (
-                        likedJoys.map((object, index) => {
-                            let cardComponent = null;
-                            if (object.type === 'meme') {
-                                cardComponent = (
-                                    <MemeCard
-                                        key={index}
-                                        image={(object as MemeType).url}
-                                        isLiked={
-                                            likedMemes.find(
-                                                (meme) =>
-                                                    meme.url ===
-                                                    (object as MemeType).url
-                                            )
-                                                ? true
-                                                : false
-                                        }
-                                        handleLike={() => {
-                                            likeMemePost(object);
-                                        }}
-                                    ></MemeCard>
-                                );
-                            } else if (object.type === 'news') {
-                                cardComponent = (
-                                    <NewsCard
-                                        key={index}
-                                        title={(object as NewsType).title}
-                                        image={(object as NewsType).urlToImage}
-                                        text={(object as NewsType).text}
-                                        author={(object as NewsType).author}
-                                        published={
-                                            (object as NewsType).publishedAt
-                                        }
-                                        source={(object as NewsType).source}
-                                        url={(object as NewsType).url}
-                                        isLiked={
-                                            likedNews.find(
-                                                (news) =>
-                                                    news.url ===
-                                                    (object as NewsType).url
-                                            )
-                                                ? true
-                                                : false
-                                        }
-                                        handleLike={() => {
-                                            likeNewsPost(object);
-                                        }}
-                                    ></NewsCard>
-                                );
-                            } else if (object.type === 'joke') {
-                                cardComponent = (
-                                    <JokeCard
-                                        key={index}
-                                        text={(object as JokeType).text}
-                                        isLiked={
-                                            likedJokes.find(
-                                                (joke) =>
-                                                    joke.text ===
-                                                    (object as JokeType).text
-                                            )
-                                                ? true
-                                                : false
-                                        }
-                                        handleLike={() => {
-                                            likeJokePost(object);
-                                        }}
-                                    ></JokeCard>
-                                );
-                            }
-
-                            return cardComponent;
-                        })
-                    ) : (
-                        <div className="w-full">
-                            <h2 className="text-2xl font-light text-center dark:text-white">
-                                You have no liked content
-                            </h2>
+            <div
+                className="absolute top-[38%] w-full bg-gradient-to-r from-red-200 to-red-300 text-black
+        dark:from-[#08094d]  dark:to-[#04052e]"
+            >
+                <section className="w-full !scroll-smooth">
+                    <div className="flex flex-col md:flex-row w-full">
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
+                            {mapCards(likedJoys1)}
                         </div>
-                    )}
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
+                            {mapCards(likedJoys2, 'right')}
+                        </div>
+                    </div>
                 </section>
+                <div className="h-10"></div>
             </div>
         </div>
     );
