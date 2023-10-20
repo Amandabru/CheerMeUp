@@ -1,9 +1,9 @@
 import HomeView from './HomeView';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
-import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
+import { splitArrayInHalf } from '../../DataFunctions';
 import { getPopular } from '../../api/getPopular';
 
 function HomePresenter() {
@@ -25,25 +25,6 @@ function HomePresenter() {
     )
         ? splitArrayInHalf(dataRecentlyLiked)
         : [[], []];
-
-    // Count used for keeping track of the pagination
-    const initialCount = useMemo(() => {
-        const storedCount = localStorage.getItem('newsCount');
-        return storedCount ? parseInt(storedCount, 10) : 0;
-    }, []);
-    const [count, setCount] = useState<number>(initialCount);
-
-    const increment = () => {
-        if (count < 2) {
-            setCount(count + 1);
-        }
-    };
-
-    const decrement = () => {
-        if (count > 0) {
-            setCount(count - 1);
-        }
-    };
 
     useEffect(() => {
         async function getPopularJoys() {
@@ -73,10 +54,6 @@ function HomePresenter() {
         getPopularJoys();
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('joyCount', count.toString());
-    }, [count]);
-
     return (
         promiseNoData(
             promiseMostLiked,
@@ -93,8 +70,10 @@ function HomePresenter() {
             'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
         ) || (
             <HomeView
-                mostLikedJoys={dataMostLiked as DataBaseType[]}
-                recentlyLikedJoys={dataRecentlyLiked as DataBaseType[]}
+                mostLikedJoys1={dataMostLiked1 as DataBaseType[]}
+                mostLikedJoys2={dataMostLiked2 as DataBaseType[]}
+                recentlyLikedJoys1={dataRecentlyLiked1 as DataBaseType[]}
+                recentlyLikedJoys2={dataRecentlyLiked2 as DataBaseType[]}
             />
         )
     );
