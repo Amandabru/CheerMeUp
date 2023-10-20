@@ -1,5 +1,5 @@
 import HomeView from './HomeView';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
@@ -11,48 +11,50 @@ function HomePresenter() {
         DataBaseType[]
     > | null>(null);
     const [dataMostLiked, errorMostLiked] = usePromise(promiseMostLiked);
-    const [dataMostLiked1, dataMostLiked2] = Array.isArray(dataMostLiked)
-        ? splitArrayInHalf(dataMostLiked)
-        : [[], []];
+    const [dataMostLiked1, dataMostLiked2] = useMemo(() => {
+        if (Array.isArray(dataMostLiked)) {
+            return splitArrayInHalf(dataMostLiked);
+        }
+        return [[], []];
+    }, [dataMostLiked]);
 
     const [promiseRecentlyLiked, setPromiseRecentlyLiked] = useState<Promise<
         DataBaseType[]
     > | null>(null);
     const [dataRecentlyLiked, errorRecentlyLiked] =
         usePromise(promiseRecentlyLiked);
-    const [dataRecentlyLiked1, dataRecentlyLiked2] = Array.isArray(
-        dataRecentlyLiked
-    )
-        ? splitArrayInHalf(dataRecentlyLiked)
-        : [[], []];
+    const [dataRecentlyLiked1, dataRecentlyLiked2] = useMemo(() => {
+        if (Array.isArray(dataRecentlyLiked)) {
+            return splitArrayInHalf(dataRecentlyLiked);
+        }
+        return [[], []];
+    }, [dataRecentlyLiked]);
+
+    const getPopularJoys = useCallback(async () => {
+        try {
+            // Fetch most liked data
+            const mostLikedPromise = getPopular(24, 'likes').then((data) => {
+                return data as DataBaseType[];
+            });
+
+            // Fetch recently liked data
+            const recentlyLikedPromise = getPopular(24, 'recentlyLiked').then(
+                (data) => {
+                    return data as DataBaseType[];
+                }
+            );
+
+            // Set the promises in state
+            setPromiseMostLiked(mostLikedPromise);
+            setPromiseRecentlyLiked(recentlyLikedPromise);
+        } catch (error) {
+            console.error(error);
+        }
+    }, [setPromiseMostLiked, setPromiseRecentlyLiked]);
 
     useEffect(() => {
-        async function getPopularJoys() {
-            try {
-                // Fetch most liked data
-                const mostLikedPromise = getPopular(24, 'likes').then(
-                    (data) => {
-                        return data as DataBaseType[];
-                    }
-                );
-
-                // Fetch recently liked data
-                const recentlyLikedPromise = getPopular(
-                    24,
-                    'recentlyLiked'
-                ).then((data) => {
-                    return data as DataBaseType[];
-                });
-
-                // Set the promises in state
-                setPromiseMostLiked(mostLikedPromise);
-                setPromiseRecentlyLiked(recentlyLikedPromise);
-            } catch (error) {
-                console.error(error);
-            }
-        }
         getPopularJoys();
-    }, []);
+    }, [getPopularJoys]);
 
     return (
         promiseNoData(
