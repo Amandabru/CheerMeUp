@@ -20,8 +20,8 @@ export async function getMemesController(
     res: Response,
     next: NextFunction
 ) {
-    //get 20 wholesome random memes
-    const api_url = 'https://meme-api.com/gimme/wholesomememes/20';
+    //get 24 wholesome random memes
+    const api_url = 'https://meme-api.com/gimme/wholesomememes/24';
 
     try {
         const response = await fetch(api_url);
