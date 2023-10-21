@@ -7,6 +7,7 @@ import { DataStructure, MemeType, JokeType, NewsType } from '../Types';
 export class CheerModel {
     private observers: (() => void)[];
     public likedJoys: DataStructure;
+    public currentMeme: MemeType | null;
 
     constructor(
         observers = [],
@@ -15,14 +16,24 @@ export class CheerModel {
             activities: [],
             memes: [],
             news: []
-        }
+        },
+        currentMeme = null
     ) {
         this.observers = observers;
         this.likedJoys = likedJoys;
+        this.currentMeme = currentMeme;
     }
 
     getLikedJoys(): DataStructure {
         return { ...this.likedJoys };
+    }
+
+    getCurrentMeme(): MemeType | null {
+        return this.currentMeme;
+    }
+
+    resetCurrentMeme() {
+        this.currentMeme = null;
     }
 
     setLikedJoys(likedJoys: DataStructure | undefined) {
@@ -35,28 +46,16 @@ export class CheerModel {
     async likeOrUnlikeMeme(likedMeme: MemeType) {
         try {
             const likedJoysCopy = { ...this.likedJoys };
-            const encodedUrl = encodeURIComponent(likedMeme.url);
-            const meme = await getJoy('url', encodedUrl, 'meme');
-            if (meme.exists) {
-                const memeToUpdate: JoyToUpdateType = {
-                    id: meme.id,
-                    type: 'meme',
-                    searchParamValue: likedMeme.url
-                };
-                patchLike(memeToUpdate);
-                const index = likedJoysCopy.memes.findIndex(
-                    (meme) => meme.url === likedMeme.url
-                );
+            const index = likedJoysCopy.memes.findIndex(
+                (meme) => meme.url === likedMeme.url
+            );
 
-                if (index !== -1) {
-                    likedJoysCopy.memes.splice(index, 1);
-                } else {
-                    likedJoysCopy.memes.push(likedMeme);
-                }
+            if (index !== -1) {
+                likedJoysCopy.memes.splice(index, 1);
             } else {
-                postLike(likedMeme);
                 likedJoysCopy.memes.push(likedMeme);
             }
+            this.currentMeme = likedMeme;
             this.setLikedJoys(likedJoysCopy);
             this.notifyObservers();
         } catch (error) {
