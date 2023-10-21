@@ -5,6 +5,6 @@ export async function getPopular(
     number: number,
     sortBy: string
 ): Promise<DataBaseType[]> {
-    const response = await fetch(`${API_URL}/popular/${sortBy}/${number}`);
+    const response = await fetch(`${API_URL}/api/popular/${sortBy}/${number}`);
     return response.json();
 }

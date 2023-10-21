@@ -48,26 +48,26 @@ app.use(
 );
 
 //CheerMeUp end-points
-app.get('/news', getNewsController);
-app.get('/memes', getMemesController);
-app.get('/jokes/:categories', getJokeController);
-app.get('/activities/:type', getActivityController);
+app.get('/api/news', getNewsController);
+app.get('/api/memes', getMemesController);
+app.get('/api/jokes/:categories', getJokeController);
+app.get('/api/activities/:type', getActivityController);
 
-app.get('/joyExists/:type/:searchParam/:searchParamValue', getJoyController);
-app.patch('/like', requiresAuth, patchLikeController);
-app.post('/like', requiresAuth, postLikeController);
-app.get('/popular/:sortBy/:number', getPopularController);
+app.get('/api/joyExists/:type/:searchParam/:searchParamValue', getJoyController);
+app.patch('/api/like', requiresAuth, patchLikeController);
+app.post('/api/like', requiresAuth, postLikeController);
+app.get('/api/popular/:sortBy/:number', getPopularController);
 
-app.get('/users', UserController.getAuthenticatedUser);
-app.post('/users/signup', UserController.signUp);
+app.get('/api/users', UserController.getAuthenticatedUser);
+app.post('/api/users/signup', UserController.signUp);
 app.get(
-    '/users/verifyUser/:userId/:uniqueString',
+    '/api/users/verifyUser/:userId/:uniqueString',
     UserController.getVerifiedUser
 );
-app.get('/users/verifiedPage', UserController.getVerifiedPage);
-app.post('/users/login', UserController.login);
-app.post('/users/logout', requiresAuth, UserController.logout);
-app.get('/users/likedJoys', requiresAuth, UserController.getLikedJoys);
+app.get('/api/users/verifiedPage', UserController.getVerifiedPage);
+app.post('/api/users/login', UserController.login);
+app.post('/api/users/logout', requiresAuth, UserController.logout);
+app.get('/api/users/likedJoys', requiresAuth, UserController.getLikedJoys);
 
 // Unexisting endpoint
 //app.use((_req, _res, next) => {

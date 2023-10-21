@@ -16,7 +16,7 @@ export async function getJoy(
     type: string
 ): Promise<ExistingJoy> {
     const response = await fetch(
-        `${API_URL}/joyExists/${type}/${searchParam}/${searchParamValue}`
+        `${API_URL}/api/joyExists/${type}/${searchParam}/${searchParamValue}`
     );
     return response.json();
 }
