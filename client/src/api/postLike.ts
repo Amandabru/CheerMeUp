@@ -1,10 +1,10 @@
-import { API_URL } from './config';
+//import { API_URL } from './config';
 import { ActivityType, MemeType, NewsType, JokeType } from '../Types';
 
 export async function postLike(
     likedJoy: ActivityType | MemeType | NewsType | JokeType
 ) {
-    fetch(`${API_URL}/api/like`, {
+    fetch(`/api/like`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
