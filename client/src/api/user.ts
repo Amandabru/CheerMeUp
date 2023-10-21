@@ -1,10 +1,10 @@
-//import { fetchData } from './fetchData';
+import { fetchData } from './fetchData';
 import { API_URL } from './config';
 import { User } from '../userModel.ts';
 import { DataStructure } from '../Types.ts';
 
 export async function getLoggedInUser(): Promise<User> {
-    const response = await fetch(`${API_URL}/api/users`, {
+    const response = await fetchData(`${API_URL}/api/users`, {
         method: 'GET',
         credentials: 'include'
     });
@@ -18,7 +18,7 @@ export interface SignUpCredentials {
 }
 
 export async function signUp(credentials: SignUpCredentials) {
-    const response = await fetch(`${API_URL}/api/users/signup`, {
+    const response = await fetchData(`${API_URL}/api/users/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export interface LoginCredentials {
 }
 
 export async function login(credentials: LoginCredentials): Promise<User> {
-    const response = await fetch(`${API_URL}/api/users/login`, {
+    const response = await fetchData(`${API_URL}/api/users/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -47,14 +47,14 @@ export async function login(credentials: LoginCredentials): Promise<User> {
 }
 
 export async function logout() {
-    await fetch(`${API_URL}/api/users/logout`, {
+    await fetchData(`${API_URL}/api/users/logout`, {
         method: 'POST',
         credentials: 'include'
     });
 }
 
 export async function getLikedJoys(): Promise<DataStructure> {
-    const response = await fetch(`${API_URL}/api/users/likedJoys`, {
+    const response = await fetchData(`${API_URL}/api/users/likedJoys`, {
         method: 'GET',
         credentials: 'include'
     });
