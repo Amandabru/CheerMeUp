@@ -39,6 +39,7 @@ export class CheerModel {
     setLikedJoys(likedJoys: DataStructure | undefined) {
         if (likedJoys) {
             this.likedJoys = { ...likedJoys };
+            this.currentMeme = null;
         }
         this.notifyObservers();
     }
@@ -55,8 +56,8 @@ export class CheerModel {
             } else {
                 likedJoysCopy.memes.push(likedMeme);
             }
-            this.currentMeme = likedMeme;
             this.setLikedJoys(likedJoysCopy);
+            this.currentMeme = likedMeme;
             this.notifyObservers();
         } catch (error) {
             console.log(error);

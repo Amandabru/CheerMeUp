@@ -69,7 +69,6 @@ function App({ model }: { model: CheerModel }) {
             });
         }
     }, [loggedInUser]);
-
     return (
         <>
             <NavBarPresenter
