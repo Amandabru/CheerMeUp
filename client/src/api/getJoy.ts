@@ -1,5 +1,5 @@
 import { ExistingJoy } from '../Types';
-//import { API_URL } from './config';
+import { API_URL } from './config';
 
 // searchParam: the parameter to check after in the database, are the following for the different types:
 // meme: "url"
@@ -16,7 +16,7 @@ export async function getJoy(
     type: string
 ): Promise<ExistingJoy> {
     const response = await fetch(
-        `/api/joyExists/${type}/${searchParam}/${searchParamValue}`
+        `${API_URL}/api/joyExists/${type}/${searchParam}/${searchParamValue}`
     );
     return response.json();
 }

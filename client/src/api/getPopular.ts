@@ -1,10 +1,10 @@
-//import { API_URL } from './config';
+import { API_URL } from './config';
 import { DataBaseType } from '../Types';
 
 export async function getPopular(
     number: number,
     sortBy: string
 ): Promise<DataBaseType[]> {
-    const response = await fetch(`/api/popular/${sortBy}/${number}`);
+    const response = await fetch(`${API_URL}/api/popular/${sortBy}/${number}`);
     return response.json();
 }
