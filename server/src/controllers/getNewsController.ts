@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import fetch from 'node-fetch';
 import createHttpError from 'http-errors';
+import { NewsType } from '../Types';
 
 export type NewsArticle = {
     source: { id: string; name: string };
@@ -28,16 +29,28 @@ export async function getNewsController(
 
         const data = await response.json();
 
-        const filteredArticles = data.articles.map((article: NewsArticle) => ({
-            type: 'news',
-            source: article.source.name,
-            author: article.author,
-            title: article.title,
-            text: article.description,
-            url: article.url,
-            urlToImage: article.urlToImage,
-            publishedAt: article.publishedAt.substring(0, 10)
-        }));
+        const filteredArticles = data.articles
+            .map((article: NewsArticle) => ({
+                type: 'news',
+                source: article.source.name,
+                author: article.author,
+                title: article.title,
+                text: article.description,
+                url: article.url,
+                urlToImage: article.urlToImage,
+                publishedAt: article.publishedAt.substring(0, 10)
+            }))
+            .filter((article: NewsType) => {
+                return (
+                    article.source &&
+                    article.author &&
+                    article.title &&
+                    article.text &&
+                    article.url &&
+                    article.urlToImage &&
+                    article.publishedAt
+                );
+            });
         res.status(200).json(filteredArticles);
     } catch (error) {
         next(error);
