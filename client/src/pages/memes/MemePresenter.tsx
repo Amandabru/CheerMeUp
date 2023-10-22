@@ -60,8 +60,7 @@ function MemePresenter({
                     promise,
                     data,
                     error,
-                    'Could not fetch memes',
-                    ''
+                    'Could not fetch memes (promise denied)'
                 ) || dataSlice(memeData1, count)
             }
             memeData2={
@@ -69,8 +68,7 @@ function MemePresenter({
                     promise,
                     data,
                     error,
-                    'Could not fetch memes',
-                    ''
+                    'Could not fetch memes (promise denied)'
                 ) || dataSlice(memeData2, count)
             }
             onIncrement={increment}
