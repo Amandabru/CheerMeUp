@@ -7,6 +7,7 @@ import promiseNoData from '../../PromiseNoData';
 import useModelProp from '../../hooks/useModelProp';
 import { User } from '../../userModel';
 import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
+import usePromise from '../../hooks/usePromise';
 
 function NewsPresenter({
     model,
@@ -17,9 +18,16 @@ function NewsPresenter({
     user: User | null;
     directToLogin: Function;
 }) {
-    const [newsData, setNewsData] = useState<NewsType[]>([]);
-    const [newsData1, newsData2] = splitArrayInHalf(newsData);
-    const [error, setError] = useState<Error | null>(null);
+    const [promise, setPromise] = useState<Promise<NewsType[]> | null>(null);
+    const [data, error] = usePromise(promise);
+    // Divide newsData into two arrays since we want two independent columns in scroll feed
+    let newsData1: NewsType[] = [];
+    let newsData2: NewsType[] = [];
+    if (Array.isArray(data)) {
+        const newsData = data as NewsType[]; // Cast data to NewsType[] since we know it is of type NewsData[]
+        [newsData1, newsData2] = splitArrayInHalf(newsData);
+    }
+
     const likedJoys: DataStructure = useModelProp(model);
 
     // Count used for keeping track of the pagination
@@ -38,13 +46,7 @@ function NewsPresenter({
     };
 
     const fetchData = useCallback(() => {
-        getHappyNews()
-            .then((newData) => {
-                setNewsData(newData);
-            })
-            .catch((error) => {
-                setError(error);
-            });
+        setPromise(getHappyNews());
     }, []);
 
     useEffect(() => {
@@ -52,25 +54,31 @@ function NewsPresenter({
     }, []);
 
     return (
-        promiseNoData(
-            getHappyNews(),
-            newsData,
-            error,
-            'Could not fetch news (promise denied)',
-            'bg-gradient-to-r from-blue-200 to-blue-300 dark:from-[#08094d] dark:to-[#04052e]'
-        ) || (
-            <NewsView
-                newsData1={dataSlice(newsData1, count)}
-                newsData2={dataSlice(newsData2, count)}
-                onIncrement={increment}
-                onDecrement={decrement}
-                count={count}
-                likedNews={likedJoys.news}
-                likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
-                user={user}
-                showUserMustLogin={() => directToLogin()}
-            />
-        )
+        <NewsView
+            newsData1={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch news (promise denied)'
+                ) || dataSlice(newsData1, count)
+            }
+            newsData2={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch news (promise denied)'
+                ) || dataSlice(newsData2, count)
+            }
+            onIncrement={increment}
+            onDecrement={decrement}
+            count={count}
+            likedNews={likedJoys.news}
+            likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
+            user={user}
+            showUserMustLogin={() => directToLogin()}
+        />
     );
 }
 

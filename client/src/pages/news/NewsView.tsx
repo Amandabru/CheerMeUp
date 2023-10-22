@@ -2,6 +2,7 @@ import { NewsType } from '../../Types';
 import { NewsCard } from '../../components/Card';
 import { User } from '../../userModel';
 import PaginationButtons from '../../components/UI/PaginationButtons';
+import React from 'react';
 
 function NewsView({
     newsData1,
@@ -14,8 +15,8 @@ function NewsView({
     user,
     showUserMustLogin
 }: {
-    newsData1: NewsType[];
-    newsData2: NewsType[];
+    newsData1: NewsType[] | React.ReactElement;
+    newsData2: NewsType[] | React.ReactElement;
     onIncrement: () => void;
     onDecrement: () => void;
     count: number;
@@ -24,32 +25,40 @@ function NewsView({
     user: User | null;
     showUserMustLogin: Function;
 }) {
-    function mapCards(newsData: NewsType[]) {
-        return newsData ? (
-            newsData.map((newsObject, index) => (
-                <NewsCard
-                    key={index}
-                    image={newsObject.urlToImage}
-                    title={newsObject.title}
-                    text={newsObject.text}
-                    author={newsObject.author}
-                    published={newsObject.publishedAt}
-                    source={newsObject.source}
-                    url={newsObject.url}
-                    isLiked={
-                        likedNews.find((news) => news.url === newsObject.url)
-                            ? true
-                            : false
-                    }
-                    handleLike={() => {
-                        user ? likePost(newsObject) : showUserMustLogin();
-                    }}
-                />
-            ))
-        ) : (
-            <div>No news data available</div>
-        );
+    function mapCards(data: NewsType[] | React.ReactElement) {
+        if (React.isValidElement(data)) {
+            // Display data from promiseNoData
+            return data;
+        }
+
+        const newsData = Array.isArray(data) ? data : [];
+
+        if (newsData.length === 0) {
+            return <div>No happy news available</div>;
+        }
+
+        return newsData.map((newsObject, index) => (
+            <NewsCard
+                key={index}
+                image={newsObject.urlToImage}
+                title={newsObject.title}
+                text={newsObject.text}
+                author={newsObject.author}
+                published={newsObject.publishedAt}
+                source={newsObject.source}
+                url={newsObject.url}
+                isLiked={
+                    likedNews.find((news) => news.url === newsObject.url)
+                        ? true
+                        : false
+                }
+                handleLike={() => {
+                    user ? likePost(newsObject) : showUserMustLogin();
+                }}
+            />
+        ));
     }
+
     return (
         <div
             className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
@@ -66,8 +75,8 @@ function NewsView({
                 <button className="btn btn-outline">More happy news!</button>
             </div>
             <div
-                className="absolute top-[36%] bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
-                dark:from-[#08094d]  dark:to-[#04052e] "
+                className="absolute top-[35%] w-full bg-gradient-to-r from-blue-200 to-blue-300 text-black
+                dark:from-[#08094d]  dark:to-[#04052e]"
             >
                 <PaginationButtons
                     count={count}
