@@ -9,6 +9,7 @@ function MemeView({
     memeData2,
     onIncrement,
     onDecrement,
+    onNewFetch,
     count,
     likedMemes,
     likePost,
@@ -19,6 +20,7 @@ function MemeView({
     memeData2: MemeType[] | React.ReactElement;
     onIncrement: () => void;
     onDecrement: () => void;
+    onNewFetch: () => void;
     count: number;
     likedMemes: MemeType[];
     likePost: Function;
@@ -64,9 +66,11 @@ dark:from-[#0d3b40] dark:to-[#0a2d30] dark:text-white"
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Memes will brighten your day!
             </h2>
-            <div className="absolute top-[30%] flex w-full place-items-center">
+            <div className="absolute top-[30%] flex justify-center w-full">
                 {' '}
-                <button className="btn btn-outline">More memes!</button>
+                <button className="btn btn-outline" onClick={onNewFetch}>
+                    More memes!
+                </button>
             </div>
             <div
                 className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black

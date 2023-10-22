@@ -9,6 +9,7 @@ function NewsView({
     newsData2,
     onIncrement,
     onDecrement,
+    onNewFetch,
     count,
     likedNews,
     likePost,
@@ -19,6 +20,7 @@ function NewsView({
     newsData2: NewsType[] | React.ReactElement;
     onIncrement: () => void;
     onDecrement: () => void;
+    onNewFetch: () => void;
     count: number;
     likedNews: NewsType[];
     likePost: Function;
@@ -70,9 +72,11 @@ function NewsView({
             <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 We only serve good ones!
             </h2>
-            <div className="absolute top-[30%] flex w-full place-items-center">
+            <div className="absolute top-[30%] flex justify-center w-full ">
                 {' '}
-                <button className="btn btn-outline">More happy news!</button>
+                <button className="btn btn-outline" onClick={onNewFetch}>
+                    More happy news!
+                </button>
             </div>
             <div
                 className="absolute top-[35%] w-full bg-gradient-to-r from-blue-200 to-blue-300 text-black

@@ -47,6 +47,7 @@ function MemePresenter({
 
     const fetchData = useCallback(() => {
         setPromise(getMemes());
+        setCount(0);
     }, []);
 
     useEffect(() => {
@@ -73,6 +74,7 @@ function MemePresenter({
             }
             onIncrement={increment}
             onDecrement={decrement}
+            onNewFetch={fetchData}
             count={count}
             likedMemes={likedJoys.memes}
             likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}

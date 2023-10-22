@@ -47,6 +47,7 @@ function NewsPresenter({
 
     const fetchData = useCallback(() => {
         setPromise(getHappyNews());
+        setCount(0);
     }, []);
 
     useEffect(() => {
@@ -73,6 +74,7 @@ function NewsPresenter({
             }
             onIncrement={increment}
             onDecrement={decrement}
+            onNewFetch={fetchData}
             count={count}
             likedNews={likedJoys.news}
             likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
