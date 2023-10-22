@@ -1,8 +1,8 @@
 import {
-    MemeType,
-    NewsType,
-    JokeType,
     ActivityType,
+    NewsType,
+    MemeType,
+    JokeType,
     DataBaseType,
     MessageType
 } from './Types';
@@ -29,8 +29,7 @@ function promiseNoData(
         | MessageType
         | null,
     error: Error | null,
-    noDataMessage: string,
-    bgc: string
+    noDataMessage: string
 ) {
     if (!promise) {
         return <span> {noDataMessage} </span>;
@@ -39,7 +38,7 @@ function promiseNoData(
         !error
     ) {
         return (
-            <div className={`min-h-screen min-w-screen overflow-hidden ${bgc}`}>
+            <div className="min-h-screen min-w-screen overflow-hidden">
                 <span className="loading loading-dots loading-md top-1/2 left-1/2 absolute"></span>
             </div>
         );

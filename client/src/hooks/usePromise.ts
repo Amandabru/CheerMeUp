@@ -1,16 +1,42 @@
 import { useEffect, useState } from 'react';
-import { JokeType, ActivityType, DataBaseType, MessageType } from '../Types';
+import {
+    ActivityType,
+    NewsType,
+    MemeType,
+    JokeType,
+    DataBaseType,
+    MessageType
+} from '../Types';
 
 function usePromise(
     promise: Promise<
-        ActivityType | JokeType | DataBaseType[] | MessageType
+        | ActivityType
+        | NewsType[]
+        | MemeType[]
+        | JokeType
+        | DataBaseType[]
+        | MessageType
     > | null
 ): [
-    ActivityType | JokeType | DataBaseType[] | MessageType | null,
+    (
+        | ActivityType
+        | NewsType[]
+        | MemeType[]
+        | JokeType
+        | DataBaseType[]
+        | MessageType
+        | null
+    ),
     Error | null
 ] {
     const [data, setData] = useState<
-        ActivityType | JokeType | DataBaseType[] | MessageType | null
+        | ActivityType
+        | NewsType[]
+        | MemeType[]
+        | JokeType
+        | DataBaseType[]
+        | MessageType
+        | null
     >(null);
     const [error, setError] = useState<Error | null>(null);
     useEffect(
@@ -24,6 +50,8 @@ function usePromise(
                         (
                             dt:
                                 | ActivityType
+                                | NewsType[]
+                                | MemeType[]
                                 | JokeType
                                 | DataBaseType[]
                                 | MessageType
