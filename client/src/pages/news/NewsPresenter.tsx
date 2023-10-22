@@ -61,7 +61,8 @@ function NewsPresenter({
                     promise,
                     data,
                     error,
-                    'Could not fetch news (promise denied)'
+                    'Could not fetch news (promise denied)',
+                    'yes'
                 ) || dataSlice(newsData1, count)
             }
             newsData2={
@@ -69,7 +70,8 @@ function NewsPresenter({
                     promise,
                     data,
                     error,
-                    'Could not fetch news (promise denied)'
+                    'Could not fetch news (promise denied)',
+                    'yes'
                 ) || dataSlice(newsData2, count)
             }
             onIncrement={increment}

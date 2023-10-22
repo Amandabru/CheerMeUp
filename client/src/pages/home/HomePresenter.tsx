@@ -49,7 +49,8 @@ function HomePresenter() {
                     promiseMostLiked,
                     dataMostLiked,
                     errorMostLiked,
-                    'Could not fetch most liked joys'
+                    'Could not fetch most liked joys (promise denied)',
+                    'yes'
                 ) || dataMostLiked1
             }
             mostLikedJoys2={
@@ -57,7 +58,8 @@ function HomePresenter() {
                     promiseMostLiked,
                     dataMostLiked,
                     errorMostLiked,
-                    'Could not fetch most liked joys'
+                    'Could not fetch most liked joys (promise denied)',
+                    'yes'
                 ) || dataMostLiked2
             }
             recentlyLikedJoys1={
@@ -65,7 +67,8 @@ function HomePresenter() {
                     promiseRecentlyLiked,
                     dataRecentlyLiked,
                     errorRecentlyLiked,
-                    'Could not fetch recently liked joys'
+                    'Could not fetch recently liked joys (promise denied)',
+                    'yes'
                 ) || dataRecentlyLiked1
             }
             recentlyLikedJoys2={
@@ -73,7 +76,8 @@ function HomePresenter() {
                     promiseRecentlyLiked,
                     dataRecentlyLiked,
                     errorRecentlyLiked,
-                    'Could not fetch recently liked joys'
+                    'Could not fetch recently liked joys (promise denied)',
+                    'yes'
                 ) || dataRecentlyLiked2
             }
         />
