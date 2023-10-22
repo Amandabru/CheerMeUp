@@ -37,6 +37,7 @@ app.use(
         secret: process.env.SESSION_SECRET!,
         resave: false,
         saveUninitialized: false,
+        name: 'cheerMeUpCookie',
         cookie: {
             secure: true, // Prod is supposed to use https
             sameSite: 'none', // must be 'none' to enable cross-site delivery
