@@ -3,10 +3,11 @@ import MemeView from './MemeView';
 import { useState, useEffect, useCallback } from 'react';
 import { DataStructure, MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
-import promiseNoData from '../../PromiseNoData';
 import { User } from '../../userModel';
 import useModelProp from '../../hooks/useModelProp';
 import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
+import usePromise from '../../hooks/usePromise';
+import promiseNoData from '../../PromiseNoData';
 
 function MemePresenter({
     model,
@@ -17,9 +18,16 @@ function MemePresenter({
     user: User | null;
     directToLogin: Function;
 }) {
-    const [memeData, setMemeData] = useState<MemeType[]>([]);
-    const [memeData1, memeData2] = splitArrayInHalf(memeData);
-    const [error, setError] = useState<Error | null>(null);
+    const [promise, setPromise] = useState<Promise<MemeType[]> | null>(null);
+    const [data, error] = usePromise(promise);
+    // Divide memeData into two arrays since we want two independent columns in scroll feed
+    let memeData1: MemeType[] = [];
+    let memeData2: MemeType[] = [];
+    if (Array.isArray(data)) {
+        const memeData = data as MemeType[]; // Cast data to MemeType[] since we know it is of type MemeData[]
+        [memeData1, memeData2] = splitArrayInHalf(memeData);
+    }
+
     const likedJoys: DataStructure = useModelProp(model);
 
     // Count used for keeping track of the pagination
@@ -38,13 +46,7 @@ function MemePresenter({
     };
 
     const fetchData = useCallback(() => {
-        getMemes()
-            .then((newData) => {
-                setMemeData(newData);
-            })
-            .catch((error) => {
-                setError(error);
-            });
+        setPromise(getMemes());
     }, []);
 
     useEffect(() => {
@@ -52,25 +54,33 @@ function MemePresenter({
     }, []);
 
     return (
-        promiseNoData(
-            getMemes(),
-            memeData,
-            error,
-            'Could not fetch memes',
-            'bg-gradient-to-r from-rose-300 to-orange-300 dark:from-[#0d3b40] dark:to-[#0a2d30]'
-        ) || (
-            <MemeView
-                memeData1={dataSlice(memeData1, count)}
-                memeData2={dataSlice(memeData2, count)}
-                onIncrement={increment}
-                onDecrement={decrement}
-                count={count}
-                likedMemes={likedJoys.memes}
-                likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
-                user={user}
-                showUserMustLogin={() => directToLogin()}
-            />
-        )
+        <MemeView
+            memeData1={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch memes',
+                    ''
+                ) || dataSlice(memeData1, count)
+            }
+            memeData2={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch memes',
+                    ''
+                ) || dataSlice(memeData2, count)
+            }
+            onIncrement={increment}
+            onDecrement={decrement}
+            count={count}
+            likedMemes={likedJoys.memes}
+            likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
+            user={user}
+            showUserMustLogin={() => directToLogin()}
+        />
     );
 }
 

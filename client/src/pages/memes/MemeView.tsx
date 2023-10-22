@@ -2,6 +2,7 @@ import { MemeCard } from '../../components/Card';
 import { MemeType } from '../../Types';
 import { User } from '../../userModel';
 import PaginationButtons from '../../components/UI/PaginationButtons';
+import React from 'react';
 
 function MemeView({
     memeData1,
@@ -14,8 +15,8 @@ function MemeView({
     user,
     showUserMustLogin
 }: {
-    memeData1: MemeType[];
-    memeData2: MemeType[];
+    memeData1: MemeType[] | React.ReactElement;
+    memeData2: MemeType[] | React.ReactElement;
     onIncrement: () => void;
     onDecrement: () => void;
     count: number;
@@ -24,35 +25,38 @@ function MemeView({
     user: User | null;
     showUserMustLogin: Function;
 }) {
-    function mapCards(memeData: MemeType[]) {
-        return memeData ? (
-            memeData.map((memeObject, index) => {
-                return (
-                    <MemeCard
-                        key={index}
-                        image={memeObject.url}
-                        isLiked={
-                            likedMemes.find(
-                                (meme) => meme.url === memeObject.url
-                            )
-                                ? true
-                                : false
-                        }
-                        handleLike={() => {
-                            user ? likePost(memeObject) : showUserMustLogin();
-                        }}
-                    ></MemeCard>
-                );
-            })
-        ) : (
-            <div>No meme data available</div>
-        );
+    function mapCards(data: MemeType[] | React.ReactElement) {
+        if (React.isValidElement(data)) {
+            // Display data from promiseNoData
+            return data;
+        }
+
+        const memeData = Array.isArray(data) ? data : [];
+
+        if (memeData.length === 0) {
+            return <div>No memes available</div>;
+        }
+
+        return memeData.map((memeObject, index) => (
+            <MemeCard
+                key={index}
+                image={memeObject.url}
+                isLiked={
+                    likedMemes.find((meme) => meme.url === memeObject.url)
+                        ? true
+                        : false
+                }
+                handleLike={() => {
+                    user ? likePost(memeObject) : showUserMustLogin();
+                }}
+            ></MemeCard>
+        ));
     }
 
     return (
         <div
             className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen bg-fixed
-            dark:from-[#0d3b40]  dark:to-[#0a2d30] dark:text-white"
+dark:from-[#0d3b40] dark:to-[#0a2d30] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Craving a Smile?
@@ -66,7 +70,7 @@ function MemeView({
             </div>
             <div
                 className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
-            dark:from-[#0d3b40]  dark:to-[#0a2d30]"
+dark:from-[#0d3b40] dark:to-[#0a2d30]"
             >
                 <PaginationButtons
                     count={count}
