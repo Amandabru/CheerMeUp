@@ -25,7 +25,6 @@ const LoginPresenter = ({
     async function onSubmit(credentials: LoginCredentials) {
         try {
             const user = await userApi.login(credentials);
-            console.log(user)
             onLoginSuccessful(user);
         } catch (error) {
             if (error instanceof UnathorizedError) {
