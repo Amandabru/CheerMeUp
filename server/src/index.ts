@@ -38,8 +38,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: process.env.NODE_ENV === 'production', // Prod is supposed to use https
-            sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+            secure: true, // Prod is supposed to use https
+            sameSite: 'none', // must be 'none' to enable cross-site delivery
+            httpOnly: true,
             maxAge: 60 * 60 * 1000
         },
         rolling: true,
