@@ -39,9 +39,9 @@ app.use(
         saveUninitialized: false,
         name: 'cheerMeUpCookie',
         cookie: {
-            secure: true, // Prod is supposed to use https
-            sameSite: 'none', // must be 'none' to enable cross-site delivery
-            httpOnly: true,
+            secure: process.env.NODE_ENV == 'production', // Prod is supposed to use https
+            sameSite: process.env.NODE_ENV == 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+            httpOnly: process.env.NODE_ENV == 'production',
             maxAge: 60 * 60 * 1000
         },
         rolling: true,
