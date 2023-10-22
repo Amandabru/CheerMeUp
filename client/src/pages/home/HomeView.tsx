@@ -8,13 +8,13 @@ function HomeView({
     recentlyLikedJoys1,
     recentlyLikedJoys2
 }: {
-    mostLikedJoys1: DataBaseType[];
-    mostLikedJoys2: DataBaseType[];
-    recentlyLikedJoys1: DataBaseType[];
-    recentlyLikedJoys2: DataBaseType[];
+    mostLikedJoys1: DataBaseType[] | React.ReactElement;
+    mostLikedJoys2: DataBaseType[] | React.ReactElement;
+    recentlyLikedJoys1: DataBaseType[] | React.ReactElement;
+    recentlyLikedJoys2: DataBaseType[] | React.ReactElement;
 }) {
-    const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
-        'best'
+    const [selectedView, setSelectedView] = useState<'most' | 'recently'>(
+        'most'
     );
 
     return (
@@ -33,15 +33,15 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[65%]  md:top-[45%] bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
+                className="absolute top-[65%]  md:top-[45%] w-full bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
                     dark:from-[#611d4d] dark:to-[#4d173d]"
             >
                 <div className="flex justify-center w-full !scroll-smooth">
                     <button
                         className={`mr-10 btn btn-outline${
-                            selectedView === 'best' ? 'btn-active' : ''
+                            selectedView === 'most' ? 'btn-active' : ''
                         }`}
-                        onClick={() => setSelectedView('best')}
+                        onClick={() => setSelectedView('most')}
                     >
                         Most liked
                     </button>
@@ -57,17 +57,23 @@ function HomeView({
                 <section className="w-full !scroll-smooth">
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
-                            {selectedView === 'best' ? (
-                                <Content joys={mostLikedJoys1} />
+                            {selectedView === 'most' ? (
+                                <Content data={mostLikedJoys1} view={'most'} />
                             ) : (
-                                <Content joys={recentlyLikedJoys1} />
+                                <Content
+                                    data={recentlyLikedJoys1}
+                                    view={'recently'}
+                                />
                             )}
                         </div>
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
-                            {selectedView === 'best' ? (
-                                <Content joys={mostLikedJoys2} />
+                            {selectedView === 'most' ? (
+                                <Content data={mostLikedJoys2} view={'most'} />
                             ) : (
-                                <Content joys={recentlyLikedJoys2} />
+                                <Content
+                                    data={recentlyLikedJoys2}
+                                    view={'recently'}
+                                />
                             )}
                         </div>
                     </div>

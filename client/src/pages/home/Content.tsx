@@ -1,7 +1,29 @@
 import { DataBaseType, MemeType, JokeType, NewsType } from '../../Types';
 import { MemeCard, NewsCard, JokeCard } from '../../components/Card';
+import React from 'react';
 
-function Content({ joys }: { joys: DataBaseType[] }) {
+function Content({
+    data,
+    view
+}: {
+    data: DataBaseType[] | React.ReactElement;
+    view: 'most' | 'recently';
+}) {
+    if (React.isValidElement(data)) {
+        // Display data from promiseNoData
+        return data;
+    }
+
+    const joys = Array.isArray(data) ? data : [];
+
+    if (joys.length === 0) {
+        if (view === 'most') {
+            return <div>Most liked content not available</div>;
+        } else if (view === 'recently') {
+            return <div>Recently liked content not available</div>;
+        }
+    }
+
     return joys.map((joy, index) => {
         let cardComponent = null;
 

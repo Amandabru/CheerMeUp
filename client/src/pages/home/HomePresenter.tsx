@@ -11,9 +11,11 @@ function HomePresenter() {
         DataBaseType[]
     > | null>(null);
     const [dataMostLiked, errorMostLiked] = usePromise(promiseMostLiked);
+    // Divide data into two arrays since we want two independent columns in scroll feed
     const [dataMostLiked1, dataMostLiked2] = useMemo(() => {
         if (Array.isArray(dataMostLiked)) {
-            return splitArrayInHalf(dataMostLiked);
+            const dataMostLikedArray = dataMostLiked as DataBaseType[]; // Cast data to DataBaseType[] since we know it is of type DataBaseType[]
+            return splitArrayInHalf(dataMostLikedArray);
         }
         return [[], []];
     }, [dataMostLiked]);
@@ -25,59 +27,56 @@ function HomePresenter() {
         usePromise(promiseRecentlyLiked);
     const [dataRecentlyLiked1, dataRecentlyLiked2] = useMemo(() => {
         if (Array.isArray(dataRecentlyLiked)) {
-            return splitArrayInHalf(dataRecentlyLiked);
+            const dataRecentlyLikedArray = dataRecentlyLiked as DataBaseType[];
+            return splitArrayInHalf(dataRecentlyLikedArray);
         }
         return [[], []];
     }, [dataRecentlyLiked]);
 
-    const getPopularJoys = useCallback(async () => {
-        try {
-            // Fetch most liked data
-            const mostLikedPromise = getPopular(24, 'likes').then((data) => {
-                return data as DataBaseType[];
-            });
-
-            // Fetch recently liked data
-            const recentlyLikedPromise = getPopular(24, 'recentlyLiked').then(
-                (data) => {
-                    return data as DataBaseType[];
-                }
-            );
-
-            // Set the promises in state
-            setPromiseMostLiked(mostLikedPromise);
-            setPromiseRecentlyLiked(recentlyLikedPromise);
-        } catch (error) {
-            console.error(error);
-        }
-    }, [setPromiseMostLiked, setPromiseRecentlyLiked]);
+    const fetchData = useCallback(() => {
+        setPromiseMostLiked(getPopular(24, 'likes'));
+        setPromiseRecentlyLiked(getPopular(24, 'recentlyLiked'));
+    }, []);
 
     useEffect(() => {
-        getPopularJoys();
-    }, [getPopularJoys]);
+        fetchData();
+    }, [fetchData]);
 
     return (
-        promiseNoData(
-            promiseMostLiked,
-            dataMostLiked,
-            errorMostLiked,
-            'Could not fetch most liked joys',
-            'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
-        ) ||
-        promiseNoData(
-            promiseRecentlyLiked,
-            dataRecentlyLiked,
-            errorRecentlyLiked,
-            'Could not fetch recently liked joys',
-            'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
-        ) || (
-            <HomeView
-                mostLikedJoys1={dataMostLiked1 as DataBaseType[]}
-                mostLikedJoys2={dataMostLiked2 as DataBaseType[]}
-                recentlyLikedJoys1={dataRecentlyLiked1 as DataBaseType[]}
-                recentlyLikedJoys2={dataRecentlyLiked2 as DataBaseType[]}
-            />
-        )
+        <HomeView
+            mostLikedJoys1={
+                promiseNoData(
+                    promiseMostLiked,
+                    dataMostLiked,
+                    errorMostLiked,
+                    'Could not fetch most liked joys'
+                ) || dataMostLiked1
+            }
+            mostLikedJoys2={
+                promiseNoData(
+                    promiseMostLiked,
+                    dataMostLiked,
+                    errorMostLiked,
+                    'Could not fetch most liked joys'
+                ) || dataMostLiked2
+            }
+            recentlyLikedJoys1={
+                promiseNoData(
+                    promiseRecentlyLiked,
+                    dataRecentlyLiked,
+                    errorRecentlyLiked,
+                    'Could not fetch recently liked joys'
+                ) || dataRecentlyLiked1
+            }
+            recentlyLikedJoys2={
+                promiseNoData(
+                    promiseRecentlyLiked,
+                    dataRecentlyLiked,
+                    errorRecentlyLiked,
+                    'Could not fetch recently liked joys'
+                ) || dataRecentlyLiked2
+            }
+        />
     );
 }
 
