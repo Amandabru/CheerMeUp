@@ -11,7 +11,7 @@ export async function getPopularController(
     const sortBy = req.params.sortBy;
 
     try {
-        const topList = await JoyModel.find()
+        const topList = await JoyModel.find({ likes: { $gt: 0 } })
             .sort(sortBy === 'likes' ? { likes: -1 } : { lastLiked: -1 })
             .limit(number);
 
