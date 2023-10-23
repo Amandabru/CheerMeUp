@@ -50,6 +50,7 @@ function HomePresenter() {
                     dataMostLiked,
                     errorMostLiked,
                     'Could not fetch most liked joys (promise denied)',
+                    '',
                     'yes'
                 ) || dataMostLiked1
             }
@@ -59,6 +60,7 @@ function HomePresenter() {
                     dataMostLiked,
                     errorMostLiked,
                     'Could not fetch most liked joys (promise denied)',
+                    '',
                     'yes'
                 ) || dataMostLiked2
             }
@@ -68,6 +70,7 @@ function HomePresenter() {
                     dataRecentlyLiked,
                     errorRecentlyLiked,
                     'Could not fetch recently liked joys (promise denied)',
+                    '',
                     'yes'
                 ) || dataRecentlyLiked1
             }
@@ -77,6 +80,7 @@ function HomePresenter() {
                     dataRecentlyLiked,
                     errorRecentlyLiked,
                     'Could not fetch recently liked joys (promise denied)',
+                    '',
                     'yes'
                 ) || dataRecentlyLiked2
             }

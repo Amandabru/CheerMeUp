@@ -30,6 +30,7 @@ function promiseNoData(
         | null,
     error: Error | null,
     noDataMessage: string,
+    bgc: string,
     spinner?: 'yes'
 ) {
     if (!promise) {
@@ -39,7 +40,7 @@ function promiseNoData(
         !error
     ) {
         return (
-            <div className="min-h-screen min-w-screen overflow-hidden">
+            <div className={`min-h-screen min-w-screen overflow-hidden ${bgc}`}>
                 {spinner === 'yes' ? (
                     <span className="loading loading-spinner loading-lg top-[20%] left-1/2 absolute dark:text-gray-300"></span>
                 ) : (

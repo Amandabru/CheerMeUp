@@ -62,6 +62,7 @@ function MemePresenter({
                     data,
                     error,
                     'Could not fetch memes (promise denied)',
+                    '',
                     'yes'
                 ) || dataSlice(memeData1, count)
             }
@@ -71,6 +72,7 @@ function MemePresenter({
                     data,
                     error,
                     'Could not fetch memes (promise denied)',
+                    '',
                     'yes'
                 ) || dataSlice(memeData2, count)
             }

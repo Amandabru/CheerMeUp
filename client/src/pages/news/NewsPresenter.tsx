@@ -62,6 +62,7 @@ function NewsPresenter({
                     data,
                     error,
                     'Could not fetch news (promise denied)',
+                    '',
                     'yes'
                 ) || dataSlice(newsData1, count)
             }
@@ -71,6 +72,7 @@ function NewsPresenter({
                     data,
                     error,
                     'Could not fetch news (promise denied)',
+                    '',
                     'yes'
                 ) || dataSlice(newsData2, count)
             }
