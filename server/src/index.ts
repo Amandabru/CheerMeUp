@@ -40,7 +40,7 @@ app.use(
         name: 'cheerMeUpCookie',
         cookie: {
             secure: true, 
-            sameSite: 'none', 
+            sameSite: 'lax', 
             httpOnly: true,
             maxAge: 60 * 60 * 1000
         },

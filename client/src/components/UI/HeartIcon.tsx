@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { BsSuitHeartFill, BsSuitHeart } from 'react-icons/bs';
 import { PiHeart, PiHeartFill } from 'react-icons/pi';
 
 interface HeartIconProps {
