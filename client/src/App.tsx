@@ -69,7 +69,6 @@ function App({ model }: { model: CheerModel }) {
             });
         }
     }, [loggedInUser]);
-
     return (
         <>
             <NavBarPresenter
@@ -81,13 +80,7 @@ function App({ model }: { model: CheerModel }) {
             {loggedInUser && <AnimationPresenter user={loggedInUser} />}
             <div>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <HomePresenter
-                            />
-                        }
-                    />
+                    <Route path="/" element={<HomePresenter />} />
                     <Route
                         path="/jokes"
                         element={
@@ -120,7 +113,8 @@ function App({ model }: { model: CheerModel }) {
                     />
                     <Route
                         path="/verify/:userId/:uniqueString"
-                        element={<VerifyPresenter/>}/>
+                        element={<VerifyPresenter />}
+                    />
                     <Route path="/activities" element={<ActivityPresenter />} />
                     <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/404" replace />} />
