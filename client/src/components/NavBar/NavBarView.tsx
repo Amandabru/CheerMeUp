@@ -88,7 +88,7 @@ function NavBarView({
                 </div>
 
                 <img
-                    className="h-10 normal-case animate-wiggle mr-5"
+                    className="h-10 normal-case animate-wiggle mr-5 ml-8"
                     src={logoImage}
                     alt="Logo"
                 ></img>
