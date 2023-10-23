@@ -44,7 +44,7 @@ export default {
                     ...require('daisyui/src/theming/themes')[
                         '[data-theme=dracula]'
                     ],
-                    primary: '#31572C',
+                    primary: '#002e18',
                     accent: '#000000',
                     '.navbar': {
                         'background-color': '#202020'
