@@ -6,7 +6,10 @@ import { DataStructure } from '../Types.ts';
 export async function getLoggedInUser(): Promise<User> {
     const response = await fetchData(`${API_URL}/api/users`, {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+            'Access-Control-Allow-Origin': '*' //test
+        },
     });
     return response.json();
 }
@@ -21,7 +24,8 @@ export async function signUp(credentials: SignUpCredentials) {
     const response = await fetchData(`${API_URL}/api/users/signup`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' //test
         },
         body: JSON.stringify(credentials),
         credentials: 'include'
@@ -38,7 +42,8 @@ export async function login(credentials: LoginCredentials): Promise<User> {
     const response = await fetchData(`${API_URL}/api/users/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' //test
         },
         body: JSON.stringify(credentials),
         credentials: 'include'
@@ -49,14 +54,21 @@ export async function login(credentials: LoginCredentials): Promise<User> {
 export async function logout() {
     await fetchData(`${API_URL}/api/users/logout`, {
         method: 'POST',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+            'Access-Control-Allow-Origin': '*' //test
+        },
+
     });
 }
 
 export async function getLikedJoys(): Promise<DataStructure> {
     const response = await fetchData(`${API_URL}/api/users/likedJoys`, {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+            'Access-Control-Allow-Origin': '*' //test
+        },
     });
     return response.json();
 }
