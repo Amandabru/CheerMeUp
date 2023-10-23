@@ -85,7 +85,7 @@ function JokeView({
                 </div>
                 <div
                     className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-green-100 h-40 w-full flex items-center justify-center relative 
-                    dark:bg-[#193d28] dark:text-gray-300 dark:border-[#1f471f]"
+                    dark:bg-[#011c0f] dark:text-gray-300 dark:border-[#002e18]"
                 >
                     <span
                         className={'absolute top-[15px] right-[15px]'}
