@@ -1,4 +1,8 @@
 export function splitArrayInHalf<T>(array: T[]): [T[], T[]] {
+    if (array.length === 1) {
+        return [array, []];
+    }
+
     const middle = Math.floor(array.length / 2);
 
     const firstHalf = array.slice(0, middle);

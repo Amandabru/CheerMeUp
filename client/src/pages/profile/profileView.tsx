@@ -27,7 +27,7 @@ function ProfileView({
 
     function mapCards(
         likedJoys: (MemeType | NewsType | JokeType)[],
-        position?: 'right' | null
+        position?: 'left' | null
     ) {
         return likedJoys.length > 0 ? (
             likedJoys.map((object, index) => {
@@ -98,7 +98,7 @@ function ProfileView({
             })
         ) : (
             <div className="w-full">
-                {position === 'right' && (
+                {position === 'left' && (
                     <h2 className="text-2xl font-light text-center dark:text-white">
                         You have no liked content
                     </h2>
@@ -125,10 +125,10 @@ function ProfileView({
                 <section className="w-full !scroll-smooth">
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
-                            {mapCards(likedJoys1)}
+                            {mapCards(likedJoys1, 'left')}
                         </div>
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
-                            {mapCards(likedJoys2, 'right')}
+                            {mapCards(likedJoys2)}
                         </div>
                     </div>
                 </section>
