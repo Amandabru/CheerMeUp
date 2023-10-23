@@ -1,10 +1,10 @@
 import { Form } from 'react-bootstrap';
 import TextInputField from '../UI/TextInputField';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { SignUpCredentials, LoginCredentials } from '../../api/user';
+import { SignUpCredentials } from '../../api/user';
 
 interface SignUpViewProps {
-    register: UseFormRegister<SignUpCredentials | LoginCredentials>;
+    register: UseFormRegister<SignUpCredentials>;
     handleSubmit: () => void;
     errors: FieldErrors<SignUpCredentials>;
     errorText: string | null;

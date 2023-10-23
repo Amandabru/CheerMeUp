@@ -1,17 +1,16 @@
 import { FieldError, RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
-import { LoginCredentials, SignUpCredentials } from '../../api/user';
 
 interface TextInputFieldProps {
     id: string;
-    name: 'email' | 'username' | 'password';
+    name: string;
     label: string;
-    register: UseFormRegister<LoginCredentials | SignUpCredentials>;
+    register: UseFormRegister<any>;
     registerOptions?: RegisterOptions;
     error?: FieldError;
     [x: string]:
         | string
-        | UseFormRegister<LoginCredentials | SignUpCredentials>
+        | UseFormRegister<any>
         | RegisterOptions
         | FieldError
         | undefined;
