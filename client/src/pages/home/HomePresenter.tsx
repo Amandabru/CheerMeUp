@@ -14,8 +14,7 @@ function HomePresenter() {
     // Divide data into two arrays since we want two independent columns in scroll feed
     const [dataMostLiked1, dataMostLiked2] = useMemo(() => {
         if (Array.isArray(dataMostLiked)) {
-            const dataMostLikedArray = dataMostLiked as DataBaseType[]; // Cast data to DataBaseType[] since we know it is of type DataBaseType[]
-            return splitArrayInHalf(dataMostLikedArray);
+            return splitArrayInHalf(dataMostLiked);
         }
         return [[], []];
     }, [dataMostLiked]);
@@ -27,8 +26,7 @@ function HomePresenter() {
         usePromise(promiseRecentlyLiked);
     const [dataRecentlyLiked1, dataRecentlyLiked2] = useMemo(() => {
         if (Array.isArray(dataRecentlyLiked)) {
-            const dataRecentlyLikedArray = dataRecentlyLiked as DataBaseType[];
-            return splitArrayInHalf(dataRecentlyLikedArray);
+            return splitArrayInHalf(dataRecentlyLiked);
         }
         return [[], []];
     }, [dataRecentlyLiked]);

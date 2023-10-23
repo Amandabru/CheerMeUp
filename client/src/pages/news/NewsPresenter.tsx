@@ -20,12 +20,11 @@ function NewsPresenter({
 }) {
     const [promise, setPromise] = useState<Promise<NewsType[]> | null>(null);
     const [data, error] = usePromise(promise);
-    // Divide newsData into two arrays since we want two independent columns in scroll feed
+    // Divide data into two arrays since we want two independent columns in scroll feed
     let newsData1: NewsType[] = [];
     let newsData2: NewsType[] = [];
     if (Array.isArray(data)) {
-        const newsData = data as NewsType[]; // Cast data to NewsType[] since we know it is of type NewsData[]
-        [newsData1, newsData2] = splitArrayInHalf(newsData);
+        [newsData1, newsData2] = splitArrayInHalf(data);
     }
 
     const likedJoys: DataStructure = useModelProp(model);

@@ -20,12 +20,11 @@ function MemePresenter({
 }) {
     const [promise, setPromise] = useState<Promise<MemeType[]> | null>(null);
     const [data, error] = usePromise(promise);
-    // Divide memeData into two arrays since we want two independent columns in scroll feed
+    // Divide data into two arrays since we want two independent columns in scroll feed
     let memeData1: MemeType[] = [];
     let memeData2: MemeType[] = [];
     if (Array.isArray(data)) {
-        const memeData = data as MemeType[]; // Cast data to MemeType[] since we know it is of type MemeData[]
-        [memeData1, memeData2] = splitArrayInHalf(memeData);
+        [memeData1, memeData2] = splitArrayInHalf(data);
     }
 
     const likedJoys: DataStructure = useModelProp(model);
