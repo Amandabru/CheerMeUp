@@ -15,7 +15,7 @@ function PaginationButtons({
         <div className="flex justify-center items-center !scroll-smooth">
             {count ? (
                 <button
-                    className="btn btn-accent mt-10 mr-10"
+                    className="btn btn-ghost mt-10 mr-10 dark:text-gray-300"
                     onClick={() => {
                         onDecrement();
                         position === 'bottom' && window.scrollTo(0, 0);
@@ -26,7 +26,7 @@ function PaginationButtons({
             ) : null}
             {count < 2 ? (
                 <button
-                    className="btn btn-accent mt-10"
+                    className="btn btn-ghost mt-10 dark:text-gray-300"
                     onClick={() => {
                         onIncrement();
                         position === 'bottom' && window.scrollTo(0, 0);
