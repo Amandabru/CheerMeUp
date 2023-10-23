@@ -22,6 +22,8 @@ const PORT = 5000;
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 app.use(
     cors({
         origin: true,
@@ -51,7 +53,6 @@ app.use(
     })
 );
 
-app.set("trust proxy", 1);
 
 //CheerMeUp end-points
 app.get('/api/news', getNewsController);
