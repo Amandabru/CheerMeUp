@@ -3,43 +3,26 @@ import { Link } from 'react-router-dom';
 import logoImage from '../../assets/images/LogoTest.png';
 import { useState } from 'react';
 import ProfileIcon from '../UI/ProfileIcon';
+import './NavBarAnimation.css';
 
 interface NavBarViewProps {
     loggedInUser: User | null;
     onSignUpClicked: () => void;
     onLoginClicked: () => void;
     onLogoutClicked: () => void;
-}
-
-function NavLink({
-    to,
-    text,
-    isActive,
-    onClick
-}: {
-    to: string;
-    text: string;
-    isActive: boolean;
-    onClick: () => void;
-}) {
-    const decoration = isActive ? 'underline' : '';
-
-    return (
-        <Link
-            to={to}
-            className={`normal-case text-xl mr-10 ${decoration}`}
-            onClick={onClick}
-        >
-            {text}
-        </Link>
-    );
+    onGiveCompliment: () => void;
+    onRemoveCompliment: () => void;
+    compliment: string | null;
 }
 
 function NavBarView({
     loggedInUser,
     onSignUpClicked,
     onLoginClicked,
-    onLogoutClicked
+    onLogoutClicked,
+    onGiveCompliment,
+    onRemoveCompliment,
+    compliment
 }: NavBarViewProps) {
     const [activeLink, setActiveLink] = useState<number | null>(null);
 
@@ -86,14 +69,31 @@ function NavBarView({
                         ))}
                     </ul>
                 </div>
+                <div className="navbarSmiley">
+                    <img
+                        className="h-10 normal-case animate-wiggle mr-5 ml-8"
+                        src={logoImage}
+                        alt="Logo"
+                        onMouseEnter={() => onGiveCompliment()}
+                        onMouseLeave={() => onRemoveCompliment()}
+                    ></img>
+                    <div
+                        className={
+                            compliment
+                                ? 'chat chat-start navbarSpeechBubble'
+                                : 'hidden'
+                        }
+                    >
+                        <div className="chat-bubble">
+                            <p className="compliment">{compliment}</p>
+                        </div>
+                    </div>
+                </div>
 
-                <img
-                    className="h-10 normal-case animate-wiggle mr-5 ml-8"
-                    src={logoImage}
-                    alt="Logo"
-                ></img>
                 <Link
-                    className="normal-case text-xl mr-5"
+                    className={
+                        compliment ? 'opacity-0' : 'normal-case text-xl mr-5'
+                    }
                     to="/"
                     onClick={() => setActiveLink(null)}
                 >
@@ -163,6 +163,30 @@ function NavBarView({
                 ) : null}
             </div>
         </div>
+    );
+}
+
+function NavLink({
+    to,
+    text,
+    isActive,
+    onClick
+}: {
+    to: string;
+    text: string;
+    isActive: boolean;
+    onClick: () => void;
+}) {
+    const decoration = isActive ? 'underline' : '';
+
+    return (
+        <Link
+            to={to}
+            className={`normal-case text-xl mr-10 ${decoration}`}
+            onClick={onClick}
+        >
+            {text}
+        </Link>
     );
 }
 
