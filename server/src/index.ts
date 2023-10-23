@@ -41,8 +41,8 @@ app.use(
         saveUninitialized: false,
         name: 'cheerMeUpCookie',
         cookie: {
-            secure: false, 
-            sameSite: 'lax', 
+            secure: true, 
+            sameSite: 'none', 
             httpOnly: true,
             maxAge: 60 * 60 * 1000
         },
