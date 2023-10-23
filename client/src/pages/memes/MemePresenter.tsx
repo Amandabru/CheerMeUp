@@ -5,7 +5,7 @@ import { DataStructure, MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
 import { User } from '../../userModel';
 import useModelProp from '../../hooks/useModelProp';
-import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
+import { splitArrayInHalf } from '../../DataFunctions';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
 
@@ -29,24 +29,8 @@ function MemePresenter({
 
     const likedJoys: DataStructure = useModelProp(model);
 
-    // Count used for keeping track of the pagination
-    const [count, setCount] = useState<number>(0);
-
-    const increment = () => {
-        if (count < 2) {
-            setCount(count + 1);
-        }
-    };
-
-    const decrement = () => {
-        if (count > 0) {
-            setCount(count - 1);
-        }
-    };
-
     const fetchData = useCallback(() => {
         setPromise(getMemes());
-        setCount(0);
     }, []);
 
     useEffect(() => {
@@ -63,7 +47,7 @@ function MemePresenter({
                     'Could not fetch memes (promise denied)',
                     '',
                     'yes'
-                ) || dataSlice(memeData1, count)
+                ) || memeData1
             }
             memeData2={
                 promiseNoData(
@@ -73,12 +57,9 @@ function MemePresenter({
                     'Could not fetch memes (promise denied)',
                     '',
                     'yes'
-                ) || dataSlice(memeData2, count)
+                ) || memeData2
             }
-            onIncrement={increment}
-            onDecrement={decrement}
             onNewFetch={fetchData}
-            count={count}
             likedMemes={likedJoys.memes}
             likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
             user={user}

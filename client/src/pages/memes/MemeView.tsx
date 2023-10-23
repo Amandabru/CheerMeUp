@@ -1,16 +1,12 @@
 import { MemeCard } from '../../components/Card';
 import { MemeType } from '../../Types';
 import { User } from '../../userModel';
-import PaginationButtons from '../../components/UI/PaginationButtons';
 import React from 'react';
 
 function MemeView({
     memeData1,
     memeData2,
-    onIncrement,
-    onDecrement,
     onNewFetch,
-    count,
     likedMemes,
     likePost,
     user,
@@ -18,10 +14,7 @@ function MemeView({
 }: {
     memeData1: MemeType[] | React.ReactElement;
     memeData2: MemeType[] | React.ReactElement;
-    onIncrement: () => void;
-    onDecrement: () => void;
     onNewFetch: () => void;
-    count: number;
     likedMemes: MemeType[];
     likePost: Function;
     user: User | null;
@@ -69,18 +62,13 @@ dark:from-[#0d3b40] dark:to-[#0a2d30] dark:text-white"
             <div className="absolute top-[30%] flex justify-center w-full">
                 {' '}
                 <button className="btn btn-outline" onClick={onNewFetch}>
-                    More memes!
+                    Generate new memes!
                 </button>
             </div>
             <div
                 className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
 dark:from-[#0d3b40] dark:to-[#0a2d30]"
             >
-                <PaginationButtons
-                    count={count}
-                    onDecrement={onDecrement}
-                    onIncrement={onIncrement}
-                />
                 <section className="w-full !scroll-smooth">
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
@@ -91,12 +79,18 @@ dark:from-[#0d3b40] dark:to-[#0a2d30]"
                         </div>
                     </div>
                 </section>
-                <PaginationButtons
-                    count={count}
-                    onDecrement={onDecrement}
-                    onIncrement={onIncrement}
-                    position={'bottom'}
-                />
+                <div className="flex justify-center w-full mt-10">
+                    {' '}
+                    <button
+                        className="btn btn-outline"
+                        onClick={() => {
+                            onNewFetch();
+                            window.scrollTo(0, 0);
+                        }}
+                    >
+                        Generate new memes!
+                    </button>
+                </div>
                 <div className="h-10"></div>
             </div>
         </div>
