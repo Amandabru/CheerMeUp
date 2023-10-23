@@ -17,7 +17,7 @@ function promiseNoData<T>(
                 {spinner === 'yes' ? (
                     <span className="loading loading-spinner loading-lg top-[20%] left-1/2 absolute dark:text-gray-300"></span>
                 ) : (
-                    <span className="loading loading-dots loading-md top-[1/2] left-1/2 absolute"></span>
+                    <span className="loading loading-dots loading-md top-[50%] left-1/2 absolute "></span>
                 )}
             </div>
         );
