@@ -66,7 +66,7 @@ dark:from-[#0f4b52] dark:to-[#052124] dark:text-white"
                 </button>
             </div>
             <div
-                className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
+                className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black mt-5
 dark:from-[#0f4b52] dark:to-[#052124]"
             >
                 <section className="w-full !scroll-smooth">

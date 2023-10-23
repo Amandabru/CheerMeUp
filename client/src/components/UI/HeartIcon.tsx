@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BsSuitHeartFill, BsSuitHeart } from 'react-icons/bs';
+import { PiHeart, PiHeartFill } from 'react-icons/pi';
 
 interface HeartIconProps {
     isSolid: boolean;
@@ -10,7 +11,7 @@ function HeartIcon(props: HeartIconProps) {
 
     if (props.isSolid) {
         return (
-            <BsSuitHeartFill
+            <PiHeartFill
                 className={`${
                     effect && 'animate-pulse'
                 }  cursor-pointer transform scale-150`}
@@ -22,7 +23,7 @@ function HeartIcon(props: HeartIconProps) {
         );
     }
     return (
-        <BsSuitHeart
+        <PiHeart
             className={`${
                 effect && 'animate-pulse'
             }  cursor-pointer transform scale-150`}
