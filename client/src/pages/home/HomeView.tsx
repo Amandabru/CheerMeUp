@@ -58,11 +58,16 @@ function HomeView({
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
                             {selectedView === 'most' ? (
-                                <Content data={mostLikedJoys1} view={'most'} />
+                                <Content
+                                    data={mostLikedJoys1}
+                                    view={'most'}
+                                    position={'left'}
+                                />
                             ) : (
                                 <Content
                                     data={recentlyLikedJoys1}
                                     view={'recently'}
+                                    position={'left'}
                                 />
                             )}
                         </div>

@@ -4,10 +4,12 @@ import React from 'react';
 
 function Content({
     data,
-    view
+    view,
+    position
 }: {
     data: DataBaseType[] | React.ReactElement;
     view: 'most' | 'recently';
+    position?: 'left' | null;
 }) {
     if (React.isValidElement(data)) {
         // Display data from promiseNoData
@@ -18,9 +20,17 @@ function Content({
 
     if (joys.length === 0) {
         if (view === 'most') {
-            return <div>Most liked content not available</div>;
+            return (
+                position === 'left' && (
+                    <div>Most liked content not available</div>
+                )
+            );
         } else if (view === 'recently') {
-            return <div>Recently liked content not available</div>;
+            return (
+                position === 'left' && (
+                    <div>Most liked content not available</div>
+                )
+            );
         }
     }
 
