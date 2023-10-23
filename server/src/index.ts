@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(
     session({
         secret: process.env.SESSION_SECRET!,
-        resave: false,
+        resave: true,
         saveUninitialized: false,
         name: 'cheerMeUpCookie',
         cookie: {
