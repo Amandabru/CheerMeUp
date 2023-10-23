@@ -48,7 +48,6 @@ function JokePresenter({
         setJokeType(newJokeType);
         setPromise(getJoke(newJokeType));
     };
-    console.log(user);
     return (
         <JokeView
             randomJokeText={
