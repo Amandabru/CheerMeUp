@@ -41,6 +41,9 @@ export async function getMemesController(
             }))
             .filter((meme: MemeType) => {
                 return meme.type && meme.title && meme.url;
+            })
+            .filter((meme: MemeType) => {
+                return meme.url !== 'https://i.redd.it/65chmhfmhwvb1.png';
             });
         res.status(200).json(filteredArrayWithSelectedProperties);
     } catch (error) {
