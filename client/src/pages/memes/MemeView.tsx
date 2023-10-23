@@ -50,8 +50,8 @@ function MemeView({
 
     return (
         <div
-            className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen bg-fixed 
-dark:from-[#0d3b40] dark:to-[#0a2d30] dark:text-white"
+            className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen bg-fixed
+dark:from-[#0f4b52] dark:to-[#052124] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Craving a Smile?
@@ -66,8 +66,8 @@ dark:from-[#0d3b40] dark:to-[#0a2d30] dark:text-white"
                 </button>
             </div>
             <div
-                className="absolute top-[40%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
-dark:from-[#0d3b40] dark:to-[#0a2d30]"
+                className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black
+dark:from-[#0f4b52] dark:to-[#052124]"
             >
                 <section className="w-full !scroll-smooth">
                     <div className="flex flex-col md:flex-row w-full">

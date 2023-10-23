@@ -62,7 +62,7 @@ function NewsView({
     return (
         <div
             className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
-            dark:from-[#08094d]  dark:to-[#04052e] dark:text-white"
+            dark:from-[#121475]  dark:to-[#04052e] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 Tired of Bad News?
@@ -72,7 +72,7 @@ function NewsView({
             </h2>
             <div
                 className="absolute top-[30%] w-full bg-gradient-to-r from-blue-200 to-blue-300 text-black
-                dark:from-[#08094d]  dark:to-[#04052e]"
+                dark:from-[#121475]  dark:to-[#04052e]"
             >
                 <PaginationButtons
                     count={count}

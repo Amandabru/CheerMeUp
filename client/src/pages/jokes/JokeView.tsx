@@ -35,7 +35,7 @@ function JokeView({
     return (
         <div
             className="bg-gradient-to-r from-lime-100 to-green-300 text-black h-full w-full fixed
-       dark:from-[#1d472f]  dark:to-[#143020] dark:text-white"
+       dark:from-[#002e18]  dark:to-[#01140b] dark:text-white"
         >
             <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 {' '}
