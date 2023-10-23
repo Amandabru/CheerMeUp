@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import fetch from 'node-fetch';
 import createHttpError from 'http-errors';
 import UserModel from '../models/User';
+import { MemeType } from '../Types';
 
 type RedditPost = {
     postLink: string;
@@ -20,8 +21,8 @@ export async function getMemesController(
     res: Response,
     next: NextFunction
 ) {
-    //get 20 wholesome random memes
-    const api_url = 'https://meme-api.com/gimme/wholesomememes/20';
+    //get 24 wholesome random memes
+    const api_url = 'https://meme-api.com/gimme/wholesomememes/24';
 
     try {
         const response = await fetch(api_url);
@@ -32,13 +33,18 @@ export async function getMemesController(
         if (data.error) {
             throw createHttpError(500, 'Failed to fetch memes');
         }
-        const filteredArrayWithSelectedProperties = data.memes.map(
-            (item: RedditPost) => ({
+        const filteredArrayWithSelectedProperties = data.memes
+            .map((item: RedditPost) => ({
                 type: 'meme',
                 title: item.title,
                 url: item.url
+            }))
+            .filter((meme: MemeType) => {
+                return meme.type && meme.title && meme.url;
             })
-        );
+            .filter((meme: MemeType) => {
+                return meme.url !== 'https://i.redd.it/65chmhfmhwvb1.png';
+            });
         res.status(200).json(filteredArrayWithSelectedProperties);
     } catch (error) {
         next(error);

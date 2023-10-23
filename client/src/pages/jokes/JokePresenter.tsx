@@ -48,7 +48,6 @@ function JokePresenter({
         setJokeType(newJokeType);
         setPromise(getJoke(newJokeType));
     };
-
     return (
         <JokeView
             randomJokeText={
@@ -58,9 +57,9 @@ function JokePresenter({
                     error,
                     'Choose the type of joke you want',
                     ''
-                ) || joke.text
+                ) || (joke as JokeType)?.text
             }
-            randomJokeData={joke ? joke : null}
+            randomJokeData={(joke as JokeType) ? (joke as JokeType) : null}
             onChristmasClick={() => playSantaLaugh()}
             onSpookyClick={() => playSpookyLaugh()}
             jokeType={jokeType}

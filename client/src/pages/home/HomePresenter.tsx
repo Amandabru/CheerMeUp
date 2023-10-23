@@ -1,54 +1,88 @@
 import HomeView from './HomeView';
-import { getPopular } from '../../api/getPopular';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { DataBaseType } from '../../Types';
 import usePromise from '../../hooks/usePromise';
 import promiseNoData from '../../PromiseNoData';
+import { splitArrayInHalf } from '../../DataFunctions';
+import { getPopular } from '../../api/getPopular';
 
 function HomePresenter() {
     const [promiseMostLiked, setPromiseMostLiked] = useState<Promise<
         DataBaseType[]
     > | null>(null);
-    const [dataMostLiked, errorMostliked] = usePromise(promiseMostLiked);
+    const [dataMostLiked, errorMostLiked] = usePromise(promiseMostLiked);
+    // Divide data into two arrays since we want two independent columns in scroll feed
+    const [dataMostLiked1, dataMostLiked2] = useMemo(() => {
+        if (Array.isArray(dataMostLiked)) {
+            return splitArrayInHalf(dataMostLiked);
+        }
+        return [[], []];
+    }, [dataMostLiked]);
 
     const [promiseRecentlyLiked, setPromiseRecentlyLiked] = useState<Promise<
         DataBaseType[]
     > | null>(null);
     const [dataRecentlyLiked, errorRecentlyLiked] =
         usePromise(promiseRecentlyLiked);
-
-    useEffect(() => {
-        async function getPopularJoys() {
-            try {
-                setPromiseMostLiked(getPopular(20, 'likes'));
-                setPromiseRecentlyLiked(getPopular(20, 'recentlyLiked'));
-            } catch (error) {
-                console.log(error);
-            }
+    const [dataRecentlyLiked1, dataRecentlyLiked2] = useMemo(() => {
+        if (Array.isArray(dataRecentlyLiked)) {
+            return splitArrayInHalf(dataRecentlyLiked);
         }
-        getPopularJoys();
+        return [[], []];
+    }, [dataRecentlyLiked]);
+
+    const fetchData = useCallback(() => {
+        setPromiseMostLiked(getPopular(24, 'likes'));
+        setPromiseRecentlyLiked(getPopular(24, 'recentlyLiked'));
     }, []);
 
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
     return (
-        promiseNoData(
-            promiseMostLiked,
-            dataMostLiked,
-            errorMostliked,
-            'Could not fetch most liked joys',
-            'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
-        ) ||
-        promiseNoData(
-            promiseRecentlyLiked,
-            dataRecentlyLiked,
-            errorRecentlyLiked,
-            'Could not fetch recently liked joys',
-            'bg-gradient-to-r from-pink-300 to-[#ff82c9] dark:from-[#611d4d] dark:to-[#4d173d]'
-        ) || (
-            <HomeView
-                mostLikedJoys={dataMostLiked}
-                recentlyLikedJoys={dataRecentlyLiked}
-            />
-        )
+        <HomeView
+            mostLikedJoys1={
+                promiseNoData(
+                    promiseMostLiked,
+                    dataMostLiked,
+                    errorMostLiked,
+                    'Could not fetch most liked joys (promise denied)',
+                    '',
+                    'yes'
+                ) || dataMostLiked1
+            }
+            mostLikedJoys2={
+                promiseNoData(
+                    promiseMostLiked,
+                    dataMostLiked,
+                    errorMostLiked,
+                    'Could not fetch most liked joys (promise denied)',
+                    '',
+                    'yes'
+                ) || dataMostLiked2
+            }
+            recentlyLikedJoys1={
+                promiseNoData(
+                    promiseRecentlyLiked,
+                    dataRecentlyLiked,
+                    errorRecentlyLiked,
+                    'Could not fetch recently liked joys (promise denied)',
+                    '',
+                    'yes'
+                ) || dataRecentlyLiked1
+            }
+            recentlyLikedJoys2={
+                promiseNoData(
+                    promiseRecentlyLiked,
+                    dataRecentlyLiked,
+                    errorRecentlyLiked,
+                    'Could not fetch recently liked joys (promise denied)',
+                    '',
+                    'yes'
+                ) || dataRecentlyLiked2
+            }
+        />
     );
 }
 

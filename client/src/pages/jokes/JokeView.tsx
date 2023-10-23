@@ -16,8 +16,8 @@ function JokeView({
     user,
     showUserMustLogin
 }: {
-    randomJokeText: string;
-    randomJokeData: JokeType;
+    randomJokeText: string | React.ReactElement | undefined;
+    randomJokeData: JokeType | null;
     onChristmasClick: Function;
     onSpookyClick: Function;
     jokeType: string[];
@@ -35,7 +35,7 @@ function JokeView({
     return (
         <div
             className="bg-gradient-to-r from-lime-100 to-green-300 text-black h-full w-full fixed
-       dark:from-[#1d472f]  dark:to-[#143020] dark:text-white"
+       dark:from-[#002e18]  dark:to-[#01140b] dark:text-white"
         >
             <h1 className=" absolute top-[13%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144 mt-16">
                 {' '}
@@ -85,7 +85,7 @@ function JokeView({
                 </div>
                 <div
                     className="m-auto p-10 text-center border-2 border-solid border-white rounded-2xl bg-green-100 h-40 w-full flex items-center justify-center relative 
-                    dark:bg-[#193d28] dark:text-gray-300 dark:border-[#1f471f]"
+                    dark:bg-[#011c0f] dark:text-gray-300 dark:border-[#002e18]"
                 >
                     <span
                         className={'absolute top-[15px] right-[15px]'}

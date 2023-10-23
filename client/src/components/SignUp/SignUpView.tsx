@@ -1,12 +1,12 @@
 import { Form } from 'react-bootstrap';
 import TextInputField from '../UI/TextInputField';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import * as userApi from '../../api/user';
+import { SignUpCredentials } from '../../api/user';
 
 interface SignUpViewProps {
-    register: UseFormRegister<userApi.SignUpCredentials>;
+    register: UseFormRegister<SignUpCredentials>;
     handleSubmit: () => void;
-    errors: FieldErrors<userApi.SignUpCredentials>;
+    errors: FieldErrors<SignUpCredentials>;
     errorText: string | null;
     isSubmitting: boolean;
     directToLogin: Function;

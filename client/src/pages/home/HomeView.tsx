@@ -3,26 +3,24 @@ import { DataBaseType } from '../../Types';
 import Content from './Content';
 
 function HomeView({
-    mostLikedJoys,
-    recentlyLikedJoys
+    mostLikedJoys1,
+    mostLikedJoys2,
+    recentlyLikedJoys1,
+    recentlyLikedJoys2
 }: {
-    mostLikedJoys: DataBaseType[];
-    recentlyLikedJoys: DataBaseType[];
+    mostLikedJoys1: DataBaseType[] | React.ReactElement;
+    mostLikedJoys2: DataBaseType[] | React.ReactElement;
+    recentlyLikedJoys1: DataBaseType[] | React.ReactElement;
+    recentlyLikedJoys2: DataBaseType[] | React.ReactElement;
 }) {
-    const [selectedView, setSelectedView] = useState<'recently' | 'best'>(
-        'best'
+    const [selectedView, setSelectedView] = useState<'most' | 'recently'>(
+        'most'
     );
-    const renderSelectedView = () => {
-        if (selectedView === 'best') {
-            return <Content joys={mostLikedJoys}></Content>;
-        } else if (selectedView === 'recently') {
-            return <Content joys={recentlyLikedJoys}></Content>;
-        }
-    };
+
     return (
         <div
             className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen bg-fixed
-            dark:from-[#611d4d] dark:to-[#4d173d] dark:text-white"
+            dark:from-[#611d4d] dark:to-[#240f1d] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
                 {' '}
@@ -35,15 +33,15 @@ function HomeView({
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[65%]  md:top-[45%] bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
-                    dark:from-[#611d4d] dark:to-[#4d173d]"
+                className="absolute top-[65%]  md:top-[45%] w-full bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
+                    dark:from-[#611d4d] dark:to-[#240f1d]"
             >
                 <div className="flex justify-center w-full !scroll-smooth">
                     <button
                         className={`mr-10 btn btn-outline${
-                            selectedView === 'best' ? 'btn-active' : ''
+                            selectedView === 'most' ? 'btn-active' : ''
                         }`}
-                        onClick={() => setSelectedView('best')}
+                        onClick={() => setSelectedView('most')}
                     >
                         Most liked
                     </button>
@@ -56,9 +54,36 @@ function HomeView({
                         Recently liked
                     </button>
                 </div>
-                <section className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-10 mt-10 mb-20">
-                    {renderSelectedView()}
+                <section className="w-full !scroll-smooth">
+                    <div className="flex flex-col md:flex-row w-full">
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-end md:mr-[3%]">
+                            {selectedView === 'most' ? (
+                                <Content
+                                    data={mostLikedJoys1}
+                                    view={'most'}
+                                    position={'left'}
+                                />
+                            ) : (
+                                <Content
+                                    data={recentlyLikedJoys1}
+                                    view={'recently'}
+                                    position={'left'}
+                                />
+                            )}
+                        </div>
+                        <div className="flex flex-col w-full md:w-1/2 gap-y-10 mt-10 place-items-center md:place-items-start md:ml-[3%]">
+                            {selectedView === 'most' ? (
+                                <Content data={mostLikedJoys2} view={'most'} />
+                            ) : (
+                                <Content
+                                    data={recentlyLikedJoys2}
+                                    view={'recently'}
+                                />
+                            )}
+                        </div>
+                    </div>
                 </section>
+                <div className="h-10"></div>
             </div>
         </div>
     );

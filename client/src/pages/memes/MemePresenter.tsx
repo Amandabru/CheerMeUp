@@ -1,11 +1,13 @@
 import { CheerModel } from '../../models/model';
 import MemeView from './MemeView';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DataStructure, MemeType } from '../../Types';
 import { getMemes } from '../../api/getMemes';
-import promiseNoData from '../../PromiseNoData';
 import { User } from '../../userModel';
 import useModelProp from '../../hooks/useModelProp';
+import { splitArrayInHalf } from '../../DataFunctions';
+import usePromise from '../../hooks/usePromise';
+import promiseNoData from '../../PromiseNoData';
 
 function MemePresenter({
     model,
@@ -16,96 +18,53 @@ function MemePresenter({
     user: User | null;
     directToLogin: Function;
 }) {
-    const [memeData, setMemeData] = useState<MemeType[]>([]);
-    const storedCount = localStorage.getItem('memeCount');
-    const initialCount = storedCount ? parseInt(storedCount) : 0;
-    const [count, setCount] = useState<number>(initialCount);
-
-    const [error, setError] = useState<Error | null>(null);
-    const likedJoys: DataStructure = useModelProp(model);
-
-    const lastFetchDate = localStorage.getItem('lastFetchDateMemes');
-
-    const shouldFetchData = () => {
-        if (!lastFetchDate) return true;
-        const lastFetchTime = new Date(lastFetchDate).getTime();
-        const currentTime = new Date().getTime();
-        const twentyFourHours = 24 * 60 * 60 * 1000;
-        return currentTime - lastFetchTime >= twentyFourHours;
-    };
-
-    const fetchData = () => {
-        getMemes()
-            .then((res) => {
-                setMemeData(res);
-                localStorage.setItem('memeData', JSON.stringify(res));
-                localStorage.setItem(
-                    'lastFetchDateMemes',
-                    new Date().toISOString()
-                );
-            })
-            .catch((err) => setError(err));
-    };
-
-    const increment = () => {
-        if (count < 2) {
-            setCount(count + 1);
-        }
-    };
-
-    const decrement = () => {
-        if (count > 0) {
-            setCount(count - 1);
-        }
-    };
-
-    useEffect(() => {
-        if (shouldFetchData()) {
-            fetchData();
-        } else {
-            const storedMemeData = localStorage.getItem('memeData');
-            if (storedMemeData) {
-                setMemeData(JSON.parse(storedMemeData));
-            }
-        }
-    }, []); // Empty dependency array means this effect runs only once on component mount
-
-    useEffect(() => {
-        localStorage.setItem('memeCount', count.toString());
-    }, [count]);
-
-    function memeDataSlice(data: MemeType[], count: number): MemeType[] {
-        if (count === 0) {
-            return data.slice(0, data.length / 3);
-        }
-        if (count === 1) {
-            return data.slice(data.length / 3, data.length - data.length / 3);
-        }
-        if (count === 2) {
-            return data.slice(data.length - data.length / 3, data.length);
-        }
-        return [];
+    const [promise, setPromise] = useState<Promise<MemeType[]> | null>(null);
+    const [data, error] = usePromise(promise);
+    // Divide data into two arrays since we want two independent columns in scroll feed
+    let memeData1: MemeType[] = [];
+    let memeData2: MemeType[] = [];
+    if (Array.isArray(data)) {
+        [memeData1, memeData2] = splitArrayInHalf(data);
     }
 
+    const likedJoys: DataStructure = useModelProp(model);
+
+    const fetchData = useCallback(() => {
+        setPromise(getMemes());
+    }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
-        promiseNoData(
-            getMemes(),
-            memeData,
-            error,
-            'Could not fetch memes',
-            'bg-gradient-to-r from-rose-300 to-orange-300 dark:from-[#0d3b40] dark:to-[#0a2d30]'
-        ) || (
-            <MemeView
-                memeData={memeDataSlice(memeData, count)}
-                onIncrement={increment}
-                onDecrement={decrement}
-                count={count}
-                likedMemes={likedJoys.memes}
-                likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
-                user={user}
-                showUserMustLogin={() => directToLogin()}
-            />
-        )
+        <MemeView
+            memeData1={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch memes (promise denied)',
+                    '',
+                    'yes'
+                ) || memeData1
+            }
+            memeData2={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch memes (promise denied)',
+                    '',
+                    'yes'
+                ) || memeData2
+            }
+            onNewFetch={fetchData}
+            likedMemes={likedJoys.memes}
+            likePost={(meme: MemeType) => model.likeOrUnlikeMeme(meme)}
+            user={user}
+            showUserMustLogin={() => directToLogin()}
+        />
     );
 }
 

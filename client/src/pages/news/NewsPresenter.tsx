@@ -1,11 +1,13 @@
 import { CheerModel } from '../../models/model';
 import NewsView from './NewsView';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DataStructure, NewsType } from '../../Types';
 import { getHappyNews } from '../../api/getNews';
 import promiseNoData from '../../PromiseNoData';
 import useModelProp from '../../hooks/useModelProp';
 import { User } from '../../userModel';
+import { splitArrayInHalf, dataSlice } from '../../DataFunctions';
+import usePromise from '../../hooks/usePromise';
 
 function NewsPresenter({
     model,
@@ -16,35 +18,19 @@ function NewsPresenter({
     user: User | null;
     directToLogin: Function;
 }) {
-    const [newsData, setNewsData] = useState<NewsType[]>([]);
-    const storedCount = localStorage.getItem('newsCount');
-    const initialCount = storedCount ? parseInt(storedCount, 10) : 0;
-    const [count, setCount] = useState<number>(initialCount);
-    const [error, setError] = useState<Error | null>(null);
+    const [promise, setPromise] = useState<Promise<NewsType[]> | null>(null);
+    const [data, error] = usePromise(promise);
+    // Divide data into two arrays since we want two independent columns in scroll feed
+    let newsData1: NewsType[] = [];
+    let newsData2: NewsType[] = [];
+    if (Array.isArray(data)) {
+        [newsData1, newsData2] = splitArrayInHalf(data);
+    }
+
     const likedJoys: DataStructure = useModelProp(model);
 
-    const lastFetchDate = localStorage.getItem('lastFetchDateNews');
-
-    const shouldFetchData = () => {
-        if (!lastFetchDate) return true;
-        const lastFetchTime = new Date(lastFetchDate).getTime();
-        const currentTime = new Date().getTime();
-        const twentyFourHours = 24 * 60 * 60 * 1000;
-        return currentTime - lastFetchTime >= twentyFourHours;
-    };
-
-    const fetchData = () => {
-        getHappyNews()
-            .then((res) => {
-                setNewsData(res);
-                localStorage.setItem('newsData', JSON.stringify(res));
-                localStorage.setItem(
-                    'lastFetchDateNews',
-                    new Date().toISOString()
-                );
-            })
-            .catch((err) => setError(err));
-    };
+    // Count used for keeping track of the pagination
+    const [count, setCount] = useState<number>(0);
 
     const increment = () => {
         if (count < 2) {
@@ -58,52 +44,44 @@ function NewsPresenter({
         }
     };
 
-    useEffect(() => {
-        if (shouldFetchData()) {
-            fetchData();
-        } else {
-            const storedNewsData = localStorage.getItem('newsData');
-            if (storedNewsData) {
-                setNewsData(JSON.parse(storedNewsData));
-            }
-        }
-    }, []); // Empty dependency array means this effect runs only once on component mount
+    const fetchData = useCallback(() => {
+        setPromise(getHappyNews());
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem('newsCount', count.toString());
-    }, [count]);
+        fetchData();
+    }, []);
 
-    function newsDataSlice(data: NewsType[], count: number): NewsType[] {
-        if (count === 0) {
-            return data.slice(0, data.length / 3);
-        }
-        if (count === 1) {
-            return data.slice(data.length / 3, data.length - data.length / 3);
-        }
-        if (count === 2) {
-            return data.slice(data.length - data.length / 3, data.length);
-        }
-        return [];
-    }
     return (
-        promiseNoData(
-            getHappyNews(),
-            newsData,
-            error,
-            'Could not fetch news (promise denied)',
-            'bg-gradient-to-r from-blue-200 to-blue-300 dark:from-[#08094d] dark:to-[#04052e]'
-        ) || (
-            <NewsView
-                newsData={newsDataSlice(newsData, count)}
-                onIncrement={increment}
-                onDecrement={decrement}
-                count={count}
-                likedNews={likedJoys.news}
-                likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
-                user={user}
-                showUserMustLogin={() => directToLogin()}
-            />
-        )
+        <NewsView
+            newsData1={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch news (promise denied)',
+                    '',
+                    'yes'
+                ) || dataSlice(newsData1, count)
+            }
+            newsData2={
+                promiseNoData(
+                    promise,
+                    data,
+                    error,
+                    'Could not fetch news (promise denied)',
+                    '',
+                    'yes'
+                ) || dataSlice(newsData2, count)
+            }
+            onIncrement={increment}
+            onDecrement={decrement}
+            count={count}
+            likedNews={likedJoys.news}
+            likePost={(news: NewsType) => model.likeOrUnlikeNews(news)}
+            user={user}
+            showUserMustLogin={() => directToLogin()}
+        />
     );
 }
 

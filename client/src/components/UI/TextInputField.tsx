@@ -8,7 +8,12 @@ interface TextInputFieldProps {
     register: UseFormRegister<any>;
     registerOptions?: RegisterOptions;
     error?: FieldError;
-    [x: string]: any;
+    [x: string]:
+        | string
+        | UseFormRegister<any>
+        | RegisterOptions
+        | FieldError
+        | undefined;
 }
 
 const TextInputField = ({
