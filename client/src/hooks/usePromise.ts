@@ -1,12 +1,4 @@
 import { useEffect, useState } from 'react';
-import {
-    ActivityType,
-    NewsType,
-    MemeType,
-    JokeType,
-    DataBaseType,
-    MessageType
-} from '../Types';
 
 function usePromise<T>(promise: Promise<T> | null): [T | null, Error | null] {
     const [data, setData] = useState<T | null>(null);
