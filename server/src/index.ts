@@ -42,7 +42,7 @@ app.use(
         },
         rolling: true,
         store: MongoStore.create({
-            mongoUrl: process.env.MONGO_URL!
+            mongoUrl: process.env.MONGO_LOCAL_URL!
         })
     })
 );
