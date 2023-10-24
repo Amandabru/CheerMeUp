@@ -34,7 +34,7 @@ function NavBarView({
     ];
 
     return (
-        <div className="navbar bg-base-100 fixed top-0 z-40 pr-10">
+        <div className="navbar bg-base-100 sticky top-0 z-40 pr-5 md:pr-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -69,7 +69,7 @@ function NavBarView({
                         ))}
                     </ul>
                 </div>
-                <div className="navbarSmiley">
+                <div className="navbarSmiley hidden md:block">
                     <img
                         className="h-10 normal-case animate-wiggle mr-5 ml-8"
                         src={logoImage}

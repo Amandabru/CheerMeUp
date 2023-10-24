@@ -50,23 +50,23 @@ function MemeView({
 
     return (
         <div
-            className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen bg-fixed
+            className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen w-full
 dark:from-[#0f4b52] dark:to-[#052124] dark:text-white"
         >
-            <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className="text-4xl font-bold text-center pt-15">
                 Craving a Smile?
             </h1>
-            <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h2 className="text-2xl font-light text-center mt-10 md:mt-4 w-80 md:w-144 mx-auto flex items-center justify-center">
                 Memes will brighten your day!
             </h2>
-            <div className="absolute top-[30%] flex justify-center w-full">
+            <div className="absolute top-[30%] mt-3 flex justify-center w-full">
                 {' '}
                 <button className="btn btn-outline" onClick={onNewFetch}>
                     Generate new memes!
                 </button>
             </div>
             <div
-                className="absolute top-[35%] w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black mt-5
+                className="pt-14 w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black mt-5
 dark:from-[#0f4b52] dark:to-[#052124]"
             >
                 <section className="w-full !scroll-smooth">

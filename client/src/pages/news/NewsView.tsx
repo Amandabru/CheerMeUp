@@ -61,17 +61,17 @@ function NewsView({
 
     return (
         <div
-            className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen bg-fixed
+            className="bg-gradient-to-r from-blue-200 to-blue-300 text-black min-h-screen w-full
             dark:from-[#121475]  dark:to-[#04052e] dark:text-white"
         >
-            <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className="text-4xl font-bold text-center pt-15">
                 Tired of Bad News?
             </h1>
-            <h2 className="absolute top-[26%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h2 className="text-2xl font-light text-center mt-10 md:mt-4 w-80 md:w-144 mx-auto flex items-center justify-center">
                 We only serve good ones!
             </h2>
             <div
-                className="absolute top-[30%] w-full bg-gradient-to-r from-blue-200 to-blue-300 text-black
+                className=" w-full bg-gradient-to-r from-blue-200 to-blue-300 text-black
                 dark:from-[#121475]  dark:to-[#04052e]"
             >
                 <PaginationButtons
