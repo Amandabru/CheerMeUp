@@ -22,19 +22,19 @@ function HomeView({
             className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen w-full
             dark:from-[#611d4d] dark:to-[#240f1d] dark:text-white"
         >
-            <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
+            <h1 className="text-4xl font-bold text-center pt-15">
                 {' '}
                 Cheer Me Up!
             </h1>
-            <h2 className="absolute top-[44%]  md:top-[32%] text-2xl font-light left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-80 md:w-144">
+            <h2 className="text-2xl font-light text-center mt-10 md:mt-4 w-80 md:w-144 mx-auto flex items-center justify-center ">
                 Welcome to the hub of happiness! If you're feeling bored, in
                 need of a good laugh, or have temporarily lost faith in
                 humanity, you're in the right place. Our mission is simple: to
                 brighten your day!
             </h2>
             <div
-                className="absolute top-[65%]  md:top-[45%] w-full bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
-                    dark:from-[#611d4d] dark:to-[#240f1d]"
+                className=" bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black
+                dark:from-[#611d4d] dark:to-[#240f1d] pt-10"
             >
                 <div className="flex justify-center w-full !scroll-smooth">
                     <button

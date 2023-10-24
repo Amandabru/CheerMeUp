@@ -15,7 +15,7 @@ function promiseNoData<T>(
         return (
             <div className={`min-h-screen min-w-screen overflow-hidden ${bgc}`}>
                 {spinner === 'yes' ? (
-                    <span className="loading loading-spinner loading-lg top-[20%] left-1/2 absolute dark:text-gray-300"></span>
+                    <span className="loading loading-spinner loading-lg top-[50%] left-1/2 absolute dark:text-gray-300"></span>
                 ) : (
                     <span className="loading loading-dots loading-md top-[50%] left-1/2 absolute "></span>
                 )}
