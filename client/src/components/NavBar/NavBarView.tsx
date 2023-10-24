@@ -69,7 +69,7 @@ function NavBarView({
                         ))}
                     </ul>
                 </div>
-                <div className="navbarSmiley">
+                <div className="navbarSmiley invisible md:visible">
                     <img
                         className="h-10 normal-case animate-wiggle mr-5 ml-8"
                         src={logoImage}
