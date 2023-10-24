@@ -19,7 +19,7 @@ function HomeView({
 
     return (
         <div
-            className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen bg-fixed
+            className="bg-gradient-to-r from-pink-300 to-[#ff82c9] text-black min-h-screen w-full
             dark:from-[#611d4d] dark:to-[#240f1d] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">

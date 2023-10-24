@@ -50,7 +50,7 @@ function MemeView({
 
     return (
         <div
-            className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen bg-fixed
+            className="bg-gradient-to-r from-rose-300 to-orange-300 text-black min-h-screen w-full
 dark:from-[#0f4b52] dark:to-[#052124] dark:text-white"
         >
             <h1 className=" absolute top-[20%] text-4xl font-bold left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-144">
