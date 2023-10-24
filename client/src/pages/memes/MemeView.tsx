@@ -59,14 +59,14 @@ dark:from-[#0f4b52] dark:to-[#052124] dark:text-white"
             <h2 className="text-2xl font-light text-center mt-4 w-80 md:w-144 mx-auto flex items-center justify-center">
                 Memes will brighten your day!
             </h2>
-            <div className="absolute top-[28%]  md:top-[24%] mt-3 flex justify-center w-full">
+            <div className="top-[28%] md:top-[24%] mt-6 flex justify-center w-full">
                 {' '}
                 <button className="btn btn-outline" onClick={onNewFetch}>
                     Generate new memes!
                 </button>
             </div>
             <div
-                className="pt-14 w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black mt-5
+                className=" w-full bg-gradient-to-r from-rose-300 to-orange-300 text-black mt-5
 dark:from-[#0f4b52] dark:to-[#052124]"
             >
                 <section className="w-full !scroll-smooth">
