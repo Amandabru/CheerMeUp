@@ -56,10 +56,10 @@ dark:from-[#0f4b52] dark:to-[#052124] dark:text-white"
             <h1 className="text-4xl font-bold text-center pt-15">
                 Craving a Smile?
             </h1>
-            <h2 className="text-2xl font-light text-center mt-10 md:mt-4 w-80 md:w-144 mx-auto flex items-center justify-center">
+            <h2 className="text-2xl font-light text-center mt-4 w-80 md:w-144 mx-auto flex items-center justify-center">
                 Memes will brighten your day!
             </h2>
-            <div className="absolute top-[30%] mt-3 flex justify-center w-full">
+            <div className="absolute top-[28%]  md:top-[24%] mt-3 flex justify-center w-full">
                 {' '}
                 <button className="btn btn-outline" onClick={onNewFetch}>
                     Generate new memes!
