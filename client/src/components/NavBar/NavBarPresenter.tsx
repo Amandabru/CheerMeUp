@@ -1,7 +1,7 @@
 import { User } from '../../userModel';
 import NavBarView from './NavBarView';
 import * as userApi from '../../api/user';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const compliments: string[] = [
     `Hope you have a lovely day!`,
